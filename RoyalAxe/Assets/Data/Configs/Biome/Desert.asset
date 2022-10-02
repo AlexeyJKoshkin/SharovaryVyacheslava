@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ba6cbe1f8246ccad7243946868479c, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  _type: 1
+  _chunks:
+  - {fileID: 5113476195565501132, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 5113476195565501132, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 5113476195565501132, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  Lines:
+  - Size: 2
+    MobId:
+    - Gunslinger_1
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Gunslinger_1

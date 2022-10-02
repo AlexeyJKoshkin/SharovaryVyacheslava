@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3961d39062a833442b543f3bee5192b2, type: 3}
+  m_Name: LevelsSheet
+  m_EditorClassIdentifier: 
+  _sheetId: 1YoNkOXgdRJwkZ1LfRNcAI0ghSNo5bbokJ7SWAa6jbVg
+  _configUpdater:
+    id: 0
+  _pages:
+  - PageName: Level configurator
+    FolderState: 10
+  - PageName: Help
+    FolderState: 6
+  references:
+    version: 1
+    00000000:
+      type: {class: LevelDataToJsonParser, ns: ProjectEditorEcosystem.GoogleSheetsDataUpdaters, asm: Assembly-CSharp-Editor}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064b24e40fb84abaaa3e1999b91f5827, type: 3}
+  m_Name: UserSaveSettingStorage
+  m_EditorClassIdentifier: 
+  _pathSettingses:
+  - id: 0
+  - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: DefautlPC, ns: Core.UserProfile, asm: Assembly-CSharp}
+      data:
+        <RootPath>k__BackingField: Assets/Temp/[Editor_Save_folder]/
+    00000001:
+      type: {class: PCPlayer, ns: Core.UserProfile, asm: Assembly-CSharp}
+      data:
+        <RootPath>k__BackingField: D:/Projects/CreativeGame/Assets/StreamingAssets/[SharovaruVaycheslava_UserProfile]/

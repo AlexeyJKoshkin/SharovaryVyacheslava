@@ -1,0 +1,39 @@
+main.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+Волосы
+bounds:2,233,454,404
+rotate:90
+Нога лев
+bounds:408,263,104,255
+rotate:90
+Нога прав
+bounds:665,115,104,255
+Рука  прав 2
+bounds:771,277,99,93
+rotate:90
+Рука лев 1
+bounds:698,378,109,181
+offsets:0,1,109,182
+rotate:90
+Рука лев 2
+bounds:771,176,99,93
+rotate:90
+Рука прав 1
+bounds:500,80,109,181
+offsets:0,1,109,182
+Таз
+bounds:408,369,318,104
+rotate:90
+Тело
+bounds:2,689,522,308
+Топор
+bounds:526,489,508,471
+rotate:90
+Ухо
+bounds:514,372,115,182
+rotate:90
+шея
+bounds:408,69,192,90
+rotate:90

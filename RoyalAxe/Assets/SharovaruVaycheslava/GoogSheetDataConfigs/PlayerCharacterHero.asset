@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3961d39062a833442b543f3bee5192b2, type: 3}
+  m_Name: PlayerCharacterHero
+  m_EditorClassIdentifier: 
+  _sheetId: 1vwcjVNuRuHKk0seRmVgTzTT2DKaYbci5iri3C-Xrfhk
+  _configUpdater:
+    id: 0
+  _pages:
+  - PageName: Default_Hero
+    FolderState: 10
+  references:
+    version: 1
+    00000000:
+      type: {class: HeroCharacterUnitSheetToJsonParser, ns: ProjectEditorEcosystem.GoogleSheetsDataUpdaters, asm: Assembly-CSharp-Editor}
+      data:
+        _unitsDataLoader:
+          _dataBox: {fileID: 11400000, guid: c612ec8c13fbaad409cc08dfc40cd687, type: 2}
+          _rootFolderConfigs: {fileID: 102900000, guid: 7414179b37b2d624684204f1dd208ace, type: 3}
+          CreateNew: 0
+          IncludeSubFolders: 0

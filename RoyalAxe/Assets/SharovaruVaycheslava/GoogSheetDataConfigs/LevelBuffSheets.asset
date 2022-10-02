@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3961d39062a833442b543f3bee5192b2, type: 3}
+  m_Name: LevelBuffSheets
+  m_EditorClassIdentifier: 
+  _sheetId: 1QihaX_WGYaGZhaHNQd7oZ1DVb35_3hQxVF3Bw5YK778
+  _configUpdater:
+    id: 0
+  _pages: []
+  references:
+    version: 1
+    00000000:
+      type: {class: LevelBuffToJsonParser, ns: ProjectEditorEcosystem.GoogleSheetsDataUpdaters, asm: Assembly-CSharp-Editor}
+      data:
+        _buffDataLoader:
+          _dataBox: {fileID: 0}
+          _rootFolderConfigs: {fileID: 0}
+          CreateNew: 0
+          IncludeSubFolders: 0

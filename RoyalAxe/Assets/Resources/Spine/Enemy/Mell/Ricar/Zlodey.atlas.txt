@@ -1,0 +1,44 @@
+Zlodey.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+Волосы
+bounds:2,750,541,253
+Воротник
+bounds:331,119,291,104
+rotate:90
+Голова
+bounds:2,322,426,327
+rotate:90
+Кисть 2
+bounds:2,9,83,70
+rotate:90
+Кисть1
+bounds:870,444,83,70
+rotate:90
+Мечь
+bounds:331,412,111,336
+Нога 1
+bounds:745,198,84,143
+Нога 2
+bounds:831,198,84,143
+Перья
+bounds:444,311,299,216
+Рубаха
+bounds:2,94,226,88
+rotate:90
+Рука алев
+bounds:92,2,123,184
+rotate:90
+Рука прав
+bounds:745,343,123,184
+Тело
+bounds:92,127,193,171
+rotate:90
+Шлем
+bounds:545,529,474,429
+rotate:90
+ухо1
+bounds:444,647,97,101
+ухо2
+bounds:444,544,97,101
