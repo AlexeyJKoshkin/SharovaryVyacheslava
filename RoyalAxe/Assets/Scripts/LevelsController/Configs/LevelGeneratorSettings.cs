@@ -54,7 +54,7 @@ namespace RoyalAxe.CoreLevel
 
     public enum BiomeType
     {
-        FieldPlain =0,
+        Forest =0,
         Desert =1,
         
     }

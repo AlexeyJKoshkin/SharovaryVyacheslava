@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Runtime/CoreGameScene.unity
     guid: ad15c7c1d0e067b4389618f1427e5514
-  - enabled: 1
-    path: Assets/Scenes/TestDamage.unity
-    guid: ec024f5d98a5ac0408f7dff135b55f1e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

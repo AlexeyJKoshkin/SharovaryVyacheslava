@@ -8,6 +8,9 @@ namespace RoyalAxe.CoreLevel {
      
         private readonly IRATimer _spawnCooldownTimer;
         private readonly ILevelWaveProvider _levelWaveProvider;
+        private CoreGamePlayEntity _wave;
+        
+        bool HasMob => _wave.hasMobWaveCollection && _wave.mobWaveCollection.HasMobs;
         
         public LevelDirector(IRoyalAxeCoreMap map, ITimerFactory timerFactory, ILevelWaveProvider levelWaveProvider)
         {
@@ -20,15 +23,9 @@ namespace RoyalAxe.CoreLevel {
 
         public void StartLevel()
         {
-            _levelWaveProvider.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
+          _wave =  _levelWaveProvider.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
             _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown);
             ExecuteTimerHandler();
-        }
-
-
-        public void Stop()
-        {
-            _spawnCooldownTimer.Destroy();
         }
 
         void IDoneTimerListener.OnDoneTimer(GameRootLoopEntity entity)
@@ -42,18 +39,11 @@ namespace RoyalAxe.CoreLevel {
             SpawnWhileCan(mobGeneratorHelper);
             var deltaMob =  _levelWaveProvider.MaxMobAmount- mobGeneratorHelper.CurrentMobAmount;
             if (deltaMob <= 0) return;
-            if(_levelWaveProvider.NextWave()) // пробуем загрузить волну
-                _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown);
-            else // неполучилось. ждем пока не останется мобов на поле
-            {
-                if (mobGeneratorHelper.CurrentMobAmount == 0)
-                {
-                    DoEndLevelWin();
-                }    
-            }
+            LoadNextOrFinish(mobGeneratorHelper);
+          
         }
 
-    
+       
 
         private void SpawnWhileCan(IEnemyWaveGenerator mobGeneratorHelper)
         {
@@ -64,16 +54,33 @@ namespace RoyalAxe.CoreLevel {
             */
          
             var needMob = _levelWaveProvider.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
-            while (needMob>0 && _levelWaveProvider.HasMob) // создаем мобов пока можем
+            while (needMob>0 && HasMob) // создаем мобов пока можем
             {
-                var modData = _levelWaveProvider.GenerateMobDataForSpawn();
+                var modData = GenerateMobDataForSpawn();
                 mobGeneratorHelper.GenerateEnemy(modData.mobId, modData.mobLevel, mobReward);
                 needMob--;
             }
         }
-
-       
         
+        (string mobId, byte mobLevel) GenerateMobDataForSpawn()
+        {
+            var mobData = _wave.mobWaveCollection.Generate();
+            return (mobData.MobId, mobData.Level);
+        }
+
+        private void LoadNextOrFinish(IEnemyWaveGenerator mobGeneratorHelper)
+        {
+            if(_levelWaveProvider.NextWave()) // пробуем загрузить волну
+                _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown); //запускаем таймер с новым значением
+            else // неполучилось. 
+            {
+                //ждем пока не останется мобов на поле
+                if (mobGeneratorHelper.CurrentMobAmount == 0)
+                {
+                    DoEndLevelWin();
+                }    
+            }
+        }
         
         private void DoEndLevelWin()
         {

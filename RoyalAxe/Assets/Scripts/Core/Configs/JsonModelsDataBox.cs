@@ -27,7 +27,5 @@ namespace Core.Configs
             if (_configsModelsLoader == null)    return;
             foreach (var model in _configsModelsLoader.Load<T>()) _collection.Add(model.UniqueID.GetHashCode(), model);
         }
-
-
     }
 }

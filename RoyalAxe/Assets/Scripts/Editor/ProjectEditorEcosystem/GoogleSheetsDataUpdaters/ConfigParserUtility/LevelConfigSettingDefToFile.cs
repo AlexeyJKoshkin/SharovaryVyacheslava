@@ -18,8 +18,6 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 
         protected override IEnumerable<LevelGeneratorSettings> Parse(GoogleSheetGameData page, IGameDataParser parser)
         {
-            
-
             for (int i = 0; i < page.Cells.Count; i++)
             {
                 LevelGeneratorSettings result = new LevelGeneratorSettings();

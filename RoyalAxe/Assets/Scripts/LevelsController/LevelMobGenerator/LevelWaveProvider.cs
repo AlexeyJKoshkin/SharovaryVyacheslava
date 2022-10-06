@@ -9,7 +9,7 @@ namespace RoyalAxe.CoreLevel
         public float SpawnCooldown => _currentSettings.SpawnCooldown;
         public int MaxMobAmount => _currentSettings.MaxMobAmount;
         public MobDeathReward CurrentMobReward => _currentSettings.MobDeathReward;
-        public bool HasMob => _waveEntity.hasMobWaveCollection && _waveEntity.mobWaveCollection.HasMobs;
+      
 
         private readonly CoreGamePlayEntity _waveEntity;
 
@@ -21,6 +21,13 @@ namespace RoyalAxe.CoreLevel
             _dataStorage = dataStorage;
             _waveEntity = coreGamePlayContext.CreateEntity();
             _waveEntity.AddWaveNumber(0);
+        }
+        
+        public CoreGamePlayEntity LoadWave(int waveNumber)
+        {
+            _waveEntity.ReplaceWaveNumber(waveNumber-1);
+            NextWave();
+            return _waveEntity;
         }
 
         public bool NextWave()
@@ -41,18 +48,6 @@ namespace RoyalAxe.CoreLevel
             _currentSettings = nextWaveSettings;
            _waveEntity.ReplaceWaveNumber(WaveNumber);
            _waveEntity.ReplaceMobWaveCollection(nextWaveSettings.MobsData.Select(o=> new MobAtLevelData(o)).ToList());
-        }
-
-        public void LoadWave(int waveNumber)
-        {
-           _waveEntity.ReplaceWaveNumber(waveNumber-1);
-            NextWave();
-        }
-
-        public (string mobId, byte mobLevel) GenerateMobDataForSpawn()
-        {
-            var mobData = _waveEntity.mobWaveCollection.Generate();
-            return (mobData.MobId, mobData.Level);
         }
     }
 }

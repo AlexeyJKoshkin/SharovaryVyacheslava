@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Core.Configs
 {
@@ -10,7 +11,14 @@ namespace Core.Configs
 
     public class JsonConfigsPathBuilder : IJsonConfigsPathBuilder
     {
-        private string EditorPath = "Assets/Data/Configs/Json";
+        public string ConfigsJsonConfigsPath = "Configs/Json";
+
+        private readonly string _fullPath;
+
+        public JsonConfigsPathBuilder()
+        {
+            _fullPath = GetRootFolderConfigPath();
+        }
 
         public string BuildForType<T>(string extension = "json")
         {
@@ -19,15 +27,18 @@ namespace Core.Configs
 
         public string BuildForType(Type type, string extension = "json")
         {
-            return $"{GetRootFolderConfigPath()}/{type.Name}.{extension}";
+            return $"{_fullPath}/{type.Name}.{extension}";
         }
 
         private string GetRootFolderConfigPath()
         {
+            string rootPath;
 #if UNITY_EDITOR
-            return EditorPath;
+            rootPath = "Assets/Data";
+#else
+    rootPath = Application.persistentDataPath;
 #endif
-            //todo: реализовать правильный путь на устройстве
+            return $"{rootPath}/{ConfigsJsonConfigsPath}";
         }
     }
 }
