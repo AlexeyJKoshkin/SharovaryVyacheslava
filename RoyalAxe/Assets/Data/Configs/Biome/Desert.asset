@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _chunks:
-  - {fileID: 5113476195565501132, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
-  - {fileID: 5113476195565501132, guid: 95512e85710d5dd41a26de0f8e238af5, type: 3}
-  - {fileID: 5113476195565501132, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 5113476195565501132, guid: 7a4641ab6ebe0dc4b916bd5ca328a6bf, type: 3}
+  - {fileID: 4533351946129732577, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 1719168916856003772, guid: 1da5c752c0546304a9d54d4d9407a215, type: 3}
+  - {fileID: 4533351946129732577, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 3050209905451524390, guid: c27f83cfe48b06941a996a11dccd44bd, type: 3}
+  - {fileID: 6765124769186922558, guid: a5049e3e146c87c4a805e998f567d715, type: 3}
+  - {fileID: 1504372685261267855, guid: a3d95740a57909740b358a153a6d69a3, type: 3}
   Lines:
   - Size: 2
     MobId:
