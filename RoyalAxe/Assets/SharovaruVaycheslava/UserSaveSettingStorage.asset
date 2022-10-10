@@ -15,13 +15,14 @@ MonoBehaviour:
   _pathSettingses:
   - id: 0
   - id: 1
+  - id: 2
   references:
     version: 1
     00000000:
       type: {class: DefautlPC, ns: Core.UserProfile, asm: Assembly-CSharp}
       data:
-        <RootPath>k__BackingField: Assets/Temp/[Editor_Save_folder]/
+        _rootPath: Assets/Temp/[Editor_Save_folder]/
     00000001:
       type: {class: PCPlayer, ns: Core.UserProfile, asm: Assembly-CSharp}
-      data:
-        <RootPath>k__BackingField: D:/Projects/CreativeGame/Assets/StreamingAssets/[SharovaruVaycheslava_UserProfile]/
+    00000002:
+      type: {class: AndroidPlayer, ns: Core.UserProfile, asm: Assembly-CSharp}

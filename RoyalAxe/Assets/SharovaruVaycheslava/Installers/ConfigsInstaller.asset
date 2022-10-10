@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e9ed020537453580651e58d10bef3c, type: 3}
   m_Name: ConfigsInstaller
   m_EditorClassIdentifier: 
+  _buildInJsonDataProvider: {fileID: 11400000, guid: 8b1a71977a1b79947aab6cdf716f1f3a, type: 2}
