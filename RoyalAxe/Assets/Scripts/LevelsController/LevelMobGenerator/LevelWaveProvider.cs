@@ -3,7 +3,7 @@ using Core.Data.Provider;
 
 namespace RoyalAxe.CoreLevel
 {
-    public class LevelWaveProvider : ILevelWaveProvider
+    public class LevelWaveProvider : ILevelWaveLoader
     {
         public int WaveNumber => _waveEntity.waveNumber.Number;
         public float SpawnCooldown => _currentSettings.SpawnCooldown;

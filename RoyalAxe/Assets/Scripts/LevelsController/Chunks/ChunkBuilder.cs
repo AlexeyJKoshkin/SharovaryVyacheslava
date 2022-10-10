@@ -13,11 +13,13 @@ namespace RoyalAxe.CoreLevel
         readonly ILevelAdapter _levelView;
         private Bounds _levelViewBounds;
         private readonly Queue<LevelChunkView> _queue = new Queue<LevelChunkView>();
+        private IChunkPositionCalculation _chunkPositionCalculation;
 
-        public ChunkBuilderHelper(CoreGamePlayContext gamePlayContext, ILevelAdapter levelView)
+        public ChunkBuilderHelper(CoreGamePlayContext gamePlayContext, ILevelAdapter levelView, IChunkPositionCalculation chunkPositionCalculation)
         {
             _gamePlayContext = gamePlayContext;
             _levelView       = levelView;
+            _chunkPositionCalculation = chunkPositionCalculation;
             _levelViewBounds = levelView.Bounds;
             Initialize();
         }
@@ -29,7 +31,7 @@ namespace RoyalAxe.CoreLevel
             var chunkBounds = view.CalcChunkBounds();
             chunkEntity.AddChunkView(view);
             chunkEntity.ReplaceChunkBounds(chunkBounds);
-            var endPoint = _levelViewBounds.min.y - chunkBounds.extents.y;
+            var endPoint = _chunkPositionCalculation.GetEndPoint(_levelViewBounds, chunkBounds);
             chunkEntity.AddMovingChunk(endPoint);
             return chunkEntity;
         }

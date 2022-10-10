@@ -7,15 +7,15 @@ namespace RoyalAxe.CoreLevel {
         private readonly IRoyalAxeCoreMap _map;
      
         private readonly IRATimer _spawnCooldownTimer;
-        private readonly ILevelWaveProvider _levelWaveProvider;
+        private readonly ILevelWaveLoader _levelWaveLoader;
         private CoreGamePlayEntity _wave;
         
         bool HasMob => _wave.hasMobWaveCollection && _wave.mobWaveCollection.HasMobs;
         
-        public LevelDirector(IRoyalAxeCoreMap map, ITimerFactory timerFactory, ILevelWaveProvider levelWaveProvider)
+        public LevelDirector(IRoyalAxeCoreMap map, ITimerFactory timerFactory, ILevelWaveLoader levelWaveLoader)
         {
             _map                = map;
-            _levelWaveProvider  = levelWaveProvider;
+            _levelWaveLoader  = levelWaveLoader;
             _spawnCooldownTimer = timerFactory.CreateTimer(0, true);
             _spawnCooldownTimer.AddDoneHandler(this);
         }
@@ -23,8 +23,8 @@ namespace RoyalAxe.CoreLevel {
 
         public void StartLevel()
         {
-             _wave =  _levelWaveProvider.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
-            _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown);
+             _wave =  _levelWaveLoader.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
+            _spawnCooldownTimer.Run(_levelWaveLoader.SpawnCooldown);
             ExecuteTimerHandler();
         }
 
@@ -37,27 +37,23 @@ namespace RoyalAxe.CoreLevel {
         {
             var mobGeneratorHelper =  _map.StartGenerateMobPosition(); // получаем хелпер для генерации позиций мобу
             SpawnWhileCan(mobGeneratorHelper);
-            var deltaMob =  _levelWaveProvider.MaxMobAmount- mobGeneratorHelper.CurrentMobAmount;
+            var deltaMob =  _levelWaveLoader.MaxMobAmount- mobGeneratorHelper.CurrentMobAmount;
             if (deltaMob <= 0) return;
             LoadNextOrFinish(mobGeneratorHelper);
-          
         }
-
-       
-
+        
         private void SpawnWhileCan(IEnemyWaveGenerator mobGeneratorHelper)
         {
-            var mobReward = _levelWaveProvider.CurrentMobReward;
             /* при генерации всегда выполняются два условия
              1. мобы всегда генерируются ЗА экраном
              2. Мобов всегда генерируем пачкой. за 1 кадр . для этого мобов надо предсоздать в пуле. 
             */
          
-            var needMob = _levelWaveProvider.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
+            var needMob = _levelWaveLoader.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
             while (needMob>0 && HasMob) // создаем мобов пока можем
             {
                 var modData = GenerateMobDataForSpawn();
-                mobGeneratorHelper.GenerateEnemy(modData.mobId, modData.mobLevel, mobReward);
+                mobGeneratorHelper.GenerateEnemy(modData.mobId, modData.mobLevel);
                 needMob--;
             }
         }
@@ -70,9 +66,9 @@ namespace RoyalAxe.CoreLevel {
 
         private void LoadNextOrFinish(IEnemyWaveGenerator mobGeneratorHelper)
         {
-            if(_levelWaveProvider.NextWave()) // пробуем загрузить волну
-                _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown); //запускаем таймер с новым значением
-            else // неполучилось. 
+            if(_levelWaveLoader.NextWave())                              // пробуем загрузить волну
+                _spawnCooldownTimer.Run(_levelWaveLoader.SpawnCooldown); //запускаем таймер с новым значением
+            else                                                         // неполучилось. 
             {
                 //ждем пока не останется мобов на поле
                 if (mobGeneratorHelper.CurrentMobAmount == 0)

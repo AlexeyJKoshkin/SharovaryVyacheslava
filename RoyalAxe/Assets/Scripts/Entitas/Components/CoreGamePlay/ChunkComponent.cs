@@ -27,7 +27,8 @@ namespace RoyalAxe.GameEntitas
     {
         public Bounds Bounds;
         public Vector3 Extents => Bounds.extents;
-        public Vector3 Max => Bounds.max;
+        public Vector2 Max => Bounds.max;
+        public Vector2 Min => Bounds.min;
 
         public bool Contains(Vector3 position)
         {
