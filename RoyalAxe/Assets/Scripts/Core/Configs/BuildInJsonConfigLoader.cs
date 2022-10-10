@@ -1,5 +1,4 @@
-﻿using System;
-using Core;
+﻿using Core;
 using Core.Configs;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.CoreLevel;

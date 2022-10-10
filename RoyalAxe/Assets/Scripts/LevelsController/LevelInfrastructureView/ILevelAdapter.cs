@@ -20,16 +20,19 @@ namespace RoyalAxe.CoreLevel
         public BiomeScriptableDef BiomeDef => _view.BiomeDef;
         public IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels => _view.MeleeMobEndPoints;
 
+        private IChunkPositionCalculation _chunkPositionCalculation;
+
         private LevelInfrastructureView _view;
         private readonly CoreGamePlayContext _coreGamePlayContext;
         private readonly ChunkBuilderHelper _chunkBuilderHelper;
         private CoreGamePlayEntity BearingSpawnChunk => _coreGamePlayContext.bearingSpawnChunkEntity;
         
-        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext)
+        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext, IChunkPositionCalculation chunkPositionCalculation)
         {
             _view = view;
             _coreGamePlayContext = coreGamePlayContext;
-            _chunkBuilderHelper = new ChunkBuilderHelper(coreGamePlayContext, this);
+            _chunkPositionCalculation = chunkPositionCalculation;
+            _chunkBuilderHelper = new ChunkBuilderHelper(coreGamePlayContext, this, chunkPositionCalculation);
         }
 
 
@@ -51,19 +54,18 @@ namespace RoyalAxe.CoreLevel
         
         private void SetNextChunk(CoreGamePlayEntity nextChunk)
         {
-            var upPosition = BearingSpawnChunk.chunkBounds.Max.y;
-            var halfSize   = nextChunk.chunkBounds.Extents.y;
-            upPosition += halfSize;
-            SetChunkPos(nextChunk, upPosition);
+         
+            var nextChunkPos = _chunkPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds.Bounds, nextChunk.chunkBounds.Bounds);
+            SetChunkPos(nextChunk, nextChunkPos);
             BearingSpawnChunk.isBearingSpawnChunk = false;
             SetNewBearingChunk(nextChunk);
         }
 
         private void SetChunkToStartPoint(CoreGamePlayEntity startChunk) // установили чанк на стартовую позицию
         {
-            var downPosition = _view.Bounds.min.y;
-            var halfSize     = startChunk.chunkBounds.Extents.y;
-            SetChunkPos(startChunk, downPosition + halfSize);
+            var startChunkPos = _chunkPositionCalculation.CalcStartChunkPos(_view.Bounds, startChunk.chunkBounds.Bounds);
+            
+            SetChunkPos(startChunk,startChunkPos);
             SetNewBearingChunk(startChunk);
         }
 

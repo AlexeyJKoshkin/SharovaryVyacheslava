@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RoyalAxe.CoreLevel
 {
     public interface IEnemyWaveGenerator { 
-        void GenerateEnemy(string modDataMobId, byte modDataMobLevel, MobDeathReward mobReward);
+        void GenerateEnemy(string modDataMobId, byte modDataMobLevel);
         int CurrentMobAmount { get; }
     }
 

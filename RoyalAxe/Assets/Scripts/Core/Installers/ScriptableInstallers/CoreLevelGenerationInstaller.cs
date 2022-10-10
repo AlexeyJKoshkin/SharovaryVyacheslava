@@ -21,6 +21,8 @@ namespace Core
             Container.Register<LineRoyalAxeMapBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
             
             Container.Register<LevelAdapter>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<ChunkPositionCalculation>(Lifetime.Singleton).AsImplementedInterfaces();
+            
             Container.RegisterInstance(_coreMapSettings);
             
             Container.Register<LevelDirector>(Lifetime.Singleton).AsImplementedInterfaces();

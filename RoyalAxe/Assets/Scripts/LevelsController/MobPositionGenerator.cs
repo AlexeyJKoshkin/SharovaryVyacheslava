@@ -15,18 +15,19 @@ namespace RoyalAxe.CoreLevel
 
     class MobPositionGenerator : IMobPositionGenerator
     {
+        private readonly IChunkPositionCalculation _chunkPositionCalculation;
         private readonly LineRoyalAxeMap[] _lineRoyalAxeMaps;
         private readonly EndPointsRoyalAxeMap[] _endPoints;
-        private readonly float _yZero;
+      //  private readonly float _yZero;
 
         private const float OFFSET_X = 0.1f;
 
 
-        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ILevelAdapter levelAdapter)
+        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ILevelAdapter levelAdapter, IChunkPositionCalculation chunkPositionCalculation)
         {
+            _chunkPositionCalculation = chunkPositionCalculation;
             _lineRoyalAxeMaps = currenLevelLineBuilder.Build(levelAdapter.BiomeDef.Lines, levelAdapter.Bounds);
             _endPoints = currenLevelLineBuilder.Build(levelAdapter.EndPointsModels);
-            _yZero            = levelAdapter.Bounds.max.y + 0.3f;
         }
 
         public (Vector2 startPoint, Vector2 endPoint) GetPosForNewMob(string modDataMobId)
@@ -80,11 +81,11 @@ namespace RoyalAxe.CoreLevel
 
         private Vector2 GetNextMobPosition(LineRoyalAxeMap line)
         {
-            var y = line.MobAmount++;
+            var mobAmount = line.MobAmount++;
             var x =  Random.Range(line.MinX + OFFSET_X, line.MaxX - OFFSET_X);
 
-
-            return new Vector2(x, _yZero + y * 2);
+          
+            return new Vector2(x,  _chunkPositionCalculation.GetMobYPos(mobAmount));
         }
     }
 }
