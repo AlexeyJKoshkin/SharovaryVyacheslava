@@ -11,7 +11,8 @@ namespace Core.UserProfile
     [Serializable]
     public abstract class UserSavePathSettings : IUserSavePathSettings
     {
-        [field: SerializeField] [FolderPath] public string RootPath { get; protected set; }
+        public abstract string RootPath { get; }
+
 
         public abstract RuntimePlatform Id { get; }
     }

@@ -5,8 +5,8 @@ namespace Core.Configs
 {
     public interface IJsonConfigsPathBuilder
     {
-        string BuildForType<T>(string extension = "json");
-        string BuildForType(Type type, string extension = "json");
+        string BuildPathForType<T>(string extension = "json");
+        string BuildPathForType(Type type, string extension = "json");
     }
 
     public class JsonConfigsPathBuilder : IJsonConfigsPathBuilder
@@ -20,12 +20,12 @@ namespace Core.Configs
             _fullPath = GetRootFolderConfigPath();
         }
 
-        public string BuildForType<T>(string extension = "json")
+        public string BuildPathForType<T>(string extension = "json")
         {
-            return BuildForType(typeof(T));
+            return BuildPathForType(typeof(T));
         }
 
-        public string BuildForType(Type type, string extension = "json")
+        public string BuildPathForType(Type type, string extension = "json")
         {
             return $"{_fullPath}/{type.Name}.{extension}";
         }

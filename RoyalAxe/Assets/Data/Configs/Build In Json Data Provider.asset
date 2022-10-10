@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fb7cd09a3949168f2d5c1540598eb6, type: 3}
+  m_Name: Build In Json Data Provider
+  m_EditorClassIdentifier: 
+  _weaponSkill: {fileID: 4900000, guid: 3bf6ea2e283c3614a8e44eaa37c2c9d4, type: 3}
+  _unitStatCollection: {fileID: 4900000, guid: 347545ff86077fd47a41452b59f812bb, type: 3}
+  _levelsData: {fileID: 4900000, guid: d731c0379f4af08449272135878725f0, type: 3}

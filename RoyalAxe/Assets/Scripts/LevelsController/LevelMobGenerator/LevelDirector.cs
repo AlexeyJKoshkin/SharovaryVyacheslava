@@ -23,7 +23,7 @@ namespace RoyalAxe.CoreLevel {
 
         public void StartLevel()
         {
-          _wave =  _levelWaveProvider.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
+             _wave =  _levelWaveProvider.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
             _spawnCooldownTimer.Run(_levelWaveProvider.SpawnCooldown);
             ExecuteTimerHandler();
         }
@@ -86,6 +86,7 @@ namespace RoyalAxe.CoreLevel {
         {
           //  _spawnCooldownTimer.RemoveDoneHandler(this);
             HLogger.TempLog("Конец волн текущего биома");
+            StartLevel();
         }
     }
 }
