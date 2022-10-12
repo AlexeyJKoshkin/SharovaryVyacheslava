@@ -1,7 +1,5 @@
-using System;
 using System.Linq;
 using GameKit;
-using RoyalAxe.Map;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,8 +16,6 @@ namespace RoyalAxe.CoreLevel
         private readonly IChunkPositionCalculation _chunkPositionCalculation;
         private readonly LineRoyalAxeMap[] _lineRoyalAxeMaps;
         private readonly EndPointsRoyalAxeMap[] _endPoints;
-      //  private readonly float _yZero;
-
         private const float OFFSET_X = 0.1f;
 
 
