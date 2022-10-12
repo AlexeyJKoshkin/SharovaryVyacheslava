@@ -42,7 +42,6 @@ namespace RoyalAxe.CoreLevel
             SetChunkToStartPoint(startChunk); // Установили первый чанк
             var nextChunk = _chunkBuilderHelper.CreateChunk(); 
             SetNextChunk(nextChunk);
-            _view.TurnOffBorders();
         }
         
         void ILevelAdapter.HandleNextChunk(CoreGamePlayEntity chunk)

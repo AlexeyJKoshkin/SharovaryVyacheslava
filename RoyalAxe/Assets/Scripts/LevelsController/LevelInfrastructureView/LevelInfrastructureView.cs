@@ -26,11 +26,6 @@ namespace RoyalAxe.CoreLevel
 
         [SerializeField]
         private BoxCollider2D _borderCollider;
-
-        public void TurnOffBorders()
-        {
-            _borderCollider.enabled = false;
-        }
     }
 
 

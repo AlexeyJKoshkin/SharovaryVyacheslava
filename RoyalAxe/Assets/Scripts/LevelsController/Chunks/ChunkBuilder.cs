@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Entitas;
 using GameKit;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace RoyalAxe.CoreLevel
 {
