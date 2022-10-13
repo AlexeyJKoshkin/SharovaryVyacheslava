@@ -1,6 +1,6 @@
 namespace RoyalAxe.CoreLevel {
     public interface ILevelDirector
     {
-        void StartLevel();
+        void StartLevel(ICoreLevelDataInfrastructure indfrastructure);
     }
 }

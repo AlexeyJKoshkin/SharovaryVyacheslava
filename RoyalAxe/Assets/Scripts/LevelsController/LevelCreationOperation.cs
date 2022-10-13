@@ -9,7 +9,7 @@ namespace RoyalAxe.CoreLevel
 {
     public interface ILevelCreation
     {
-        void CreateLevel();
+        ICoreLevelDataInfrastructure CreateLevel();
     }
 
     //todo: переписать используя декораторы. Надо ждать всякие анимации, колбэки всякое такое. 
@@ -39,7 +39,7 @@ namespace RoyalAxe.CoreLevel
             _coreGameSceneUiView = coreGameSceneUiView;
         }
 
-        public void CreateLevel()
+        public ICoreLevelDataInfrastructure CreateLevel()
         {
             //todo: пока просто отпрвляю все что есть. По идее надо формировать данные исходя из прогресса и игрока и данных из UI 
             var infrastructure = new CoreLevelDataInfrastructure(_dataStorage.All<LevelGeneratorSettings>().ToList());
@@ -50,9 +50,10 @@ namespace RoyalAxe.CoreLevel
             CreatePlayer();
 
             BindUI();
-            
-            
-       
+
+            return infrastructure;
+
+
         }
 
         private void BindUI()

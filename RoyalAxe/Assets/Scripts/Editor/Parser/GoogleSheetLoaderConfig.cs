@@ -60,10 +60,8 @@ namespace Core.EditorCore.Parser
 
         public void UpdateNewCellData(GoogleSheetGameData[] result)
         {
-            if (_configUpdater == null)
-            {
-                return;
-            }
+            if (_configUpdater == null) return;
+           
 
             try
             {

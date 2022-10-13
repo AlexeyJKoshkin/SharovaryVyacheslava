@@ -16,6 +16,11 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             Bind<MobDeathReward>();
         }
 
+        protected override void RemoveUpdateConfigs(List<LevelGeneratorSettings> allExistItems, List<GoogleSheetGameData> allPages)
+        {
+            allExistItems.Clear();
+        }
+
         protected override IEnumerable<LevelGeneratorSettings> Parse(GoogleSheetGameData page, IGameDataParser parser)
         {
             for (int i = 0; i < page.Cells.Count; i++)

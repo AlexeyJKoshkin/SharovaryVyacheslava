@@ -26,7 +26,8 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         public void UpdateConfigs(List<GoogleSheetGameData> allPages, IJsonConfigModelsOperation operation)
         {
             _allExistItems = operation.Load<T>().ToList();
-            _allExistItems.RemoveAll(o => allPages.Any(p => p.PageName == o.UniqueID)); //удаляем все модели которые будем обновлять
+            RemoveUpdateConfigs(_allExistItems, allPages);
+
 
             allPages.ForEach(p => //распарсили каждую страничку и добавили их в общий список
                              {
@@ -36,6 +37,8 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             
             operation.Save(_allExistItems);
         }
+
+        protected abstract void RemoveUpdateConfigs(List<T> allExistItems, List<GoogleSheetGameData> allPages);
 
         protected abstract IEnumerable<T> Parse(GoogleSheetGameData googleSheetGameData, IGameDataParser dataParser);
 

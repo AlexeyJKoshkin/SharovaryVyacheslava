@@ -36,9 +36,9 @@ namespace Core.Launcher
             /*_builderFacade.CreateEnemyMobUnit(_testMob.UniqueID, 1, _testMob.Prefab.RootTransform.position);
             _builderFacade.CreateEnemyMobUnit(_testRange.UniqueID, 1,_testRange.Prefab.RootTransform.position);*/
             
-            _levelCreation.CreateLevel();
+           var indfrastructure = _levelCreation.CreateLevel();
             //по хорошему надо ждать анимации, всякое такое
-            _levelDirector.StartLevel();
+            _levelDirector.StartLevel(indfrastructure);
             //стейт начал работать
 
             //  _axeSceneDependenciesConnector.EnterState(this);   

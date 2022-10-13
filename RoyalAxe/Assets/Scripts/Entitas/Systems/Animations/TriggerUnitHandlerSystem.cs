@@ -25,7 +25,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override bool Filter(RAAnimationEntity entity)
         {
-            return true;
+            return entity.isEnabled;
         }
     }
 }
