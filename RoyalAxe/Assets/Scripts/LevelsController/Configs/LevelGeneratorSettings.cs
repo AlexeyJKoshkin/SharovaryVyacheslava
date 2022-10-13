@@ -17,7 +17,7 @@ namespace RoyalAxe.CoreLevel
         public BiomeType Type;
         [ColumnName("Level")]
         public int LevelNumber;
-        public MobDeathReward MobDeathReward;
+        public MobDeathReward MobDeathReward = new MobDeathReward();
         public List<MobAtLevelData> MobsData = new List<MobAtLevelData>();
         [JsonIgnore]
         public string UniqueID => LevelNumber.ToString();
@@ -41,7 +41,7 @@ namespace RoyalAxe.CoreLevel
     }
 
     [Serializable]
-    public struct MobDeathReward
+    public class MobDeathReward
     {
         [ColumnName("Gold")]
         public int Gold;

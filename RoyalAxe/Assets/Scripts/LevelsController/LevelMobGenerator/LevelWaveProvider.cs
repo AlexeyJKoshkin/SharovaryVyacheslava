@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core.Data.Provider;
+using GameKit;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -9,32 +11,34 @@ namespace RoyalAxe.CoreLevel
         public float SpawnCooldown => _currentSettings.SpawnCooldown;
         public int MaxMobAmount => _currentSettings.MaxMobAmount;
         public MobDeathReward CurrentMobReward => _currentSettings.MobDeathReward;
+        
+        readonly Queue<LevelGeneratorSettings> _waveQueue = new Queue<LevelGeneratorSettings>();
       
 
         private readonly CoreGamePlayEntity _waveEntity;
 
         private LevelGeneratorSettings _currentSettings;
-        private readonly IDataStorage _dataStorage;
-
-        public LevelWaveProvider(IDataStorage dataStorage, CoreGamePlayContext coreGamePlayContext)
+        public LevelWaveProvider( CoreGamePlayContext coreGamePlayContext)
         {
-            _dataStorage = dataStorage;
             _waveEntity = coreGamePlayContext.CreateEntity();
             _waveEntity.AddWaveNumber(0);
         }
         
-        public CoreGamePlayEntity LoadWave(int waveNumber)
+        public CoreGamePlayEntity InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels)
         {
-            _waveEntity.ReplaceWaveNumber(waveNumber-1);
+            infrastructurePackLevels.ForEach(e=> _waveQueue.Enqueue(e));
+            _waveEntity.ReplaceWaveNumber(0);
             NextWave();
             return _waveEntity;
         }
 
         public bool NextWave()
         {
+            if (_waveQueue.Count == 0) return false;
+            
             int nextWave = WaveNumber + 1;
-            var nextWaveSettings = _dataStorage.ById<LevelGeneratorSettings>(nextWave.ToString());
-            if (nextWaveSettings !=null && (_currentSettings == null || _currentSettings.Type == nextWaveSettings.Type))
+            var nextWaveSettings = _waveQueue.Dequeue();
+            if (_currentSettings == null || _currentSettings.Type == nextWaveSettings.Type)
             {
                 SetNewWave(nextWaveSettings);
                 _waveEntity.ReplaceWaveNumber(nextWave);
@@ -42,7 +46,6 @@ namespace RoyalAxe.CoreLevel
             }
             return false;
         }
-
         private void SetNewWave(LevelGeneratorSettings nextWaveSettings)
         {
             _currentSettings = nextWaveSettings;

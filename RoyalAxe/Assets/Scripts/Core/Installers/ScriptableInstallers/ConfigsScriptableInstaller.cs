@@ -28,7 +28,7 @@ namespace Core
         {
             Container.Register<SVJsonConverter>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<TextFileOperation>(Lifetime.Singleton).AsImplementedInterfaces();              // для сохранения загрузки стрингов json
-            Container.Register<JsonConfigsModelOperation>(Lifetime.Singleton).As<IJsonConfigsModelsLoader>(); // грузильщик конфигов из json
+            Container.Register<JsonConfigsModelOperation>(Lifetime.Singleton).AsImplementedInterfaces(); // грузильщик конфигов из json
             Container.Register<JsonConfigsPathBuilder>(Lifetime.Singleton).AsImplementedInterfaces();         // прокладывает путь к файлам
             
             Container.RegisterInstance(_buildInJsonDataProvider).AsSelf();

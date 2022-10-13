@@ -21,9 +21,9 @@ namespace RoyalAxe.CoreLevel {
         }
 
 
-        public void StartLevel()
+        public void StartLevel(ICoreLevelDataInfrastructure infrastructure)
         {
-             _wave =  _levelWaveLoader.LoadWave(1); //todo: надо ли откуда-то грузить номер волны ?
+             _wave =  _levelWaveLoader.InitWaves(infrastructure.PackLevels);
             _spawnCooldownTimer.Run(_levelWaveLoader.SpawnCooldown);
             ExecuteTimerHandler();
         }
@@ -82,7 +82,6 @@ namespace RoyalAxe.CoreLevel {
         {
           //  _spawnCooldownTimer.RemoveDoneHandler(this);
             HLogger.TempLog("Конец волн текущего биома");
-            StartLevel();
         }
     }
 }

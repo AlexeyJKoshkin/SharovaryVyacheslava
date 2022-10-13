@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Core.EditorCore.Parser;
 using Core.Parser;
 using RoyalAxe.CharacterStat;
@@ -11,7 +12,12 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         {
             Bind<SkillConfigDef.RangeParams>().Bind<SkillConfigDef.Damage>();
         }
-        
+
+        protected override void RemoveUpdateConfigs(List<WeaponsSkillConfigDef> allExistItems, List<GoogleSheetGameData> allPages)
+        {
+            allExistItems.RemoveAll(o => allPages.Any(p => p.PageName == o.UniqueID)); //удаляем все модели которые будем обновлять
+        }
+
         protected override IEnumerable<WeaponsSkillConfigDef> Parse(GoogleSheetGameData googleSheetGameData, IGameDataParser dataParser)
         {
             yield return SingleCollection(googleSheetGameData, dataParser);

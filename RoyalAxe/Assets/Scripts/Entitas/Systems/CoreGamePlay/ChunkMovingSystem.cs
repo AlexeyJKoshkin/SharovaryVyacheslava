@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Entitas;
-using RoyalAxe.EntitasSystems;
 using RoyalAxe.Map;
 using UnityEngine;
 
@@ -59,26 +58,6 @@ namespace RoyalAxe.CoreLevel
             chunk.ReplaceChunkBounds(chunk.chunkView.View.CalcChunkBounds());
 
             if (_chunkPositionCalculation.IsFinishMoving(chunk)) _axeCoreMap.HandleNextChunk(chunk);
-        }
-    }
-
-    public class LevelExperienceSystem : RAReactiveSystem<CoreGamePlayEntity>
-    {
-        public LevelExperienceSystem(IContext<CoreGamePlayEntity> context) : base(context) { }
-
-        protected override ICollector<CoreGamePlayEntity> GetTrigger(IContext<CoreGamePlayEntity> context)
-        {
-            return context.CreateCollector(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayMatcher.Experience, CoreGamePlayMatcher.Player));
-        }
-
-        protected override bool Filter(CoreGamePlayEntity entity)
-        {
-            return true;
-        }
-
-        protected override void Execute(CoreGamePlayEntity e)
-        {
-            //по идее проверяем количество опыта. и если надо то переключаемся
         }
     }
 }
