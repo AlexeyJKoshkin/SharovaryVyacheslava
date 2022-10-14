@@ -4,6 +4,8 @@ namespace RoyalAxe.LevelBuff
     {
         ILevelBuff[] GenerateBuffs();
 
+        void Return(ILevelBuff levelBuff);
+
         void TempDoAll();
     }
 }

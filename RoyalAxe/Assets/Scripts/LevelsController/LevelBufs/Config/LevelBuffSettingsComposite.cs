@@ -11,21 +11,21 @@ namespace RoyalAxe.LevelBuff
     [Serializable]
     public class LevelBuffSettingsComposite
     {
-        public FiringBladeBuffSettings FiringBladeBuffSetting;
-        public FiringFirecrackersBuffSettings FiringFirecrackersBuffSetting;
-        public FloatingShieldsBuffSettings FloatingShieldsBuffSetting;
-        public HealPlayerLifeBuffSettings HealPlayerLifeBuffSetting;
-        public IncreaseCriticalChanceBuffSettings IncreaseCriticalChanceBuffSetting;
-        public IncreaseDamageBuffSettings IncreaseDamageBuffSetting;
-        public IncreasePlayerMaxLifeBuffSettings IncreasePlayerMaxLifeBuffSetting;
-        public IncreasePlayerSkillSpeedBuffSettings IncreasePlayerSkillSpeedBuffSetting;
-        public InfectedBloodBuffSettings InfectedBloodBuffSetting;
-        public RicochetBuffSettings RicochetBuffSetting;
+        public FiringBladeBuffSettings FiringBladeBuffSetting = new FiringBladeBuffSettings();
+        public FiringFirecrackersBuffSettings FiringFirecrackersBuffSetting = new FiringFirecrackersBuffSettings();
+        public FloatingShieldsBuffSettings FloatingShieldsBuffSetting = new FloatingShieldsBuffSettings();
+        public HealPlayerLifeBuffSettings HealPlayerLifeBuffSetting = new HealPlayerLifeBuffSettings();
+        public IncreaseCriticalChanceBuffSettings IncreaseCriticalChanceBuffSetting = new IncreaseCriticalChanceBuffSettings();
+        public IncreaseDamageBuffSettings IncreaseDamageBuffSetting = new IncreaseDamageBuffSettings();
+        public IncreasePlayerMaxLifeBuffSettings IncreasePlayerMaxLifeBuffSetting = new IncreasePlayerMaxLifeBuffSettings();
+        public IncreasePlayerSkillSpeedBuffSettings IncreasePlayerSkillSpeedBuffSetting = new IncreasePlayerSkillSpeedBuffSettings();
+        public InfectedBloodBuffSettings InfectedBloodBuffSetting = new InfectedBloodBuffSettings();
+        public RicochetBuffSettings RicochetBuffSetting = new RicochetBuffSettings();
 
-        public FireAdditionDamageBuffSettings FireAdditionDamageBuffSettings;
-        public ColdAdditionDamageBuffSettings ColdAdditionDamageBuffSettings;
-        public PoisonAdditionDamageBuffSettings PoisonAdditionDamageBuffSettings;
+        public FireAdditionDamageBuffSettings FireAdditionDamageBuffSettings = new FireAdditionDamageBuffSettings();
+        public ColdAdditionDamageBuffSettings ColdAdditionDamageBuffSettings = new ColdAdditionDamageBuffSettings();
+        public PoisonAdditionDamageBuffSettings PoisonAdditionDamageBuffSettings = new PoisonAdditionDamageBuffSettings();
 
-        public ChainReactionDamageBuffSettings ChainReactionDamageBuffSettings;
+        public ChainReactionDamageBuffSettings ChainReactionDamageBuffSettings =new ChainReactionDamageBuffSettings();
     }
 }

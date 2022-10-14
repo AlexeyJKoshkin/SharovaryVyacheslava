@@ -13,7 +13,11 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
             set => _timerEntity.isActiveTimer = value;
         }
 
-        public bool IsRepeat => _timerEntity.isRepeat;
+        public bool IsRepeat
+        {
+            get => _timerEntity.isRepeat;
+            set => _timerEntity.isRepeat = value;
+        }
         public ITimerInfo Info => _timerEntity.hasTimer ? default : _timerEntity.timer;
 
         public RASimpleTimerWrapper(GameRootLoopEntity entity)

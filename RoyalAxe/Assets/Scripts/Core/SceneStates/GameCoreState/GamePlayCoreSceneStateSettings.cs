@@ -43,14 +43,15 @@ namespace Core.Launcher
             {
                new UnitsFeatureBindInfo(),
                 CleaningSystems(),
-                ChunkSystems()
+                GeneralCoreGameSystems()
             };
         }
 
-        private FeatureBindInfo ChunkSystems()
+        private FeatureBindInfo GeneralCoreGameSystems()
         {
             return FeatureBindInfo.Create("Общие кор системы")
-                .Bind<ChunkMovingSystem>();
+                                  .Bind<ChunkMovingSystem>()
+                                  .Bind<LevelExperienceSystem>();
         }
 
         private FeatureBindInfo CleaningSystems()

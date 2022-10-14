@@ -1,10 +1,11 @@
-using RoyalAxe;
+using Core;
 using RoyalAxe.CoreLevel;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
-namespace Core {
+namespace RoyalAxe
+{
     public class CoreSceneStateInstaller : MonoInstaller
     {
         [SerializeField] private LevelInfrastructureView _levelInfrastructureView;
@@ -16,6 +17,7 @@ namespace Core {
         {
             Container.RegisterInstance(_levelInfrastructureView).AsSelf();
             Container.RegisterInstance(_coreGameSceneUiView).AsSelf();
+            Container.RegisterInstance(_buffSelectWindowView).AsSelf();
         }
     }
 }

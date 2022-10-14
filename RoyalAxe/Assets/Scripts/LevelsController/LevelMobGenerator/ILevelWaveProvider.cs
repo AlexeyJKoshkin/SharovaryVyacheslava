@@ -14,5 +14,6 @@ namespace RoyalAxe.CoreLevel
     {
         bool NextWave();
         CoreGamePlayEntity InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels);
+        bool HasWizard { get; }
     }
 }

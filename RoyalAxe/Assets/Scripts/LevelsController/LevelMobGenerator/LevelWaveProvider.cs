@@ -2,6 +2,7 @@
 using System.Linq;
 using Core.Data.Provider;
 using GameKit;
+using UnityEngine;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -11,9 +12,9 @@ namespace RoyalAxe.CoreLevel
         public float SpawnCooldown => _currentSettings.SpawnCooldown;
         public int MaxMobAmount => _currentSettings.MaxMobAmount;
         public MobDeathReward CurrentMobReward => _currentSettings.MobDeathReward;
+        public bool HasWizard { get; private set; }
         
         readonly Queue<LevelGeneratorSettings> _waveQueue = new Queue<LevelGeneratorSettings>();
-      
 
         private readonly CoreGamePlayEntity _waveEntity;
 
@@ -51,6 +52,7 @@ namespace RoyalAxe.CoreLevel
             _currentSettings = nextWaveSettings;
            _waveEntity.ReplaceWaveNumber(WaveNumber);
            _waveEntity.ReplaceMobWaveCollection(nextWaveSettings.MobsData.Select(o=> new MobAtLevelData(o)).ToList());
+          // HasWizard = Random.Range(0, 1) < 0.5f;
         }
     }
 }

@@ -24,6 +24,11 @@ namespace RoyalAxe.CoreLevel {
         public void StartLevel(ICoreLevelDataInfrastructure infrastructure)
         {
              _wave =  _levelWaveLoader.InitWaves(infrastructure.PackLevels);
+             StartWaveImmediate();
+        }
+        
+        public void StartWaveImmediate()
+        {
             _spawnCooldownTimer.Run(_levelWaveLoader.SpawnCooldown);
             ExecuteTimerHandler();
         }
@@ -66,9 +71,16 @@ namespace RoyalAxe.CoreLevel {
 
         private void LoadNextOrFinish(IEnemyWaveGenerator mobGeneratorHelper)
         {
-            if(_levelWaveLoader.NextWave())                              // пробуем загрузить волну
+            if (_levelWaveLoader.NextWave()) // пробуем загрузить волну
+            {
+                if (_levelWaveLoader.HasWizard)
+                {
+                    SpawnWizard();
+                    return;
+                }
                 _spawnCooldownTimer.Run(_levelWaveLoader.SpawnCooldown); //запускаем таймер с новым значением
-            else                                                         // неполучилось. 
+            }
+            else // неполучилось загрузить волну 
             {
                 //ждем пока не останется мобов на поле
                 if (mobGeneratorHelper.CurrentMobAmount == 0)
@@ -77,7 +89,13 @@ namespace RoyalAxe.CoreLevel {
                 }    
             }
         }
-        
+
+        private void SpawnWizard()
+        {
+            _spawnCooldownTimer.IsRunning = false; // тормозим таймер спавна мобов
+            HLogger.LogError("Spawn Wizard");
+        }
+
         private void DoEndLevelWin()
         {
           //  _spawnCooldownTimer.RemoveDoneHandler(this);

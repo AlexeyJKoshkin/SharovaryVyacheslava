@@ -1,4 +1,5 @@
 using System;
+using Core;
 
 namespace RoyalAxe.LevelBuff
 {
@@ -23,7 +24,7 @@ namespace RoyalAxe.LevelBuff
              */
 
             //todo: надо писать код :-) парящие  щиты
-            throw new NotImplementedException();
+            HLogger.LogError("Парящие щиты");
         }
     }
 }
