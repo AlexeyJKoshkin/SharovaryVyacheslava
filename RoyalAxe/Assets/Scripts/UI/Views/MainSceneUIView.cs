@@ -9,13 +9,8 @@ namespace ProjectUI
 
     public class MainSceneUIView : MonoBehaviour, IMetaSceneUIViewHolder
     {
-        [field: SerializeField] public CurrencyController CurrencyController { get; private set; }
-
-        [field: SerializeField] public SwipeController SwipeController { get; private set; }
-
         public void InitMainSceneState()
         {
-            CurrencyController.InitCurrency();
         }
     }
 }

@@ -1,28 +1,31 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using GameKit;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace RoyalAxe 
+namespace RoyalAxe
 {
     public class BuffSelectWindowView : MonoBehaviour
     {
-        [SerializeField]
-        private BuffBntView[] _bntViews;
+        [SerializeField] private BuffBntView[] _bntViews;
+        public IEnumerable<BuffBntView> BuffBtns => _bntViews;
 
         private void OnDisable()
         {
-            _bntViews.ForEach(e=> e.Reset());
+            _bntViews.ForEach(e => e.Reset());
         }
 
         public void Show()
         {
             gameObject.SetActive(true);
         }
-        
+
         public void Hide()
         {
             gameObject.SetActive(false);
@@ -33,7 +36,6 @@ namespace RoyalAxe
         {
             var layot = GetComponentInChildren<LayoutGroup>();
             _bntViews = layot.GetComponentsInChildren<Button>().Select(o => new BuffBntView(o)).ToArray();
-
         }
 
         [Serializable]
@@ -43,22 +45,17 @@ namespace RoyalAxe
             {
                 set => _text.text = value;
             }
-            
-            [SerializeField]
-            private TextMeshProUGUI _text;
-            
-            [SerializeField]
-            private Button _button;
 
-            public BuffBntView()
-            {
-                
-            }
+            [SerializeField] private TextMeshProUGUI _text;
+
+            [SerializeField] private Button _button;
+
+            public BuffBntView() { }
 
             public BuffBntView(Button button)
             {
                 _button = button;
-                _text =  button.GetComponentInChildren<TextMeshProUGUI>();
+                _text   = button.GetComponentInChildren<TextMeshProUGUI>();
             }
 
             public void Reset()
@@ -67,8 +64,16 @@ namespace RoyalAxe
                 _text.text = "";
                 _button.onClick.RemoveAllListeners();
             }
+
+            public void AddCallback(UnityAction action)
+            {
+                _button.onClick.AddListener(action);
+            }
+
+            public void TurnOn()
+            {
+                _button.gameObject.SetActive(true);
+            }
         }
     }
-
-    
 }

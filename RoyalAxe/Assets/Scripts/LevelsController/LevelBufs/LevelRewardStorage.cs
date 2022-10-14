@@ -34,7 +34,7 @@ namespace RoyalAxe.LevelBuff
             return result;
         }
 
-        public void Enqueue(ILevelBuff buf)
+        public void Return(ILevelBuff buf)
         {
             _allExistsRewards.Add(buf);
         }

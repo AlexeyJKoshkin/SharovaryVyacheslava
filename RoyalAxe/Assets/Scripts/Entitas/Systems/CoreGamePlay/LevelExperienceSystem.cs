@@ -29,15 +29,10 @@ namespace RoyalAxe.CoreLevel
             {
                 var delta = e.experience.Value - NeedExpa;
                 e.ReplaceExperience(delta);
-                _showBuffCommand.DoSShowBuffs();
+                _showBuffCommand.DoShowExpBuffs();
             }
 
             //по идее проверяем количество опыта. и если надо то переключаемся
         }
-    }
-    
-    public interface IShowBuffCommand
-    {
-        void DoSShowBuffs();
     }
 }
