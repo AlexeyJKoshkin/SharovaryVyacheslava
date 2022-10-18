@@ -12,13 +12,16 @@ namespace RoyalAxe.CoreLevel
         int SpeedFactor { get; }
         bool IsFinishMoving(CoreGamePlayEntity chunk);
         float GetMobYPos(int mobAmount);
+
+        Vector2 CalcWizardPosition();
     }
 
     public class ChunkPositionCalculation : IChunkPositionCalculation
     {
+        private readonly LevelInfrastructureView _levelChunkView;
         public int SpeedFactor { get; } = 1;
 
-        private float _mobZeroSpawn;
+        private readonly float _mobZeroSpawn;
         
         public bool IsFinishMoving(CoreGamePlayEntity chunk)
         {
@@ -28,12 +31,18 @@ namespace RoyalAxe.CoreLevel
 
         public ChunkPositionCalculation(LevelInfrastructureView levelChunkView)
         {
+            _levelChunkView = levelChunkView;
             _mobZeroSpawn            =  levelChunkView.Bounds.min.y - 2.3f; // когда мобы идут снизу надо отнимать больше. т.к. не учитывается высоты моба
         }
 
         public float GetMobYPos(int mobAmount)
         {
             return _mobZeroSpawn  -mobAmount * 2;
+        }
+
+        public Vector2 CalcWizardPosition()
+        {
+            throw new System.NotImplementedException();
         }
 
         public float CalcStartChunkPos(Bounds viewBounds, Bounds chunkBounds)

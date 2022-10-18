@@ -10,7 +10,7 @@ namespace RoyalAxe.CoreLevel
         LineRoyalAxeMap[] Build(LineModel[] viewModelLines, Bounds arenaBounds);
         EndPointsRoyalAxeMap[] Build(IReadOnlyList<EndPointMeleeMobPoint> levelAdapterEndPointsModels);
     }
-
+    
     public class LineRoyalAxeMapBuilder : ILineRoyalAxeMapBuilder
     {
         private TileCoreMapSettings _tileCoreMapSettings;
@@ -21,9 +21,9 @@ namespace RoyalAxe.CoreLevel
 
         public LineRoyalAxeMap[] Build(LineModel[] viewModelLines, Bounds arenaBounds)
         {
-            float minX = arenaBounds.min.x;
-            float maxX = minX;
-            var result = new LineRoyalAxeMap[viewModelLines.Length];
+            float minX   = arenaBounds.min.x;
+            float maxX   = minX;
+            var   result = new LineRoyalAxeMap[viewModelLines.Length];
             for (int i = 0; i < viewModelLines.Length; i++)
             {
                 var lineModel = viewModelLines[i];
@@ -42,52 +42,6 @@ namespace RoyalAxe.CoreLevel
         public EndPointsRoyalAxeMap[] Build(IReadOnlyList<EndPointMeleeMobPoint> levelAdapterEndPointsModels)
         {
             return levelAdapterEndPointsModels.Select(o => new EndPointsRoyalAxeMap(o)).ToArray();
-        }
-    }
-
-
-    public class LineRoyalAxeMap
-    {
-        private readonly HashSet<string> _mobs;
-        public float MinX;
-        public float MaxX;
-        public int MobAmount;
-        public int LineIndex { get; private set; }
-
-        public LineRoyalAxeMap(LineModel line, int index)
-        {
-            _mobs     = new HashSet<string>(line.MobId);
-            LineIndex = index;
-        }
-
-        public bool CanSpawn(string mobId)
-        {
-            return _mobs.Count == 0 || mobId.Contains(mobId);
-        }
-
-        public void Reset()
-        {
-            MobAmount = 0;
-        }
-
-      
-    }
-
-    
-    public class EndPointsRoyalAxeMap
-    {
-        public Vector2 Position { get; private set; }
-
-        private HashSet<string> _mobIds;
-        public EndPointsRoyalAxeMap(EndPointMeleeMobPoint model)
-        {
-        _mobIds = new HashSet<string>(model.MobIds);
-        Position = model.PointPosition;
-        }
-
-        public bool Contains(string modDataMobId)
-        {
-            return _mobIds.Count == 0 || _mobIds.Contains(modDataMobId);
         }
     }
 }

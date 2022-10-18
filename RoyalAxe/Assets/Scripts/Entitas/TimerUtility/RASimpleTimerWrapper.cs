@@ -48,10 +48,7 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
 
         public void Run(float time)
         {
-            if (time <= 0)
-            {
-                return;
-            }
+            if (time <= 0) return;
 
             _timerEntity.isPause = false;
             _timerEntity.ReplaceTimer(0, time);
@@ -61,11 +58,8 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
 
         public void Destroy()
         {
-            if (!_timerEntity.isEnabled)
-            {
-                return;
-            }
-
+            if (!_timerEntity.isEnabled) return;
+            
             _timerEntity.isPause  = false;
             _timerEntity.isRepeat = false;
             if (_timerEntity.hasDoneTimerListener)

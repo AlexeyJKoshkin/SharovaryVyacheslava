@@ -9,7 +9,6 @@ namespace RoyalAxe.CoreLevel
         Bounds Bounds { get; }
         BiomeScriptableDef BiomeDef { get; }
         IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels { get; }
-
         void HandleNextChunk(CoreGamePlayEntity chunk);
     }
 
@@ -20,9 +19,9 @@ namespace RoyalAxe.CoreLevel
         public BiomeScriptableDef BiomeDef => _view.BiomeDef;
         public IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels => _view.MeleeMobEndPoints;
 
-        private IChunkPositionCalculation _chunkPositionCalculation;
+        private readonly IChunkPositionCalculation _chunkPositionCalculation;
 
-        private LevelInfrastructureView _view;
+        private readonly LevelInfrastructureView _view;
         private readonly CoreGamePlayContext _coreGamePlayContext;
         private readonly ChunkBuilderHelper _chunkBuilderHelper;
         private CoreGamePlayEntity BearingSpawnChunk => _coreGamePlayContext.bearingSpawnChunkEntity;

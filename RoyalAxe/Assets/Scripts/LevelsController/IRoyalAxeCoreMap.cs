@@ -1,6 +1,4 @@
-﻿using Entitas;
-using UnityEngine;
-
+﻿
 namespace RoyalAxe.CoreLevel
 {
     public interface IEnemyWaveGenerator { 
