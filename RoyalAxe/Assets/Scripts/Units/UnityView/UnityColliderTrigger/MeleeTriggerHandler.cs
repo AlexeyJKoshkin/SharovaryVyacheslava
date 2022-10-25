@@ -34,8 +34,9 @@ namespace RoyalAxe.Units
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (_owner == null) return;
-            if (collision.CompareTag("GameController")) return;
 
+            if (collision.CompareTag("GameController")) return;
+            if (collision.CompareTag("Untagged")) return;
             var checkTagResult = CheckTag(collision.tag);
             if (!checkTagResult.allow)
                 return;
@@ -62,7 +63,7 @@ namespace RoyalAxe.Units
             if (collision.CompareTag("GameController"))
             {
                 _owner.isDestroyUnit = true;
-                _owner.isDeadUnit = true;
+                _owner.isDeadUnit    = true;
             }
         }
     }

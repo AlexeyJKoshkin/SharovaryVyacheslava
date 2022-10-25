@@ -3,10 +3,15 @@
 
 namespace FluentBehaviourTree
 {
+    public interface ISequenceNode : IParentBehaviourTreeNode
+    {
+        
+    }
+
     /// <summary>
     /// Runs child nodes in sequence, until one fails.
     /// </summary>
-    public class SequenceNode :AbstractBTNode, IParentBehaviourTreeNode
+    public class SequenceNode :AbstractBTNode, ISequenceNode
     {
         /// <summary>
         /// Name of the node.

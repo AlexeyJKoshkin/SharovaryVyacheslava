@@ -6,11 +6,10 @@ using UnityEngine;
 namespace Core.Launcher
 {
     [Serializable]
-    public abstract class ProjectStateSettings : ISceneStateSettings, IRoyalAxeSceneFeatureProvider
+    public abstract class ProjectStateSettings : IRoyalAxeSceneFeatureProvider
     {
-        public string NodeName => _state.name;
-        [SerializeField] private AbstractSceneStateScriptable _state;
-        public AbstractSceneStateScriptable State => _state;
+
+
         public abstract IEnumerable<Feature> EventListenerSystem(Contexts contexts);
 
         public abstract IEnumerable<FeatureBindInfo> AlwaysUpdate();

@@ -1,16 +1,12 @@
 using FluentBehaviourTree;
-using UnityEngine;
 
 namespace Core.Launcher
 {
-    public class StartSceneState : AbstractSceneStateScriptable
+    public class StartSceneState : RoyalAxeSceneState<IStateInfrastructure>
     {
-        [SerializeField] public GameSceneType NextSceneLoad;
-
         protected override void OnExecute(TimeData dt)
         {
-            //чекаем процессы запущенные ранее
-            LoadScene(NextSceneLoad); // Заканчиваем стейт загрузкой сцены меты
+            LoadScene(new MockSceneLoader(GameSceneType.Meta)); // Заканчиваем стейт загрузкой сцены меты. пока грузим сцену простой заглушкой
         }
 
         protected override void OnEnterState()
@@ -20,5 +16,7 @@ namespace Core.Launcher
             
             base.OnEnterState();
         }
+
+        public StartSceneState(IStateInfrastructure stateInfrastructure) : base(stateInfrastructure) { }
     }
 }

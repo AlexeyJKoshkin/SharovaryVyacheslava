@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.Data.Provider;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace RoyalAxe.CoreLevel 

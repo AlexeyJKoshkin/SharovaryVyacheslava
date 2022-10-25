@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace RoyalAxe.CoreLevel 
 {
-    public interface ILevelAdapter : ICoreLevelBuilder
+    public interface ILevelAdapter : ICoreLevelBuilder, IBound
     {
         Transform ChunkRoot { get; }
-        Bounds Bounds { get; }
-        BiomeScriptableDef BiomeDef { get; }
+      //  BiomeScriptableDef BiomeDef { get; }
         IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels { get; }
         void HandleNextChunk(CoreGamePlayEntity chunk);
     }
@@ -16,7 +15,7 @@ namespace RoyalAxe.CoreLevel
     {
         public Transform ChunkRoot => _view.ChunkRoot;
         public Bounds Bounds => _view.Bounds;
-        public BiomeScriptableDef BiomeDef => _view.BiomeDef;
+       // public BiomeScriptableDef BiomeDef => _view.BiomeDef;
         public IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels => _view.MeleeMobEndPoints;
 
         private readonly IChunkPositionCalculation _chunkPositionCalculation;
@@ -35,8 +34,10 @@ namespace RoyalAxe.CoreLevel
         }
 
 
-        public void BuildLevel(ICoreLevelDataInfrastructure levelNumber)
+        public void BuildLevel(ICoreLevelDataInfrastructure levelDataInfrastructure)
         {
+            _chunkBuilderHelper.Initialize(levelDataInfrastructure.BiomeDef);
+            
             var startChunk = _chunkBuilderHelper.CreateChunk();
             SetChunkToStartPoint(startChunk); // Установили первый чанк
             var nextChunk = _chunkBuilderHelper.CreateChunk(); 
@@ -53,7 +54,7 @@ namespace RoyalAxe.CoreLevel
         private void SetNextChunk(CoreGamePlayEntity nextChunk)
         {
          
-            var nextChunkPos = _chunkPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds.Bounds, nextChunk.chunkBounds.Bounds);
+            var nextChunkPos = _chunkPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds, nextChunk.chunkBounds);
             SetChunkPos(nextChunk, nextChunkPos);
             BearingSpawnChunk.isBearingSpawnChunk = false;
             SetNewBearingChunk(nextChunk);
@@ -61,7 +62,7 @@ namespace RoyalAxe.CoreLevel
 
         private void SetChunkToStartPoint(CoreGamePlayEntity startChunk) // установили чанк на стартовую позицию
         {
-            var startChunkPos = _chunkPositionCalculation.CalcStartChunkPos(_view.Bounds, startChunk.chunkBounds.Bounds);
+            var startChunkPos = _chunkPositionCalculation.CalcStartChunkPos(startChunk.chunkBounds);
             
             SetChunkPos(startChunk,startChunkPos);
             SetNewBearingChunk(startChunk);

@@ -5,12 +5,12 @@ namespace RoyalAxe.CoreLevel
 {
     public class LevelExperienceSystem : RAReactiveSystem<CoreGamePlayEntity>
     {
-        private readonly IShowBuffCommand _showBuffCommand;
-        private int NeedExpa = 50;
+        private readonly IShowSelectBuffWindowCommand _showSelectBuffWindowCommand;
+        private int NeedExpa = 100;
         
-        public LevelExperienceSystem(IContext<CoreGamePlayEntity> context, IShowBuffCommand showBuffCommand) : base(context)
+        public LevelExperienceSystem(IContext<CoreGamePlayEntity> context, IShowSelectBuffWindowCommand showSelectBuffWindow) : base(context)
         {
-            _showBuffCommand = showBuffCommand;
+            _showSelectBuffWindowCommand = showSelectBuffWindow;
         }
 
         protected override ICollector<CoreGamePlayEntity> GetTrigger(IContext<CoreGamePlayEntity> context)
@@ -29,10 +29,8 @@ namespace RoyalAxe.CoreLevel
             {
                 var delta = e.experience.Value - NeedExpa;
                 e.ReplaceExperience(delta);
-                _showBuffCommand.DoShowExpBuffs();
+                _showSelectBuffWindowCommand.ExecuteCommand();
             }
-
-            //по идее проверяем количество опыта. и если надо то переключаемся
         }
     }
 }

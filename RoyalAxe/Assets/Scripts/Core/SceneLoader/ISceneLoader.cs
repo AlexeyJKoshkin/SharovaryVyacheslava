@@ -6,7 +6,7 @@ namespace Core.Launcher
     public interface ISceneLoader
     {
         GameSceneType CurrentScene { get; }
-        void LoadScene(GameSceneType gameSceneType);
+        void LoadScene(ISceneLoaderHelper sceneLoaderHelper);
     }
 
 

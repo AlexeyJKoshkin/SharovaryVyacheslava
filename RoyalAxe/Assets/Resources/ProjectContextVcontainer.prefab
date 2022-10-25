@@ -55,4 +55,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 433dfdb2444723547a33577d58b910ab, type: 2}
   - {fileID: 11400000, guid: 6ac01b38fed878c4cb5e251a4c573c26, type: 2}
   - {fileID: 11400000, guid: 0ad866a4880e3f74abbc25001d58e60f, type: 2}
+  - {fileID: 11400000, guid: bbc095346d038ed4fbb0e0c79b4559ec, type: 2}
   _monInstallers: []

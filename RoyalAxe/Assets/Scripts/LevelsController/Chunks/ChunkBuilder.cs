@@ -9,9 +9,9 @@ namespace RoyalAxe.CoreLevel
     {
         private readonly CoreGamePlayContext _gamePlayContext;
         readonly ILevelAdapter _levelView;
-        private Bounds _levelViewBounds;
+        private readonly Bounds _levelViewBounds;
         private readonly Queue<LevelChunkView> _queue = new Queue<LevelChunkView>();
-        private IChunkPositionCalculation _chunkPositionCalculation;
+        private readonly IChunkPositionCalculation _chunkPositionCalculation;
 
         public ChunkBuilderHelper(CoreGamePlayContext gamePlayContext, ILevelAdapter levelView, IChunkPositionCalculation chunkPositionCalculation)
         {
@@ -19,8 +19,7 @@ namespace RoyalAxe.CoreLevel
             _levelView       = levelView;
             _chunkPositionCalculation = chunkPositionCalculation;
             _levelViewBounds = levelView.Bounds;
-            Initialize();
-        }
+       }
 
         public CoreGamePlayEntity CreateChunk()
         {
@@ -41,9 +40,9 @@ namespace RoyalAxe.CoreLevel
         }
 
 
-        public void Initialize()
+        public void Initialize(BiomeScriptableDef scriptableDef)
         {
-            var instanTiatedhunks = _levelView.BiomeDef.Chunks.Select(e => Object.Instantiate(e, _levelView.ChunkRoot));
+            var instanTiatedhunks = scriptableDef.Chunks.Select(e => Object.Instantiate(e, _levelView.ChunkRoot));
             _queue.Clear();
             instanTiatedhunks.ForEach(e =>
                                       {

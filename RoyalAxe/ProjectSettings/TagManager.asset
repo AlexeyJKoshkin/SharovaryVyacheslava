@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MapBack
+    uniqueID: 2934896761
+    locked: 0
+  - name: MapLevel
+    uniqueID: 1487088355
+    locked: 0
+  - name: MapDecor
+    uniqueID: 398894653
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ActiveObjectOnMap
+    uniqueID: 1568555015
     locked: 0

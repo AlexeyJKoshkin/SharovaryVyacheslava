@@ -3,63 +3,60 @@ using System.Linq;
 using Core.Data.Provider;
 using Core.UserProfile;
 using Entitas;
+using FluentBehaviourTree;
 using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CoreLevel
 {
     public interface ILevelCreation
     {
-        ICoreLevelDataInfrastructure CreateLevel();
+        //тут создаем и подготавливаем данные для работы уровня
+        IBehaviourTreeNode CreateLevel();
     }
 
     //todo: переписать используя декораторы. Надо ждать всякие анимации, колбэки всякое такое. 
     public class LevelCreationOperation : ILevelCreation
     {
-        private readonly IDataStorage _dataStorage;
         private readonly CoreGamePlayContext _coreGamePlay;
-        private readonly CoreGameSceneUIView _coreGameSceneUiView;
+   
         private readonly IUnitsBuilderFacade _unitBuilder;
         private readonly ICurrentUserProfile _userProfile;
-        private readonly Contexts _contexts;
+        private readonly IPrepareGameUICommand _prepareGameUiCommand;
         private readonly ICoreLevelBuilder _coreLevelBuilder;
+        private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
+        private readonly CoreGameBehaviourNode _coreGameBehaviourNode;
+        private readonly IMobAtLevelDirector _mobAtLevelDirector;
 
         public LevelCreationOperation(IUnitsBuilderFacade unitBuilder,
                                       ICurrentUserProfile userProfile,
                                       ICoreLevelBuilder coreLevelBuilder,
-                                      IDataStorage dataStorage,
-                                      CoreGamePlayContext coreGamePlay,
-                                      Contexts contexts, CoreGameSceneUIView coreGameSceneUiView)
+                                      ICoreLevelDataInfrastructure coreLevelDataInfrastructure,
+                                      CoreGameBehaviourNode coreGameBehaviourNode,
+                                      Contexts contexts,
+                                      IMobAtLevelDirector mobAtLevelDirector, IPrepareGameUICommand prepareGameUiCommand)
         {
             _unitBuilder       = unitBuilder;
             _userProfile       = userProfile;
             _coreLevelBuilder  = coreLevelBuilder;
-            _dataStorage       = dataStorage;
-            _coreGamePlay = coreGamePlay;
-            _contexts = contexts;
-            _coreGameSceneUiView = coreGameSceneUiView;
+            _coreLevelDataInfrastructure = coreLevelDataInfrastructure;
+            this._coreGameBehaviourNode = coreGameBehaviourNode;
+            _coreGamePlay = contexts.coreGamePlay;
+            _mobAtLevelDirector = mobAtLevelDirector;
+            _prepareGameUiCommand = prepareGameUiCommand;
         }
 
-        public ICoreLevelDataInfrastructure CreateLevel()
+        public IBehaviourTreeNode CreateLevel()
         {
-            //todo: пока просто отпрвляю все что есть. По идее надо формировать данные исходя из прогресса и игрока и данных из UI 
-            var infrastructure = new CoreLevelDataInfrastructure(_dataStorage.All<LevelGeneratorSettings>().ToList());
             // создаем карту
-            _coreLevelBuilder.BuildLevel(infrastructure);
+            _coreLevelBuilder.BuildLevel(_coreLevelDataInfrastructure);
             // создаем всю остальную хуйню (спавнер мобов, карту)
 
+            _mobAtLevelDirector.StartWaveImmediate();
             CreatePlayer();
 
-            BindUI();
+            _prepareGameUiCommand.PrepareUIStartGame();
 
-            return infrastructure;
-
-
-        }
-
-        private void BindUI()
-        {
-            _coreGameSceneUiView.InitEntity( _contexts.units.playerEntity);
-            _coreGameSceneUiView.InitEntity( _contexts.coreGamePlay.playerEntity);
+            return _coreGameBehaviourNode;
         }
 
         private void CreatePlayer()

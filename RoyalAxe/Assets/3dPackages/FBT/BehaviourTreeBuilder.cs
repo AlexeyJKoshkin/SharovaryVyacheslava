@@ -75,6 +75,22 @@ namespace FluentBehaviourTree
 
             return Push(sequenceNode);
         }
+        
+        /// <summary>
+        /// Create a sequence node.
+        /// </summary>
+        public BehaviourTreeBuilder Sequence(ISequenceNode sequenceNode)
+        {
+            return Push(sequenceNode);
+        }
+        
+        /// <summary>
+        /// Create a sequence node.
+        /// </summary>
+        public BehaviourTreeBuilder Parent(IParentBehaviourTreeNode sequenceNode)
+        {
+            return Push(sequenceNode);
+        }
 
         /// <summary>
         /// Create a parallel node.

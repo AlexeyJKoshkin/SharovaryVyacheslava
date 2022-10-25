@@ -6,6 +6,5 @@ namespace RoyalAxe.LevelBuff
 
         void Return(ILevelBuff levelBuff);
 
-        void TempDoAll();
     }
 }

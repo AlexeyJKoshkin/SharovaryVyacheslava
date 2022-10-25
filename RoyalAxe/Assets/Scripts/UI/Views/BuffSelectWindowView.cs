@@ -11,24 +11,14 @@ using UnityEngine.UI;
 
 namespace RoyalAxe
 {
-    public class BuffSelectWindowView : MonoBehaviour
+    public class BuffSelectWindowView : UIViewComponent
     {
         [SerializeField] private BuffBntView[] _bntViews;
-        public IEnumerable<BuffBntView> BuffBtns => _bntViews;
+        public IReadOnlyList<BuffBntView> BuffBtns => _bntViews;
 
         private void OnDisable()
         {
             _bntViews.ForEach(e => e.Reset());
-        }
-
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
         }
 
         [Button]

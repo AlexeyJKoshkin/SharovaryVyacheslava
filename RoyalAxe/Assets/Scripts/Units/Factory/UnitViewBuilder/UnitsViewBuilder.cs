@@ -95,6 +95,7 @@ namespace RoyalAxe.GameEntitas
             var result = Object.Instantiate(prefab);
             result.EntityBehaviours().Where(o => null != o).ForEach(b => b.InitEntity(e));
             e.AddUnitsView(result);
+            result.GetComponentsInChildren<Renderer>().ForEach(r=> r.enabled = false);
             return result;
         }
     }

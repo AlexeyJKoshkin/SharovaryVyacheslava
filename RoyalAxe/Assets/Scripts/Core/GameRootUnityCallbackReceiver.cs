@@ -32,7 +32,6 @@ namespace Core.Installers
             {
                 return;
             }
-
             _onUpdateFeature.Add(updateFeature);
             HandleAddFeature(updateFeature);
         }
@@ -44,10 +43,11 @@ namespace Core.Installers
                 return;
             }
 
+            
             _onUpdateFeature.Remove(updateFeature);
             _onPauseAbleUpdateFeature.Remove(updateFeature);
-            updateFeature.Cleanup();
-            updateFeature.ClearReactiveSystems();
+            HandleRemoveFeature(updateFeature);
+            
         }
 
         public void AddPauseAbleUpdate(Feature pauseAble)
@@ -76,6 +76,16 @@ namespace Core.Installers
             feature.Initialize();
 #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
             feature.gameObject.transform.SetParent(transform);
+#endif
+        }
+        
+        private void HandleRemoveFeature(Feature feature)
+        {
+            feature.Cleanup();
+            feature.ClearReactiveSystems();
+            feature.DeactivateReactiveSystems();
+#if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
+            Destroy(feature.gameObject);
 #endif
         }
 

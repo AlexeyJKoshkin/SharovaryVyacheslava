@@ -14,8 +14,7 @@ namespace RoyalAxe.LevelBuff
 
         public override void Activate()
         {
-            UnitsEntity player      = null;
-            var         skillEntity = player.unitActiveSkill.SkillEntity;
+            var         skillEntity = Player.unitActiveSkill.SkillEntity;
             var         usages      = skillEntity.useCounterSkill;
             skillEntity.ReplaceUseCounterSkill(usages.CurrentValue + Increase_Amount, usages.MaxValue + Increase_Amount);
         }

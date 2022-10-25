@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace RoyalAxe.CoreLevel
 {
-    public class LevelInfrastructureView : MonoBehaviour
+    public class LevelInfrastructureView : MonoBehaviour, IBound
     {
         [field: SerializeField]
         public Transform ChunkRoot { get; private set; }
@@ -22,7 +22,7 @@ namespace RoyalAxe.CoreLevel
 
         public Bounds Bounds => _borderCollider.bounds;
         public TileCoreMapSettings TimeMapCoreSettings;
-        public BiomeScriptableDef BiomeDef;
+        //public BiomeScriptableDef BiomeDef;
 
         [SerializeField]
         private BoxCollider2D _borderCollider;

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
 using GameKit;
 using RoyalAxe.CoreLevel;
 
@@ -21,5 +23,36 @@ namespace RoyalAxe.GameEntitas {
             if (item.TotalAmount == 0) this.Remove(item);
             return item;
         }
+    }
+    [CoreGamePlay]
+    [Unique]
+    public class LevelWaveComponent : IComponent
+    {
+        
+    }
+
+    [CoreGamePlay, Event(EventTarget.Self)]
+    public class WaveNumberComponent : IComponent
+    {
+        public int Number;
+    }
+
+    /// <summary>
+    /// Указатель, что волна закончилась
+    /// </summary>
+    [CoreGamePlay]
+    public class WaveFinishedComponent : IComponent
+    {
+    }
+
+    //указательно, что можно начинать спавнить мобов
+    [CoreGamePlay]
+    public class WaveMobReadyComponent : IComponent
+    {
+    }
+    
+    [CoreGamePlay]
+    public class WizardShopReadyComponent : IComponent
+    {
     }
 }

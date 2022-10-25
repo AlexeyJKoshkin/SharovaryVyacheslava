@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1344113513}
   - component: {fileID: 1344113512}
+  - component: {fileID: 1344113514}
   m_Layer: 0
   m_Name: '[StartSceneProjectContext]'
   m_TagString: Untagged
@@ -157,7 +158,8 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _installers: []
-  _monInstallers: []
+  _monInstallers:
+  - {fileID: 1344113514}
   SceneData: []
   _settings:
     id: 0
@@ -165,8 +167,6 @@ MonoBehaviour:
     version: 1
     00000000:
       type: {class: DefaultProjectStateSettings, ns: Core.Launcher, asm: Assembly-CSharp}
-      data:
-        _state: {fileID: 11400000, guid: 4dfab84912f9d4942ae52493226dc834, type: 2}
 --- !u!4 &1344113513
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +181,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1344113514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344113511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21f14bfe4304cd6915c3b72d0aa8a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1787479366
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,62 @@
+using Entitas;
+using FluentBehaviourTree;
+using GameKit;
+using RoyalAxe.CoreLevel;
+using UnityEngine;
+
+namespace Core.Launcher
+{
+    public class CoreGameState : RoyalAxeSceneState<ICoreGameInfrastructure>
+    {
+        private ILevelCreation LevelCreation => Infrastructure.LevelCreation;
+
+        private IStateLoaderProvider StateLoaderProvider => Infrastructure.StateLoaderProvider;
+        IBehaviourTreeNode _behaviour;
+
+        public CoreGameState(ICoreGameInfrastructure coreGameInfrastructure) : base(coreGameInfrastructure)
+        {
+        }
+
+        protected override void OnExecute(TimeData dt)
+        {
+            _behaviour.Execute(dt);
+            var sceneLoader = StateLoaderProvider.GetCurrentSceneLoader();
+
+            if (sceneLoader == null)
+                Continue();
+            else
+            {
+                LoadScene(sceneLoader);
+            }
+        }
+
+        protected override void OnEnterState()
+        {
+            _behaviour = LevelCreation.CreateLevel();
+
+            /*_mobAtLevelDirector.StartLevel(indfrastructure);
+            _mobAtLevelDirector.StartWaveImmediate();*/
+
+            //по хорошему надо ждать анимации, всякое такое
+            //стейт начал работать
+
+            //  _axeSceneDependenciesConnector.EnterState(this);   
+        }
+
+        protected override void OnExitState()
+        {
+            Debug.LogError("On Exit Core State");
+            var context = Infrastructure.Contexts;
+            ClearContext(context.units);
+            ClearContext(context.skill);
+            ClearContext(context.rAAnimation);
+            ClearContext(context.coreGamePlay);
+        }
+
+        private void ClearContext(IContext contextUnits)
+        {
+            contextUnits.ClearComponentPools();
+            contextUnits.Reset();
+        }
+    }
+}

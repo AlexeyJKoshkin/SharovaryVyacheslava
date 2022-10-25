@@ -21,9 +21,5 @@ namespace RoyalAxe.GameEntitas
         public int Value;
     }
 
-    [CoreGamePlay, Event(EventTarget.Self)]
-    public class WaveNumberComponent : IComponent
-    {
-        public int Number;
-    }
+   
 }

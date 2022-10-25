@@ -17,13 +17,17 @@ public static class CoreGamePlayComponentsLookup {
     public const int Experience = 6;
     public const int Gems = 7;
     public const int Gold = 8;
-    public const int MobWaveCollection = 9;
-    public const int MovingChunk = 10;
-    public const int Player = 11;
-    public const int WaveNumber = 12;
-    public const int WaveNumberListener = 13;
+    public const int LevelWave = 9;
+    public const int MobWaveCollection = 10;
+    public const int MovingChunk = 11;
+    public const int Player = 12;
+    public const int WaveFinished = 13;
+    public const int WaveMobReady = 14;
+    public const int WaveNumber = 15;
+    public const int WizardShopReady = 16;
+    public const int WaveNumberListener = 17;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
         "ExperienceListener",
@@ -35,10 +39,14 @@ public static class CoreGamePlayComponentsLookup {
         "Experience",
         "Gems",
         "Gold",
+        "LevelWave",
         "MobWaveCollection",
         "MovingChunk",
         "Player",
+        "WaveFinished",
+        "WaveMobReady",
         "WaveNumber",
+        "WizardShopReady",
         "WaveNumberListener"
     };
 
@@ -52,10 +60,14 @@ public static class CoreGamePlayComponentsLookup {
         typeof(RoyalAxe.GameEntitas.ExperienceComponent),
         typeof(RoyalAxe.GameEntitas.GemsComponent),
         typeof(RoyalAxe.GameEntitas.GoldComponent),
+        typeof(RoyalAxe.GameEntitas.LevelWaveComponent),
         typeof(RoyalAxe.GameEntitas.MobWaveCollectionComponent),
         typeof(RoyalAxe.GameEntitas.MovingChunkComponent),
         typeof(RoyalAxe.GameEntitas.PlayerComponent),
+        typeof(RoyalAxe.GameEntitas.WaveFinishedComponent),
+        typeof(RoyalAxe.GameEntitas.WaveMobReadyComponent),
         typeof(RoyalAxe.GameEntitas.WaveNumberComponent),
+        typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent),
         typeof(WaveNumberListenerComponent)
     };
 }

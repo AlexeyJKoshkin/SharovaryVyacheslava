@@ -38,11 +38,5 @@ namespace RoyalAxe.LevelBuff
         {
             _allExistsRewards.Add(buf);
         }
-        
-        
-        public void TempDoAll()
-        {
-         _allExistsRewards.ForEach(e=> e.Activate());
-        }
     }
 }

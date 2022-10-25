@@ -23,9 +23,9 @@ namespace RoyalAxe.GameEntitas
     public class BearingSpawnChunk : IComponent { }
 
     [CoreGamePlay]
-    public class ChunkBoundsComponent : IComponent
+    public class ChunkBoundsComponent : IComponent, IBound
     {
-        public Bounds Bounds;
+        public Bounds Bounds { get; set; }
         public Vector3 Extents => Bounds.extents;
         public Vector2 Max => Bounds.max;
         public Vector2 Min => Bounds.min;

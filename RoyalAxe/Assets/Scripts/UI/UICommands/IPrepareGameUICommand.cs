@@ -1,0 +1,35 @@
+namespace RoyalAxe.CoreLevel {
+    public interface IPrepareGameUICommand
+    {
+        void PrepareUIStartGame();
+    }
+    
+    public class PrepareGameUICommand : IPrepareGameUICommand
+    {
+        private readonly CoreGameSceneUIView _coreGameSceneUiView;
+        private readonly WinWindowView _winWindowController;
+        private readonly LoseWindowView _loseWindowController;
+        private readonly BuffSelectWindowView _buffSelectWindowView;
+        private readonly Contexts _contexts;
+        public PrepareGameUICommand(CoreGameSceneUIView coreGameSceneUiView, Contexts contexts,
+                                    LoseWindowView loseWindowController,
+                                    WinWindowView winWindowController,
+                                    BuffSelectWindowView buffSelectWindowView)
+        {
+            _coreGameSceneUiView = coreGameSceneUiView;
+            _contexts            = contexts;
+            _loseWindowController = loseWindowController;
+            _winWindowController = winWindowController;
+            _buffSelectWindowView = buffSelectWindowView;
+        }
+
+        public void PrepareUIStartGame()
+        {
+            _coreGameSceneUiView.InitEntity( _contexts.units.playerEntity);
+            _coreGameSceneUiView.InitEntity( _contexts.coreGamePlay.playerEntity);
+            _winWindowController.Hide();
+            _loseWindowController.Hide();
+            _buffSelectWindowView.Hide();
+        }
+    }
+}

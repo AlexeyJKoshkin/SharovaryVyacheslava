@@ -2,21 +2,24 @@ using System.Collections.Generic;
 
 namespace RoyalAxe.CoreLevel 
 {
+    //Инфраструктура с данными для работы текущего уровня
     public interface ICoreLevelDataInfrastructure
     {
-        BiomeType BiomeType { get; }
         IReadOnlyList<LevelGeneratorSettings> PackLevels { get; }
+        
+        BiomeScriptableDef BiomeDef { get; }
     }
 
     public class CoreLevelDataInfrastructure : ICoreLevelDataInfrastructure
     {
-        public BiomeType BiomeType { get; }
-        public IReadOnlyList<LevelGeneratorSettings> PackLevels { get; }
+        public IReadOnlyList<LevelGeneratorSettings> PackLevels { get; set; }
+        public BiomeScriptableDef BiomeDef { get; set; }
 
-        public CoreLevelDataInfrastructure(List<LevelGeneratorSettings> levels)
+        /*public CoreLevelDataInfrastructure(List<LevelGeneratorSettings> levels, BiomeScriptableDef biomeDef)
         {
             PackLevels = levels;
+            BiomeDef = biomeDef;
             BiomeType = levels[0].Type;
-        }
+        }*/
     }
 }

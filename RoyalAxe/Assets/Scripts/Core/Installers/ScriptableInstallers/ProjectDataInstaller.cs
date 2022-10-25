@@ -13,7 +13,7 @@ namespace Core
         protected override void InstallBindings()
         {
             _dataStorage.Reload();
-            _dataStorage.Collection.ForEach(e => Container.RegisterInstance(e.GetType()).AsImplementedInterfaces());
+            _dataStorage.Collection.ForEach(e => Container.RegisterInstance(e).AsImplementedInterfaces());
 
             Container.Register<LocalDataBoxStorage>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }

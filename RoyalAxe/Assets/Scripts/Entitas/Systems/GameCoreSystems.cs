@@ -41,17 +41,8 @@ namespace RoyalAxe.EntitasSystems
         {
             HLogger.LogInfo("Init GameCore Systems");
 
-            _mainLoopBT = new BehaviourTreeBuilder()
-                          .Sequence("Тик стейта сцены")                                  // Постоянно крутим в цикле два действия
-                          .Do("Обновить текущий стейт", UpdateCurrentState)              // стейт сцены подменяется на текущий при запуске сцены
-                          .Do("Установили текущий стейт загрузка сцены", HandleEndState) //
-                          .End().Build();
+            _mainLoopBT = new ActionNode("Обновить текущий стейт", UpdateCurrentState); // выполняем действие текущего стейта
             _fmsStateCollection.SetState<MockState>();
-        }
-
-        private BehaviourTreeStatus HandleEndState(TimeData arg)
-        {
-            return BehaviourTreeStatus.Success;
         }
 
         private BehaviourTreeStatus UpdateCurrentState(TimeData dt)

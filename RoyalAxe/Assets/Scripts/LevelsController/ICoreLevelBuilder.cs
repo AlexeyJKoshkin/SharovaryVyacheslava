@@ -1,6 +1,6 @@
 namespace RoyalAxe.CoreLevel {
     public interface ICoreLevelBuilder
     {
-        void BuildLevel(ICoreLevelDataInfrastructure levelNumber);
+        void BuildLevel(ICoreLevelDataInfrastructure levelDataInfrastructure);
     }
 }

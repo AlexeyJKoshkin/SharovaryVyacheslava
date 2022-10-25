@@ -18,11 +18,10 @@ namespace RoyalAxe.CoreLevel
         private readonly EndPointsRoyalAxeMap[] _endPoints;
         private const float OFFSET_X = 0.1f;
 
-
-        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ILevelAdapter levelAdapter, IChunkPositionCalculation chunkPositionCalculation)
+        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ICoreLevelDataInfrastructure coreLevelDataInfrastructure, ILevelAdapter levelAdapter, IChunkPositionCalculation chunkPositionCalculation)
         {
             _chunkPositionCalculation = chunkPositionCalculation;
-            _lineRoyalAxeMaps = currenLevelLineBuilder.Build(levelAdapter.BiomeDef.Lines, levelAdapter.Bounds);
+            _lineRoyalAxeMaps = currenLevelLineBuilder.Build(coreLevelDataInfrastructure.BiomeDef.Lines, levelAdapter.Bounds);
             _endPoints = currenLevelLineBuilder.Build(levelAdapter.EndPointsModels);
         }
 

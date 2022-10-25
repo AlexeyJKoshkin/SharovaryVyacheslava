@@ -5,11 +5,16 @@ using VContainer;
 
 namespace Core.Launcher
 {
-    public class MetaSceneState : AbstractSceneStateScriptable, IMetaSceneContext
+    public class MetaSceneState : RoyalAxeSceneState<IMetaSceneInfrastructure>, IMetaSceneContext
     {
-        [Inject] private IMaineSceneStateProvider _maineSceneStateProvider;
+        /*[Inject] private IMaineSceneStateProvider _maineSceneStateProvider;*/
         private IBehaviourTreeNode _tree;
 
+        private IStateLoaderProvider TempMetaStateDirector => Infrastructure.StateLoaderProvider;
+        
+        public MetaSceneState(IMetaSceneInfrastructure metaSceneInfrastructure) : base(metaSceneInfrastructure)
+        {
+        }
 
         /// <summary>
         ///     Каждый тик пробуем запускать все зарегестрированные запускаем все стейты из метасцены
@@ -17,7 +22,13 @@ namespace Core.Launcher
         /// <param name="dt"></param>
         protected override void OnExecute(TimeData dt)
         {
-            switch (_tree.Execute(dt))
+            var sceneLoader = TempMetaStateDirector.GetCurrentSceneLoader();
+            if(sceneLoader == null) Continue();
+            else
+            {
+                LoadScene(sceneLoader);
+            }
+            /*switch (_tree.Execute(dt))
             {
                 case BehaviourTreeStatus.Failure:
                     Debug.LogError("Что-то где-то пошло не так. Возможно тут стоит добавить отдельную ветку");
@@ -31,17 +42,18 @@ namespace Core.Launcher
                     break;
             }
 
-            Continue();
+            Continue();*/
         }
 
         protected override void OnEnterState()
         {
             base.OnEnterState();
-            _tree = CreateSelectorAllStates();
-            _maineSceneStateProvider.GetState<MainStateMetaScene>().EnterState(); // первый стейт активируем принудительно
+            TempMetaStateDirector.Initialize();
+            /*_tree = CreateSelectorAllStates();
+            _maineSceneStateProvider.GetState<MainStateMetaScene>().EnterState(); // первый стейт активируем принудительно*/
         }
 
-        private IBehaviourTreeNode CreateSelectorAllStates()
+        /*private IBehaviourTreeNode CreateSelectorAllStates()
         {
             var allStatesAsNode = _maineSceneStateProvider.AllStates().Cast<IBehaviourTreeNode>().ToArray();
             var builder         = new BehaviourTreeBuilder();
@@ -49,6 +61,7 @@ namespace Core.Launcher
             builder.Selector<SelectorWithMemory>("Обновляем первый попавшийся стейт", allStatesAsNode)
                    .End();
             return builder.Build();
-        }
+        }*/
+       
     }
 }

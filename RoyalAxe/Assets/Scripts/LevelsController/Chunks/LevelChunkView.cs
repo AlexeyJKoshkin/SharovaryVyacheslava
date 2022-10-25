@@ -8,7 +8,6 @@ namespace RoyalAxe.CoreLevel
 {
     public class LevelChunkView : MonoBehaviour, IDataObject
     {
-     
         public Transform RootTransform => _rootTransform;
         [SerializeField,GameKit.ReadOnly]
         private Transform _rootTransform;
@@ -39,24 +38,12 @@ namespace RoyalAxe.CoreLevel
         private void OnDrawGizmos()
         {
             if (TileMap == null) return;
-            var cellSize = TileMap.cellSize;
-
             var bounds = CalcChunkBounds();
             Gizmos.color = TileMap.color;
             Gizmos.DrawLine(bounds.min, new Vector2(bounds.max.x, bounds.min.y));
             Gizmos.DrawLine(new Vector2(bounds.max.x, bounds.max.y), new Vector2(bounds.min.x, bounds.max.y));
             Gizmos.DrawLine(new Vector2(bounds.min.x, bounds.max.y), bounds.min);
 
-            Vector2 startposition = bounds.min;
-            Vector2 endPosition   = startposition + new Vector2(0, TileMap.size.y * cellSize.y);
-
-            void DrawGizmoLine(LineModel obj)
-            {
-                var delta = obj.Size * cellSize.x;
-                startposition.x += delta;
-                endPosition.x   += delta;
-                Gizmos.DrawLine(startposition, endPosition);
-            }
         }
 
         private void Reset()

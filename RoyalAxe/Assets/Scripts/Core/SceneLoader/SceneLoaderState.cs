@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Core.Launcher
 {
-    public class SceneLoaderState : AbstractBTNode, ISceneLoaderSceneState
+    public class SceneLoaderState : AbstractBTNode,ISceneLoaderSceneState
     {
         private readonly ISceneLoaderUnityView _view;
 
@@ -15,20 +15,13 @@ namespace Core.Launcher
 
         public GameSceneType CurrentScene { get; private set; }
 
-        private GameSceneType _currentLoadingScene;
+        private ISceneLoaderHelper _currentLoadingScene;
         private BehaviourTreeStatus _result;
 
-        public void LoadScene(GameSceneType gameSceneType)
+        public void LoadScene(ISceneLoaderHelper sceneLoader)
         {
-            _currentLoadingScene = gameSceneType;
+            _currentLoadingScene = sceneLoader;
             //подготовка к загрузке сцены
-        }
-
-        private IEnumerator MockLoadScene(GameSceneType gameSceneType)
-        {
-            var operation = SceneManager.LoadSceneAsync((int) gameSceneType);
-            while (operation.isDone) yield return null;
-            HLogger.LogInfo($"SceneLoaded {gameSceneType}");
         }
 
         void IFMSState.ExitState()
@@ -36,19 +29,41 @@ namespace Core.Launcher
             _result = BehaviourTreeStatus.Failure; // вызов исполнения ноды в неактивном режиме вызовет срабатывание фейл
         }
 
-        void IFMSState.EnterState()
+        async void IFMSState.EnterState()
         {
             //   Debug.LogError("ENter Load");
             //всю логику (подготовка, UI, старт загрузки, показ доп модулей и всякое такое выполнять в этом методе)
             //Желательно сделать одну большую макаронину и разбить на таски или отдельные задачи, которые выполняются последовательно.
-            _view.StartCoroutine(MockLoadScene(_currentLoadingScene)); // пока просто грузим сцену без ничего.
+
             //добавить показ UI/
             //добавит прогресс бар загрузки если надо
+
+            if (_currentLoadingScene != null)
+            {
+                await _currentLoadingScene.UnloadResources();
+            }
+
+            _view.StartCoroutine(MockLoadScene(_currentLoadingScene)); // пока просто грузим сцену без ничего.
             //выбор окон
-            CurrentScene = _currentLoadingScene;
-            _result      = BehaviourTreeStatus.Running;
+            _result = BehaviourTreeStatus.Running;
         }
 
+        private IEnumerator MockLoadScene(ISceneLoaderHelper sceneLoaderHelper)
+        {
+            // По идее тут надо выгружать старые ресурсы
+
+            var operation = SceneManager.LoadSceneAsync((int) sceneLoaderHelper.TargetScene);
+            while (operation.isDone) yield return null;
+            HLogger.LogInfo($"SceneLoaded {sceneLoaderHelper.TargetScene}");
+            CurrentScene = _currentLoadingScene.TargetScene;
+            PreloadResources(sceneLoaderHelper);
+        }
+
+        private async void PreloadResources(ISceneLoaderHelper sceneLoaderHelper)
+        {
+            await sceneLoaderHelper.PreloadResources();
+            _result = BehaviourTreeStatus.Success;
+        }
 
         public override BehaviourTreeStatus Execute(TimeData time)
         {

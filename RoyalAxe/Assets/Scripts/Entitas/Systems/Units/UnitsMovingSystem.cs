@@ -10,6 +10,7 @@ namespace RoyalAxe.EntitasSystems
 
         public UnitsMovingSystem(UnitsContext unitsContext)
         {
+            Debug.LogError("UnitsMovingSystem");
             _unitsContext = unitsContext;
         }
 
@@ -22,7 +23,7 @@ namespace RoyalAxe.EntitasSystems
 
         private void UpdateMobPosition(UnitsEntity entity)
         {
-            var transform  = entity.unitsView.View.RootTransform;
+            var transform = entity.unitsView.View.RootTransform;
             Vector2 currentPos = transform.position;
             transform.position = Vector2.MoveTowards(currentPos, entity.movingToPoint.TargetPosition, entity.moveSpeed.CurrentValue * Time.deltaTime);
             entity.ReplaceMovingToPoint(entity.movingToPoint.PointAdapter);

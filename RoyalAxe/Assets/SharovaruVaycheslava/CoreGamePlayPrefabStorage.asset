@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f87d3882e7433387c850ef31443ee1, type: 3}
+  m_Name: CoreGamePlayPrefabStorage
+  m_EditorClassIdentifier: 
+  WizardTrigger: {fileID: 7534363666553023441, guid: 5032d2a2c7ff70a4ab9df6bd67ab033f, type: 3}

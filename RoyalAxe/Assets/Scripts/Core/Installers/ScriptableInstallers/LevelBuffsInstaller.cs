@@ -17,7 +17,7 @@ namespace Core
 
             AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelBuff>(); });
 
-            Container.Register<ShowBuffCommand>(Lifetime.Singleton).AsImplementedInterfaces();
+         
         }
 
         IEnumerable<Type> AllGameBuffs()

@@ -15,7 +15,7 @@ namespace Core
             DontDestroyOnLoad(loaderView);
 
             Container.RegisterInstance(loaderView).AsSelf().AsImplementedInterfaces();
-            Container.Register<SceneLoaderState>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<SceneLoaderState>(Lifetime.Singleton).As<ISceneLoader>().As<ISceneLoaderSceneState>();
         }
     }
 }

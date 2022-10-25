@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collection:
   - {fileID: 11400000, guid: df57221fce83cb442877c07416c2bccd, type: 2}
+  - {fileID: 11400000, guid: e89aefc4edcab7c4596fc1aecf7a6b14, type: 2}
   _providerType: 4
   _foldersPath:
   - Assets/Data/Configs

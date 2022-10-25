@@ -4,6 +4,7 @@ using Core.Installers;
 using Core.Launcher;
 using Entitas;
 using GameKit;
+using UnityEngine;
 
 namespace RoyalAxe.EntitasSystems
 {
@@ -55,16 +56,17 @@ namespace RoyalAxe.EntitasSystems
         private void ExitState(GameRootLoopEntity state)
         {
             state.additionalDataBox.ForEach(_localDataBoxStorage.Remove);
-
+            
             state.updateSystems.Collection.ForEach(_unityCallbackReceiver.RemoveUpdate);
+            
             state.pauseableUpdateSystems.Collection.ForEach(_unityCallbackReceiver.RemoveUpdate);
-
+            
             _mainGameContext.HandleNewState(_sceneLoaderSceneState);
+            
         }
 
         private void EnterState(GameRootLoopEntity state)
         {
-            
             state.additionalDataBox.ForEach(_localDataBoxStorage.Add);
 
             state.updateSystems.Collection.ForEach(_unityCallbackReceiver.AddUpdate);

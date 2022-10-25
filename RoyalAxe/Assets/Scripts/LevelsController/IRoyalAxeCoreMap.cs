@@ -1,7 +1,8 @@
 ﻿
 namespace RoyalAxe.CoreLevel
 {
-    public interface IEnemyWaveGenerator { 
+    public interface IEnemyWaveGenerator 
+    { 
         void GenerateEnemy(string modDataMobId, byte modDataMobLevel);
         int CurrentMobAmount { get; }
     }
@@ -9,6 +10,7 @@ namespace RoyalAxe.CoreLevel
     public interface IRoyalAxeCoreMap
     {
         IEnemyWaveGenerator StartGenerateMobPosition();
+        int CurrentMobAmount { get; }
     }
 
 

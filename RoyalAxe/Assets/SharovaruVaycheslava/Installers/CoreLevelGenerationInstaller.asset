@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CoreLevelGenerationInstaller
   m_EditorClassIdentifier: 
   _coreMapSettings: {fileID: 11400000, guid: b79b1ce845b26ee418f719d1a5265f0a, type: 2}
+  _prefabStorage: {fileID: 11400000, guid: f461b5430d1165c449519d742da0cef3, type: 2}

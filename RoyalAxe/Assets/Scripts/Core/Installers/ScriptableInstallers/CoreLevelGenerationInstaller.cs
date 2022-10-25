@@ -1,3 +1,4 @@
+using Core.Launcher;
 using Core.UserProfile;
 using RoyalAxe;
 using RoyalAxe.CoreLevel;
@@ -12,7 +13,32 @@ namespace Core
     {
         [SerializeField]
         private TileCoreMapSettings _coreMapSettings;
+
+        [SerializeField] private CoreGamePlayPrefabStorage _prefabStorage;
+        
         protected override void InstallBindings()
+        {
+            Container.RegisterInstance(_prefabStorage);
+
+            Container.Register<CoreGameSceneLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            
+            InstallMap();
+            InstallWizardShop();
+
+            InstallNodeLogic();
+        }
+
+        private void InstallNodeLogic()
+        {
+            Container.Register<ShowWinWindowNode>(Lifetime.Singleton).AsSelf();
+            Container.Register<SpawnMobNode>(Lifetime.Singleton).AsSelf();
+            Container.Register<LoadNextWaveNode>(Lifetime.Singleton).AsSelf();
+            Container.Register<CoreGameBehaviourNode>(Lifetime.Singleton).AsSelf();
+            
+        }
+
+        private void InstallMap()
         {
             Container.Register<LevelCreationOperation>(Lifetime.Singleton).AsImplementedInterfaces();
 
@@ -25,8 +51,18 @@ namespace Core
             
             Container.RegisterInstance(_coreMapSettings);
             
-            Container.Register<LevelDirector>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<LevelWaveProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<MobAtLevelDirector>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<WaveLevelSwitcher>(Lifetime.Singleton).AsImplementedInterfaces();
+
+        
+
+        }
+
+        private void InstallWizardShop()
+        {
+            
+            Container.Register<WizardViewBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+        
         }
     }
 }

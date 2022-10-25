@@ -9,7 +9,8 @@ namespace Core.Launcher
     [Serializable]
     public class GamePlayCoreSceneStateSettings : ProjectStateSettings
     {
-        private List<FeatureBindInfo> _updates;
+        private List<FeatureBindInfo> _pauseAble;
+        private List<FeatureBindInfo> _alwaysUpdate;
 
         public override IEnumerable<Feature> EventListenerSystem(Contexts contexts)
         {
@@ -21,13 +22,13 @@ namespace Core.Launcher
 
         public override IEnumerable<FeatureBindInfo> AlwaysUpdate()
         {
-            yield break;
+            return _alwaysUpdate;
             
         }
 
         public override IEnumerable<FeatureBindInfo> PauseableUpdate()
         {
-            return _updates;
+            return _pauseAble;
         }
 
         public override IEnumerable<Type> AllSystems()
@@ -39,13 +40,27 @@ namespace Core.Launcher
 
         public override void CreateFeatureBlanks()
         {
-            _updates = new List<FeatureBindInfo>
+            _pauseAble = new List<FeatureBindInfo>
             {
                new UnitsFeatureBindInfo(),
                 CleaningSystems(),
                 GeneralCoreGameSystems()
             };
+
+            _alwaysUpdate = new List<FeatureBindInfo>()
+            {
+              //  CoreGamePlaySystems() 
+            };
         }
+        
+        /*private FeatureBindInfo CoreGamePlaySystems()
+        {
+            return FeatureBindInfo.Create("Cистемы уровня")
+                              //    .Bind<LoadNextWaveSystem>()
+                              //    .Bind<CheckHasWizardShopSystem>()
+                               //   .Bind<StartSpawnMobSystem>()
+                                  .Bind<CoreGameBehaviourSystem>();
+        }*/
 
         private FeatureBindInfo GeneralCoreGameSystems()
         {
