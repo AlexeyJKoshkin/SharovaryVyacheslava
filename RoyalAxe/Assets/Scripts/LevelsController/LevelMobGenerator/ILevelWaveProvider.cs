@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 namespace RoyalAxe.CoreLevel 
 {
     public interface ILevelWaveProvider
@@ -13,5 +15,6 @@ namespace RoyalAxe.CoreLevel
     public interface ILevelWaveLoader : ILevelWaveProvider
     {
         bool NextWave();
+        void InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels);
     }
 }

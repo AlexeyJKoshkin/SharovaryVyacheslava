@@ -2,15 +2,18 @@ using System.Collections.Generic;
 using Core;
 using Core.Installers;
 using Entitas;
+using RoyalAxe.CoreLevel;
 
 namespace RoyalAxe.EntitasSystems 
 {
     public class HandlePlayerDeadSystem : ReactiveSystem<UnitsEntity>
     {
-        private readonly IRoyalAxePauseSystemSwitcher _pauseSystemSwitcher;
-        public HandlePlayerDeadSystem(IContext<UnitsEntity> context, IRoyalAxePauseSystemSwitcher pauseSystemSwitcher ) : base(context)
+        private readonly ILoseLevelUICommand _loseLevelUICommand;
+  
+        public HandlePlayerDeadSystem(IContext<UnitsEntity> context, ILoseLevelUICommand loseLevelUICommand) : base(context)
         {
-            _pauseSystemSwitcher = pauseSystemSwitcher;
+            _loseLevelUICommand = loseLevelUICommand;
+
         }
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
@@ -28,9 +31,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override void Execute(List<UnitsEntity> entities)
         {
-            var player = entities.SingleEntity();
-            HLogger.TempLog("Игрок помер");
-            _pauseSystemSwitcher.SetPause();
+            _loseLevelUICommand.ExecuteCommand();
         }
     }
 }

@@ -19,15 +19,15 @@ namespace RoyalAxe.CoreLevel
 
         private LevelGeneratorSettings _currentSettings;
 
-        public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext, ICoreLevelDataInfrastructure dataInfrastructure)
+        public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext)
         {
             _waveEntity = coreGamePlayContext.CreateEntity();
             _waveEntity.isLevelWave = true;
-            InitWaves(dataInfrastructure.PackLevels);
         }
 
-        void InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels)
+        public void InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels)
         {
+            _waveQueue.Clear();
             infrastructurePackLevels.ForEach(e => _waveQueue.Enqueue(e));
             _waveEntity.ReplaceWaveNumber(0);
             NextWave();

@@ -10,7 +10,6 @@ namespace RoyalAxe.EntitasSystems
 
         public UnitsMovingSystem(UnitsContext unitsContext)
         {
-            Debug.LogError("UnitsMovingSystem");
             _unitsContext = unitsContext;
         }
 

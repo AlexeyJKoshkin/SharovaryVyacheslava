@@ -19,6 +19,7 @@ namespace RoyalAxe
         {
             
             Container.Register<CoreGameState>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            Container.Register<CoreGameUtility>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Container.Register<CoreGameSceneInfrastructure>(Lifetime.Singleton).AsImplementedInterfaces();
             
             
@@ -36,7 +37,8 @@ namespace RoyalAxe
         {
             Container.Register<ShowSelectBuffWindowCommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<WinLevelCommand>(Lifetime.Singleton).AsImplementedInterfaces();
-            
+            Container.Register<StopCoreGameLogicCommand>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LoseLevelUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<PrepareGameUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 

@@ -15,7 +15,6 @@ namespace RoyalAxe.CoreLevel
     {
         public Transform ChunkRoot => _view.ChunkRoot;
         public Bounds Bounds => _view.Bounds;
-       // public BiomeScriptableDef BiomeDef => _view.BiomeDef;
         public IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels => _view.MeleeMobEndPoints;
 
         private readonly IChunkPositionCalculation _chunkPositionCalculation;

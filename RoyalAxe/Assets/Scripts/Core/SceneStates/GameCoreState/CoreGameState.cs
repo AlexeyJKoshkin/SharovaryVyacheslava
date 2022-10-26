@@ -45,18 +45,9 @@ namespace Core.Launcher
 
         protected override void OnExitState()
         {
-            Debug.LogError("On Exit Core State");
-            var context = Infrastructure.Contexts;
-            ClearContext(context.units);
-            ClearContext(context.skill);
-            ClearContext(context.rAAnimation);
-            ClearContext(context.coreGamePlay);
+            Infrastructure.LevelUtility.ClearAllBeforeLeaveCoreScene();
         }
 
-        private void ClearContext(IContext contextUnits)
-        {
-            contextUnits.ClearComponentPools();
-            contextUnits.Reset();
-        }
+      
     }
 }

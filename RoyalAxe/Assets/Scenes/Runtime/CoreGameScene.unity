@@ -627,8 +627,6 @@ MonoBehaviour:
     version: 1
     00000000:
       type: {class: GamePlayCoreSceneStateSettings, ns: Core.Launcher, asm: Assembly-CSharp}
-      data:
-        _state: {fileID: 11400000, guid: 50996e6542a3d094092a5168356d0311, type: 2}
 --- !u!4 &1508454806
 Transform:
   m_ObjectHideFlags: 0
@@ -841,6 +839,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 541151152}
     m_Modifications:
+    - target: {fileID: 1352458746732138251, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746732138251, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746732138251, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746732138251, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1352458746857433590, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
       propertyPath: m_Name
       value: LoseWindow
@@ -928,6 +942,26 @@ PrefabInstance:
     - target: {fileID: 1352458746857433591, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746950502008, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746950502008, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746950502008, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746950502008, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352458746950502015, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 249f264a29a76dd47b47e64b567b51ef, type: 3}

@@ -24,6 +24,7 @@ namespace RoyalAxe.CoreLevel
         private readonly IPrepareGameUICommand _prepareGameUiCommand;
         private readonly ICoreLevelBuilder _coreLevelBuilder;
         private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
+        private readonly ILevelWaveLoader _levelWaveProvider;
         private readonly CoreGameBehaviourNode _coreGameBehaviourNode;
         private readonly IMobAtLevelDirector _mobAtLevelDirector;
 
@@ -33,7 +34,8 @@ namespace RoyalAxe.CoreLevel
                                       ICoreLevelDataInfrastructure coreLevelDataInfrastructure,
                                       CoreGameBehaviourNode coreGameBehaviourNode,
                                       Contexts contexts,
-                                      IMobAtLevelDirector mobAtLevelDirector, IPrepareGameUICommand prepareGameUiCommand)
+                                      IMobAtLevelDirector mobAtLevelDirector, IPrepareGameUICommand prepareGameUiCommand,
+                                      ILevelWaveLoader levelWaveProvider)
         {
             _unitBuilder       = unitBuilder;
             _userProfile       = userProfile;
@@ -43,6 +45,7 @@ namespace RoyalAxe.CoreLevel
             _coreGamePlay = contexts.coreGamePlay;
             _mobAtLevelDirector = mobAtLevelDirector;
             _prepareGameUiCommand = prepareGameUiCommand;
+            _levelWaveProvider = levelWaveProvider;
         }
 
         public IBehaviourTreeNode CreateLevel()
@@ -50,7 +53,7 @@ namespace RoyalAxe.CoreLevel
             // создаем карту
             _coreLevelBuilder.BuildLevel(_coreLevelDataInfrastructure);
             // создаем всю остальную хуйню (спавнер мобов, карту)
-
+            _levelWaveProvider.InitWaves(_coreLevelDataInfrastructure.PackLevels);
             _mobAtLevelDirector.StartWaveImmediate();
             CreatePlayer();
 
