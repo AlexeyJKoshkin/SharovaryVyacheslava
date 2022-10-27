@@ -18,7 +18,7 @@ namespace Core
             Container.Register<SkillFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<BosonUnitPipeline>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitsInfluenceCalculator>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<DefaultDamageApplier>(Lifetime.Singleton).AsSelf();
+            Container.Register<UnitDamageApplierFactory>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindViewBuilder()

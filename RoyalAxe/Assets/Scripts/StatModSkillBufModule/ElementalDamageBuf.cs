@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentBehaviourTree;
+using RoyalAxe.EntitasSystems;
+using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CharacterStat
 {
     public class ElementalDamageBuf : BaseEntityBuf
     {
+      
         //ссылка на того, кто навесил этот отрицательный баф.
         //нельзя хранить просто ссылку на сущность. т.к юнити может умереть пока действует елементальный урон
         public readonly Guid OwnerGuid;
@@ -23,7 +26,12 @@ namespace RoyalAxe.CharacterStat
             OwnerGuid            = owner.uniqueUnitGUID.Guid;
             _damage              = damage;
 
-            _node = new ElementalDamageNode(damage, DoDamageCooldown, DoBufTimer);
+            _node = new ElementalDamageNode(damage,IsTargetAlive, DoDamageCooldown, DoBufTimer);
+        }
+
+        private bool IsTargetAlive(TimeData arg)
+        {
+            return !Target.isDeadUnit && Target.health.CurrentValue > 0;
         }
 
         private void DoBufTimer()
@@ -48,33 +56,40 @@ namespace RoyalAxe.CharacterStat
             yield break;
         }
 
-        public class ElementalBufApplyHelper : IDamageApplier
+        public class ElementalBufApplyHelper : IPeriodicDamageApplier
         {
+            public DamageType Type => _damage.ElementalDamageType;
+            
             private readonly PeriodicDamageInfluenceData _damage;
+            private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
-            public ElementalBufApplyHelper(PeriodicDamageInfluenceData damage)
+            public ElementalBufApplyHelper(PeriodicDamageInfluenceData damage, IUnitDamageApplierFactory unitDamageApplierFactory)
             {
                 _damage              = damage;
+                _unitDamageApplierFactory = unitDamageApplierFactory;
             }
 
-            public void Apply(UnitsEntity attacker, UnitsEntity target, IUnitsInfluenceCalculator unitsInfluenceCalculator)
+            public void Apply(UnitsEntity attacker, UnitsEntity target)
             {
-                var existsBuf =
-                    target?.activeUnitBuff.FirstOrDefault(o => o is ElementalDamageBuf elementalDamageBuf
-                                                            && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
-                                                            && elementalDamageBuf._damage.ElementalDamageType ==
-                                                               _damage.ElementalDamageType) as ElementalDamageBuf;
+                if(target == null || !target.isEnabled) return;
+                var existsBuf = target.activeUnitBuff.FirstOrDefault(o => o is ElementalDamageBuf elementalDamageBuf
+                                                                        && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
+                                                                        && elementalDamageBuf._damage.ElementalDamageType ==
+                                                                           _damage.ElementalDamageType) as ElementalDamageBuf;
 
-                if (existsBuf == null)
-                {
-                    existsBuf = new ElementalDamageBuf(unitsInfluenceCalculator, attacker, _damage);
-                    existsBuf.ApplyTo(target);
-                }
-                else
+                if (existsBuf != null)
                 {
                     existsBuf._node.IncreaseDuration(_damage.MagicDuration);
                 }
+                else
+                {
+                    var buff = _unitDamageApplierFactory.CreateElementalDamage(attacker, _damage);
+                  
+                    target.ApplyBuf(buff);
+                }
             }
+
+            
         }
     }
 }

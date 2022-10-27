@@ -1,3 +1,5 @@
+using RoyalAxe.CharacterStat;
+
 namespace RoyalAxe.LevelBuff {
     public class ColdAdditionalDamageBuff : AdditionalDamageBuff
     {
@@ -7,6 +9,6 @@ namespace RoyalAxe.LevelBuff {
             return providerSettingsComposite.ColdAdditionDamageBuffSettings;
         }
 
-        public ColdAdditionalDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(unitsContext, provider) { }
+        public ColdAdditionalDamageBuff(UnitsContext unitsContext, IUnitDamageApplierFactory unitDamageApplierFactory, ILevelBuffSettingCompositeProvider provider) : base(unitsContext, unitDamageApplierFactory, provider) { }
     }
 }

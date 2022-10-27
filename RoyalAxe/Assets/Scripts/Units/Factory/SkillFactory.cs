@@ -9,13 +9,16 @@ namespace RoyalAxe.GameEntitas
     {
         private readonly ITimerFactory _timerFactory;
         private readonly IDataStorage _storage;
+        private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
         public SkillFactory(SkillContext skillContext,
                             ITimerFactory timerFactory,
-                            IDataStorage storage) : base(skillContext)
+                            IDataStorage storage,
+                            IUnitDamageApplierFactory unitDamageApplierFactory) : base(skillContext)
         {
             _timerFactory = timerFactory;
             _storage      = storage;
+            _unitDamageApplierFactory = unitDamageApplierFactory;
         }
 
         public void EquipMobWeapon(UnitsEntity unit, string weaponId, byte weaponLevel)
@@ -78,16 +81,17 @@ namespace RoyalAxe.GameEntitas
 
         private void AddDamageComponent(UnitsEntity unit, SkillConfigDef.Damage damage)
         {
-            var list = new List<OneMomentDamageOperation>();
+            var list = new List<ISimpleDamageApplier>();
 
-            ElementalDamageBuf.ElementalBufApplyHelper periodicDamage = null;
+            IPeriodicDamageApplier periodicDamage = null;
 
-
-            list.Add(new OneMomentDamageOperation(DamageType.Physical, damage.PhysicalDamage));
+            var simplePhysDamage = _unitDamageApplierFactory.CreateOneMomentDamage(DamageType.Physical, damage.PhysicalDamage); 
+            list.Add(simplePhysDamage);
 
             if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
             {
-                list.Add(new OneMomentDamageOperation(damage.ElementalDamageType, damage.ElementalDamage));
+                var simpleElementalDamage = _unitDamageApplierFactory.CreateOneMomentDamage(damage.ElementalDamageType, damage.ElementalDamage);
+                list.Add(simpleElementalDamage);
             }
 
             if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
@@ -100,12 +104,12 @@ namespace RoyalAxe.GameEntitas
                     ElementalDamageType = damage.ElementalDamageType
                 };
 
-                periodicDamage = new ElementalDamageBuf.ElementalBufApplyHelper(periodicDamageInfluenceData);
+                periodicDamage = _unitDamageApplierFactory.CreatePeriodicDamage(periodicDamageInfluenceData);
             }
 
             var periodic = periodicDamage == null
-                ? new List<ElementalDamageBuf.ElementalBufApplyHelper>()
-                : new List<ElementalDamageBuf.ElementalBufApplyHelper> {periodicDamage};
+                ? new List<IPeriodicDamageApplier>()
+                : new List<IPeriodicDamageApplier> {periodicDamage};
 
             unit.AddDamage(list, periodic);
         }

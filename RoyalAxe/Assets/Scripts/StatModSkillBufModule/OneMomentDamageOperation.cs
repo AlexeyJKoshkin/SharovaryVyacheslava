@@ -1,20 +1,19 @@
-﻿using UnityEngine;
+﻿using RoyalAxe.EntitasSystems;
+using UnityEngine;
 
 namespace RoyalAxe.CharacterStat
 {
-    public class OneMomentDamageOperation : IDamageApplier
+    public class OneMomentDamageOperation : ISimpleDamageApplier
     {
         public DamageType Type => _damage.ElementalDamageType;
         public float Value => _damage.Damage;
         private readonly DamageInfluenceData _damage;
-        public OneMomentDamageOperation(DamageInfluenceData damage)
+        private readonly IUnitsInfluenceCalculator _calculator;
+        
+        public OneMomentDamageOperation(DamageInfluenceData damage, IUnitsInfluenceCalculator calculator)
         {
             _damage = damage;
-        }
-        
-        public OneMomentDamageOperation(DamageType type, float damage)
-        {
-            _damage = new DamageInfluenceData(damage, type);
+            _calculator = calculator;
         }
 
         public void AddDamage(float damage)
@@ -22,9 +21,9 @@ namespace RoyalAxe.CharacterStat
             _damage.Damage = Mathf.Max(0, _damage.Damage + damage);
         }
 
-        public void Apply(UnitsEntity attacker, UnitsEntity target, IUnitsInfluenceCalculator compositeCalculator)
+        public void Apply(UnitsEntity attacker, UnitsEntity target)
         {
-            var calculator = compositeCalculator.GetBy(_damage.ElementalDamageType);
+            var calculator = _calculator.GetBy(_damage.ElementalDamageType);
             var damage = calculator.PowerDamage(attacker, _damage.Damage);
             var damageInfo = calculator.ApplyTo(target,damage);
             HandleDamage(attacker, target, damageInfo);
@@ -37,4 +36,6 @@ namespace RoyalAxe.CharacterStat
             target.unitAnimationEntity.AnimationEntity.isHitTrigger = true;
         }
     }
+    
+   
 }

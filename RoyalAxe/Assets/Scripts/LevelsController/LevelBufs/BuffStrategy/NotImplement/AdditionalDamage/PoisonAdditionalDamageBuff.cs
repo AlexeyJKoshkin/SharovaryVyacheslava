@@ -1,3 +1,5 @@
+using RoyalAxe.CharacterStat;
+
 namespace RoyalAxe.LevelBuff {
     public class PoisonAdditionalDamageBuff : AdditionalDamageBuff
     {
@@ -6,6 +8,6 @@ namespace RoyalAxe.LevelBuff {
             return providerSettingsComposite.PoisonAdditionDamageBuffSettings;
         }
 
-        public PoisonAdditionalDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(unitsContext, provider) { }
+        public PoisonAdditionalDamageBuff(UnitsContext unitsContext, IUnitDamageApplierFactory unitDamageApplierFactory, ILevelBuffSettingCompositeProvider provider) : base(unitsContext, unitDamageApplierFactory, provider) { }
     }
 }

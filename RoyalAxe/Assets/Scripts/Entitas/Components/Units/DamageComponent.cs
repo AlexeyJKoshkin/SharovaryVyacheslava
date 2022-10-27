@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Entitas;
-using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.GameEntitas
 {
@@ -11,8 +10,8 @@ namespace RoyalAxe.GameEntitas
     [Units]
     public class DamageComponent : IComponent, IEnumerable<IDamageApplier>
     {
-        public List<OneMomentDamageOperation> SingleDamage;
-        public List<ElementalDamageBuf.ElementalBufApplyHelper> PeriodicDamage;
+        public List<ISimpleDamageApplier> SingleDamage;
+        public List<IPeriodicDamageApplier> PeriodicDamage;
         public IEnumerator<IDamageApplier> GetEnumerator()
         {
             for (int i = 0; i < SingleDamage.Count; i++)

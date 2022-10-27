@@ -27,6 +27,7 @@ namespace Core.Launcher
                 .Bind<InitPhysicalInteractionHandlerCompositeSystem>() // обработка логика обработки физического взаимодейтсвия
                 .Bind<UpdateUnitBehaviourSystem>()                     // обновляем поведение мобов
                 .Bind<MeleeMobAttackSystem>()                          // обработка атаки милишников todo: возможно стоит перенсти в поведние
+                .Bind<UnitBuffTickSystem>()                            // тик переодического урона
                 .Bind<DestroyItemsAfterInteraction>()                  // отдаем команду на уничтожение юнитов на поле
 
                 //движение

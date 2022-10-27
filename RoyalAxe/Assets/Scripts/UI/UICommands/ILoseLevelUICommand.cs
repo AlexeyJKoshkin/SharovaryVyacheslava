@@ -13,22 +13,13 @@ namespace RoyalAxe.CoreLevel
         private readonly LoseWindowView _loseWindowView;
         private readonly IStopCoreGameLogicCommand _stopCoreGameLogicCommand;
         private readonly ICoreGameHandlerAdapter _coreGameHandlerAdapter;
-        private readonly IMobAtLevelDirector _mobAtLevelDirector;
-        private readonly ILevelWaveLoader _levelWaveProvider;
-        private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
         public LoseLevelUICommand(LoseWindowView loseWindowView,
                                   IStopCoreGameLogicCommand stopCoreGameLogicCommand,
-                                  ICoreGameHandlerAdapter coreGameHandlerAdapter,
-                                  IMobAtLevelDirector mobAtLevelDirector,
-                                  ILevelWaveLoader levelWaveProvider,
-                                  ICoreLevelDataInfrastructure coreLevelDataInfrastructure)
+                                  ICoreGameHandlerAdapter coreGameHandlerAdapter)
         {
             _loseWindowView = loseWindowView;
             _stopCoreGameLogicCommand = stopCoreGameLogicCommand;
             _coreGameHandlerAdapter = coreGameHandlerAdapter;
-            _mobAtLevelDirector = mobAtLevelDirector;
-            _levelWaveProvider = levelWaveProvider;
-            _coreLevelDataInfrastructure = coreLevelDataInfrastructure;
             _loseWindowView.LoadMetaBtn.onClick.AddListener(LoadMetaScene);
             _loseWindowView.RetryBtn.onClick.AddListener(RetryHandler);
             _loseWindowView.Open();
@@ -37,8 +28,6 @@ namespace RoyalAxe.CoreLevel
         private void RetryHandler()
         {
             ClearWindowHandlers();
-            _levelWaveProvider.InitWaves(_coreLevelDataInfrastructure.PackLevels);
-            _mobAtLevelDirector.StartWaveImmediate();
             _loseWindowView.Hide();
             _handler.FireCallback(true);
         }
@@ -62,7 +51,6 @@ namespace RoyalAxe.CoreLevel
         {
             _loseWindowView.LoadMetaBtn.onClick.RemoveAllListeners();
             _loseWindowView.RetryBtn.onClick.RemoveAllListeners();
-            _loseWindowView.LoadLastPointBtn.onClick.RemoveAllListeners();
         }
     }
 }

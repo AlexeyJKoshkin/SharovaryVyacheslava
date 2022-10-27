@@ -9,11 +9,8 @@ namespace RoyalAxe.EntitasSystems
     /// </summary>
     public class MeleeMobAttackSystem : RAReactiveSystem<UnitsEntity>, IGamePlaySceneSystem
     {
-        private readonly IUnitsInfluenceCalculator _calculator;
-
-        public MeleeMobAttackSystem(IContext<UnitsEntity> context, IUnitsInfluenceCalculator damageApplier) : base(context)
+        public MeleeMobAttackSystem(IContext<UnitsEntity> context) : base(context)
         {
-            _calculator = damageApplier;
         }
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
@@ -41,7 +38,7 @@ namespace RoyalAxe.EntitasSystems
 
             foreach (var damageOperation in attacker.damage)
             {
-                damageOperation.Apply(attacker, target, _calculator);
+                damageOperation.Apply(attacker, target);
             }
         }
     }

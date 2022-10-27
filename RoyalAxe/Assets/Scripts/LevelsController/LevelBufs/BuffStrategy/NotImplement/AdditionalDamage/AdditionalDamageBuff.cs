@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Runtime.InteropServices;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.LevelBuff
@@ -9,12 +10,16 @@ namespace RoyalAxe.LevelBuff
         private UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
+        private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
         private readonly AdditionDamageBuffSettings _settings;
 
 
-        public AdditionalDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider)
+        public AdditionalDamageBuff(UnitsContext unitsContext,
+                                    IUnitDamageApplierFactory unitDamageApplierFactory,
+                                    ILevelBuffSettingCompositeProvider provider)
         {
             _unitsContext = unitsContext;
+            _unitDamageApplierFactory = unitDamageApplierFactory;
             _settings     = GetSettings(provider.SettingsComposite);
         }
 
@@ -31,8 +36,9 @@ namespace RoyalAxe.LevelBuff
                 ElementalDamageType = _settings.Type,
                 Damage = maxPhysDamage * _settings.PercentActiveDamage*.01f
             };
-            
-            Player.damage.SingleDamage.Add(new OneMomentDamageOperation(elementalDamage)); 
+
+            var damage = _unitDamageApplierFactory.CreateOneMomentDamage(_settings.Type, maxPhysDamage * _settings.PercentActiveDamage * .01f);
+            Player.damage.SingleDamage.Add(damage); 
             
         }
     }

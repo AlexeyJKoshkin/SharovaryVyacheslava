@@ -3,7 +3,7 @@ using FluentBehaviourTree;
 
 namespace RoyalAxe.CharacterStat
 {
-    public class ElementalDamageNode : ParallelNode
+    public class ElementalDamageNode : SequenceNode
     {
         private readonly PeriodicDamageInfluenceData _damage;
         private readonly TimerNode _bufDurationTimer;
@@ -11,8 +11,11 @@ namespace RoyalAxe.CharacterStat
         public Action DoDamageEvent;
         public Action EndBufEvent;
 
-        public ElementalDamageNode(PeriodicDamageInfluenceData damage, Action doDamage = null, Action endBuff = null) :
-            base("Елементальный урон по времени", 0, 5)
+        public ElementalDamageNode(PeriodicDamageInfluenceData damage,
+                                   Func<TimeData, bool> checkIsTargetAlive,
+                                   Action doDamage = null,
+                                   Action endBuff = null) :
+            base("Наносим урон размазанный по времени")
         {
             _damage              = damage;
             _damageCooldownTimer = new TimerNode(damage.DamageCooldown, "damage timer");
@@ -20,7 +23,9 @@ namespace RoyalAxe.CharacterStat
             DoDamageEvent        = doDamage;
             EndBufEvent          = endBuff;
 
-            new BehaviourTreeBuilder().Push(this)
+            new BehaviourTreeBuilder().Parent(this)
+                                      .Condition("Цель жива ?", checkIsTargetAlive)
+                                      .Parallel("Счетчики", 0,5)
                                         .Sequence("Таймер нанесения урона")
                                             .Do(_damageCooldownTimer)
                                             .Do("Наносим урон", DoDamageCooldown)

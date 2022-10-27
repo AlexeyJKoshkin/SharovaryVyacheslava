@@ -9,16 +9,18 @@ namespace RoyalAxe.LevelBuff
 
         private readonly IncreaseDamageBuffSettings _settings;
         private readonly UnitsContext _unitsContext;
+        private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
-        public IncreaseDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider)
+        public IncreaseDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider, IUnitDamageApplierFactory unitDamageApplierFactory)
         {
             _unitsContext = unitsContext;
+            _unitDamageApplierFactory = unitDamageApplierFactory;
             _settings     = provider.SettingsComposite.IncreaseDamageBuffSetting;
         }
 
         public override void Activate()
         {
-            UnitsEntity player = null;
+            UnitsEntity player = _unitsContext.playerEntity;
             //либо увеличиваем физ дамаг как стат
            // player.physicalDamage.ChangeValue(_increaseDamage).ApplyPermanentMod();
             //либо увеличиваем физ дамаг в способности
@@ -30,7 +32,7 @@ namespace RoyalAxe.LevelBuff
 
             if (physDamage == null)
             {
-                damageComponent.SingleDamage.Add(new OneMomentDamageOperation(DamageType.Physical, _settings.Value));
+                damageComponent.SingleDamage.Add(_unitDamageApplierFactory.CreateOneMomentDamage(DamageType.Physical, _settings.Value));
             }
             else
                 physDamage.AddDamage(_settings.Value);

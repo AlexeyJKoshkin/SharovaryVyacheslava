@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FluentBehaviourTree;
+using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CharacterStat
 {
@@ -36,6 +37,7 @@ namespace RoyalAxe.CharacterStat
         public void RemoveFrom(UnitsEntity owner)
         {
             _helper.RemoveFrom(owner);
+            Target.RemoveBuf(this);
         }
 
         //Применять перманентные изменения

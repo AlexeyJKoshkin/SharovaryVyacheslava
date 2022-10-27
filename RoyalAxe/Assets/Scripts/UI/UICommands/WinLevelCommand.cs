@@ -11,13 +11,11 @@ namespace RoyalAxe.CoreLevel
         private readonly WinWindowView _winWindowController;
 
         private readonly ICoreGameHandlerAdapter _coreGameHandlerAdapter;
-        private IStopCoreGameLogicCommand _stopCoreGameLogicCommand;
+        private readonly IStopCoreGameLogicCommand _stopCoreGameLogicCommand;
         private IUICommand.UIHandler _handler;
 
         public WinLevelCommand(WinWindowView winWindowController,
-                               IRoyalAxePauseSystemSwitcher pauseSwitcher,
                                ICoreGameHandlerAdapter coreGameHandlerAdapter,
-                               IMobAtLevelDirector mobAtLevelDirector,
                                IStopCoreGameLogicCommand stopCoreGameLogicCommand)
         {
             _winWindowController = winWindowController;
