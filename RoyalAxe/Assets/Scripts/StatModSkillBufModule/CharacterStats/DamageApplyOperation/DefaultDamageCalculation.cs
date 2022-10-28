@@ -14,7 +14,6 @@
 
             CalcResistance(modificator);
             modificator.ApplyMod();
-            target.ReplaceComponent(UnitsComponentsLookup.Health, target.health);
 
             return new HitDamageInfo
             {
@@ -27,7 +26,8 @@
 
         private ICharacterStatModificator CreateDamageMod(UnitsEntity target, float damage)
         {
-            return target.health.ChangeValue(-damage); // наносим урон здоровью
+            var mod = target.health.ChangeValue(-damage); // наносим урон здоровью 
+            return new UnitCharacterStatModificatorDecorator(mod, UnitsComponentsLookup.Health, target);
         }
 
         protected abstract void CalcResistance(ICharacterStatModificator modificator);

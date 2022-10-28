@@ -1,9 +1,7 @@
-﻿using RoyalAxe.GameEntitas;
 using UnityEngine;
 
-namespace RoyalAxe.CoreLevel
-{
-    public interface IChunkPositionCalculation
+namespace RoyalAxe.CoreLevel {
+    public interface ILevelPositionCalculation
     {
         float CalcStartChunkPos(IBound chunkBounds);
         float CalcNextChunkPos(IBound bearingChunkBounds, IBound bounds);

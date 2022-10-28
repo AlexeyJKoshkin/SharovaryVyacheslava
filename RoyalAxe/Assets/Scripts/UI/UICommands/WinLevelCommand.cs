@@ -12,7 +12,7 @@ namespace RoyalAxe.CoreLevel
 
         private readonly ICoreGameHandlerAdapter _coreGameHandlerAdapter;
         private readonly IStopCoreGameLogicCommand _stopCoreGameLogicCommand;
-        private IUICommand.UIHandler _handler;
+        private UIHandler _handler;
 
         public WinLevelCommand(WinWindowView winWindowController,
                                ICoreGameHandlerAdapter coreGameHandlerAdapter,
@@ -25,7 +25,7 @@ namespace RoyalAxe.CoreLevel
 
         public void ExecuteCommand(Action<bool> onDoneExecuteCommand = null)
         {
-            _handler = new IUICommand.UIHandler(onDoneExecuteCommand);
+            _handler = new UIHandler(onDoneExecuteCommand);
             _winWindowController.LoadMetaBtn.onClick.AddListener(LoadMetaScene);
             _stopCoreGameLogicCommand.StopGameLogic();
             _winWindowController.Open(); // открываем окошко победы

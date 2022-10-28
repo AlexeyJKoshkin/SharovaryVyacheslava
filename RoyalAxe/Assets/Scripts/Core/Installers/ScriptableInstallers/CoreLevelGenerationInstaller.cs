@@ -41,13 +41,14 @@ namespace Core
         private void InstallMap()
         {
             Container.Register<LevelCreationOperation>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<PlayerCoreGameFacade>(Lifetime.Singleton).AsImplementedInterfaces();
 
             Container.Register<MockLevelCoreMap>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<MobPositionGenerator>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<LineRoyalAxeMapBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
             
             Container.Register<LevelAdapter>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<ChunkPositionCalculation>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LevelPositionCalculation>(Lifetime.Singleton).AsImplementedInterfaces();
             
             Container.RegisterInstance(_coreMapSettings);
             

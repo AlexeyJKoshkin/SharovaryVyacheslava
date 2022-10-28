@@ -13,14 +13,14 @@ namespace RoyalAxe.CoreLevel
 
     class MobPositionGenerator : IMobPositionGenerator
     {
-        private readonly IChunkPositionCalculation _chunkPositionCalculation;
+        private readonly ILevelPositionCalculation _levelPositionCalculation;
         private readonly LineRoyalAxeMap[] _lineRoyalAxeMaps;
         private readonly EndPointsRoyalAxeMap[] _endPoints;
         private const float OFFSET_X = 0.1f;
 
-        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ICoreLevelDataInfrastructure coreLevelDataInfrastructure, ILevelAdapter levelAdapter, IChunkPositionCalculation chunkPositionCalculation)
+        public MobPositionGenerator(ILineRoyalAxeMapBuilder currenLevelLineBuilder, ICoreLevelDataInfrastructure coreLevelDataInfrastructure, ILevelAdapter levelAdapter, ILevelPositionCalculation levelPositionCalculation)
         {
-            _chunkPositionCalculation = chunkPositionCalculation;
+            _levelPositionCalculation = levelPositionCalculation;
             _lineRoyalAxeMaps = currenLevelLineBuilder.Build(coreLevelDataInfrastructure.BiomeDef.Lines, levelAdapter.Bounds);
             _endPoints = currenLevelLineBuilder.Build(levelAdapter.EndPointsModels);
         }
@@ -80,7 +80,7 @@ namespace RoyalAxe.CoreLevel
             var x =  Random.Range(line.MinX + OFFSET_X, line.MaxX - OFFSET_X);
 
           
-            return new Vector2(x,  _chunkPositionCalculation.GetMobYPos(mobAmount));
+            return new Vector2(x,  _levelPositionCalculation.GetMobYPos(mobAmount));
         }
     }
 }

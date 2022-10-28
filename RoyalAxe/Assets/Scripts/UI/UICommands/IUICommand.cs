@@ -8,22 +8,22 @@ namespace RoyalAxe.CoreLevel
     public interface IUICommand
     {
         void ExecuteCommand(Action<bool> onDoneExecuteCommand = null);
-        
-        public struct UIHandler
+    }
+    
+    public class UIHandler
+    {
+        private Action<bool> _callback;
+
+        public UIHandler(Action<bool> callback)
         {
-            private Action<bool> _callback;
+            _callback = callback;
+        }
 
-            public UIHandler(Action<bool> callback)
-            {
-                _callback = callback;
-            }
-
-            public void FireCallback(bool isSuccess)
-            {
-                var temp = _callback;
-                _callback = null;
-                temp?.Invoke(isSuccess);
-            }
+        public void FireCallback(bool isSuccess)
+        {
+            var temp = _callback;
+            _callback = null;
+            temp?.Invoke(isSuccess);
         }
     }
 

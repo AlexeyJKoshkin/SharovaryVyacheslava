@@ -10,17 +10,17 @@ namespace RoyalAxe.CoreLevel
         private readonly IGroup<CoreGamePlayEntity> _movingChunks;
 
         private readonly ILevelAdapter _axeCoreMap;
-        private IChunkPositionCalculation _chunkPositionCalculation;
+        private ILevelPositionCalculation _levelPositionCalculation;
         private readonly TileCoreMapSettings _settings;
 
         public ChunkMovingSystem(CoreGamePlayContext coreGamePlayContext,
                                  ILevelAdapter axeCoreMap,
                                  TileCoreMapSettings settings,
-                                 IChunkPositionCalculation chunkPositionCalculation)
+                                 ILevelPositionCalculation levelPositionCalculation)
         {
             _axeCoreMap = axeCoreMap;
             _settings = settings;
-            _chunkPositionCalculation = chunkPositionCalculation;
+            _levelPositionCalculation = levelPositionCalculation;
 
             _movingChunks =
                 coreGamePlayContext.GetGroup(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayComponentsLookup.MovingChunk,
@@ -30,7 +30,7 @@ namespace RoyalAxe.CoreLevel
         public void Execute()
         {
             var movingTransform = _axeCoreMap.ChunkRoot;
-            movingTransform.Translate(new Vector3(0, Time.deltaTime * _settings.ChunkSpeed * _chunkPositionCalculation.SpeedFactor, 0));
+            movingTransform.Translate(new Vector3(0, Time.deltaTime * _settings.ChunkSpeed * _levelPositionCalculation.SpeedFactor, 0));
             var chunks = _movingChunks.GetEntities();
 
             for (int i = 0; i < chunks.Length; i++)
@@ -38,7 +38,7 @@ namespace RoyalAxe.CoreLevel
                 MoveChunk(chunks[i]);
             }
 
-            if (_chunkPositionCalculation.CheckNeedRelocateToStartPoint(movingTransform.position.y))
+            if (_levelPositionCalculation.CheckNeedRelocateToStartPoint(movingTransform.position.y))
             {
                 List<Transform> childs = new List<Transform>(movingTransform.childCount);
 
@@ -57,7 +57,7 @@ namespace RoyalAxe.CoreLevel
         {
             chunk.ReplaceChunkBounds(chunk.chunkView.View.CalcChunkBounds());
 
-            if (_chunkPositionCalculation.IsFinishMoving(chunk)) _axeCoreMap.HandleNextChunk(chunk);
+            if (_levelPositionCalculation.IsFinishMoving(chunk)) _axeCoreMap.HandleNextChunk(chunk);
         }
     }
 }

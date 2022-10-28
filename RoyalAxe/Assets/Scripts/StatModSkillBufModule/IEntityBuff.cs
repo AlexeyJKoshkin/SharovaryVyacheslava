@@ -8,6 +8,6 @@ namespace RoyalAxe.CharacterStat
     public interface IEntityBuff : IBehaviourTreeNode
     {
         void ApplyTo(UnitsEntity owner);
-        void RemoveFrom(UnitsEntity owner);
+        void RemoveFrom(UnitsEntity owner, bool isSilent = false);
     }
 }

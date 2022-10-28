@@ -9,7 +9,7 @@ namespace RoyalAxe.CoreLevel
     {
         private readonly ISelectBuffScenario _buffScenario;
         private readonly IRoyalAxePauseSystemSwitcher _pauseSystemSwitcher;
-        private IUICommand.UIHandler _handler;
+        private UIHandler _handler;
 
         public ShowSelectBuffWindowCommand(ISelectBuffScenario buffScenario, IRoyalAxePauseSystemSwitcher pauseSystemSwitcher)
         {
@@ -19,7 +19,7 @@ namespace RoyalAxe.CoreLevel
 
         public void ExecuteCommand(Action<bool> onDoneExecuteCommand = null)
         {
-            _handler = new IUICommand.UIHandler(onDoneExecuteCommand);
+            _handler = new UIHandler(onDoneExecuteCommand);
             _pauseSystemSwitcher.SetPause();
             _buffScenario.OnFinishScenarioEvent += BuffScenarioOnOnFinishScenarioEvent;
             _buffScenario.DoShowExpBuffs();

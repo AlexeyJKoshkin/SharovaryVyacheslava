@@ -1,5 +1,7 @@
-﻿using Entitas;
+﻿using System.Linq;
+using Entitas;
 using GameKit;
+using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -10,41 +12,45 @@ namespace RoyalAxe.CoreLevel
 
     public class ResetCoreGameToRetryCommand : IResetCoreGameToRetryCommand
     {
-        private UnitsContext _unitsContext;
+        private readonly UnitsContext _unitsContext;
 
         private readonly IGroup<UnitsEntity> _bosonGroup;
-        private readonly IGroup<UnitsEntity> _allMobs;
         
         public ResetCoreGameToRetryCommand(UnitsContext unitsContext)
         {
             _unitsContext = unitsContext;
             _bosonGroup = _unitsContext.GetGroup(Matcher<UnitsEntity>.AllOf(UnitsMatcher.Boson, UnitsMatcher.UnitsView));
-            _allMobs = _unitsContext.GetGroup(Matcher<UnitsEntity>.AllOf(UnitsMatcher.Mob, UnitsMatcher.Damage));
+
         }
 
         public void RestartGameAfterPlayerDearth()
         {
             DestroyAllBosons();
-            KillAllTimingDamageFromPlayer();
             ResetPlayerStat();
         }
 
-        private void KillAllTimingDamageFromPlayer()
-        {
-            foreach (var mob in _allMobs)
-            {
-                mob.damage.PeriodicDamage.ForEach(d =>
-                {
-                //    d.Apply();
-                });
-            }
-        }
 
         private void ResetPlayerStat()
         {
             var player = _unitsContext.playerEntity;
             player.enterPhysicInteraction.Clear();
-            player.exitPhysicInteraction.Clear();
+        //    player.exitPhysicInteraction.Clear();
+
+            var maxHealthValue = player.health.MaxValue;   
+            player.health.ChangeValue(maxHealthValue - player.health.CurrentValue);
+            player.ReplaceComponent(UnitsComponentsLookup.Health, player.health);
+
+            var buffs = player.activeUnitBuff.Collection;
+            var tickDamages = buffs.Where(o => o is ElementalDamageBuf).Cast<ElementalDamageBuf>().ToArray();
+            tickDamages.ForEach(e=>
+                                {
+                                    e.RemoveFrom(player, true);
+                                    buffs.Remove(e);
+                                });
+            player.ReplaceActiveUnitBuff(buffs);
+            player.isDeadUnit = false;
+            player.isDestroyUnit = false;
+
 
         }
 

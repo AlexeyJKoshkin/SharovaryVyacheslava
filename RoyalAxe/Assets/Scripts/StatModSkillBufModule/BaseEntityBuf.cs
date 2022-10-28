@@ -34,9 +34,10 @@ namespace RoyalAxe.CharacterStat
             yield break;
         }
 
-        public void RemoveFrom(UnitsEntity owner)
+        public void RemoveFrom(UnitsEntity owner, bool isSilent = false)
         {
             _helper.RemoveFrom(owner);
+            if(isSilent) return;
             Target.RemoveBuf(this);
         }
 

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using FluentBehaviourTree;
 using RoyalAxe.CharacterStat;
 
@@ -44,9 +44,9 @@ namespace RoyalAxe.GameEntitas
             _equipable.ApplyTo(owner);
         }
 
-        public void RemoveFrom(UnitsEntity owner)
+        public void RemoveFrom(UnitsEntity owner, bool isSilent)
         {
             _equipable.RemoveFrom(owner);
         }
     }
-}
+}*/

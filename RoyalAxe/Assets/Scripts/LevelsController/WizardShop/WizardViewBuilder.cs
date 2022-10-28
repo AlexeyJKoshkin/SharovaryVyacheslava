@@ -10,13 +10,13 @@ namespace RoyalAxe.CoreLevel
     public class WizardViewBuilder : IWizardViewBuilder
     {
         private readonly CoreGamePlayPrefabStorage _prefabStorage;
-        private readonly IChunkPositionCalculation _chunkPositionCalculation;
+        private readonly ILevelPositionCalculation _levelPositionCalculation;
         private readonly ILevelAdapter _levelAdapter;
 
-        public WizardViewBuilder(CoreGamePlayPrefabStorage prefabStorage, IChunkPositionCalculation chunkPositionCalculation, ILevelAdapter levelAdapter)
+        public WizardViewBuilder(CoreGamePlayPrefabStorage prefabStorage, ILevelPositionCalculation levelPositionCalculation, ILevelAdapter levelAdapter)
         {
             _prefabStorage            = prefabStorage;
-            _chunkPositionCalculation = chunkPositionCalculation;
+            _levelPositionCalculation = levelPositionCalculation;
             _levelAdapter             = levelAdapter;
         }
 
@@ -24,7 +24,7 @@ namespace RoyalAxe.CoreLevel
         {
             var prefab = _prefabStorage.WizardTrigger;
             var result = Object.Instantiate(prefab, _levelAdapter.ChunkRoot);
-            result.transform.position = _chunkPositionCalculation.CalcWizardPosition(result);
+            result.transform.position = _levelPositionCalculation.CalcWizardPosition(result);
             return result;
         }
     }

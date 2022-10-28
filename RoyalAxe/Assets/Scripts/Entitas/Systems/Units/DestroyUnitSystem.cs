@@ -10,7 +10,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            var healthMobMatcher = Matcher<UnitsEntity>.AllOf(UnitsMatcher.UnitsView, UnitsMatcher.DestroyUnit);
+            var healthMobMatcher = Matcher<UnitsEntity>.AllOf(UnitsMatcher.UnitsView, UnitsMatcher.DestroyUnit).NoneOf(UnitsMatcher.Player);
             return context.CreateCollector(healthMobMatcher);
         }
 

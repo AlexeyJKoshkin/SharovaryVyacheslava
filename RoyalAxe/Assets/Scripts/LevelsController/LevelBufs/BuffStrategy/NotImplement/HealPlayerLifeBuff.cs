@@ -18,6 +18,7 @@ namespace RoyalAxe.LevelBuff
         public override void Activate()
         {
             Player.health.ChangeValue().FromActualMax(_settings.HealPercent).ApplyPermanentMod();
+            Player.ReplaceComponent(UnitsComponentsLookup.Health, Player.health);
         }
     }
 }

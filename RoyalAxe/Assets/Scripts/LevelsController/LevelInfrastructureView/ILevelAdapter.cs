@@ -17,19 +17,19 @@ namespace RoyalAxe.CoreLevel
         public Bounds Bounds => _view.Bounds;
         public IReadOnlyList<EndPointMeleeMobPoint> EndPointsModels => _view.MeleeMobEndPoints;
 
-        private readonly IChunkPositionCalculation _chunkPositionCalculation;
+        private readonly ILevelPositionCalculation _levelPositionCalculation;
 
         private readonly LevelInfrastructureView _view;
         private readonly CoreGamePlayContext _coreGamePlayContext;
         private readonly ChunkBuilderHelper _chunkBuilderHelper;
         private CoreGamePlayEntity BearingSpawnChunk => _coreGamePlayContext.bearingSpawnChunkEntity;
         
-        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext, IChunkPositionCalculation chunkPositionCalculation)
+        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext, ILevelPositionCalculation levelPositionCalculation)
         {
             _view = view;
             _coreGamePlayContext = coreGamePlayContext;
-            _chunkPositionCalculation = chunkPositionCalculation;
-            _chunkBuilderHelper = new ChunkBuilderHelper(coreGamePlayContext, this, chunkPositionCalculation);
+            _levelPositionCalculation = levelPositionCalculation;
+            _chunkBuilderHelper = new ChunkBuilderHelper(coreGamePlayContext, this, levelPositionCalculation);
         }
 
 
@@ -53,7 +53,7 @@ namespace RoyalAxe.CoreLevel
         private void SetNextChunk(CoreGamePlayEntity nextChunk)
         {
          
-            var nextChunkPos = _chunkPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds, nextChunk.chunkBounds);
+            var nextChunkPos = _levelPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds, nextChunk.chunkBounds);
             SetChunkPos(nextChunk, nextChunkPos);
             BearingSpawnChunk.isBearingSpawnChunk = false;
             SetNewBearingChunk(nextChunk);
@@ -61,7 +61,7 @@ namespace RoyalAxe.CoreLevel
 
         private void SetChunkToStartPoint(CoreGamePlayEntity startChunk) // установили чанк на стартовую позицию
         {
-            var startChunkPos = _chunkPositionCalculation.CalcStartChunkPos(startChunk.chunkBounds);
+            var startChunkPos = _levelPositionCalculation.CalcStartChunkPos(startChunk.chunkBounds);
             
             SetChunkPos(startChunk,startChunkPos);
             SetNewBearingChunk(startChunk);

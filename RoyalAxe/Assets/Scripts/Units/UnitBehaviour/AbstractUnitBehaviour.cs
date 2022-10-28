@@ -26,7 +26,7 @@ namespace RoyalAxe.Units.UnitBehaviour
         {
             if (Unit.isEnabled)
             {
-                Unit.isDestroyUnit = true;
+                Unit.isDestroyUnit = !Unit.isPlayer; // уничтожаем юнита, только если это не игрок.
             }
         }
     }

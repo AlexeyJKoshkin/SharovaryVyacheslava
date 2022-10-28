@@ -4,20 +4,20 @@ namespace RoyalAxe.CharacterStat
 {
     public class UniversalDamageCalculation : DamageCalculation
     {
-        private readonly int _indexComponent;
+        private readonly int _powerDamageStat;
 
-        public UniversalDamageCalculation(int indexComponent)
+        public UniversalDamageCalculation(int powerDamageStat)
         {
-            _indexComponent = indexComponent;
+            _powerDamageStat = powerDamageStat;
         }
 
         public override float PowerDamage(UnitsEntity attacker, float mobDamage)
         {
-            var powerDamageStat =  attacker.GetComponent(_indexComponent) as ModifiableStat;
+            var powerDamageStat =  attacker.GetComponent(_powerDamageStat) as ModifiableStat;
 
             if (powerDamageStat == null)
             {
-                HLogger.LogError($"Not found {UnitsComponentsLookup.componentNames[_indexComponent]} as stat at unit");
+                HLogger.LogError($"Not found {UnitsComponentsLookup.componentNames[_powerDamageStat]} as stat at unit");
                 return mobDamage;
             }
             return powerDamageStat.CurrentValue + mobDamage;

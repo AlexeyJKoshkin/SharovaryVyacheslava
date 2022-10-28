@@ -40,6 +40,8 @@ namespace RoyalAxe
             Container.Register<StopCoreGameLogicCommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<LoseLevelUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<PrepareGameUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
+
+            Container.Register<ResetCoreGameToRetryCommand>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindScenarios()
