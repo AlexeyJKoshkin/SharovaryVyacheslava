@@ -1,5 +1,7 @@
 ﻿using System;
+using Core.Data.Provider;
 using RoyalAxe.EntitasSystems;
+using RoyalAxe.GameEntitas;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

@@ -3,6 +3,7 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using GameKit;
 using RoyalAxe.CoreLevel;
+using RoyalAxe.LevelBuff;
 
 namespace RoyalAxe.GameEntitas {
     [CoreGamePlay]
@@ -54,5 +55,6 @@ namespace RoyalAxe.GameEntitas {
     [CoreGamePlay]
     public class WizardShopReadyComponent : IComponent
     {
+        public LevelBuffType[] LevelBuffTypes;
     }
 }

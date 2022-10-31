@@ -8,21 +8,23 @@ namespace RoyalAxe.CoreLevel
     {
         private ILevelBuff[] _generatedBuffs;
 
-        private readonly ILevelBuffStorage _buffStorage;
+  
+        private readonly ICurrentLevelBuffDistributor _currentWaveDistributor;
 
-        public SelectBuffScenario(BuffSelectWindowView view, ILevelBuffStorage buffStorage)
+        public SelectBuffScenario(BuffSelectWindowView view, ICurrentLevelBuffDistributor currentWaveDistributor)
         {
-            _buffStorage = buffStorage;
+            _currentWaveDistributor = currentWaveDistributor;
             InitView(view);
         }
 
         public void DoShowExpBuffs()
         {
-            _generatedBuffs = _buffStorage.GenerateBuffs();
+            _generatedBuffs = _currentWaveDistributor.GenerateBuff();
             InitBuffs();
             View.Open();
             Continue();
         }
+
 
         private void InitBuffs()
         {
@@ -51,13 +53,10 @@ namespace RoyalAxe.CoreLevel
         void OnSelectBufHandler(ILevelBuff selectedBuff)
         {
             selectedBuff.Activate();
-
-            if (!selectedBuff.IsSingle) //если текущий баф можно использовать повторно
-                _buffStorage.Return(selectedBuff);
-
-            _generatedBuffs.Where(o => o != selectedBuff) // остальные тоже возвращаем 
-                           .ForEach(_buffStorage.Return); // возвращаем
-
+            _currentWaveDistributor.HandleSelection(selectedBuff);
+            selectedBuff.Activate();
+            
+            
             FinishSuccess();
         }
     }

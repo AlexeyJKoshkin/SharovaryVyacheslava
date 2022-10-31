@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class CoreGamePlayEntity {
 
-    static readonly RoyalAxe.GameEntitas.WizardShopReadyComponent wizardShopReadyComponent = new RoyalAxe.GameEntitas.WizardShopReadyComponent();
+    public RoyalAxe.GameEntitas.WizardShopReadyComponent wizardShopReady { get { return (RoyalAxe.GameEntitas.WizardShopReadyComponent)GetComponent(CoreGamePlayComponentsLookup.WizardShopReady); } }
+    public bool hasWizardShopReady { get { return HasComponent(CoreGamePlayComponentsLookup.WizardShopReady); } }
 
-    public bool isWizardShopReady {
-        get { return HasComponent(CoreGamePlayComponentsLookup.WizardShopReady); }
-        set {
-            if (value != isWizardShopReady) {
-                var index = CoreGamePlayComponentsLookup.WizardShopReady;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : wizardShopReadyComponent;
+    public void AddWizardShopReady(RoyalAxe.LevelBuff.LevelBuffType[] newLevelBuffTypes) {
+        var index = CoreGamePlayComponentsLookup.WizardShopReady;
+        var component = (RoyalAxe.GameEntitas.WizardShopReadyComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent));
+        component.LevelBuffTypes = newLevelBuffTypes;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceWizardShopReady(RoyalAxe.LevelBuff.LevelBuffType[] newLevelBuffTypes) {
+        var index = CoreGamePlayComponentsLookup.WizardShopReady;
+        var component = (RoyalAxe.GameEntitas.WizardShopReadyComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent));
+        component.LevelBuffTypes = newLevelBuffTypes;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveWizardShopReady() {
+        RemoveComponent(CoreGamePlayComponentsLookup.WizardShopReady);
     }
 }
 

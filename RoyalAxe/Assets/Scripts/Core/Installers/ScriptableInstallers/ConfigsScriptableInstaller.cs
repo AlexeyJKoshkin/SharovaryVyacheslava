@@ -17,6 +17,7 @@ namespace Core
         {
             Container.Register<JsonModelsDataBox<WeaponsSkillConfigDef>>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<JsonModelsDataBox<StatCollection>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<JsonModelsDataBox<WizardLevelCollection>>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<JsonModelsDataBox<LevelGeneratorSettings>>(Lifetime.Singleton).AsImplementedInterfaces();
 
             BindJsonFileDependencies();

@@ -6,10 +6,12 @@ namespace RoyalAxe.Configs
     public class BuildInJsonDataProvider : ScriptableObject
     {
         public string WeaponSkillText => GetText(_weaponSkill);
+        public string WizardLevelText => GetText(_wizardShop);
         public string UnitStatText => GetText(_unitStatCollection);
         public string LevelDataText => GetText(_levelsData);
 
         [SerializeField] private TextAsset _weaponSkill;
+        [SerializeField] private TextAsset _wizardShop;
         
         [SerializeField] private TextAsset _unitStatCollection;
 

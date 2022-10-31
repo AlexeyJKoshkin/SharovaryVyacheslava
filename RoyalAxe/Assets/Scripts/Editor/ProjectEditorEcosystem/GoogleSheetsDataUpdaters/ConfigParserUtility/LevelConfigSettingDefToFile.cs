@@ -14,6 +14,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         {
             Bind<LevelGeneratorSettings>();
             Bind<MobDeathReward>();
+            Bind<WaveDestiny>();
         }
 
         protected override void RemoveUpdateConfigs(List<LevelGeneratorSettings> allExistItems, List<GoogleSheetGameData> allPages)
@@ -26,9 +27,10 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             for (int i = 0; i < page.Cells.Count; i++)
             {
                 LevelGeneratorSettings result = new LevelGeneratorSettings();
-                var levelCells = page.Cells[i];                       // тут содержится инфа об уровне оружия
-                parser.UpdateObject(levelCells, result);
-                parser.UpdateObject(levelCells, result.MobDeathReward);
+                var levelCells = page.Cells[i];                       // тут содержится инфа об волнах уровня
+                parser.UpdateObject(levelCells, result);              // общий класс
+                parser.UpdateObject(levelCells, result.MobDeathReward); // мобьи награды
+                parser.UpdateObject(levelCells, result.Destiny);        // судьба/магазин
                 FillMobSpawnData(levelCells, result);
                 yield return result;
             }

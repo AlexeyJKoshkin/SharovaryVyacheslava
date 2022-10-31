@@ -6,7 +6,10 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
     {
         private readonly GameRootLoopEntity _timerEntity;
 
-        public bool IsPause => _timerEntity.isPause;
+        public bool IsPause {
+            get => _timerEntity.isPause;
+            set => _timerEntity.isPause = value;
+        }
         public bool IsRunning
         {
             get => _timerEntity.isEnabled && _timerEntity.isActiveTimer;
@@ -68,6 +71,7 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
             }
 
             _timerEntity.isDoneTimer = true;
+            _timerEntity.Destroy();
         }
     }
 }

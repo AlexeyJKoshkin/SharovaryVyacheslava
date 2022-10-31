@@ -18,6 +18,7 @@ namespace RoyalAxe.Configs
             if (typeof(T) == typeof(StatCollection)) return _buildInJsonDataProvider.UnitStatText;
             if (typeof(T) == typeof(LevelGeneratorSettings)) return _buildInJsonDataProvider.LevelDataText;
             if (typeof(T) == typeof(WeaponsSkillConfigDef)) return _buildInJsonDataProvider.WeaponSkillText;
+            if (typeof(T) == typeof(WizardLevelCollection)) return _buildInJsonDataProvider.WizardLevelText;
 
             HLogger.LogError($"Not Found json Asset {typeof(T).Name}");
             return null;

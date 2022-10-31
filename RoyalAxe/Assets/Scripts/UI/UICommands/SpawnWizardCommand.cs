@@ -1,5 +1,6 @@
 using System;
 using FluentBehaviourTree;
+using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CoreLevel
 {

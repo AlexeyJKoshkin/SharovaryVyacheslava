@@ -13,7 +13,6 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             Bind<StatsConfig>();
         }
 
-
         protected StatCollection SingleCollection(GoogleSheetGameData page, IGameDataParser parser)
         {
             StatCollection result = new StatCollection {UniqueID = page.PageName};

@@ -39,7 +39,7 @@ namespace Core.Launcher
             return new CoreLevelParameters()
             {
                 BiomeType = BiomeType.Desert, // по хорошему либо выбирать из меню либо грузить из прогресса
-                StartLevel = 4 
+                StartLevel = 1 
             };
         }
 
