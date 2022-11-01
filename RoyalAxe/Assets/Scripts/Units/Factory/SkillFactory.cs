@@ -50,11 +50,8 @@ namespace RoyalAxe.GameEntitas
 
         private void TryAddDefaultGunnerSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity mob)
         {
-            if (rangeParams.RangeCooldownAttack <= 0)
-            {
-                return;
-            }
-
+            if (rangeParams.RangeCooldownAttack <= 0) return;
+            
             var skill = CreateWeaponSkill(rangeParams, mob);
             var timer = _timerFactory.CreateRestoreUsageSkillTimer(skill, rangeParams.RangeCooldownAttack);
             skill.AddRestoreAttemptsTimer(1, timer);

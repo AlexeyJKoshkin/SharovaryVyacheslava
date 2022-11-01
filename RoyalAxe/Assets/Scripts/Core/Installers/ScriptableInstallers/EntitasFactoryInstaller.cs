@@ -25,8 +25,6 @@ namespace Core
         {
             Container.Register<UnitsViewBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitsBuilderFacade>(Lifetime.Singleton).AsImplementedInterfaces();
-
-           
         }
     }
 }

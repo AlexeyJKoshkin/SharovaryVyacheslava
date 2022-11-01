@@ -21,13 +21,16 @@ namespace RoyalAxe.CoreLevel
 
         private readonly LevelInfrastructureView _view;
         private readonly CoreGamePlayContext _coreGamePlayContext;
+        private readonly IUltimateCheatAdapter _ultimateCheatAdapter;
         private readonly ChunkBuilderHelper _chunkBuilderHelper;
         private CoreGamePlayEntity BearingSpawnChunk => _coreGamePlayContext.bearingSpawnChunkEntity;
         
-        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext, ILevelPositionCalculation levelPositionCalculation)
+        public LevelAdapter(LevelInfrastructureView view, CoreGamePlayContext coreGamePlayContext, IUltimateCheatAdapter ultimateCheatAdapter,
+                            ILevelPositionCalculation levelPositionCalculation)
         {
             _view = view;
             _coreGamePlayContext = coreGamePlayContext;
+            _ultimateCheatAdapter = ultimateCheatAdapter;
             _levelPositionCalculation = levelPositionCalculation;
             _chunkBuilderHelper = new ChunkBuilderHelper(coreGamePlayContext, this, levelPositionCalculation);
         }
@@ -52,7 +55,6 @@ namespace RoyalAxe.CoreLevel
         
         private void SetNextChunk(CoreGamePlayEntity nextChunk)
         {
-         
             var nextChunkPos = _levelPositionCalculation.CalcNextChunkPos( BearingSpawnChunk.chunkBounds, nextChunk.chunkBounds);
             SetChunkPos(nextChunk, nextChunkPos);
             BearingSpawnChunk.isBearingSpawnChunk = false;
@@ -79,6 +81,7 @@ namespace RoyalAxe.CoreLevel
             currentPos.y                = yPos;
             view.RootTransform.position = currentPos;
             chunk.ReplaceChunkBounds(view.CalcChunkBounds());
+            view.SetActive(_ultimateCheatAdapter.EnableRender);
         }
     }
 }

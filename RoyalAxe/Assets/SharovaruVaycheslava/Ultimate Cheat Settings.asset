@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d666b5e41f4254bde46f4e69755d02, type: 3}
-  m_Name: CoreInstaller
+  m_Script: {fileID: 11500000, guid: 869ab2d6207848c0b2a87c06b9a2330f, type: 3}
+  m_Name: Ultimate Cheat Settings
   m_EditorClassIdentifier: 
-  _loaderUnityView: {fileID: 3962046951731044840, guid: 85d6183891ab8e7408fa39065eb22314, type: 3}
+  EnableCheats: 1
+  WaveNumber: 1
+  EnableRender: 0
+  StartCustomLevel: 1
+  LevelParams:
+    BiomeType: 1
+    StartLevel: 3

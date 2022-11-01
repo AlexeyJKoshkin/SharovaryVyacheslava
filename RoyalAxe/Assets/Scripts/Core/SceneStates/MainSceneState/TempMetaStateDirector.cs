@@ -12,13 +12,15 @@ namespace Core.Launcher
     {
         private readonly MetaSceneUIView _metaSceneUIView;
         private readonly ISceneLoaderProvider _sceneLoaderProvider;
+        private readonly IUltimateCheatAdapter _ultimateCheatAdapter;
 
         private ISceneLoaderHelper _currentSceneLoader;
 
-        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider)
+        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter)
         {
             _metaSceneUIView = metaSceneUIView;
             _sceneLoaderProvider = sceneLoaderProvider;
+            _ultimateCheatAdapter = ultimateCheatAdapter;
         }
 
         public void Initialize()
@@ -36,10 +38,11 @@ namespace Core.Launcher
 
         private CoreLevelParameters GetLevelParams()
         {
+            if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
             return new CoreLevelParameters()
             {
                 BiomeType = BiomeType.Desert, // по хорошему либо выбирать из меню либо грузить из прогресса
-                StartLevel = 1 
+                StartLevel = 1
             };
         }
 

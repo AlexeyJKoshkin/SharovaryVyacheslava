@@ -3,7 +3,6 @@ using System.Linq;
 using Core.Data.Provider;
 using GameKit;
 using RoyalAxe.LevelBuff;
-using UnityEngine;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -93,5 +92,7 @@ namespace RoyalAxe.CoreLevel
         {
             return _waveEntity.mobWaveCollection.Generate();
         }
+
+        public bool HasWave => _waveQueue.Count > 0;
     }
 }

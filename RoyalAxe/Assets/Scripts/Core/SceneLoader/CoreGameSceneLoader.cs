@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Data.Provider;
 using RoyalAxe.CoreLevel;
 
 namespace Core.Launcher
 {
+    [Serializable]
     public class CoreLevelParameters
     {
         public BiomeType BiomeType;

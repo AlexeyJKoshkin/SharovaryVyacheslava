@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ConfigsInstaller
   m_EditorClassIdentifier: 
   _buildInJsonDataProvider: {fileID: 11400000, guid: 8b1a71977a1b79947aab6cdf716f1f3a, type: 2}
+  _cheatSettings: {fileID: 11400000, guid: 1ee0cb0369f3f9c488e28b05addec54d, type: 2}

@@ -39,13 +39,9 @@ namespace RoyalAxe.CoreLevel
             if (_levelWaveLoader.NextWave()) // пробуем загрузить следующую волну один раз
             {
                 HLogger.LogError("Load Next wave");
+                return BehaviourTreeStatus.Success;
             }
-            else
-            {
-                HLogger.LogError("Волны закончились");
-            }
-
-            return BehaviourTreeStatus.Success;
+            return BehaviourTreeStatus.Failure;
         }
     }
 }

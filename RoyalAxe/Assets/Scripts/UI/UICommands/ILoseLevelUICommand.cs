@@ -42,7 +42,7 @@ namespace RoyalAxe.CoreLevel
             ClearWindowHandlers();
             _resetCoreGame.RestartGameAfterPlayerDearth();
             _pauseSystemSwitcher.UnPause();
-            _loseWindowView.Hide();
+            _loseWindowView.Close();
             _handler.FireCallback(true);
         }
         

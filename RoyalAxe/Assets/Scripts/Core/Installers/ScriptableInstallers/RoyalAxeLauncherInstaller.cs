@@ -43,15 +43,7 @@ namespace Core
         private void BindContexts(Contexts shared)
         {
             Container.RegisterInstance(shared).AsSelf();
-
-
             foreach (object context in shared.allContexts) Container.RegisterInstance(context).AsSelf().AsImplementedInterfaces();
-
-            /*foreach (var context in shared.allContexts)
-            {
-                var entityType = GetEntityType(context);
-                containerBuilder.RegisterInstance(context).AsSelf().As(typeof(IContext<>).MakeGenericType(entityType));
-            }*/
         }
 
 

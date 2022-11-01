@@ -1,5 +1,6 @@
 using Entitas;
 using RoyalAxe.GameEntitas;
+using UnityEngine;
 
 namespace RoyalAxe.EntitasSystems
 {
@@ -8,12 +9,11 @@ namespace RoyalAxe.EntitasSystems
     /// </summary>
     public class DropSkillsTimerSystem : IInitializeSystem, ITearDownSystem
     {
-        private IGroup<SkillEntity> _restoreTimers;
+        private readonly IGroup<SkillEntity> _restoreTimers;
 
         public DropSkillsTimerSystem(SkillContext skillContext)
         {
-            _restoreTimers                 =  skillContext.GetGroup(Matcher<SkillEntity>.AnyOf(SkillMatcher.RestoreAttemptsTimer));
-            _restoreTimers.OnEntityRemoved += RestoreTimersOnOnEntityRemoved;
+            _restoreTimers = skillContext.GetGroup(SkillMatcher.RestoreAttemptsTimer);
         }
 
         private void RestoreTimersOnOnEntityRemoved(IGroup<SkillEntity> group, SkillEntity entity, int index, IComponent component)

@@ -4,7 +4,7 @@ namespace RoyalAxe
 {
     public abstract class UIViewComponent : MonoBehaviour
     {
-        public void Hide()
+        public void Close()
         {
             gameObject.SetActive(false);
         }

@@ -4,6 +4,7 @@ using Core.Data.Provider;
 using Entitas;
 using GameKit;
 using RoyalAxe.Configs;
+using RoyalAxe.CoreLevel;
 using RoyalAxe.Units;
 using UnityEngine;
 
@@ -13,10 +14,12 @@ namespace RoyalAxe.GameEntitas
     {
         private readonly IDataStorage _dataStorage;
         private readonly IGroup<CoreGamePlayEntity> _allChunksGroup;
+        private IUltimateCheatAdapter _ultimateCheatSettings;
 
-        public UnitsViewBuilder(IDataStorage dataStorage, IContext<CoreGamePlayEntity> coreGamePlayContext)
+        public UnitsViewBuilder(IDataStorage dataStorage, IContext<CoreGamePlayEntity> coreGamePlayContext, IUltimateCheatAdapter ultimateCheatSettings)
         {
             _dataStorage    = dataStorage;
+            _ultimateCheatSettings = ultimateCheatSettings;
             _allChunksGroup = coreGamePlayContext.GetGroup(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayComponentsLookup.ChunkView));
         }
 
@@ -95,7 +98,9 @@ namespace RoyalAxe.GameEntitas
             var result = Object.Instantiate(prefab);
             result.EntityBehaviours().Where(o => null != o).ForEach(b => b.InitEntity(e));
             e.AddUnitsView(result);
-        //    result.GetComponentsInChildren<Renderer>().ForEach(r=> r.enabled = false);
+            
+            if(!_ultimateCheatSettings.EnableRender)
+                result.GetComponentsInChildren<Renderer>().ForEach(r=> r.enabled = false);
             return result;
         }
     }

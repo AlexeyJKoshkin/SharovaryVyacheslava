@@ -12,6 +12,7 @@ namespace RoyalAxe.CoreLevel
         bool HasMob { get; }
         LevelBuffType[] CurrentBuffs { get; }
         MobAtLevelData GenerateMobData();
+        bool HasWave { get; }
     }
 
     public interface ILevelWaveLoader : ILevelWaveProvider

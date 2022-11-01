@@ -54,9 +54,7 @@ namespace RoyalAxe.CoreLevel
         {
             selectedBuff.Activate();
             _currentWaveDistributor.HandleSelection(selectedBuff);
-            selectedBuff.Activate();
-            
-            
+            View.Close();
             FinishSuccess();
         }
     }

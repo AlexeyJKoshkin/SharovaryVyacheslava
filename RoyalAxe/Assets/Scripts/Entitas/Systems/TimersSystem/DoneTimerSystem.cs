@@ -9,7 +9,8 @@ namespace RoyalAxe.Entitas.Systems.TimersSystem
 
         protected override ICollector<GameRootLoopEntity> GetTrigger(IContext<GameRootLoopEntity> context)
         {
-            return context.CreateCollector(Matcher<GameRootLoopEntity>.AllOf(GameRootLoopMatcher.Timer, GameRootLoopMatcher.DoneTimer)
+            return context.CreateCollector(Matcher<GameRootLoopEntity>.AllOf(GameRootLoopMatcher.Timer,
+                                                                             GameRootLoopMatcher.DoneTimer)
                                                                       .NoneOf(GameRootLoopMatcher.Pause).Added());
         }
 
@@ -27,6 +28,7 @@ namespace RoyalAxe.Entitas.Systems.TimersSystem
             }
             else
             {
+               // Debug.LogError("DONE TIMER");
                 entity.Destroy();
             }
         }

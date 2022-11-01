@@ -69,9 +69,7 @@ namespace RoyalAxe.EntitasSystems.TimerUtility
             {
                 _timerEntity.RemoveDoneTimerListener();
             }
-
-            _timerEntity.isDoneTimer = true;
-            _timerEntity.Destroy();
+            _timerEntity.isDoneTimer = true; // таймер удалится в нужное время
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Core
     {
         [SerializeField]
         private BuildInJsonDataProvider _buildInJsonDataProvider;
+        [SerializeField]
+        private UltimateCheatSettings _cheatSettings;
         protected override void InstallBindings()
         {
             Container.Register<JsonModelsDataBox<WeaponsSkillConfigDef>>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -23,8 +25,9 @@ namespace Core
             BindJsonFileDependencies();
 
             Container.Register<LevelBuffSettingCompositeProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-        }
 
+            BindCheats();
+        }
         private void BindJsonFileDependencies()
         {
             Container.Register<SVJsonConverter>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -39,5 +42,12 @@ namespace Core
             //Container.Register<ConfigTextLoader>(Lifetime.Singleton).As<IJsonConfigFileLoader>();
 
         }
+        
+        private void BindCheats()
+        {
+            Container.Register<UltimateCheatAdapter>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.RegisterInstance(_cheatSettings).AsSelf();
+        }
+
     }
 }

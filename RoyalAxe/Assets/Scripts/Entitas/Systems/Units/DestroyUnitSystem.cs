@@ -23,7 +23,12 @@ namespace RoyalAxe.EntitasSystems
         {
             if(e.hasUnitAnimationEntity && e.unitAnimationEntity.AnimationEntity.isEnabled)
                 e.unitAnimationEntity.AnimationEntity.Destroy();
-            
+
+            if (e.hasUnitActiveSkill)
+            {
+                e.unitActiveSkill.SkillEntity.Destroy();
+            }
+
             //по хорошему вьюшку надо вернуть в пул, но пока просто уничтожаем
             var view = e.unitsView.View;
             Object.Destroy(view.gameObject);
