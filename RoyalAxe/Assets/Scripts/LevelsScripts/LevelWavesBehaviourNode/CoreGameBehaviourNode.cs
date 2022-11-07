@@ -2,6 +2,12 @@ using FluentBehaviourTree;
 
 namespace RoyalAxe.CoreLevel
 {
+    public interface ILevelGamePlayNodeBehavior : IBehaviourTreeNode
+    {
+        void StartLevel();
+        void EndLevel();
+    }
+
     public class CoreGameBehaviourNode : ParallelNode
     {
         public CoreGameBehaviourNode(ShowWinWindowNode showWinWindowNode,
@@ -10,11 +16,11 @@ namespace RoyalAxe.CoreLevel
         {
             new BehaviourTreeBuilder()
                 .Parent(this)
-                .Do(showWinWindowNode)
-                .Do(spawnMobNode)
-                .Do(loadNextWave)
+                    .Do(showWinWindowNode) // пробуем закончить игру
+                    .Do(spawnMobNode)      // пробуем заспавнить мобов
+                    .Do(loadNextWave)      // пробуем загрузить следующую волну
                 .End()
-                .Build();
+            .Build();
         }
     }
 }

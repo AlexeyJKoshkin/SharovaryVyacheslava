@@ -27,6 +27,7 @@ namespace RoyalAxe.CoreLevel {
         {
             _coreGameSceneUiView.InitEntity( _contexts.units.playerEntity);
             _coreGameSceneUiView.InitEntity( _contexts.coreGamePlay.playerEntity);
+            _coreGameSceneUiView.InitEntity(_contexts.coreGamePlay.GetGroup(CoreGamePlayMatcher.LevelNumber).GetSingleEntity());
             _winWindowController.Close();
             _loseWindowController.Close();
             _buffSelectWindowView.Close();

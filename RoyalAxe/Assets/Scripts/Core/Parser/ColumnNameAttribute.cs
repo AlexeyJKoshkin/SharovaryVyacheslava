@@ -15,4 +15,21 @@ namespace Core.Parser
             ColumnName = columnName;
         }
     }
+    
+    
+    /// <summary>
+    ///     В моделях указываем имя колонки в гуглтаблицах
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field)]
+    public class GoogleSheetPageNameAttribute : Attribute
+    {
+        public bool SameAsFieldName => string.IsNullOrEmpty(PageName);
+        public string PageName;
+
+        public GoogleSheetPageNameAttribute(string columnName = null)
+        {
+            PageName = columnName;
+        }
+    }
+    
 }

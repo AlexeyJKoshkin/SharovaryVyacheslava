@@ -11,21 +11,21 @@ public static class CoreGamePlayComponentsLookup {
     public const int ExperienceListener = 0;
     public const int GemsListener = 1;
     public const int GoldListener = 2;
-    public const int BearingSpawnChunk = 3;
-    public const int ChunkBounds = 4;
-    public const int ChunkView = 5;
-    public const int Experience = 6;
-    public const int Gems = 7;
-    public const int Gold = 8;
-    public const int LevelWave = 9;
-    public const int MobWaveCollection = 10;
-    public const int MovingChunk = 11;
-    public const int Player = 12;
-    public const int WaveFinished = 13;
-    public const int WaveMobReady = 14;
-    public const int WaveNumber = 15;
-    public const int WizardShopReady = 16;
-    public const int WaveNumberListener = 17;
+    public const int LevelNumberListener = 3;
+    public const int BearingSpawnChunk = 4;
+    public const int ChunkBounds = 5;
+    public const int ChunkView = 6;
+    public const int Experience = 7;
+    public const int Gems = 8;
+    public const int Gold = 9;
+    public const int LevelNumber = 10;
+    public const int LevelWave = 11;
+    public const int MobWaveCollection = 12;
+    public const int MovingChunk = 13;
+    public const int Player = 14;
+    public const int WaveFinished = 15;
+    public const int WaveMobReady = 16;
+    public const int WizardShopReady = 17;
 
     public const int TotalComponents = 18;
 
@@ -33,41 +33,40 @@ public static class CoreGamePlayComponentsLookup {
         "ExperienceListener",
         "GemsListener",
         "GoldListener",
+        "LevelNumberListener",
         "BearingSpawnChunk",
         "ChunkBounds",
         "ChunkView",
         "Experience",
         "Gems",
         "Gold",
+        "LevelNumber",
         "LevelWave",
         "MobWaveCollection",
         "MovingChunk",
         "Player",
         "WaveFinished",
         "WaveMobReady",
-        "WaveNumber",
-        "WizardShopReady",
-        "WaveNumberListener"
+        "WizardShopReady"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(ExperienceListenerComponent),
         typeof(GemsListenerComponent),
         typeof(GoldListenerComponent),
+        typeof(LevelNumberListenerComponent),
         typeof(RoyalAxe.GameEntitas.BearingSpawnChunk),
         typeof(RoyalAxe.GameEntitas.ChunkBoundsComponent),
         typeof(RoyalAxe.GameEntitas.ChunkViewComponent),
         typeof(RoyalAxe.GameEntitas.ExperienceComponent),
         typeof(RoyalAxe.GameEntitas.GemsComponent),
         typeof(RoyalAxe.GameEntitas.GoldComponent),
+        typeof(RoyalAxe.GameEntitas.LevelNumberComponent),
         typeof(RoyalAxe.GameEntitas.LevelWaveComponent),
         typeof(RoyalAxe.GameEntitas.MobWaveCollectionComponent),
         typeof(RoyalAxe.GameEntitas.MovingChunkComponent),
         typeof(RoyalAxe.GameEntitas.PlayerComponent),
         typeof(RoyalAxe.GameEntitas.WaveFinishedComponent),
-        typeof(RoyalAxe.GameEntitas.WaveMobReadyComponent),
-        typeof(RoyalAxe.GameEntitas.WaveNumberComponent),
-        typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent),
-        typeof(WaveNumberListenerComponent)
+        typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent)
     };
 }

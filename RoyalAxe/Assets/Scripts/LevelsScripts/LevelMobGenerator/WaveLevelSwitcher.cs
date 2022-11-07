@@ -8,7 +8,7 @@ namespace RoyalAxe.CoreLevel
 {
     public class WaveLevelSwitcher : ILevelWaveLoader
     {
-        public int WaveNumber => _waveEntity.waveNumber.Number;
+        public int WaveNumber => _waveEntity.levelNumber.Number;
         public float SpawnCooldown => _currentSettings.SpawnCooldown;
         public int MaxMobAmount => _currentSettings.MaxMobAmount;
         public MobDeathReward CurrentMobReward => _currentSettings.MobDeathReward;
@@ -30,14 +30,6 @@ namespace RoyalAxe.CoreLevel
             _waveEntity.isLevelWave = true;
         }
 
-        public void InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels)
-        {
-            _waveQueue.Clear();
-            infrastructurePackLevels.ForEach(e => _waveQueue.Enqueue(e));
-            _waveEntity.ReplaceWaveNumber(0);
-            NextWave();
-        }
-
         public bool NextWave()
         {
             if (_waveQueue.Count == 0) return false;
@@ -48,20 +40,25 @@ namespace RoyalAxe.CoreLevel
             if (_currentSettings == null || _currentSettings.Type == nextWaveSettings.Type)
             {
                 SetNewWave(nextWaveSettings);
-                _waveEntity.ReplaceWaveNumber(nextWave);
+                _waveEntity.ReplaceLevelNumber(nextWave);
                 return true;
             }
-
             return false;
+        }
+
+        public void Init(ICoreLevelDataInfrastructure levelData)
+        {
+            _waveQueue.Clear();
+            levelData.PackLevels.ForEach(e => _waveQueue.Enqueue(e));
+            _waveEntity.AddLevelNumber(0);
         }
 
         private void SetNewWave(LevelGeneratorSettings nextWaveSettings)
         {
             _currentSettings = nextWaveSettings;
-            _waveEntity.ReplaceWaveNumber(WaveNumber);
-            _waveEntity.ReplaceMobWaveCollection(nextWaveSettings.MobsData.Select(o => new MobAtLevelData(o)).ToList());
+            _waveEntity.ReplaceLevelNumber(WaveNumber); // номер уровня/волны
+            _waveEntity.ReplaceMobWaveCollection(nextWaveSettings.MobsData.Select(o => new MobAtLevelData(o)).ToList()); //обновляем список мобов для спавна
             _waveEntity.isWaveFinished = false;
-
             HandleDestiny(nextWaveSettings.Destiny);
         }
 
@@ -73,14 +70,14 @@ namespace RoyalAxe.CoreLevel
                 if (wizardData != null) // если установлен какой-то магазин
                 {
                     _waveEntity.ReplaceWizardShopReady(wizardData.PossibleBuffs);  
-                    _waveEntity.isWaveMobReady = false;
+                   // _waveEntity.isWaveMobReady = false;
                     return;
                 }
             }
             
             if(_waveEntity.hasWizardShopReady)
                 _waveEntity.RemoveWizardShopReady();
-            _waveEntity.isWaveMobReady = true;
+
         }
 
         private WizardShopSettings GetWizardShop(WaveDestiny destiny)

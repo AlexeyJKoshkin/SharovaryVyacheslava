@@ -9,17 +9,17 @@ namespace RoyalAxe.CoreLevel
     
     public class StopCoreGameLogicCommand : IStopCoreGameLogicCommand
     {
-        private readonly IMobAtLevelDirector _mobAtLevelDirector;
+        private readonly IMobSpawnTimer _mobSpawnTimer;
         private readonly IRoyalAxePauseSystemSwitcher _pauseSwitcher;
-        public StopCoreGameLogicCommand(IMobAtLevelDirector mobAtLevelDirector, IRoyalAxePauseSystemSwitcher pauseSwitcher)
+        public StopCoreGameLogicCommand(IRoyalAxePauseSystemSwitcher pauseSwitcher, IMobSpawnTimer mobSpawnTimer)
         {
-            _mobAtLevelDirector = mobAtLevelDirector;
             _pauseSwitcher = pauseSwitcher;
+            _mobSpawnTimer = mobSpawnTimer;
         }
 
         public void StopGameLogic()
         {
-            _mobAtLevelDirector.StopSpawn();
+            _mobSpawnTimer.StopMobTimer();
             _pauseSwitcher.SetPause(); // все ставим 
         }
     }

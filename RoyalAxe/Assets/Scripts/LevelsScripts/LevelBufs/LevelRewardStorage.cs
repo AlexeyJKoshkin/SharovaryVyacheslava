@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Core.Data.Provider;
 using GameKit;
 
@@ -23,6 +24,10 @@ namespace RoyalAxe.LevelBuff
             {
                 if (buff.IsSingle)
                     _allExistsRewards.Remove(type);
+            }
+            else
+            {
+                HLogger.LogError($"Not Found Buff {type}. Check if you bind it at LevelBuffsInstaller.cs");
             }
             return buff;
         }

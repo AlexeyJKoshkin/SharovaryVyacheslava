@@ -15,14 +15,34 @@ MonoBehaviour:
   _sheetId: 1QihaX_WGYaGZhaHNQd7oZ1DVb35_3hQxVF3Bw5YK778
   _configUpdater:
     id: 0
-  _pages: []
+  _pages:
+  - PageName: ColdAdditionalDamageBuffSettings
+    FolderState: 10
+  - PageName: FireAdditionalDamageBuffSettings
+    FolderState: 10
+  - PageName: PoisonAdditionalDamageBuffSettings
+    FolderState: 10
+  - PageName: FiringBladeBuffSettings
+    FolderState: 10
+  - PageName: FiringFirecrackersBuffSettings
+    FolderState: 10
+  - PageName: FloatingShieldsBuffSettings
+    FolderState: 10
+  - PageName: HealPlayerLifeBuffSettings
+    FolderState: 10
+  - PageName: IncreaseCriticalChanceBuffSettings
+    FolderState: 10
+  - PageName: IncreaseDamageBuffSettings
+    FolderState: 10
+  - PageName: IncreasePlayerMaxLifeBuffSettings
+    FolderState: 10
+  - PageName: IncreasePlayerSkillSpeedBuffSettings
+    FolderState: 10
+  - PageName: IncreasePlayerSkillUsageBuffSettings
+    FolderState: 10
+  - PageName: InfectedBloodBuffSettings
+    FolderState: 10
   references:
     version: 1
     00000000:
       type: {class: LevelBuffToJsonParser, ns: ProjectEditorEcosystem.GoogleSheetsDataUpdaters, asm: Assembly-CSharp-Editor}
-      data:
-        _buffDataLoader:
-          _dataBox: {fileID: 0}
-          _rootFolderConfigs: {fileID: 0}
-          CreateNew: 0
-          IncludeSubFolders: 0

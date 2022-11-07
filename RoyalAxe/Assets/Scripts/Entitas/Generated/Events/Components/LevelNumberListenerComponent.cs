@@ -7,6 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
-public sealed class WaveNumberListenerComponent : Entitas.IComponent {
-    public System.Collections.Generic.List<IWaveNumberListener> value;
+public sealed class LevelNumberListenerComponent : Entitas.IComponent {
+    public System.Collections.Generic.List<ILevelNumberListener> value;
 }

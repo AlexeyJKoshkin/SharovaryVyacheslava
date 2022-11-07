@@ -45,7 +45,8 @@ namespace Core.Launcher
         {
             var biome = _dataStorage.ById<BiomeScriptableDef>(_coreLevelParameters.BiomeType.ToString());
             _coreLevelDataInfrastructure.BiomeDef = biome;
-            
+            _coreLevelDataInfrastructure.LevelNumber = _coreLevelParameters.StartLevel;
+           
             var allLevels = _dataStorage.All<LevelGeneratorSettings>() // Уровни
                                         .Where(o=> o.LevelNumber >= _coreLevelParameters.StartLevel) // которые больше текущего
                                         .ToList();

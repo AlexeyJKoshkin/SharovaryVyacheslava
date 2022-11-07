@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core;
 using Core.Configs;
 using UnityEngine;
 
@@ -21,12 +22,12 @@ namespace ProjectEditorEcoSystem
 
         public void StartWork()
         {
-            Debug.LogError("Start Editor Eco System");
+            HLogger.LogInfo("Start Editor Eco System");
         }
 
         public void StopWork()
         {
-            Debug.LogError("StopWork World");
+            HLogger.LogInfo("StopWork World");
             OnFinishWorkingEvent?.Invoke();
         }
 

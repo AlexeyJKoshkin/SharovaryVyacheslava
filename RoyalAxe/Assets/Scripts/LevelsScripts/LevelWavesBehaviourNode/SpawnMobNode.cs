@@ -1,16 +1,19 @@
 ﻿using FluentBehaviourTree;
+using RoyalAxe.EntitasSystems.TimerUtility;
 
 namespace RoyalAxe.CoreLevel
 {
+    //Пробуем спавнить мобов
     public class SpawnMobNode : SequenceNode
     {
         private readonly CoreGamePlayEntity _coreGameState;
-        private readonly IMobAtLevelDirector _mobAtLevelDirector;
-
-        public SpawnMobNode(CoreGamePlayContext coreGameState, IMobAtLevelDirector mobAtLevelDirector) : base("Начинаем спавн мобов")
+        private readonly IMobSpawnOperation _mobSpawnOperation;
+        
+       public SpawnMobNode(CoreGamePlayContext coreGameState,
+                            IMobSpawnOperation mobSpawnOperation) : base("Начинаем спавн мобов")
         {
             _coreGameState      = coreGameState.levelWaveEntity;
-            _mobAtLevelDirector = mobAtLevelDirector;
+            _mobSpawnOperation = mobSpawnOperation;
 
             new BehaviourTreeBuilder().Sequence(this)
                                       .Condition("Можно ли начать спавн,", CheckCanSpawn)
@@ -19,13 +22,12 @@ namespace RoyalAxe.CoreLevel
 
         private bool CheckCanSpawn(TimeData arg)
         {
-            return _coreGameState.isWaveMobReady;
+            return false;
         }
 
         private BehaviourTreeStatus DoSpawn(TimeData arg)
         {
-            _mobAtLevelDirector.StartWaveImmediate();
-            _coreGameState.isWaveMobReady = false;
+            _mobSpawnOperation.SpawnMobs();
             return BehaviourTreeStatus.Success;
         }
     }

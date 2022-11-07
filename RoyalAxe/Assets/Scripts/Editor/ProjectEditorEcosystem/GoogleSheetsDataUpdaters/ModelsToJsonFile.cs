@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Configs;
@@ -9,7 +10,7 @@ using Sirenix.Utilities;
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
    
-    internal abstract class ModelsToJsonFile<T> where T : class, IDataObject, new()
+    internal abstract class ModelsToJsonFile<T> where T : class,  new()
     {
         private List<T> _allExistItems;
         private readonly CompositeGenericParser _dataParser;
@@ -22,6 +23,10 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         public CompositeGenericParser Bind<TType>()
         {
             return _dataParser.Bind<TType>();
+        }
+        public CompositeGenericParser Bind(Type type)
+        {
+            return _dataParser.Bind(type);
         }
 
         public void UpdateConfigs(List<GoogleSheetGameData> allPages, IJsonConfigModelsOperation operation)

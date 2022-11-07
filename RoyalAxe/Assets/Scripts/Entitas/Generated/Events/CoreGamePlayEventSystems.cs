@@ -12,6 +12,6 @@ public sealed class CoreGamePlayEventSystems : Feature {
         Add(new ExperienceEventSystem(contexts)); // priority: 0
         Add(new GemsEventSystem(contexts)); // priority: 0
         Add(new GoldEventSystem(contexts)); // priority: 0
-        Add(new WaveNumberEventSystem(contexts)); // priority: 0
+        Add(new LevelNumberEventSystem(contexts)); // priority: 0
     }
 }

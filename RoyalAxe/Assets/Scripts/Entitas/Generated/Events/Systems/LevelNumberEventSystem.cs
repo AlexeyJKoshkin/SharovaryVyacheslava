@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class WaveNumberEventSystem : Entitas.ReactiveSystem<CoreGamePlayEntity> {
+public sealed class LevelNumberEventSystem : Entitas.ReactiveSystem<CoreGamePlayEntity> {
 
-    readonly System.Collections.Generic.List<IWaveNumberListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<ILevelNumberListener> _listenerBuffer;
 
-    public WaveNumberEventSystem(Contexts contexts) : base(contexts.coreGamePlay) {
-        _listenerBuffer = new System.Collections.Generic.List<IWaveNumberListener>();
+    public LevelNumberEventSystem(Contexts contexts) : base(contexts.coreGamePlay) {
+        _listenerBuffer = new System.Collections.Generic.List<ILevelNumberListener>();
     }
 
     protected override Entitas.ICollector<CoreGamePlayEntity> GetTrigger(Entitas.IContext<CoreGamePlayEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(CoreGamePlayMatcher.WaveNumber)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(CoreGamePlayMatcher.LevelNumber)
         );
     }
 
     protected override bool Filter(CoreGamePlayEntity entity) {
-        return entity.hasWaveNumber && entity.hasWaveNumberListener;
+        return entity.hasLevelNumber && entity.hasLevelNumberListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<CoreGamePlayEntity> entities) {
         foreach (var e in entities) {
-            var component = e.waveNumber;
+            var component = e.levelNumber;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.waveNumberListener.value);
+            _listenerBuffer.AddRange(e.levelNumberListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnWaveNumber(e, component.Number);
+                listener.OnLevelNumber(e, component.Number);
             }
         }
     }

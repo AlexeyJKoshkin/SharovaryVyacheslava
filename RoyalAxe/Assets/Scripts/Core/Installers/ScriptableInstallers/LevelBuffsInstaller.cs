@@ -25,6 +25,9 @@ namespace Core
         {
             yield return typeof(RoyalAxe.LevelBuff.DoubleParallelWeaponThrowBuff);
             yield return typeof(RoyalAxe.LevelBuff.FiringBladeBuff);
+            yield return typeof(RoyalAxe.LevelBuff.FireAdditionalDamageBuff);
+            yield return typeof(RoyalAxe.LevelBuff.ColdAdditionalDamageBuff);
+            yield return typeof(RoyalAxe.LevelBuff.PoisonAdditionalDamageBuff);
           //  yield return typeof(RoyalAxe.LevelBuff.FiringFirecrackersBuff);
           //  yield return typeof(RoyalAxe.LevelBuff.FloatingShieldsBuff);
             yield return typeof(RoyalAxe.LevelBuff.HealPlayerLifeBuff);

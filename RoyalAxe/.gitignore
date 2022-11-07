@@ -18,6 +18,9 @@
 /.vs
 /*.apk
 /*.sln
+/Assets/3dPackages/KoshkinAssets
+/Assets/3dPackages/KoshkinAssets/
+/Assets/3dPackages/KoshkinAssets.meta
 
 /Assets/Plugins/Editor/JetBrains
 

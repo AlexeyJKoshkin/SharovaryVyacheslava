@@ -6,13 +6,16 @@ namespace RoyalAxe.CoreLevel
     public interface ICoreLevelDataInfrastructure
     {
         IReadOnlyList<LevelGeneratorSettings> PackLevels { get; }
-        
+
+        int LevelNumber { get; }
+
         BiomeScriptableDef BiomeDef { get; }
     }
 
     public class CoreLevelDataInfrastructure : ICoreLevelDataInfrastructure
     {
         public IReadOnlyList<LevelGeneratorSettings> PackLevels { get; set; }
+        public int LevelNumber { get; set; }
         public BiomeScriptableDef BiomeDef { get; set; }
 
         /*public CoreLevelDataInfrastructure(List<LevelGeneratorSettings> levels, BiomeScriptableDef biomeDef)

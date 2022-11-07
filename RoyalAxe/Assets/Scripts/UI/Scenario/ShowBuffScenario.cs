@@ -45,6 +45,12 @@ namespace RoyalAxe.CoreLevel
 
         private void InitBuff(BuffSelectWindowView.BuffBntView buffBtn, ILevelBuff generatedBuff)
         {
+            if (generatedBuff == null)
+            {
+                buffBtn.Reset();
+                return;
+            }
+
             buffBtn.TurnOn();
             buffBtn.Text = generatedBuff.GetType().Name;
             buffBtn.AddCallback(() => OnSelectBufHandler(generatedBuff));

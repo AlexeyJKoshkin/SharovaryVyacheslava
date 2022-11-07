@@ -6,6 +6,8 @@ namespace RoyalAxe.CoreLevel
     {
         //тут создаем и подготавливаем данные для работы уровня
         IBehaviourTreeNode CreateLevel();
+
+        void StartLevel();
     }
 
 
@@ -17,35 +19,45 @@ namespace RoyalAxe.CoreLevel
         private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
         private readonly ILevelWaveLoader _levelWaveProvider;
         private readonly CoreGameBehaviourNode _coreGameBehaviourNode;
-        private readonly IMobAtLevelDirector _mobAtLevelDirector;
+        private readonly IMobSpawnOperation _mobSpawnOperation;
+        private readonly IMobSpawnTimer _mobSpawnTimer;
         private readonly IPlayerCoreGameFacade _playerCoreGameFacade;
 
         public LevelCreationOperation(ICoreLevelBuilder coreLevelBuilder,
                                       ICoreLevelDataInfrastructure coreLevelDataInfrastructure,
                                       CoreGameBehaviourNode coreGameBehaviourNode,
-                                      IMobAtLevelDirector mobAtLevelDirector, IPrepareGameUICommand prepareGameUiCommand,
+                                      IMobSpawnOperation mobSpawnOperation,
+                                      IMobSpawnTimer mobSpawnTimer,
+                                      IPrepareGameUICommand prepareGameUiCommand,
                                       ILevelWaveLoader levelWaveProvider, IPlayerCoreGameFacade playerCoreGameFacade)
         {
             _coreLevelBuilder            = coreLevelBuilder;
             _coreLevelDataInfrastructure = coreLevelDataInfrastructure;
             this._coreGameBehaviourNode  = coreGameBehaviourNode;
+            _mobSpawnOperation = mobSpawnOperation;
+            _mobSpawnTimer = mobSpawnTimer;
 
-            _mobAtLevelDirector   = mobAtLevelDirector;
             _prepareGameUiCommand = prepareGameUiCommand;
             _levelWaveProvider    = levelWaveProvider;
             _playerCoreGameFacade = playerCoreGameFacade;
         }
 
-        public IBehaviourTreeNode CreateLevel()
+        public void StartLevel()
+        {
+            _levelWaveProvider.NextWave(); // по факту грузится первый уровень
+            _mobSpawnTimer.StartMobTimer();// запускаем таймер
+            _mobSpawnOperation.SpawnMobs();// первую волну спавним на старте
+
+        }
+
+        IBehaviourTreeNode ILevelCreation.CreateLevel()
         {
             // создаем карту
             _coreLevelBuilder.BuildLevel(_coreLevelDataInfrastructure);
-            // создаем всю остальную хуйню (спавнер мобов, карту)
-            _levelWaveProvider.InitWaves(_coreLevelDataInfrastructure.PackLevels);
-            _mobAtLevelDirector.StartWaveImmediate();
+            // создаем все остальное (спавнер мобов, карту)
+            _levelWaveProvider.Init(_coreLevelDataInfrastructure);
             _playerCoreGameFacade.CreatePlayer();
             _prepareGameUiCommand.PrepareUIStartGame();
-
             return _coreGameBehaviourNode;
         }
     }

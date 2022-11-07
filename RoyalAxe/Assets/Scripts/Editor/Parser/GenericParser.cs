@@ -52,8 +52,9 @@ namespace Core.Parser
     public class GenericParser<T> : IGameDataParser
     {
         private readonly Dictionary<Type, IComplexTypeParser> _complexTypeParsers = new Dictionary<Type, IComplexTypeParser>();
-
+//имя колонки -> описание поля
         private readonly Dictionary<string, FieldInfo> _fieldNameMap = new Dictionary<string, FieldInfo>();
+      
 
         private readonly Dictionary<Type, MethodInfo> _simpleTypeParserMethod = new Dictionary<Type, MethodInfo>();
 
@@ -233,19 +234,7 @@ namespace Core.Parser
         {
             foreach (var fieldInfo in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public))
             {
-                var attribute = fieldInfo.GetCustomAttribute<ColumnNameAttribute>();
-                if (attribute == null)
-                {
-                    continue;
-                }
-
-                if (_fieldNameMap.ContainsKey(attribute.ColumnName))
-                {
-                    Debug.LogError($"{typeof(T).Name} duplicate RowName at {fieldInfo.Name}. Origin {_fieldNameMap[attribute.ColumnName].Name}");
-                    continue;
-                }
-
-                _fieldNameMap.Add(attribute.ColumnName, fieldInfo);
+                AddColumnField(fieldInfo);
             }
 
             var baseType = type.BaseType;
@@ -253,6 +242,22 @@ namespace Core.Parser
             {
                 LoadField(baseType);
             }
+        }
+
+      
+
+        private void AddColumnField(FieldInfo fieldInfo)
+        {
+            var attribute = fieldInfo.GetCustomAttribute<ColumnNameAttribute>();
+            if (attribute == null) return;
+
+            if (_fieldNameMap.ContainsKey(attribute.ColumnName))
+            {
+                Debug.LogError($"{typeof(T).Name} duplicate RowName at {fieldInfo.Name}. Origin {_fieldNameMap[attribute.ColumnName].Name}");
+                return;
+            }
+
+            _fieldNameMap.Add(attribute.ColumnName, fieldInfo);
         }
 
         private void LoadParserMethods(Type parseMethodsLibrary)

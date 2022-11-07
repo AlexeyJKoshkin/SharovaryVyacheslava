@@ -18,6 +18,6 @@ namespace RoyalAxe.CoreLevel
     public interface ILevelWaveLoader : ILevelWaveProvider
     {
         bool NextWave();
-        void InitWaves(IReadOnlyList<LevelGeneratorSettings> infrastructurePackLevels);
+        void Init(ICoreLevelDataInfrastructure levelData);
     }
 }

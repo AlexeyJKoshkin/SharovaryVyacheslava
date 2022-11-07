@@ -13,6 +13,18 @@ namespace Core.Parser
             _typesParsers.Add(typeof(T), new GenericParser<T>());
             return this;
         }
+        
+        public CompositeGenericParser Bind(Type type)
+        {
+            var parser = Activator.CreateInstance(typeof(GenericParser<>).MakeGenericType(type)) as IGameDataParser;
+            if (parser != null)
+                _typesParsers.Add(type, parser);
+            else
+            {
+                HLogger.LogError($"Error when create GenericParser<> with params {type.Name}");
+            }
+            return this;
+        }
 
         public void UpdateObject(List<ICellValue> cells, object data)
         {
@@ -47,5 +59,7 @@ namespace Core.Parser
         {
             return _typesParsers.Values.Any(o => o.CanRead(rowName));
         }
+
+        
     }
 }

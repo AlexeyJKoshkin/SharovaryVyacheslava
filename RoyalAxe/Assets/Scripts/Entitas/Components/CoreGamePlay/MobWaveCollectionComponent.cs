@@ -33,7 +33,7 @@ namespace RoyalAxe.GameEntitas {
     }
 
     [CoreGamePlay, Event(EventTarget.Self)]
-    public class WaveNumberComponent : IComponent
+    public class LevelNumberComponent : IComponent
     {
         public int Number;
     }
@@ -46,11 +46,7 @@ namespace RoyalAxe.GameEntitas {
     {
     }
 
-    //указательно, что можно начинать спавнить мобов
-    [CoreGamePlay]
-    public class WaveMobReadyComponent : IComponent
-    {
-    }
+
     
     [CoreGamePlay]
     public class WizardShopReadyComponent : IComponent

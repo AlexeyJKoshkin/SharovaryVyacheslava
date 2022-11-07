@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Data.Provider;
+using Core.Parser;
 
 namespace RoyalAxe.LevelBuff
 {
@@ -12,37 +13,50 @@ namespace RoyalAxe.LevelBuff
     [Serializable]
     public class LevelBuffSettingsComposite
     {
-        public FiringBladeBuffSettings FiringBladeBuffSetting = new FiringBladeBuffSettings();
-        public FiringFirecrackersBuffSettings FiringFirecrackersBuffSetting = new FiringFirecrackersBuffSettings();
-        public FloatingShieldsBuffSettings FloatingShieldsBuffSetting = new FloatingShieldsBuffSettings();
-        public HealPlayerLifeBuffSettings HealPlayerLifeBuffSetting = new HealPlayerLifeBuffSettings();
-        public IncreaseCriticalChanceBuffSettings IncreaseCriticalChanceBuffSetting = new IncreaseCriticalChanceBuffSettings();
-        public IncreaseDamageBuffSettings IncreaseDamageBuffSetting = new IncreaseDamageBuffSettings();
-        public IncreasePlayerMaxLifeBuffSettings IncreasePlayerMaxLifeBuffSetting = new IncreasePlayerMaxLifeBuffSettings();
-        public IncreasePlayerSkillSpeedBuffSettings IncreasePlayerSkillSpeedBuffSetting = new IncreasePlayerSkillSpeedBuffSettings();
-        public InfectedBloodBuffSettings InfectedBloodBuffSetting = new InfectedBloodBuffSettings();
-        public RicochetBuffSettings RicochetBuffSetting = new RicochetBuffSettings();
-        
-        public FireAdditionalDamageBuffSettings fireAdditionalDamageBuffSettings = new FireAdditionalDamageBuffSettings();
-        public ColdAdditionalDamageBuffSettings coldAdditionalDamageBuffSettings = new ColdAdditionalDamageBuffSettings();
-        public PoisonAdditionalDamageBuffSettings poisonAdditionalDamageBuffSettings = new PoisonAdditionalDamageBuffSettings();
+        [GoogleSheetPageName]
+        public FiringBladeBuffSettings FiringBladeBuffSettings = new FiringBladeBuffSettings();
+        [GoogleSheetPageName]
+        public FiringFirecrackersBuffSettings FiringFirecrackersBuffSettings = new FiringFirecrackersBuffSettings();
+        [GoogleSheetPageName]
+        public FloatingShieldsBuffSettings FloatingShieldsBuffSettings = new FloatingShieldsBuffSettings();
+        [GoogleSheetPageName]
+        public HealPlayerLifeBuffSettings HealPlayerLifeBuffSettings = new HealPlayerLifeBuffSettings();
+        [GoogleSheetPageName]
+        public IncreaseCriticalChanceBuffSettings IncreaseCriticalChanceBuffSettings = new IncreaseCriticalChanceBuffSettings();
+        [GoogleSheetPageName]
+        public IncreaseDamageBuffSettings IncreaseDamageBuffSettings = new IncreaseDamageBuffSettings();
+        [GoogleSheetPageName]
+        public IncreasePlayerMaxLifeBuffSettings IncreasePlayerMaxLifeBuffSettings = new IncreasePlayerMaxLifeBuffSettings();
+        [GoogleSheetPageName]
+        public IncreasePlayerSkillSpeedBuffSettings IncreasePlayerSkillSpeedBuffSettings = new IncreasePlayerSkillSpeedBuffSettings();
+        [GoogleSheetPageName]
+        public InfectedBloodBuffSettings InfectedBloodBuffSettings = new InfectedBloodBuffSettings();
+        [GoogleSheetPageName]
+        public RicochetBuffSettings RicochetBuffSettings = new RicochetBuffSettings();
+        [GoogleSheetPageName]
+        public FireAdditionalDamageBuffSettings FireAdditionalDamageBuffSettings = new FireAdditionalDamageBuffSettings();
+        [GoogleSheetPageName]
+        public ColdAdditionalDamageBuffSettings ColdAdditionalDamageBuffSettings = new ColdAdditionalDamageBuffSettings();
+        [GoogleSheetPageName]
+        public PoisonAdditionalDamageBuffSettings PoisonAdditionalDamageBuffSettings = new PoisonAdditionalDamageBuffSettings();
+        [GoogleSheetPageName]
         public ChainReactionDamageBuffSettings ChainReactionDamageBuffSettings =new ChainReactionDamageBuffSettings();
 
         public IEnumerable<BaseLevelBuffSettings> AllSettings()
         {
-            yield return FiringBladeBuffSetting;
-            yield return FiringFirecrackersBuffSetting;
-            yield return FloatingShieldsBuffSetting;
-            yield return HealPlayerLifeBuffSetting;
-            yield return IncreaseCriticalChanceBuffSetting;
-            yield return IncreaseDamageBuffSetting;
-            yield return IncreasePlayerMaxLifeBuffSetting;
-            yield return IncreasePlayerSkillSpeedBuffSetting;
-            yield return InfectedBloodBuffSetting;
-            yield return RicochetBuffSetting;
-            yield return fireAdditionalDamageBuffSettings;
-            yield return coldAdditionalDamageBuffSettings;
-            yield return poisonAdditionalDamageBuffSettings;
+            yield return FiringBladeBuffSettings;
+            yield return FiringFirecrackersBuffSettings;
+            yield return FloatingShieldsBuffSettings;
+            yield return RicochetBuffSettings;
+            yield return PoisonAdditionalDamageBuffSettings;
+            yield return ColdAdditionalDamageBuffSettings;
+            yield return FireAdditionalDamageBuffSettings;
+            yield return InfectedBloodBuffSettings;
+            yield return IncreasePlayerSkillSpeedBuffSettings;
+            yield return IncreasePlayerMaxLifeBuffSettings;
+            yield return IncreaseDamageBuffSettings;
+            yield return IncreaseCriticalChanceBuffSettings;
+            yield return HealPlayerLifeBuffSettings;
             yield return ChainReactionDamageBuffSettings;
         }
     }

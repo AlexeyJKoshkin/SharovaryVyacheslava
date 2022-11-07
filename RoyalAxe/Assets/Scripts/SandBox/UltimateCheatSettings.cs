@@ -28,10 +28,6 @@ namespace RoyalAxe.CoreLevel
     {
         public bool EnableCheats;
 
-        [EnableIf("EnableCheats")]
-        [MinValue(1)]
-        public int WaveNumber = 1;
-
         [EnableIf("EnableCheats")] public bool EnableRender = false;
         [EnableIf("EnableCheats")]
         [BoxGroup("Start Level")]

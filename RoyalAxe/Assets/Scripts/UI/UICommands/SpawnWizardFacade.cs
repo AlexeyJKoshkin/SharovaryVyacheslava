@@ -46,7 +46,7 @@ namespace RoyalAxe.CoreLevel
             {
                 Object.Destroy(_currentTrigger.gameObject);
                 Object.Destroy(_currentTrigger);
-                _selectBuffWindowCommand.ExecuteCommand();
+                _selectBuffWindowCommand.ExecuteCommand(OnDoneHandler);
                 
             }
         }

@@ -33,7 +33,6 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                 AddToListData(result.SkillDamage, parser, lvlCells); // Добавили уровень
                 AddToListData(result.RangeConfig, parser, lvlCells);
             }
-
             return result;
         }
     }

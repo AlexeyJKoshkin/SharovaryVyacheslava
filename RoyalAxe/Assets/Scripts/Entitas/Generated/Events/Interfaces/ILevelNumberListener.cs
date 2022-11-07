@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IWaveNumberListener {
-    void OnWaveNumber(CoreGamePlayEntity entity, int number);
+public interface ILevelNumberListener {
+    void OnLevelNumber(CoreGamePlayEntity entity, int number);
 }

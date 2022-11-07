@@ -12,13 +12,13 @@ namespace RoyalAxe.CoreLevel {
 
         public WizardShopSettings GetByLevel(int wizardLevel)
         {
+            if (wizardLevel <= 0) return null;
             wizardLevel--; // уровнь всегда на 1 больше чем индекс
             if (wizardLevel < Settings.Count)
             {
                 return Settings[wizardLevel];
             }
-
-            return new WizardShopSettings();
+            return null;
         }
     }
 }

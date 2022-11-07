@@ -33,14 +33,11 @@ namespace Core.Launcher
         protected override void OnEnterState()
         {
             _behaviour = LevelCreation.CreateLevel();
-
-            /*_mobAtLevelDirector.StartLevel(indfrastructure);
-            _mobAtLevelDirector.StartWaveImmediate();*/
-
             //по хорошему надо ждать анимации, всякое такое
             //стейт начал работать
 
             //  _axeSceneDependenciesConnector.EnterState(this);   
+            LevelCreation.StartLevel();
         }
 
         protected override void OnExitState()

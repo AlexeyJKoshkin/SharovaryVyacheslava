@@ -12,7 +12,6 @@ namespace RoyalAxe.LevelBuff
 
     public class FireAdditionalDamageBuffSettings : AdditionalDamageBuffSettings
     {
-        
         public override DamageType DamageTypeType { get; } = DamageType.Fire;
 
         public FireAdditionalDamageBuffSettings() : base(LevelBuffType.FireAdditionDamage)
