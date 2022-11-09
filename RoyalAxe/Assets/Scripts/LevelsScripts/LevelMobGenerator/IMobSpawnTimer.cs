@@ -2,20 +2,19 @@ using RoyalAxe.EntitasSystems.TimerUtility;
 
 namespace RoyalAxe.CoreLevel 
 {
-    public interface IMobSpawnTimer
+    public interface IMobSpawnFacade
     {
-        void StopMobTimer();
-        void ContinueMobTimer();
-        void StartMobTimer();
+        void StopSpawn();
+        void StartSpawnMob();
     }
 
-    public class MobSpawnTimer : IMobSpawnTimer, IDoneTimerListener 
+    public class MobSpawnFacade : IMobSpawnFacade,IDoneTimerListener
     {
         private readonly ILevelWaveProvider _waveProvider;
         private readonly IMobSpawnOperation _mobSpawnOperation;
         private readonly IRATimer _spawnCooldownTimer;
         
-        public MobSpawnTimer(ITimerFactory timerFactory, ILevelWaveProvider waveProvider, IMobSpawnOperation mobSpawnOperation)
+        public MobSpawnFacade(ITimerFactory timerFactory, ILevelWaveProvider waveProvider, IMobSpawnOperation mobSpawnOperation)
         {
             _waveProvider = waveProvider;
             _mobSpawnOperation = mobSpawnOperation;
@@ -23,7 +22,12 @@ namespace RoyalAxe.CoreLevel
             _spawnCooldownTimer.AddDoneHandler(this);
         }
 
-        public void StopMobTimer()
+        void IDoneTimerListener.OnDoneTimer(GameRootLoopEntity entity)
+        {
+            _mobSpawnOperation.SpawnMobs();
+        }
+        
+        void StopMobTimer()
         {
             _spawnCooldownTimer.IsRunning = false;
         }
@@ -33,14 +37,22 @@ namespace RoyalAxe.CoreLevel
             _spawnCooldownTimer.IsRunning = true;
         }
 
-        public void StartMobTimer()
+
+        public void StopSpawn()
         {
-            _spawnCooldownTimer.Run(_waveProvider.SpawnCooldown);
+            StopMobTimer();
+            
         }
 
-        public void OnDoneTimer(GameRootLoopEntity entity)
+        public void StartSpawnMob()
         {
-            _mobSpawnOperation.SpawnMobs();
+            _spawnCooldownTimer.Run(_waveProvider.SpawnCooldown);; // запускаем таймер
+            _mobSpawnOperation.SpawnMobs();  // первую волну спавним на старте
+        }
+
+        public void PauseSpawn()
+        {
+            StopMobTimer();
         }
     }
 }

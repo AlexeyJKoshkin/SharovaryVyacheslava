@@ -53,7 +53,7 @@ namespace Core
             Container.RegisterInstance(_coreMapSettings);
             
             Container.Register<MobSpawnOperation>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<MobSpawnTimer>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<MobSpawnFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<WaveLevelSwitcher>(Lifetime.Singleton).AsImplementedInterfaces();
 
         

@@ -21,7 +21,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             var operation = currentUtility.ConfigOperation;
             LevelBuffSettingsComposite current = new LevelBuffSettingsComposite();
             _dataParser.Load(current,allPages);
-            operation.Save(current);
+            operation.Save<LevelBuffSettingsComposite>(current);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace RoyalAxe.LevelBuff
 
             bool CheckCanReturn(ILevelBuff buff) // возращаем только не текущий баф и одноразовый
             {
-                return buff != selectedBuff && buff.IsSingle;
+                return buff != null && buff != selectedBuff && buff.IsSingle;
             }
 
             _cashed = null;

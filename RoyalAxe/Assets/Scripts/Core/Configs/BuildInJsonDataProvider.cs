@@ -9,6 +9,7 @@ namespace RoyalAxe.Configs
         public string WizardLevelText => GetText(_wizardShop);
         public string UnitStatText => GetText(_unitStatCollection);
         public string LevelDataText => GetText(_levelsData);
+        public string LevelBufSettings => GetText(_levelBuffData);
 
         [SerializeField] private TextAsset _weaponSkill;
         [SerializeField] private TextAsset _wizardShop;
@@ -16,6 +17,7 @@ namespace RoyalAxe.Configs
         [SerializeField] private TextAsset _unitStatCollection;
 
         [SerializeField] private TextAsset _levelsData;
+        [SerializeField] private TextAsset _levelBuffData;
         
         private string GetText(TextAsset asset)
         {

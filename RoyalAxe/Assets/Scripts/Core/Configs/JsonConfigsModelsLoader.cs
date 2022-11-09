@@ -43,34 +43,13 @@ namespace Core.Configs
             SaveTo<T>(json);
         }
 
-        public void Save<T>(T data) where T : class, IDataObject
+        public void Save<T>(T data)
         {
             var json = data == null ? "{}" : _jsonConverter.SerializeObject(data);
             SaveTo<T>(json);
         }
 
-        public void Save(object data)
-        {
-            string json = null;
-            if (data is IDataObject)
-            {
-                json = _jsonConverter.SerializeObject(data);
-            }
-
-            if (data is IEnumerable)
-            {
-                json = _jsonConverter.SerializeObject(data);
-            }
-
-            if (string.IsNullOrEmpty(json))
-            {
-                return;
-            }
-
-            SaveTo(data.GetType(), json);
-        }
-        
-        private void SaveTo<T>(string json) where T : class, IDataObject
+        private void SaveTo<T>(string json)
         {
             SaveTo(typeof(T), json);
         }

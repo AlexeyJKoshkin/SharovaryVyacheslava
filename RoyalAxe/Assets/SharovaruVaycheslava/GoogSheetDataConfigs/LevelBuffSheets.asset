@@ -19,29 +19,29 @@ MonoBehaviour:
   - PageName: ColdAdditionalDamageBuffSettings
     FolderState: 10
   - PageName: FireAdditionalDamageBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: PoisonAdditionalDamageBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: FiringBladeBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: FiringFirecrackersBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: FloatingShieldsBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: HealPlayerLifeBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: IncreaseCriticalChanceBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: IncreaseDamageBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: IncreasePlayerMaxLifeBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: IncreasePlayerSkillSpeedBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: IncreasePlayerSkillUsageBuffSettings
-    FolderState: 10
+    FolderState: 2
   - PageName: InfectedBloodBuffSettings
-    FolderState: 10
+    FolderState: 2
   references:
     version: 1
     00000000:

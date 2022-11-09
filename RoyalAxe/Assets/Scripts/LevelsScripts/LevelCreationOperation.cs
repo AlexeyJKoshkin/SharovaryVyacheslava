@@ -1,3 +1,4 @@
+using Core;
 using FluentBehaviourTree;
 
 namespace RoyalAxe.CoreLevel
@@ -19,23 +20,22 @@ namespace RoyalAxe.CoreLevel
         private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
         private readonly ILevelWaveLoader _levelWaveProvider;
         private readonly CoreGameBehaviourNode _coreGameBehaviourNode;
-        private readonly IMobSpawnOperation _mobSpawnOperation;
-        private readonly IMobSpawnTimer _mobSpawnTimer;
+        private readonly IMobSpawnFacade _mobSpawnFacade;
         private readonly IPlayerCoreGameFacade _playerCoreGameFacade;
 
         public LevelCreationOperation(ICoreLevelBuilder coreLevelBuilder,
                                       ICoreLevelDataInfrastructure coreLevelDataInfrastructure,
                                       CoreGameBehaviourNode coreGameBehaviourNode,
-                                      IMobSpawnOperation mobSpawnOperation,
-                                      IMobSpawnTimer mobSpawnTimer,
+                                      
+                                      IMobSpawnFacade mobSpawnFacade,
                                       IPrepareGameUICommand prepareGameUiCommand,
                                       ILevelWaveLoader levelWaveProvider, IPlayerCoreGameFacade playerCoreGameFacade)
         {
             _coreLevelBuilder            = coreLevelBuilder;
             _coreLevelDataInfrastructure = coreLevelDataInfrastructure;
             this._coreGameBehaviourNode  = coreGameBehaviourNode;
-            _mobSpawnOperation = mobSpawnOperation;
-            _mobSpawnTimer = mobSpawnTimer;
+            
+            _mobSpawnFacade = mobSpawnFacade;
 
             _prepareGameUiCommand = prepareGameUiCommand;
             _levelWaveProvider    = levelWaveProvider;
@@ -45,13 +45,14 @@ namespace RoyalAxe.CoreLevel
         public void StartLevel()
         {
             _levelWaveProvider.NextWave(); // по факту грузится первый уровень
-            _mobSpawnTimer.StartMobTimer();// запускаем таймер
-            _mobSpawnOperation.SpawnMobs();// первую волну спавним на старте
+            _mobSpawnFacade.StartSpawnMob();
+            
 
         }
 
         IBehaviourTreeNode ILevelCreation.CreateLevel()
         {
+            HLogger.LogCoreLevel($"CreateLevel {_coreLevelDataInfrastructure.ToString()}");
             // создаем карту
             _coreLevelBuilder.BuildLevel(_coreLevelDataInfrastructure);
             // создаем все остальное (спавнер мобов, карту)

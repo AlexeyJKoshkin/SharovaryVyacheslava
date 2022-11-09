@@ -2,6 +2,7 @@
 using Core.Configs;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.CoreLevel;
+using RoyalAxe.LevelBuff;
 
 namespace RoyalAxe.Configs
 {
@@ -19,6 +20,7 @@ namespace RoyalAxe.Configs
             if (typeof(T) == typeof(LevelGeneratorSettings)) return _buildInJsonDataProvider.LevelDataText;
             if (typeof(T) == typeof(WeaponsSkillConfigDef)) return _buildInJsonDataProvider.WeaponSkillText;
             if (typeof(T) == typeof(WizardLevelCollection)) return _buildInJsonDataProvider.WizardLevelText;
+            if (typeof(T) == typeof(LevelBuffSettingsComposite)) return _buildInJsonDataProvider.LevelBufSettings;
 
             HLogger.LogError($"Not Found json Asset {typeof(T).Name}");
             return null;

@@ -16,3 +16,4 @@ MonoBehaviour:
   _wizardShop: {fileID: 4900000, guid: 06a679502d049fb46aa9f01be26c93ce, type: 3}
   _unitStatCollection: {fileID: 4900000, guid: 347545ff86077fd47a41452b59f812bb, type: 3}
   _levelsData: {fileID: 4900000, guid: d731c0379f4af08449272135878725f0, type: 3}
+  _levelBuffData: {fileID: 4900000, guid: 5e39710528208c74686be8d666ccd947, type: 3}

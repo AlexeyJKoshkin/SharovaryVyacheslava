@@ -23,8 +23,9 @@ namespace RoyalAxe.CoreLevel
         {
             add
             {
-                _onFinishScenario += value;
                 _onFinishScenario -= value;
+                _onFinishScenario += value;
+                
             }
             remove { _onFinishScenario -= value; }
         }

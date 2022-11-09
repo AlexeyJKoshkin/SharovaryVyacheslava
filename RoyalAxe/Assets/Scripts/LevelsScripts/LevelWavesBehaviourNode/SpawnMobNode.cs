@@ -7,13 +7,13 @@ namespace RoyalAxe.CoreLevel
     public class SpawnMobNode : SequenceNode
     {
         private readonly CoreGamePlayEntity _coreGameState;
-        private readonly IMobSpawnOperation _mobSpawnOperation;
+        private readonly IMobSpawnFacade _mobSpawnFacade;
         
        public SpawnMobNode(CoreGamePlayContext coreGameState,
-                            IMobSpawnOperation mobSpawnOperation) : base("Начинаем спавн мобов")
+                           IMobSpawnFacade mobSpawnOperation) : base("Начинаем спавн мобов")
         {
             _coreGameState      = coreGameState.levelWaveEntity;
-            _mobSpawnOperation = mobSpawnOperation;
+            _mobSpawnFacade = mobSpawnOperation;
 
             new BehaviourTreeBuilder().Sequence(this)
                                       .Condition("Можно ли начать спавн,", CheckCanSpawn)
@@ -27,7 +27,7 @@ namespace RoyalAxe.CoreLevel
 
         private BehaviourTreeStatus DoSpawn(TimeData arg)
         {
-            _mobSpawnOperation.SpawnMobs();
+            _mobSpawnFacade.StartSpawnMob();
             return BehaviourTreeStatus.Success;
         }
     }

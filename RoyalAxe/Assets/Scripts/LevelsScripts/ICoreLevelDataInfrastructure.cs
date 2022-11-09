@@ -18,6 +18,11 @@ namespace RoyalAxe.CoreLevel
         public int LevelNumber { get; set; }
         public BiomeScriptableDef BiomeDef { get; set; }
 
+        public override string ToString()
+        {
+            return $"{BiomeDef?.UniqueID} -> {LevelNumber} Pack {PackLevels?.Count}";
+        }
+
         /*public CoreLevelDataInfrastructure(List<LevelGeneratorSettings> levels, BiomeScriptableDef biomeDef)
         {
             PackLevels = levels;

@@ -16,5 +16,5 @@ MonoBehaviour:
   EnableRender: 1
   StartCustomLevel: 1
   LevelParams:
-    BiomeType: 1
+    BiomeType: 0
     StartLevel: 2

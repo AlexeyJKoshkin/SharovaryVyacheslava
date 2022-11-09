@@ -8,20 +8,22 @@ namespace RoyalAxe.CoreLevel
         private readonly IWizardAtLevelFacade _wizardAtLevelFacade;
         private readonly ILevelWaveLoader _levelWaveLoader;
         private readonly CoreGamePlayEntity _coreGamePlay;
-        private readonly IMobSpawnTimer _mobSpawnTimer;
+        private readonly IRoyalAxeCoreMap _royalAxeCoreMap;
+        private readonly IMobSpawnFacade _mobSpawnFacade;
 
         public LoadNextWaveNode(CoreGamePlayContext coreGamePlay,
                                 IWizardAtLevelFacade wizardAtLevelFacade,
-                                ILevelWaveLoader levelWaveLoader, IMobSpawnTimer mobSpawnTimer) : base("Грузим следующий волну")
+                                ILevelWaveLoader levelWaveLoader, IMobSpawnFacade mobSpawnFacade, IRoyalAxeCoreMap royalAxeCoreMap) : base("Грузим следующий волну")
         {
             _wizardAtLevelFacade = wizardAtLevelFacade;
             _levelWaveLoader = levelWaveLoader;
-            _mobSpawnTimer = mobSpawnTimer;
+            _mobSpawnFacade = mobSpawnFacade;
+            _royalAxeCoreMap = royalAxeCoreMap;
             _coreGamePlay = coreGamePlay.levelWaveEntity;
 
             new BehaviourTreeBuilder().Sequence(this)
                                       .Condition("Волна закончилась?",
-                                                 dt => _coreGamePlay.isWaveFinished)
+                                                 dt => _coreGamePlay.isWaveFinished && _royalAxeCoreMap.CurrentMobAmount == 0)
                                       .Do("NextWave", TryLoadNext)
                                       .Condition("Check Has Wizard",
                                                  dt => _coreGamePlay.hasWizardShopReady)
@@ -38,7 +40,7 @@ namespace RoyalAxe.CoreLevel
 
         private BehaviourTreeStatus TryLoadNext(TimeData arg)
         {
-            _mobSpawnTimer.StopMobTimer();
+            _mobSpawnFacade.StopSpawn();
             if (_levelWaveLoader.NextWave()) // пробуем загрузить следующую волну один раз
             {
                 HLogger.LogError("Load Next wave");

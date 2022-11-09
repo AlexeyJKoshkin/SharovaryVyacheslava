@@ -13,5 +13,33 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   _type: 0
-  _chunks: []
-  Lines: []
+  _chunks:
+  - {fileID: 4533351946129732577, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 1719168916856003772, guid: 1da5c752c0546304a9d54d4d9407a215, type: 3}
+  - {fileID: 4533351946129732577, guid: b5a63cdfb1736534d8d3704480a59e4b, type: 3}
+  - {fileID: 3190558164888896387, guid: a3d95740a57909740b358a153a6d69a3, type: 3}
+  - {fileID: 4037695268260099114, guid: a5049e3e146c87c4a805e998f567d715, type: 3}
+  - {fileID: 1353833938699935517, guid: c27f83cfe48b06941a996a11dccd44bd, type: 3}
+  - {fileID: 5113476195565501132, guid: 7a4641ab6ebe0dc4b916bd5ca328a6bf, type: 3}
+  Lines:
+  - Size: 2
+    MobId:
+    - Gunslinger_1
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Swordsman_1
+    - Swordsman_2
+    - Swordsman_3
+  - Size: 2
+    MobId:
+    - Gunslinger_1

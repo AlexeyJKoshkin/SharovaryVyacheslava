@@ -28,6 +28,11 @@ namespace Core
             Debug.Log($"[INFO] {message}");
         }
 
+        public static void LogCoreLevel(object message)
+        {
+            Debug.Log($"[CoreLevel] {message}");
+        }
+
         public static void TempLog(object message)
         {
             Debug.Log($"[TempLog] {message}");

@@ -1,3 +1,6 @@
+using Core;
+using UnityEngine;
+
 namespace RoyalAxe.CoreLevel {
     /// <summary>
     /// Штука которая умеет заспавнить мобов по текущим параметрам
@@ -26,6 +29,7 @@ namespace RoyalAxe.CoreLevel {
             SpawnWhileCan(mobGeneratorHelper);
             var deltaMob = _levelWaveProvider.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
             if (deltaMob <= 0) return;
+          
             _coreGamePlay.levelWaveEntity.isWaveFinished = true; // т.к. надо генерить еще мобов, а мобы закончились. значит волна закончена
         }
 
@@ -37,12 +41,14 @@ namespace RoyalAxe.CoreLevel {
              2. Мобов всегда генерируем пачкой. за 1 кадр . для этого мобов надо предсоздать в пуле. 
             */
             var needMob = _levelWaveProvider.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
-            while (needMob > 0 && _levelWaveProvider.HasMob) // создаем мобов пока можем
+            int counter = 0;
+            while (counter < needMob && _levelWaveProvider.HasMob) // создаем мобов пока можем
             {
                 var mobData = _levelWaveProvider.GenerateMobData();
                 mobGeneratorHelper.GenerateEnemy(mobData.MobId, mobData.Level);
-                needMob--;
+                counter++;
             }
+            HLogger.LogCoreLevel($"Need {needMob} Created {counter}");
         }
     }
 }

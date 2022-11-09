@@ -11,8 +11,7 @@ namespace Core.Configs
 
     public interface IJsonConfigModelsOperation : IJsonConfigsModelsLoader
     {
-        void Save<T>(IEnumerable<T> data) where T : class, IDataObject;
-        void Save<T>(T data) where T : class, IDataObject;
-        void Save(object data);
+        void Save<T>(IEnumerable<T> data);
+        void Save<T>(T data);
     }
 }
