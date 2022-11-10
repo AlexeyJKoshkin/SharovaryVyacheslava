@@ -9,5 +9,6 @@ namespace RoyalAxe.GameEntitas
         UnitsView BuildMobView(UnitsEntity unitsEntity, Vector2 pos);
         UnitsView BuildPlayerView(UnitsEntity player);
         BosonView BuildBosonView(UnitsEntity boson, UnitConfigDef bosonViewConfig, Vector3 pos);
+        WizardShopUnitView BuildWizardView(UnitsEntity wizardShop);
     }
 }

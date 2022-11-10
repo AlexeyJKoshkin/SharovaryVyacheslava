@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869ab2d6207848c0b2a87c06b9a2330f, type: 3}
-  m_Name: Ultimate Cheat Settings
+  m_Script: {fileID: 11500000, guid: 8a69e603fd474e3d9080ac142c90ca1f, type: 3}
+  m_Name: WizardShop
   m_EditorClassIdentifier: 
-  EnableCheats: 1
-  EnableRender: 0
-  StartCustomLevel: 1
-  LevelParams:
-    BiomeType: 0
-    StartLevel: 2
+  Prefab: {fileID: -3212228001255818352, guid: 5032d2a2c7ff70a4ab9df6bd67ab033f, type: 3}

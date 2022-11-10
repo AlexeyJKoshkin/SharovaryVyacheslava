@@ -1,9 +1,11 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using RoyalAxe.CoreLevel;
 using UnityEngine;
 
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.Units
 {
-    public class WizardTrigger : MonoBehaviour, IBound
+    public class WizardShopUnitView : BaseUnitView, IBound
     {
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
@@ -15,6 +17,10 @@ namespace RoyalAxe.CoreLevel
         private void OnTriggerEnter2D(Collider2D other)
         {
             OnEnterTriggerEvent?.Invoke(other);
+        }
+        public override IEnumerable<IViewEntityBehaviour> EntityBehaviours()
+        {
+            yield break;
         }
     }
 }

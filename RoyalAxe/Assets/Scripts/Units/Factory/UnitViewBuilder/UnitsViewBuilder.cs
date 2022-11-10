@@ -6,6 +6,7 @@ using GameKit;
 using RoyalAxe.Configs;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.Units;
+using RoyalAxe.Units.Player;
 using UnityEngine;
 
 namespace RoyalAxe.GameEntitas
@@ -14,31 +15,24 @@ namespace RoyalAxe.GameEntitas
     {
         private readonly IDataStorage _dataStorage;
         private readonly IGroup<CoreGamePlayEntity> _allChunksGroup;
-        private IUltimateCheatAdapter _ultimateCheatSettings;
+        private readonly IUltimateCheatAdapter _ultimateCheatSettings;
+        private readonly ILevelPositionCalculation _levelPositionCalculation;
 
-        public UnitsViewBuilder(IDataStorage dataStorage, IContext<CoreGamePlayEntity> coreGamePlayContext, IUltimateCheatAdapter ultimateCheatSettings)
+        public UnitsViewBuilder(IDataStorage dataStorage,
+                                IContext<CoreGamePlayEntity> coreGamePlayContext,
+                                IUltimateCheatAdapter ultimateCheatSettings,
+                                ILevelPositionCalculation levelPositionCalculation)
         {
-            _dataStorage    = dataStorage;
+            _dataStorage = dataStorage;
             _ultimateCheatSettings = ultimateCheatSettings;
+            _levelPositionCalculation = levelPositionCalculation;
             _allChunksGroup = coreGamePlayContext.GetGroup(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayComponentsLookup.ChunkView));
         }
 
         public UnitsView BuildPlayerView(UnitsEntity unitsEntity)
         {
             var playerHeroConfig = _dataStorage.First<PlayerCharacterConfigDef>();
-            if (playerHeroConfig == null)
-            {
-                HLogger.LogError($"нет Конфига игрока {unitsEntity.unit.Id}");
-                return null;
-            }
-
-            if (playerHeroConfig.Prefab == null)
-            {
-                HLogger.LogError($"нет префаба игрока {unitsEntity.unit.Id}");
-                return null;
-            }
-
-            return Build(playerHeroConfig.Prefab, unitsEntity) as UnitsView;
+            return TryBuild<PlayerUnitView, PlayerCharacterConfigDef>(playerHeroConfig.UniqueID,unitsEntity);
         }
 
         public BosonView BuildBosonView(UnitsEntity boson, UnitConfigDef bosonViewConfig, Vector3 pos)
@@ -55,11 +49,26 @@ namespace RoyalAxe.GameEntitas
             return null;
         }
 
+        public WizardShopUnitView BuildWizardView(UnitsEntity wizardShop)
+        {
+            var npcUnitConfigDef = _dataStorage.First<NPCUnitConfigDef>();
+            var view = TryBuild<WizardShopUnitView, NPCUnitConfigDef>(npcUnitConfigDef.UniqueID, wizardShop);
+
+            if (view != null)
+            {
+                var pos = _levelPositionCalculation.CalcWizardPosition(view);
+                view.RootTransform.position = pos;
+            }
+
+            return view;
+        }
+
         public UnitsView BuildMobView(UnitsEntity unitsEntity, Vector2 pos)
         {
             var view = BuildEnemyView(unitsEntity, unitsEntity.unit.Id);
             view.RootTransform.position = pos;
             var chunk = _allChunksGroup.AsEnumerable().FirstOrDefault(o => o.chunkBounds.Contains(pos));
+
             if (chunk != null)
             {
                 view.RootTransform.SetParent(chunk.chunkView.RootTransform, true);
@@ -70,7 +79,14 @@ namespace RoyalAxe.GameEntitas
 
         private UnitsView BuildEnemyView(UnitsEntity unit, string viewId)
         {
-            var unityConfig = _dataStorage.ById<UnitConfigDef>(viewId);
+            return TryBuild<UnitsView, UnitConfigDef>(viewId, unit);
+        }
+
+        private TUnitsView TryBuild<TUnitsView, TConfig>(string viewId, UnitsEntity unit)
+            where TConfig : BaseUnitConfig where TUnitsView : BaseUnitView
+        {
+            var unityConfig = _dataStorage.ById<TConfig>(viewId);
+
             if (unityConfig == null)
             {
                 HLogger.LogError($"нет Конфига юнита {viewId}");
@@ -83,7 +99,7 @@ namespace RoyalAxe.GameEntitas
                 return null;
             }
 
-            if (unityConfig.Prefab is UnitsView unitView)
+            if (unityConfig.Prefab is TUnitsView unitView)
             {
                 return Build(unitView, unit);
             }
@@ -92,15 +108,13 @@ namespace RoyalAxe.GameEntitas
             return null;
         }
 
-
         private T Build<T>(T prefab, UnitsEntity e) where T : BaseUnitView
         {
             var result = Object.Instantiate(prefab);
             result.EntityBehaviours().Where(o => null != o).ForEach(b => b.InitEntity(e));
             e.AddUnitsView(result);
-            
-            if(!_ultimateCheatSettings.EnableRender)
-                result.GetComponentsInChildren<Renderer>().ForEach(r=> r.enabled = false);
+
+            if (!_ultimateCheatSettings.EnableRender) result.GetComponentsInChildren<Renderer>().ForEach(r => r.enabled = false);
             return result;
         }
     }

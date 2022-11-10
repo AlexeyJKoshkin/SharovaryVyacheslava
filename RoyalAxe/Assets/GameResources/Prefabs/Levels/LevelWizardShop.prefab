@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3603281551913210776}
-  - component: {fileID: 7534363666553023441}
   - component: {fileID: 4058724193145709863}
+  - component: {fileID: -3212228001255818352}
   m_Layer: 0
   m_Name: LevelWizardShop
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7534363666553023441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6577958075714201529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b704fff42524d24b85b58505db944f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 8921590949640586846}
 --- !u!61 &4058724193145709863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -72,6 +59,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-3212228001255818352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577958075714201529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d4b461a28549d0a2a41bd9777cbab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <RootTransform>k__BackingField: {fileID: 3603281551913210776}
+  _spriteRenderer: {fileID: 8921590949640586846}
 --- !u!1 &6798679076396807328
 GameObject:
   m_ObjectHideFlags: 0

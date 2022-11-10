@@ -35,7 +35,6 @@ namespace Core
             Container.Register<SpawnMobNode>(Lifetime.Singleton).AsSelf();
             Container.Register<LoadNextWaveNode>(Lifetime.Singleton).AsSelf();
             Container.Register<CoreGameBehaviourNode>(Lifetime.Singleton).AsSelf();
-            
         }
 
         private void InstallMap()
@@ -56,15 +55,10 @@ namespace Core
             Container.Register<MobSpawnFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<WaveLevelSwitcher>(Lifetime.Singleton).AsImplementedInterfaces();
 
-        
-
         }
 
         private void InstallWizardShop()
         {
-            
-            Container.Register<WizardViewBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-        
         }
     }
 }

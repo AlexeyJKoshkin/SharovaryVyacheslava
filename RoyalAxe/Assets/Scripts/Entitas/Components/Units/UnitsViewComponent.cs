@@ -12,6 +12,11 @@ namespace RoyalAxe.GameEntitas {
     public class UnitsViewComponent : BaseViewComponent<BaseUnitView>
     {
         public Transform RootTransform => View.RootTransform;
+
+        public TView Get<TView>() where TView : BaseUnitView
+        {
+            return View as TView;
+        }
     }
     
     [Units]

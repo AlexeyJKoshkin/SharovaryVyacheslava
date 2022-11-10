@@ -1,4 +1,5 @@
 ﻿using Core.UserProfile;
+using RoyalAxe.Units;
 using UnityEngine;
 
 namespace RoyalAxe.GameEntitas
@@ -26,6 +27,13 @@ namespace RoyalAxe.GameEntitas
         {
             var player = _entityFactory.CreatePlayer(selectedHero, selectedWeapon);
             _unitViewBuilder.BuildPlayerView(player);
+        }
+
+        public UnitsEntity CreateWizardShowUnit()
+        {
+            var wizardShop = _entityFactory.CreateWizardUnit();
+            _unitViewBuilder.BuildWizardView(wizardShop);
+            return wizardShop;
         }
     }
 }

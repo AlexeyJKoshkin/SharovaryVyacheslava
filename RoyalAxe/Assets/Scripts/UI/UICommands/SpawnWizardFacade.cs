@@ -2,6 +2,7 @@
 using Core.Data.Provider;
 using RoyalAxe.EntitasSystems;
 using RoyalAxe.GameEntitas;
+using RoyalAxe.Units;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,17 +10,17 @@ namespace RoyalAxe.CoreLevel
 {
     public class SpawnWizardFacade : IWizardAtLevelFacade
     {
-        private readonly IWizardViewBuilder _wizardViewBuilder;
+        private readonly IUnitsBuilderFacade _wizardViewBuilder;
 
         private readonly IShowSelectBuffWindowCommand _selectBuffWindowCommand;
 
         private readonly IUnitColliderDataBase _unitColliderDataBase;
 
-        private WizardTrigger _currentTrigger;
+        private UnitsEntity _wizard;
 
         private Action _callback;
 
-        public SpawnWizardFacade(IWizardViewBuilder wizardViewBuilder,
+        public SpawnWizardFacade(IUnitsBuilderFacade wizardViewBuilder,
                                  IUnitColliderDataBase unitColliderDataBase,
                                  IShowSelectBuffWindowCommand selectBuffScenario)
         {
@@ -34,8 +35,9 @@ namespace RoyalAxe.CoreLevel
             //инстанциируем его в мир
             // подписываемся
             _callback = onDoneCallback;
-            _currentTrigger                     =  _wizardViewBuilder.CreateWizard();
-            _currentTrigger.OnEnterTriggerEvent += WizardOnOnEnterTriggerEvent;
+            
+            _wizard = _wizardViewBuilder.CreateWizardShowUnit();
+            _wizard.unitsView.Get<WizardShopUnitView>().OnEnterTriggerEvent += WizardOnOnEnterTriggerEvent;
         }
 
         private void WizardOnOnEnterTriggerEvent(Collider2D collider)
@@ -44,10 +46,8 @@ namespace RoyalAxe.CoreLevel
             if (unit == null) return;
             if (unit.isPlayer)
             {
-                Object.Destroy(_currentTrigger.gameObject);
-                Object.Destroy(_currentTrigger);
+                _wizard.isDestroyUnit = true;
                 _selectBuffWindowCommand.ExecuteCommand(OnDoneHandler);
-                
             }
         }
 

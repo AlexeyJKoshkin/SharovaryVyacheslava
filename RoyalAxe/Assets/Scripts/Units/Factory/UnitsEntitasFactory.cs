@@ -29,6 +29,14 @@ namespace RoyalAxe.GameEntitas
             return player;
         }
 
+        public UnitsEntity CreateWizardUnit()
+        {
+            var entity = Context.CreateEntity();
+            entity.AddMoveSpeed(new CharacterStatValue(){Value = 3, MaxValue = 10});
+            entity.AddMovingToPoint(new FollowUnitPointAdapter(Context.playerEntity));
+            return entity;
+        }
+
         public UnitsEntity CreateEnemyMobUnit(string id, byte level = 1)
         {
             var mob = CreateUnit(id, level);
