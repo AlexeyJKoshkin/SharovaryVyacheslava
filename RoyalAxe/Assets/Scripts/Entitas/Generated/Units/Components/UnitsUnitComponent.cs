@@ -11,7 +11,7 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.UnitComponent unit { get { return (RoyalAxe.GameEntitas.UnitComponent)GetComponent(UnitsComponentsLookup.Unit); } }
     public bool hasUnit { get { return HasComponent(UnitsComponentsLookup.Unit); } }
 
-    public void AddUnit(string newId, byte newLevel) {
+    public void AddUnit(string newId, int newLevel) {
         var index = UnitsComponentsLookup.Unit;
         var component = (RoyalAxe.GameEntitas.UnitComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitComponent));
         component.Id = newId;
@@ -19,7 +19,7 @@ public partial class UnitsEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceUnit(string newId, byte newLevel) {
+    public void ReplaceUnit(string newId, int newLevel) {
         var index = UnitsComponentsLookup.Unit;
         var component = (RoyalAxe.GameEntitas.UnitComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitComponent));
         component.Id = newId;

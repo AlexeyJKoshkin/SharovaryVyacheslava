@@ -21,13 +21,13 @@ namespace RoyalAxe.GameEntitas
             _unitDamageApplierFactory = unitDamageApplierFactory;
         }
 
-        public void EquipMobWeapon(UnitsEntity unit, string weaponId, byte weaponLevel)
+        public void EquipMobWeapon(UnitsEntity unit, string weaponId, int weaponLevel)
         {
             var rangeData = EquipWeaponSkill(unit, weaponId, weaponLevel);
             TryAddDefaultGunnerSkill(rangeData, unit);
         }
 
-        public void CreateTestPlayerSkill(UnitsEntity player, string weaponId, byte weaponLevel)
+        public void CreateTestPlayerSkill(UnitsEntity player, string weaponId, int weaponLevel)
         {
             var range       = EquipWeaponSkill(player, weaponId, weaponLevel);
             var playerSkill = CreateWeaponSkill(range, player);
@@ -58,7 +58,7 @@ namespace RoyalAxe.GameEntitas
             skill.AddGunnerMobSkill(mob);
         }
 
-        private SkillConfigDef.RangeParams EquipWeaponSkill(UnitsEntity unit, string weaponId, byte level)
+        private SkillConfigDef.RangeParams EquipWeaponSkill(UnitsEntity unit, string weaponId, int level)
         {
             var weaponData = _storage.ById<WeaponsSkillConfigDef>(weaponId).GetByLevel(level);
             unit.AddUnitEquipWeaponData(weaponData.damage, weaponData.rangeParams, weaponId, level);

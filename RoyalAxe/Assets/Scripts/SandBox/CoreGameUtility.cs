@@ -30,7 +30,7 @@ namespace RoyalAxe.CoreLevel
         private void ClearTimers(GameRootLoopContext contextsGameRootLoop)
         {
             var timers = contextsGameRootLoop.GetGroup(GameRootLoopMatcher.Timer);
-            timers.AsEnumerable().ForEach(e=> e.Destroy());
+            timers.GetEntities().ForEach(e=> e.Destroy());
         }
 
         private void ClearContext(IContext contextUnits)

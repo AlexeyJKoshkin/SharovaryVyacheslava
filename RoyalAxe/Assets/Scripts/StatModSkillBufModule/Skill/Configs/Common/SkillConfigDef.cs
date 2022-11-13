@@ -25,7 +25,7 @@ namespace RoyalAxe.CharacterStat
 
         [SerializeField] public List<RangeParams> RangeConfig = new List<RangeParams>();
 
-        public (Damage damage, RangeParams rangeParams) GetByLevel(byte lvl)
+        public (Damage damage, RangeParams rangeParams) GetByLevel(int lvl)
         {
             lvl--; // уровнь всегда на 1 больше чем индекс
             if (lvl < SkillDamage.Count)

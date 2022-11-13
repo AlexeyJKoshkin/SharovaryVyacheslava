@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ultimate Cheat Settings
   m_EditorClassIdentifier: 
   EnableCheats: 1
-  EnableRender: 0
+  EnableRender: 1
   StartCustomLevel: 1
   LevelParams:
     BiomeType: 0
-    StartLevel: 2
+    StartLevel: 3

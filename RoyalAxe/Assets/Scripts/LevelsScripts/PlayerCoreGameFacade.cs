@@ -14,18 +14,19 @@ namespace RoyalAxe.CoreLevel
         private readonly CoreGamePlayContext _coreGamePlay;
    
         private readonly IUnitsBuilderFacade _unitBuilder;
-        private readonly ICurrentUserProfile _userProfile;
-        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder, ICurrentUserProfile userProfile)
+        private readonly IUserSaveProfileStorage _userSaveProfileStorage;
+        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,  IUserSaveProfileStorage userSaveProfileStorage)
         {
             _coreGamePlay = coreGamePlay;
             _unitBuilder  = unitBuilder;
-            _userProfile  = userProfile;
+            _userSaveProfileStorage = userSaveProfileStorage;
         }
 
         public void CreatePlayer()
         {
-            var selectedHero   = _userProfile.CurrentHeroData;
-            var selectedWeapon = _userProfile.CurrentWeaponData;
+            var current = _userSaveProfileStorage.Current;
+            var selectedHero = current.LoadCurrentHero();
+            var selectedWeapon = current.LoadCurrentWeapon();
             CreateCorePlayer();
             _unitBuilder.CreatePlayer(selectedHero, selectedWeapon);
         }

@@ -22,7 +22,7 @@ namespace Core
 
             BindProgressBuilder();
 
-            Container.Register<CurrentUserProfile>(Lifetime.Singleton).AsImplementedInterfaces();
+         
         }
 
         private void BindProgressBuilder()

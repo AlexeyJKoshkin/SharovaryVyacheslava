@@ -15,9 +15,10 @@ namespace Core.UserProfile
     {
         public DirectoryInfo FolderPath;
 
-        public UserAllHeroesProgress HeroProgress;
+        public UserAllHeroesProgress HeroProgress = new UserAllHeroesProgress();
 
-        public UserAllWeaponsProgress WeaponProgress;
+        public UserAllWeaponsProgress WeaponProgress = new UserAllWeaponsProgress();
+        
 
     }
 }

@@ -11,7 +11,7 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent unitEquipWeaponData { get { return (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)GetComponent(UnitsComponentsLookup.UnitEquipWeaponData); } }
     public bool hasUnitEquipWeaponData { get { return HasComponent(UnitsComponentsLookup.UnitEquipWeaponData); } }
 
-    public void AddUnitEquipWeaponData(RoyalAxe.CharacterStat.SkillConfigDef.Damage newDamage, RoyalAxe.CharacterStat.SkillConfigDef.RangeParams newRange, string newId, byte newLevel) {
+    public void AddUnitEquipWeaponData(RoyalAxe.CharacterStat.SkillConfigDef.Damage newDamage, RoyalAxe.CharacterStat.SkillConfigDef.RangeParams newRange, string newId, int newLevel) {
         var index = UnitsComponentsLookup.UnitEquipWeaponData;
         var component = (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent));
         component.Damage = newDamage;
@@ -21,7 +21,7 @@ public partial class UnitsEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceUnitEquipWeaponData(RoyalAxe.CharacterStat.SkillConfigDef.Damage newDamage, RoyalAxe.CharacterStat.SkillConfigDef.RangeParams newRange, string newId, byte newLevel) {
+    public void ReplaceUnitEquipWeaponData(RoyalAxe.CharacterStat.SkillConfigDef.Damage newDamage, RoyalAxe.CharacterStat.SkillConfigDef.RangeParams newRange, string newId, int newLevel) {
         var index = UnitsComponentsLookup.UnitEquipWeaponData;
         var component = (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent));
         component.Damage = newDamage;

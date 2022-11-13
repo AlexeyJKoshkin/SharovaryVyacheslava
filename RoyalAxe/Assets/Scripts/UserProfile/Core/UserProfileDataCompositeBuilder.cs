@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Core.UserProfile
 {
-    public class UserProfileDataCompositeBuilder : IDataFromJsonBuilder<UserProfileData>
+    public class UserProfileDataCompositeBuilder : IUserProfileBuilder<UserProfileData>
     {
         private readonly IReadOnlyList<IUserProfilePartBuilder<UserProfileData>> _builders;
 

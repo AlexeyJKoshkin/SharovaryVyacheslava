@@ -42,7 +42,7 @@ namespace Core.Launcher
         private void InitUserProfile()
         {
             var currentSave = _userSaveProfileStorage.Current;
-            HLogger.LogInfo($"Total {_userSaveProfileStorage.AllSaves.Count} Current : {currentSave.Name} Path => {currentSave.UserProfileData.FolderPath} ");
+            HLogger.LogInfo($"Total {_userSaveProfileStorage.AllSaves.Count} Current : {currentSave.FolderPath.Name} Path => {currentSave.FolderPath} ");
         }
 
         private void InitData()

@@ -12,7 +12,7 @@ namespace RoyalAxe.GameEntitas
     public class UnitComponent : IComponent
     {
         public string Id;
-        public byte Level;
+        public int Level;
     }
 
     /// <summary>
@@ -57,6 +57,6 @@ namespace RoyalAxe.GameEntitas
         public SkillConfigDef.Damage Damage;     // возможно данные стоит убрать отсюда
         public SkillConfigDef.RangeParams Range; // возможно данные стоит убрать отсюда
         public string Id;
-        public byte Level;
+        public int Level;
     }
 }
