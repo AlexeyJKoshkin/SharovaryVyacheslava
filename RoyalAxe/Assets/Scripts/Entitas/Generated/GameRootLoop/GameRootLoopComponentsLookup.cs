@@ -18,9 +18,13 @@ public static class GameRootLoopComponentsLookup {
     public const int Repeat = 7;
     public const int Timer = 8;
     public const int UpdateSystems = 9;
-    public const int TimerListener = 10;
+    public const int UserCurrentHeroProgress = 10;
+    public const int UserCurrentWeaponProgress = 11;
+    public const int UserLevelsProgress = 12;
+    public const int UserProgress = 13;
+    public const int TimerListener = 14;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "DoneTimerListener",
@@ -33,6 +37,10 @@ public static class GameRootLoopComponentsLookup {
         "Repeat",
         "Timer",
         "UpdateSystems",
+        "UserCurrentHeroProgress",
+        "UserCurrentWeaponProgress",
+        "UserLevelsProgress",
+        "UserProgress",
         "TimerListener"
     };
 
@@ -47,6 +55,10 @@ public static class GameRootLoopComponentsLookup {
         typeof(RoyalAxe.GameEntitas.Timer.RepeatComponent),
         typeof(RoyalAxe.GameEntitas.Timer.TimerComponent),
         typeof(RoyalAxe.GameEntitas.UpdateSystemsComponent),
+        typeof(RoyalAxe.GameEntitas.UserCurrentHeroProgressComponent),
+        typeof(RoyalAxe.GameEntitas.UserCurrentWeaponProgressComponent),
+        typeof(RoyalAxe.GameEntitas.UserCurrentLevelsProgressComponent),
+        typeof(RoyalAxe.GameEntitas.UserProgressComponent),
         typeof(TimerListenerComponent)
     };
 }

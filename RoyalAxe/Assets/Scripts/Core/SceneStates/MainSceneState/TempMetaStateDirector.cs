@@ -1,4 +1,5 @@
-﻿using ProjectUI;
+﻿using Core.UserProfile;
+using ProjectUI;
 using RoyalAxe.CoreLevel;
 namespace Core.Launcher
 {
@@ -13,14 +14,16 @@ namespace Core.Launcher
         private readonly MetaSceneUIView _metaSceneUIView;
         private readonly ISceneLoaderProvider _sceneLoaderProvider;
         private readonly IUltimateCheatAdapter _ultimateCheatAdapter;
+        private GameRootLoopContext _gameRootLoopContext;
 
         private ISceneLoaderHelper _currentSceneLoader;
 
-        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter)
+        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter, GameRootLoopContext gameRootLoopContext)
         {
             _metaSceneUIView = metaSceneUIView;
             _sceneLoaderProvider = sceneLoaderProvider;
             _ultimateCheatAdapter = ultimateCheatAdapter;
+            _gameRootLoopContext = gameRootLoopContext;
         }
 
         public void Initialize()
@@ -36,14 +39,10 @@ namespace Core.Launcher
             _currentSceneLoader = currentSceneLoader;
         }
 
-        private CoreLevelParameters GetLevelParams()
+        private LastLevel GetLevelParams()
         {
             if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
-            return new CoreLevelParameters()
-            {
-                BiomeType = BiomeType.Desert, // по хорошему либо выбирать из меню либо грузить из прогресса
-                StartLevel = 1
-            };
+            return _gameRootLoopContext.userProgressEntity.UserCurrentLevelsProgress.Progress;
         }
 
         public ISceneLoaderHelper GetCurrentSceneLoader()

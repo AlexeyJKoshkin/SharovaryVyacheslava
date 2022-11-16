@@ -1,5 +1,6 @@
 using Core.Data.Provider;
 using Core.Launcher;
+using Core.UserProfile;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
@@ -19,4 +20,6 @@ namespace RoyalAxe.GameEntitas
 
     [GameRootLoop]
     public class PauseableUpdateSystemsComponent : UpdateSystemsComponent { }
+
+ 
 }

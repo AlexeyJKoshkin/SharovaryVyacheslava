@@ -11,50 +11,30 @@ namespace Core.UserProfile
     public interface IUserSaveProfileStorage
     {
         UserProfileData Current { get; }
-       // IReadOnlyCollection<UserProfileData> AllSaves { get; }
-
-       void Load(string name);
-       void SaveCurrent();
-
-       /*UserProfileData CreateNew();
-       UserProfileData GetSave(string folderName = null);*/
+        IReadOnlyCollection<UserProfileData> AllSaves { get; }
     }
 
     public class UserSaveProfileStorage : IUserSaveProfileStorage
     {
-        private readonly UserProfileData _current;
-        private readonly IUserProfileSaveFactory _saveFactory;
-
-
+        public UserProfileData Current => _current;
+        
+        public IReadOnlyCollection<UserProfileData> AllSaves => _saves;
+        private UserProfileData _current;
+        private readonly IUserProfileBuilder<UserProfileData> _saveBuilder;
         private readonly IUserSavePathSettings _savePathSettings;
 
         private readonly List<UserProfileData> _saves = new List<UserProfileData>();
 
-        public UserSaveProfileStorage(IUserSavePathSettings savePathSettings, IUserProfileSaveFactory saveFactory)
+        public UserSaveProfileStorage(IUserSavePathSettings savePathSettings, IUserProfileBuilder<UserProfileData> saveFactory)
         {
             _savePathSettings = savePathSettings;
-            _saveFactory      = saveFactory;
+            _saveBuilder      = saveFactory;
             var root = LoadDirectory();
             foreach (var saveFolder in root.EnumerateDirectories()) GetSave(saveFolder.Name);
-            _current = GetSave("Current");
-          
+            _current = _saves.FirstOrDefault(o => o.IsLastPlayed) ?? FactoryCreateSave("TempCurrent");
         }
 
-
-        public UserProfileData Current => _current;
-        public void SaveCurrent()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IReadOnlyCollection<UserProfileData> AllSaves => _saves;
-
-        public UserProfileData CreateNew()
-        {
-            return GetSave($"Game_{_saves.Count}");
-        }
-
-        public UserProfileData GetSave(string saveFolderName)
+        UserProfileData GetSave(string saveFolderName)
         {
             if (string.IsNullOrEmpty(saveFolderName))
             {
@@ -72,13 +52,19 @@ namespace Core.UserProfile
                 result = FactoryCreateSave(saveFolderName);
                 _saves.Add(result);
             }
-
             return result;
         }
 
         private UserProfileData FactoryCreateSave(string nameSave)
         {
-            return _saveFactory.Create(new DirectoryInfo($"{_savePathSettings.RootPath}{nameSave}"));
+            var info = new DirectoryInfo($"{_savePathSettings.RootPath}{nameSave}");
+
+            var result = new UserProfileData()
+            {
+                FolderPath = info
+            };
+            _saveBuilder.BuildFrom(result, info.FullName);
+            return result;
         }
 
         private DirectoryInfo LoadDirectory()

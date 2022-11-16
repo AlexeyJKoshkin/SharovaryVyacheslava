@@ -24,10 +24,9 @@ public static class CoreGamePlayComponentsLookup {
     public const int MovingChunk = 13;
     public const int Player = 14;
     public const int WaveFinished = 15;
-    public const int WaveMobReady = 16;
-    public const int WizardShopReady = 17;
+    public const int WizardShopReady = 16;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "ExperienceListener",
@@ -46,7 +45,6 @@ public static class CoreGamePlayComponentsLookup {
         "MovingChunk",
         "Player",
         "WaveFinished",
-        "WaveMobReady",
         "WizardShopReady"
     };
 

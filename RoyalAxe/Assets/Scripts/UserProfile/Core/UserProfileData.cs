@@ -1,5 +1,6 @@
 #region
 
+using System;
 using System.IO;
 
 #endregion
@@ -13,12 +14,18 @@ namespace Core.UserProfile
 
     public class UserProfileData : IUserProfileData
     {
+        public bool IsLastPlayed;
         public DirectoryInfo FolderPath;
+        public UserAllHeroesProgress HeroProgress;
+        public UserAllWeaponsProgress WeaponProgress;
+        public UserLevelProgress LevelProgress;
+    }
 
-        public UserAllHeroesProgress HeroProgress = new UserAllHeroesProgress();
 
-        public UserAllWeaponsProgress WeaponProgress = new UserAllWeaponsProgress();
-        
 
+    [Serializable]
+    public class BaseUserProgressData
+    {
+        public int Version { get; set; }
     }
 }

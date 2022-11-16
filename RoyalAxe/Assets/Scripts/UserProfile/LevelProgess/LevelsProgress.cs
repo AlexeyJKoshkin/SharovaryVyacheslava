@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using RoyalAxe.CoreLevel;
 
 namespace Core.UserProfile 
 {
     [Serializable]
-    public class LevelsProgress
+    public class UserLevelProgress : BaseUserProgressData
     {
         public LastLevel LastLevel = LastLevel.Default;
         // можно сохранять стату по уровням. или еще какой-то другой прогресс по уровню

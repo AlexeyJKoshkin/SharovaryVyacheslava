@@ -1,5 +1,6 @@
 #region
 
+using System;
 using UnityEngine;
 
 #endregion
@@ -41,6 +42,11 @@ namespace Core
         public static void MobLog(object message)
         {
             Debug.Log($"[Mob] {message}");
+        }
+
+        public static void LogException(Exception exception)
+        {
+            Debug.LogException(exception);
         }
     }
 }

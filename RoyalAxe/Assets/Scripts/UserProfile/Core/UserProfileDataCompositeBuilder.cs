@@ -20,7 +20,10 @@ namespace Core.UserProfile
 
         public async Task BuildFrom(UserProfileData result, string folderInfoFullName)
         {
-            foreach (var builder in _builders) await builder.LoadFrom(folderInfoFullName, result);
+            foreach (var builder in _builders)
+            {
+                await builder.LoadFrom(folderInfoFullName, result);    
+            }
         }
     }
 }

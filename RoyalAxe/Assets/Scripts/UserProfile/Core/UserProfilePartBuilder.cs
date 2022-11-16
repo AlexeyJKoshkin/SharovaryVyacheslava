@@ -1,5 +1,6 @@
 #region
 
+using System;
 using System.Threading.Tasks;
 using Core.Configs;
 
@@ -7,15 +8,27 @@ using Core.Configs;
 
 namespace Core.UserProfile
 {
-    public abstract class UserProfilePartBuilder<TData> : IUserProfilePartBuilder<UserProfileData> where TData : new()
+    public interface IDefaultProgressFactory<TData> where TData : BaseUserProgressData
+    {
+        TData CreateDefault();
+    }
+    
+    
+
+    public abstract class UserProfilePartBuilder<TData> : IUserProfilePartBuilder<UserProfileData> where TData :BaseUserProgressData
     {
         private readonly IJsonConverter _jsonConverter;
         private readonly ITextFileOperation _jsonFileOperation;
 
-        public UserProfilePartBuilder(ITextFileOperation jsonFileOperation, IJsonConverter jsonConverter)
+        private readonly IDefaultProgressFactory<TData> _defaultProgressFactory;
+
+        public UserProfilePartBuilder(ITextFileOperation jsonFileOperation,
+                                      IJsonConverter jsonConverter,
+                                      IDefaultProgressFactory<TData> defaultProgressFactory)
         {
             _jsonFileOperation = jsonFileOperation;
             _jsonConverter     = jsonConverter;
+            _defaultProgressFactory = defaultProgressFactory;
         }
 
         protected abstract string FileName { get; }
@@ -29,16 +42,31 @@ namespace Core.UserProfile
             _jsonFileOperation.Save(path, json);
         }
 
-
-        public async Task LoadFrom(string folderInfoFullName, UserProfileData result)
+        public async Task LoadFrom(string folderInfoFullName, UserProfileData userProfile)
         {
             var path = $"{folderInfoFullName}/{FileName}.json";
             var json = await _jsonFileOperation.LoadText(path);
-            var item = string.IsNullOrEmpty(json) ? new TData() : _jsonConverter.Deserialize<TData>(json);
-            SetItemToResult(result, item);
+            var item =  Parse(json);
+            SetItemToResult(userProfile, item);
+        }
+
+        private TData Parse(string json)
+        {
+            if (string.IsNullOrEmpty(json)) return _defaultProgressFactory.CreateDefault();
+
+            try
+            {
+                return _jsonConverter.Deserialize<TData>(json);
+            }
+            catch (Exception e)
+            {
+               HLogger.LogException(e);
+               return _defaultProgressFactory.CreateDefault();
+            }
         }
 
         protected abstract TData GetItemToSave(UserProfileData saveobject);
+        
 
         protected abstract void SetItemToResult(UserProfileData result, TData item);
     }

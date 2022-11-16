@@ -10,7 +10,7 @@ namespace Core.UserProfile {
     }
     
     [Serializable]
-    public class UserAllWeaponsProgress
+    public class UserAllWeaponsProgress : BaseUserProgressData
     {
         public string SelectedWeaponId;
         public List<WeaponProgressData> ProgressData = new List<WeaponProgressData>();

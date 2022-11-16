@@ -2,16 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Data.Provider;
+using Core.UserProfile;
 using RoyalAxe.CoreLevel;
 
 namespace Core.Launcher
 {
-    [Serializable]
-    public class CoreLevelParameters
-    {
-        public BiomeType BiomeType;
-        public int StartLevel;
-    }
+  
 
     /// <summary>
     /// Загрузчик кор сцены.
@@ -19,7 +15,7 @@ namespace Core.Launcher
     public class CoreGameSceneLoader : ISceneLoaderHelper
     {
         private readonly CoreLevelDataInfrastructure _coreLevelDataInfrastructure;
-        private CoreLevelParameters _coreLevelParameters;
+        private LastLevel _coreLevelParameters;
         private readonly IDataStorage _dataStorage;
         public GameSceneType TargetScene => GameSceneType.Core;
 
@@ -29,7 +25,7 @@ namespace Core.Launcher
             _dataStorage = dataStorage;
         }
 
-        public void SetPlayerParameters(CoreLevelParameters coreLevelParams)
+        public void SetPlayerParameters(LastLevel coreLevelParams)
         {
             _coreLevelParameters = coreLevelParams;
         }
@@ -43,7 +39,7 @@ namespace Core.Launcher
 
         public Task PreloadResources()
         {
-            var biome = _dataStorage.ById<BiomeScriptableDef>(_coreLevelParameters.BiomeType.ToString());
+            var biome = _dataStorage.ById<BiomeScriptableDef>(_coreLevelParameters.Biome.ToString());
             _coreLevelDataInfrastructure.BiomeDef = biome;
             _coreLevelDataInfrastructure.LevelNumber = _coreLevelParameters.StartLevel;
            

@@ -12,21 +12,21 @@ namespace RoyalAxe.CoreLevel
     public class PlayerCoreGameFacade : IPlayerCoreGameFacade
     {
         private readonly CoreGamePlayContext _coreGamePlay;
+        private readonly GameRootLoopContext _gameRootLoopContext;
    
         private readonly IUnitsBuilderFacade _unitBuilder;
-        private readonly IUserSaveProfileStorage _userSaveProfileStorage;
-        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,  IUserSaveProfileStorage userSaveProfileStorage)
+        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,  GameRootLoopContext gameRootLoopContext)
         {
             _coreGamePlay = coreGamePlay;
             _unitBuilder  = unitBuilder;
-            _userSaveProfileStorage = userSaveProfileStorage;
+            _gameRootLoopContext = gameRootLoopContext;
         }
 
         public void CreatePlayer()
         {
-            var current = _userSaveProfileStorage.Current;
-            var selectedHero = current.LoadCurrentHero();
-            var selectedWeapon = current.LoadCurrentWeapon();
+            var current = _gameRootLoopContext.userProgressEntity;
+            var selectedHero = current.userCurrentHeroProgress.Progress;
+            var selectedWeapon = current.userCurrentWeaponProgress.Progress;
             CreateCorePlayer();
             _unitBuilder.CreatePlayer(selectedHero, selectedWeapon);
         }

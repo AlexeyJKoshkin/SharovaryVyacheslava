@@ -1,4 +1,5 @@
 ﻿using Core.Launcher;
+using Core.UserProfile;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace RoyalAxe.CoreLevel
     {
         bool EnableRender { get; }
         bool UseLevelFromCheat { get; }
-        CoreLevelParameters LevelParams { get; }
+        LastLevel LevelParams { get; }
     }
 
     public class UltimateCheatAdapter : IUltimateCheatAdapter
@@ -16,7 +17,7 @@ namespace RoyalAxe.CoreLevel
         private readonly UltimateCheatSettings _cheatSettings;
         public bool EnableRender => _cheatSettings.EnableCheats && _cheatSettings.EnableRender;
         public bool UseLevelFromCheat => _cheatSettings.EnableCheats && _cheatSettings.StartCustomLevel;
-        public CoreLevelParameters LevelParams => _cheatSettings.LevelParams;
+        public LastLevel LevelParams => _cheatSettings.LevelParams;
 
         public UltimateCheatAdapter(UltimateCheatSettings cheatSettings)
         {
@@ -35,6 +36,6 @@ namespace RoyalAxe.CoreLevel
         [EnableIf("EnableCheats")]
         [EnableIf("StartCustomLevel")]
         [BoxGroup("Start Level")]
-        public CoreLevelParameters LevelParams;
+        public LastLevel LevelParams;
     }
 }
