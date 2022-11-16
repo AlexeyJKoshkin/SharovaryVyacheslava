@@ -8,13 +8,6 @@ using Core.Configs;
 
 namespace Core.UserProfile
 {
-    public interface IDefaultProgressFactory<TData> where TData : BaseUserProgressData
-    {
-        TData CreateDefault();
-    }
-    
-    
-
     public abstract class UserProfilePartBuilder<TData> : IUserProfilePartBuilder<UserProfileData> where TData :BaseUserProgressData
     {
         private readonly IJsonConverter _jsonConverter;

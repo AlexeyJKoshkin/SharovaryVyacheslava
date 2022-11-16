@@ -10,20 +10,20 @@ namespace Core.UserProfile
 {
     public interface IUserSaveProfileStorage
     {
-        UserProfileData Current { get; }
-        IReadOnlyCollection<UserProfileData> AllSaves { get; }
+        ICurrentUserProgressProfileAdapter Current { get; }
+        IReadOnlyCollection<ICurrentUserProgressProfileAdapter> AllSaves { get; }
     }
 
     public class UserSaveProfileStorage : IUserSaveProfileStorage
     {
-        public UserProfileData Current => _current;
+        public ICurrentUserProgressProfileAdapter Current => _current;
         
-        public IReadOnlyCollection<UserProfileData> AllSaves => _saves;
-        private UserProfileData _current;
+        public IReadOnlyCollection<ICurrentUserProgressProfileAdapter> AllSaves => _saves;
+        private ICurrentUserProgressProfileAdapter _current;
         private readonly IUserProfileBuilder<UserProfileData> _saveBuilder;
         private readonly IUserSavePathSettings _savePathSettings;
 
-        private readonly List<UserProfileData> _saves = new List<UserProfileData>();
+        private readonly List<ICurrentUserProgressProfileAdapter> _saves = new List<ICurrentUserProgressProfileAdapter>();
 
         public UserSaveProfileStorage(IUserSavePathSettings savePathSettings, IUserProfileBuilder<UserProfileData> saveFactory)
         {
@@ -34,19 +34,19 @@ namespace Core.UserProfile
             _current = _saves.FirstOrDefault(o => o.IsLastPlayed) ?? FactoryCreateSave("TempCurrent");
         }
 
-        UserProfileData GetSave(string saveFolderName)
+        ICurrentUserProgressProfileAdapter GetSave(string saveFolderName)
         {
             if (string.IsNullOrEmpty(saveFolderName))
             {
                 return null;
             }
             
-            if (_current.FolderPath.Name == saveFolderName)
+            if (_current.ProfileName == saveFolderName)
             {
                 return _current;
             }
 
-            var result = _saves.FirstOrDefault(o => o.FolderPath.Name == saveFolderName);
+            var result = _saves.FirstOrDefault(o => o.ProfileName == saveFolderName);
             if (result == null)
             {
                 result = FactoryCreateSave(saveFolderName);
@@ -55,7 +55,7 @@ namespace Core.UserProfile
             return result;
         }
 
-        private UserProfileData FactoryCreateSave(string nameSave)
+        private ICurrentUserProgressProfileAdapter FactoryCreateSave(string nameSave)
         {
             var info = new DirectoryInfo($"{_savePathSettings.RootPath}{nameSave}");
 
@@ -64,7 +64,7 @@ namespace Core.UserProfile
                 FolderPath = info
             };
             _saveBuilder.BuildFrom(result, info.FullName);
-            return result;
+            return new CurrentUserProgressProfileAdapter(result);
         }
 
         private DirectoryInfo LoadDirectory()

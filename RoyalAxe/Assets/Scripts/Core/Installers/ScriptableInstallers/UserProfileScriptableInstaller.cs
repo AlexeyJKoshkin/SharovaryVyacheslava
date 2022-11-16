@@ -19,7 +19,6 @@ namespace Core
             Container.Register<UserSaveProfileStorage>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UserProfileDataCompositeBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
             BindProgressBuilder();
-        
         }
 
         private void BindProgressBuilder()
