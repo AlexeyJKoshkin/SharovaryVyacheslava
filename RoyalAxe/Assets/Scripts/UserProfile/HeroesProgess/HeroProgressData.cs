@@ -6,5 +6,6 @@ namespace Core.UserProfile {
     {
         public string CharacterId = "Default_Hero";
         public int Level = 1;
+        public string EquipWeapon = "Weapon_Player_default";
     }
 }

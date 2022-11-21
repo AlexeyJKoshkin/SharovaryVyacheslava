@@ -17,29 +17,38 @@ namespace Core
         {
             Container.RegisterInstance(_settings.GetCurrentSettings()).AsSelf();
             Container.Register<UserSaveProfileStorage>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProfileDataCompositeBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<ProfileProgressPartContextFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+
             BindProgressBuilder();
         }
 
         private void BindProgressBuilder()
         {
-            Container.Register<HeroProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<WeaponProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<LevelProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            
-            Container.Register<HeroProgressBuilderDefaultBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<WeaponProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<LevelProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
-
-            Container.Register<UserProgressProfileFacade<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressProfileFacade<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressProfileFacade<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
-            
-            Container.Register<UserProgressLoader<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressLoader<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<HeroProfileProgressEntityBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<HeroProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<HeroProgressDefaultFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UserProgressLoader<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
             
-         
+            
+            Container.Register<LevelProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LevelProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LevelProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressLoader<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            
+            
+            Container.Register<WeaponProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<WeaponProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressLoader<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<WeaponProfileProgressEntityBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+
+
+            Container.Register<MockUserProfileProgressHarvester<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<MockUserProfileProgressHarvester<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<MockUserProfileProgressHarvester<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+
+
 
 
 

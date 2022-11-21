@@ -10,7 +10,7 @@ namespace Core.UserProfile
 {
     public static class IUserProfileExtension
     {
-        public static HeroProgressData LoadCurrentHero(this UserProfileData userProfileSave)
+        /*public static HeroProgressData LoadCurrentHero(this UserProfileData userProfileSave)
         {
             if (userProfileSave == null) return null;
             var hero = userProfileSave.HeroProgress;
@@ -25,8 +25,8 @@ namespace Core.UserProfile
 
             return DefaultFind(weapons.SelectedWeaponId, weapons.ProgressData, (o => o.WeaponID == weapons.SelectedWeaponId));
 
-        }
-        static T DefaultFind<T>(string key, List<T> list, Predicate<T> predicate) where T : new()
+        }*/
+      public  static T DefaultFind<T>(this List<T> list,string key, Predicate<T> predicate) where T : new()
         {
             if (string.IsNullOrEmpty(key))
             {

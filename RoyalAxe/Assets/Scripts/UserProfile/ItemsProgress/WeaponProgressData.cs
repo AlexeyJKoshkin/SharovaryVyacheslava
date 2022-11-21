@@ -12,8 +12,6 @@ namespace Core.UserProfile {
     [Serializable]
     public class UserAllWeaponsProgress : BaseUserProgressData
     {
-     //   public override string FileName => "Weapons";
-        public string SelectedWeaponId;
         public List<WeaponProgressData> ProgressData = new List<WeaponProgressData>();
     }
 }

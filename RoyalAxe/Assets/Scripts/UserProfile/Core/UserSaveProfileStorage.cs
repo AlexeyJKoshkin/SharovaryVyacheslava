@@ -17,30 +17,46 @@ namespace Core.UserProfile
 {
     public interface IUserSaveProfileStorage
     {
-        ICurrentUserProgressProfileAdapter Current { get; }
+        ICurrentUserProgressProfileFacade Current { get; }
         void ReloadSaves();
     }
 
-    public class UserSaveProfileStorage : IUserSaveProfileStorage
+    public class UserSaveProfileStorage : IUserSaveProfileStorage, ICurrentUserProgressProfileFacade
     {
-        public ICurrentUserProgressProfileAdapter Current => _current;
+        public ICurrentUserProgressProfileFacade Current => _current;
 
-        private ICurrentUserProgressProfileAdapter _current;
+        private ICurrentUserProgressProfileFacade _current;
 
-        private readonly IUserSaveProfileCRUDCommand<UserProfileData> _crudCommand;
+        private readonly IProfileProgressPartContextFactory _factory;
+        private readonly IReadOnlyList<IUserProgressPartFacade> _builders;
 
-
-        public UserSaveProfileStorage(IUserSaveProfileCRUDCommand<UserProfileData> crudCommand)
+        public UserSaveProfileStorage(IProfileProgressPartContextFactory factory, IReadOnlyList<IUserProgressPartFacade> builders)
         {
-            _crudCommand = crudCommand;
+            _factory = factory;
+            _builders = builders;
         }
 
         public void ReloadSaves()
         {
-            var userProfileData = _crudCommand.Read("DefaultProfile") ?? _crudCommand.Create("DefaultProfile");
-            _current = new CurrentUserProgressProfileAdapter(userProfileData);
-       
+            _current = Load("DefaultProfile");
         }
 
+        ICurrentUserProgressProfileFacade Load(string profileName)
+        {
+            var context = _factory.CreateLocale(profileName); // Создаем текущий контекст для загрузки профиля
+            var result = new CurrentUserProgressProfileFacade(profileName);
+
+            foreach (var builder in _builders)
+            {
+                builder.LoadProgress(context, result);
+            }
+            return result;
+        }
+
+        public string ProfileName => _current.ProfileName;
+        public T Get<T>()
+        {
+            return _current.Get<T>();
+        }
     }
 }

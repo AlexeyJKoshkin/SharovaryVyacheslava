@@ -7,6 +7,5 @@ namespace Core.UserProfile {
     {
         public string SelectedHeroId;
         public List<HeroProgressData> ProgressData = new List<HeroProgressData>();
-    //    public override string FileName => "Heroes";
     }
 }

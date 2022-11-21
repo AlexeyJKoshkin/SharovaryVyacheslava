@@ -15,15 +15,19 @@ namespace Core.Launcher
         private readonly ISceneLoaderProvider _sceneLoaderProvider;
         private readonly IUltimateCheatAdapter _ultimateCheatAdapter;
         private GameRootLoopContext _gameRootLoopContext;
+        private readonly IUserSaveProfileStorage _userSaveProfileStorage;
 
         private ISceneLoaderHelper _currentSceneLoader;
 
-        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter, GameRootLoopContext gameRootLoopContext)
+        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter, GameRootLoopContext gameRootLoopContext,
+                                     IUserSaveProfileStorage userSaveProfileStorage)
         {
             _metaSceneUIView = metaSceneUIView;
             _sceneLoaderProvider = sceneLoaderProvider;
             _ultimateCheatAdapter = ultimateCheatAdapter;
             _gameRootLoopContext = gameRootLoopContext;
+            _userSaveProfileStorage = userSaveProfileStorage;
+         
         }
 
         public void Initialize()
@@ -42,7 +46,8 @@ namespace Core.Launcher
         private LastLevel GetLevelParams()
         {
             if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
-            return _gameRootLoopContext.userProgressEntity.UserCurrentLevelsProgress.Progress;
+            var current = _userSaveProfileStorage.Current;
+            return current.Get<IUserLevelsProgress>().LastLevel;
         }
 
         public ISceneLoaderHelper GetCurrentSceneLoader()
@@ -50,4 +55,5 @@ namespace Core.Launcher
             return _currentSceneLoader;
         }
     }
+  
 }

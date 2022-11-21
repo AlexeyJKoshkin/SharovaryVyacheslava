@@ -1,5 +1,4 @@
 using Core.UserProfile;
-using RoyalAxe.CoreLevel;
 using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CoreLevel
@@ -12,21 +11,21 @@ namespace RoyalAxe.CoreLevel
     public class PlayerCoreGameFacade : IPlayerCoreGameFacade
     {
         private readonly CoreGamePlayContext _coreGamePlay;
-        private readonly GameRootLoopContext _gameRootLoopContext;
-   
+        private readonly ICurrentUserProgressProfileFacade _currentUserProgressProfileFacade;
+
         private readonly IUnitsBuilderFacade _unitBuilder;
-        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,  GameRootLoopContext gameRootLoopContext)
+        public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,  GameRootLoopContext gameRootLoopContext,
+                                    ICurrentUserProgressProfileFacade currentUserProgressProfileFacade)
         {
             _coreGamePlay = coreGamePlay;
             _unitBuilder  = unitBuilder;
-            _gameRootLoopContext = gameRootLoopContext;
+            _currentUserProgressProfileFacade = currentUserProgressProfileFacade;
         }
 
         public void CreatePlayer()
         {
-            var current = _gameRootLoopContext.userProgressEntity;
-            var selectedHero = current.userCurrentHeroProgress.Progress;
-            var selectedWeapon = current.userCurrentWeaponProgress.Progress;
+            var selectedHero = _currentUserProgressProfileFacade.Get<IUserProfileHeroesProgress>().CurrentHero;
+            var selectedWeapon = _currentUserProgressProfileFacade.Get<IUserProfileWeaponsProgress>().GetWeaponProgress(selectedHero.EquipWeapon);
             CreateCorePlayer();
             _unitBuilder.CreatePlayer(selectedHero, selectedWeapon);
         }

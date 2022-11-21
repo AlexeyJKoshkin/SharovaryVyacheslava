@@ -44,31 +44,7 @@ namespace Core.Launcher
 
         private void InitUserProfile()
         {
-            _userSaveProfileStorage.ReloadSaves();
-            var currentSave = _userSaveProfileStorage.Current;
-            CreateProfileEntity(currentSave);
-             
-            
-            HLogger.TempLog("Создаем сущность профиля");
-           // HLogger.LogInfo($"Total {_userSaveProfileStorage.AllSaves.Count} Current : {currentSave.ToString()}");
-        }
-
-        private void CreateProfileEntity(ICurrentUserProgressProfileAdapter currentSave)
-        {
-            var entity = _gameRootLoopContext.hasUserProgress ? _gameRootLoopContext.userProgressEntity : _gameRootLoopContext.CreateEntity();
-                      // entity.ReplaceUserProgress(currentSave);
-                       entity.ReplaceUserCurrentHeroProgress(currentSave.CurrentHero);
-                       //entity.ReplaceUserCurrentWeaponProgress(currentSave.LoadCurrentWeapon());
-                  //     entity.ReplaceUserLevelsProgress(currentSave.LevelProgress.LastLevel);
-        }
-
-        private void CreateProfileEntity(UserProfileData currentSave)
-        {
-            var entity = _gameRootLoopContext.hasUserProgress ? _gameRootLoopContext.userProgressEntity : _gameRootLoopContext.CreateEntity();
-            entity.ReplaceUserProgress(currentSave);
-            entity.ReplaceUserCurrentHeroProgress(currentSave.LoadCurrentHero());
-            entity.ReplaceUserCurrentWeaponProgress(currentSave.LoadCurrentWeapon());
-            entity.ReplaceUserLevelsProgress(currentSave.LevelProgress.LastLevel);
+            _userSaveProfileStorage.ReloadSaves(); // загрузили 
         }
 
         private void InitData()

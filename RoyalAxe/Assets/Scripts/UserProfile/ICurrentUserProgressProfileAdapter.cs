@@ -1,27 +1,51 @@
-﻿namespace Core.UserProfile
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Core.UserProfile
 {
-    public interface ICurrentUserProgressProfileAdapter
+    public interface IUserProfileProgressRoot
+    {
+        void AddPartProgress(IUserProgressProfile userProgressProfile);
+    }
+
+    public interface ICurrentUserProgressProfileFacade
     {
         string ProfileName { get; }
-        bool IsLastPlayed { get; }
-        HeroProgressData CurrentHero { get; }
+        T Get<T>();
     }
     
-    
-
-    public class CurrentUserProgressProfileAdapter : ICurrentUserProgressProfileAdapter
+    internal interface IUserLevelsProgress : IUserProgressProfile
     {
-        public string ProfileName => _userProfileData.ProfileName;
-        public bool IsLastPlayed => _userProfileData.IsLastPlayed;
-        public HeroProgressData CurrentHero { get; private set; }
-        private readonly UserProfileData _userProfileData;
+        LastLevel LastLevel { get; }
+    }
 
-        public CurrentUserProgressProfileAdapter(UserProfileData userProfileData)
+    public interface IUserProgressProfile
+    {
+      //  void Save();
+    }
+
+
+
+    public class CurrentUserProgressProfileFacade : ICurrentUserProgressProfileFacade,IUserProfileProgressRoot
+    {
+        public string ProfileName { get;  }
+
+        private HashSet<IUserProgressProfile> _progressProfiles = new HashSet<IUserProgressProfile>();
+
+        public CurrentUserProgressProfileFacade(string profileName)
         {
-            _userProfileData = userProfileData;
-            CurrentHero = userProfileData.LoadCurrentHero();
+            ProfileName = profileName;
         }
 
-        
+        public T Get<T>()
+        {
+            var result = _progressProfiles.FirstOrDefault(o => o is T);
+            return result == default ? default : (T) result;
+        }
+
+        public void AddPartProgress(IUserProgressProfile userProgressProfile)
+        {
+            _progressProfiles.Add(userProgressProfile);
+        }
     }
 }

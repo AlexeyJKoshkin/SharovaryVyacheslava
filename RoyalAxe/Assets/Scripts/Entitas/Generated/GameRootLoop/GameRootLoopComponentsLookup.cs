@@ -55,10 +55,6 @@ public static class GameRootLoopComponentsLookup {
         typeof(RoyalAxe.GameEntitas.Timer.RepeatComponent),
         typeof(RoyalAxe.GameEntitas.Timer.TimerComponent),
         typeof(RoyalAxe.GameEntitas.UpdateSystemsComponent),
-        typeof(RoyalAxe.GameEntitas.UserCurrentHeroProgressComponent),
-        typeof(RoyalAxe.GameEntitas.UserCurrentWeaponProgressComponent),
-        typeof(RoyalAxe.GameEntitas.UserCurrentLevelsProgressComponent),
-        typeof(RoyalAxe.GameEntitas.UserProgressComponent),
         typeof(TimerListenerComponent)
     };
 }
