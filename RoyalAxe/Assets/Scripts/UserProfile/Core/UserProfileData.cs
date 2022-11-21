@@ -1,7 +1,9 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -15,7 +17,8 @@ namespace Core.UserProfile
     public class UserProfileData : IUserProfileData
     {
         public bool IsLastPlayed;
-        public DirectoryInfo FolderPath;
+        public string ProfileName;
+
         public UserAllHeroesProgress HeroProgress;
         public UserAllWeaponsProgress WeaponProgress;
         public UserLevelProgress LevelProgress;
@@ -23,9 +26,14 @@ namespace Core.UserProfile
 
 
 
+
     [Serializable]
-    public class BaseUserProgressData
+    public abstract class BaseUserProgressData
     {
-        public int Version { get; set; }
+        //версия структуры
+        public int FormatVersion { get; set; }
+        
+        //имя файла в котором хранится прогресс
+        //public abstract string FileName { get; }
     }
 }

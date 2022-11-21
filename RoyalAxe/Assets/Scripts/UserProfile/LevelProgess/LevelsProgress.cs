@@ -9,6 +9,7 @@ namespace Core.UserProfile
         public LastLevel LastLevel = LastLevel.Default;
         // можно сохранять стату по уровням. или еще какой-то другой прогресс по уровню
         private object LevelsProgressInfo = null;
+    //    public override string FileName => "Levels";
     }
 
     [Serializable]

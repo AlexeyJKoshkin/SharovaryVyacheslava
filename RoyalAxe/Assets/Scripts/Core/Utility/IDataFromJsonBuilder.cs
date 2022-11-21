@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace Core.UserProfile
 {
-    public interface IUserProfileBuilder<in TData> where TData : new()
+
+    
+    public interface IUserSaveProfileCRUDCommand<TData>
     {
-        void SaveTo(string folderInfoFullName, TData saveobject);
-        Task BuildFrom(TData result, string folderInfoFullName);
+        TData Create(string profileName);
+        TData Read(string profileName);
+        void Update(TData profile);
+        void Delete(string profileName);
     }
+    
+    
 }

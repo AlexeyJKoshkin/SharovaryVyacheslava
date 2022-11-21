@@ -24,13 +24,24 @@ namespace Core
         private void BindProgressBuilder()
         {
             Container.Register<HeroProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<HeroProgressBuilderDefaultBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            
             Container.Register<WeaponProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<WeaponProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
-            
             Container.Register<LevelProgressBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            Container.Register<HeroProgressBuilderDefaultBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<WeaponProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<LevelProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
+
+            Container.Register<UserProgressProfileFacade<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressProfileFacade<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressProfileFacade<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            Container.Register<UserProgressLoader<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressLoader<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UserProgressLoader<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+         
+
+
 
         }
     }

@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using Core.Configs;
 
 namespace Core.UserProfile {
-    public class HeroProgressBuilder : UserProfilePartBuilder<UserAllHeroesProgress>
+    public class HeroProgressBuilder : UserProfileInfrastructureHelper<UserAllHeroesProgress>
     {
-        public HeroProgressBuilder(ITextFileOperation jsonFileOperation, IJsonConverter jsonConverter, IDefaultProgressFactory<UserAllHeroesProgress> defaultProgressFactory) : base(jsonFileOperation, jsonConverter, defaultProgressFactory) { }
-        protected override string FileName => "Heroes";
+        public override string FileName => "Heroes";
 
-        protected override UserAllHeroesProgress GetItemToSave(UserProfileData saveobject)
+        public override UserAllHeroesProgress GetItemToSave(UserProfileData saveobject)
         {
             return saveobject.HeroProgress;
         }
 
-        protected override void SetItemToResult(UserProfileData result, UserAllHeroesProgress item)
+        public override void SetItemToResult(UserProfileData result, UserAllHeroesProgress item)
         {
             result.HeroProgress = item;
         }

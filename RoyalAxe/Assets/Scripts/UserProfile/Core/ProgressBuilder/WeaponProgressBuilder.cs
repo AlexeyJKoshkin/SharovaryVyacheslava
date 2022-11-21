@@ -3,22 +3,20 @@ using Core.Configs;
 
 namespace Core.UserProfile 
 {
-    public class WeaponProgressBuilder : UserProfilePartBuilder<UserAllWeaponsProgress>
+    public class WeaponProgressBuilder : UserProfileInfrastructureHelper<UserAllWeaponsProgress>
     {
 
-        protected override string FileName => "Weapons";
+        public override string FileName => "Weapons";
 
-        protected override UserAllWeaponsProgress GetItemToSave(UserProfileData saveobject)
+        public override UserAllWeaponsProgress GetItemToSave(UserProfileData saveobject)
         {
             return saveobject.WeaponProgress;
         }
 
-        protected override void SetItemToResult(UserProfileData result, UserAllWeaponsProgress item)
+        public override void SetItemToResult(UserProfileData result, UserAllWeaponsProgress item)
         {
             result.WeaponProgress = item;
         }
-
-        public WeaponProgressBuilder(ITextFileOperation jsonFileOperation, IJsonConverter jsonConverter, IDefaultProgressFactory<UserAllWeaponsProgress> defaultProgressFactory) : base(jsonFileOperation, jsonConverter, defaultProgressFactory) { }
     }
 
     public class WeaponProgressBuilderDefault : IDefaultProgressFactory<UserAllWeaponsProgress>

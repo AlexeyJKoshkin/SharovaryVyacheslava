@@ -8,7 +8,9 @@ namespace Core.UserProfile
 {
     public interface IUserProfilePartBuilder<TDataWrapper>
     {
-        void SaveTo(string folderInfoFullName, TDataWrapper saveobject);
-        Task LoadFrom(string folderInfoFullName, TDataWrapper result);
+        void SaveProgress(IProfileProgressStorageContext context,TDataWrapper saveobject);
+        void LoadTo(IProfileProgressStorageContext context, TDataWrapper result);
     }
+
+
 }

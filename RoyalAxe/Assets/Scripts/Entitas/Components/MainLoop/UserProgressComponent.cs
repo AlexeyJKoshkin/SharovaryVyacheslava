@@ -8,7 +8,6 @@ namespace RoyalAxe.GameEntitas
     public class UserProgressComponent : IComponent
     {
         public UserProfileData ProfileData;
-        public string ProfileName => ProfileData.FolderPath.Name;
     }
 
     [DontGenerate]

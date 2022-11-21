@@ -8,59 +8,72 @@ using Core.Configs;
 
 namespace Core.UserProfile
 {
-    public abstract class UserProfilePartBuilder<TData> : IUserProfilePartBuilder<UserProfileData> where TData :BaseUserProgressData
+    //Контекстное хранилище текущего профиля
+    public interface IProfileProgressStorageContext
     {
-        private readonly IJsonConverter _jsonConverter;
-        private readonly ITextFileOperation _jsonFileOperation;
+        void Save(string json, string key);
+        string Load(string key);
+    }
+    
+    public interface IProfileProgressPartContextFactory
+    {
+        LocalUserProfileContext CreateLocale(UserProfileData profile);
+    }
 
-        private readonly IDefaultProgressFactory<TData> _defaultProgressFactory;
-
-        public UserProfilePartBuilder(ITextFileOperation jsonFileOperation,
-                                      IJsonConverter jsonConverter,
-                                      IDefaultProgressFactory<TData> defaultProgressFactory)
+    public class ProfileProgressPartContextFactory : IProfileProgressPartContextFactory
+    {
+        private readonly IUserSavePathSettings _settings;
+        private readonly ITextFileOperation _textFileOperation;
+        public ProfileProgressPartContextFactory(ITextFileOperation textFileOperation, IUserSavePathSettings settings)
         {
-            _jsonFileOperation = jsonFileOperation;
-            _jsonConverter     = jsonConverter;
-            _defaultProgressFactory = defaultProgressFactory;
+            _textFileOperation = textFileOperation;
+            _settings = settings;
         }
 
-        protected abstract string FileName { get; }
-
-
-        public void SaveTo(string folderInfoFullName, UserProfileData saveobject)
+        public LocalUserProfileContext CreateLocale(UserProfileData profile)
         {
-            var item = GetItemToSave(saveobject);
-            var json = _jsonConverter.SerializeObject(item);
-            var path = $"{folderInfoFullName}/{FileName}.json";
-            _jsonFileOperation.Save(path, json);
+            return new LocalUserProfileContext(_textFileOperation, _settings, profile);
+        }
+    }
+
+
+
+    public class LocalUserProfileContext : IProfileProgressStorageContext
+    {
+        private readonly UserProfileData _userProfile;
+        private readonly IUserSavePathSettings _settings;
+        private readonly ITextFileOperation _textFileOperation;
+        public LocalUserProfileContext(ITextFileOperation textFileOperation, IUserSavePathSettings settings, UserProfileData userProfile)
+        {
+            _textFileOperation = textFileOperation;
+            _settings = settings;
+            _userProfile = userProfile;
         }
 
-        public async Task LoadFrom(string folderInfoFullName, UserProfileData userProfile)
+        void IProfileProgressStorageContext.Save(string json, string key)
         {
-            var path = $"{folderInfoFullName}/{FileName}.json";
-            var json = await _jsonFileOperation.LoadText(path);
-            var item =  Parse(json);
-            SetItemToResult(userProfile, item);
+            string pathToFile = $"{_settings.RootPath}{_userProfile.ProfileName}/{key}.json";
+            _textFileOperation.Save(pathToFile, json);
         }
 
-        private TData Parse(string json)
+        string IProfileProgressStorageContext.Load(string key)
         {
-            if (string.IsNullOrEmpty(json)) return _defaultProgressFactory.CreateDefault();
-
-            try
-            {
-                return _jsonConverter.Deserialize<TData>(json);
-            }
-            catch (Exception e)
-            {
-               HLogger.LogException(e);
-               return _defaultProgressFactory.CreateDefault();
-            }
+            string pathToFile = $"{_settings.RootPath}{_userProfile.ProfileName}/{key}.json";
+            return _textFileOperation.LoadText(pathToFile).Result;
         }
+    }
 
-        protected abstract TData GetItemToSave(UserProfileData saveobject);
+
+    public abstract class UserProfileInfrastructureHelper<TData> : IUserProfileInfrastructure<TData> where TData :BaseUserProgressData
+    {
+
+        public abstract string FileName { get; }
+
+        public abstract TData GetItemToSave(UserProfileData saveobject);
         
 
-        protected abstract void SetItemToResult(UserProfileData result, TData item);
+        public abstract void SetItemToResult(UserProfileData result, TData item);
     }
+
+  
 }
