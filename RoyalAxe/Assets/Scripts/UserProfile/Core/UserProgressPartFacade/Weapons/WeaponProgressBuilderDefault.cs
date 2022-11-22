@@ -6,11 +6,14 @@ namespace Core.UserProfile
     {
         public UserAllWeaponsProgress CreateDefault()
         {
-            var current = new WeaponProgressData();
+            var current = new WeaponProgressData()
+            {
+                Weapon = new SaveEntityRecord(){Id = "Weapon_Player_default", Level = 1}
+            };
 
             return new UserAllWeaponsProgress()
             {
-                ProgressData = new List<WeaponProgressData>(){current},
+                WeaponProgressData = new List<WeaponProgressData>(){current},
     };
         }
     }

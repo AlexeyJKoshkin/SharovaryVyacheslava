@@ -8,11 +8,8 @@ namespace Core.UserProfile
         {
             return new UserLevelProgress()
             {
-                LastLevel = new LastLevel()
-                {
-                    Biome = BiomeType.Forest,
-                    StartLevel = 1
-                }
+                LastPlayedLevel = LastLevel.Default,
+                LastSavedLevel = LastLevel.Default
             };
         }
     }

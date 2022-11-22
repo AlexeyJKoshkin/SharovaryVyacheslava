@@ -6,7 +6,8 @@ namespace Core.UserProfile
     [Serializable]
     public class UserLevelProgress : BaseUserProgressData
     {
-        public LastLevel LastLevel = LastLevel.Default;
+        public LastLevel LastSavedLevel = LastLevel.Default;
+        public LastLevel LastPlayedLevel = LastLevel.Default;
         // можно сохранять стату по уровням. или еще какой-то другой прогресс по уровню
         private object LevelsProgressInfo = null;
     //    public override string FileName => "Levels";

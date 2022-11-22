@@ -1,4 +1,5 @@
-﻿using GameKit;
+﻿using System.Linq;
+using GameKit;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,8 +15,8 @@ namespace Core
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
-            _installers.ForEach(e => e.Install(builder));
-            _monInstallers.ForEach(e => e.Install(builder));
+            _installers.Where(e=>e != null).ForEach(e => e.Install(builder));
+            _monInstallers.Where(e=>e != null).ForEach(e => e.Install(builder));
         }
     }
 }

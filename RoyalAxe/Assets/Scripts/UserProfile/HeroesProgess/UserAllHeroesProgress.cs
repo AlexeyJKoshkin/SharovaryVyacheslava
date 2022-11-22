@@ -6,6 +6,6 @@ namespace Core.UserProfile {
     public class UserAllHeroesProgress : BaseUserProgressData
     {
         public string SelectedHeroId;
-        public List<HeroProgressData> ProgressData = new List<HeroProgressData>();
+        public List<HeroProgressData> SavedHeroes = new List<HeroProgressData>();
     }
 }

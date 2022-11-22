@@ -61,7 +61,6 @@ public static class CoreGamePlayComponentsLookup {
         typeof(RoyalAxe.GameEntitas.GoldComponent),
         typeof(RoyalAxe.GameEntitas.LevelNumberComponent),
         typeof(RoyalAxe.GameEntitas.LevelWaveComponent),
-        typeof(RoyalAxe.GameEntitas.MobWaveCollectionComponent),
         typeof(RoyalAxe.GameEntitas.MovingChunkComponent),
         typeof(RoyalAxe.GameEntitas.PlayerComponent),
         typeof(RoyalAxe.GameEntitas.WaveFinishedComponent),

@@ -15,17 +15,17 @@ namespace RoyalAxe.GameEntitas
             _entityFactory   = entityFactory;
         }
 
-        public UnitsEntity CreateEnemyMobUnit(string id, byte level, Vector2 pos)
+
+        public UnitsEntity CreateEnemyMobUnit(MobBlueprint mobBlueprint)
         {
-            var mob  = _entityFactory.CreateEnemyMobUnit(id, level);
-            _unitViewBuilder.BuildMobView(mob, pos);
+            var mob = _entityFactory.CreateEnemyMobUnit(mobBlueprint);
+            _unitViewBuilder.BuildMobView(mob, mobBlueprint.Position);
             return mob;
         }
 
-
-        public void CreatePlayer(HeroProgressData selectedHero, WeaponProgressData selectedWeapon)
+        public void CreatePlayer(UnitBlueprint unitBlueprint)
         {
-            var player = _entityFactory.CreatePlayer(selectedHero, selectedWeapon);
+            var player = _entityFactory.CreatePlayer(unitBlueprint);
             _unitViewBuilder.BuildPlayerView(player);
         }
 

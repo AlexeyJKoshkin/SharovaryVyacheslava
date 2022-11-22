@@ -21,7 +21,8 @@ namespace Core
             typeof(CalcTimerSystem),         // обновляем таймеры
             typeof(TimerEventSystem),        // вызов тиков таймеров
             typeof(DoneTimerEventSystem),    // обработка окончание таймеры
-            typeof(DoneTimerSystem)          //окончание таймеры удаление/перезапуск
+            typeof(DoneTimerSystem),          //окончание таймеры удаление/перезапуск
+            typeof(SaveUserProgressSystem),   // сохраняем прогресс игрока если надо, в конце кадра 
         };
 
 

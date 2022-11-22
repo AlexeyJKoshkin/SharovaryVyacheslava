@@ -44,7 +44,7 @@ namespace Core.Launcher
 
         private void InitUserProfile()
         {
-            _userSaveProfileStorage.ReloadSaves(); // загрузили 
+            HLogger.LogInfo($"Current user profile {_userSaveProfileStorage.Current.ProfileName}");
         }
 
         private void InitData()

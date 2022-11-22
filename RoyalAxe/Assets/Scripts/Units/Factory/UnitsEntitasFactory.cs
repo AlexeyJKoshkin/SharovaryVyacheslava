@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Core.Data.Provider;
 using Core.UserProfile;
 using RoyalAxe.CharacterStat;
+using RoyalAxe.Configs;
+using UnityEngine;
 
 namespace RoyalAxe.GameEntitas
 {
@@ -12,20 +14,19 @@ namespace RoyalAxe.GameEntitas
         private readonly ISkillFactory _skillBuilder;
         private readonly UnitStatsBuilder _unitStatsBuilder;
 
-        public UnitsEntityFactory(UnitsContext units, RAAnimationContext animationContext, IDataStorage dataStorage, ISkillFactory skillBuilder) : base(units)
+        public UnitsEntityFactory(UnitsContext units, RAAnimationContext animationContext, ISkillFactory skillBuilder) : base(units)
         {
             _animationContext = animationContext;
             _skillBuilder     = skillBuilder;
-            _unitStatsBuilder = new UnitStatsBuilder(dataStorage);
+            _unitStatsBuilder = new UnitStatsBuilder();
         }
 
-        public UnitsEntity CreatePlayer(HeroProgressData characterConfigUniqueId, WeaponProgressData selectedWeapon)
+
+        public UnitsEntity CreatePlayer(UnitBlueprint unitBlueprint)
         {
-            var player = CreateBlankUnit();
-            player.AddUnit(characterConfigUniqueId.CharacterId, characterConfigUniqueId.Level);
+            var player     = CreateUnit(unitBlueprint);
             player.isPlayer = true;
-            _unitStatsBuilder.AddStats(player, characterConfigUniqueId.CharacterId);
-            _skillBuilder.CreateTestPlayerSkill(player, selectedWeapon.WeaponID, selectedWeapon.Level);
+            _skillBuilder.CreateTestPlayerSkill(player, unitBlueprint.ActiveSkill);
             return player;
         }
 
@@ -37,18 +38,12 @@ namespace RoyalAxe.GameEntitas
             return entity;
         }
 
-        public UnitsEntity CreateEnemyMobUnit(string id, byte level = 1)
+        public UnitsEntity CreateEnemyMobUnit(MobBlueprint mobBlueprint)
         {
-            var mob = CreateUnit(id, level);
-            mob.AddUnit(id, level);
+            var mob = CreateUnit(mobBlueprint);
             mob.isMob = true;
-            EquipWeapon(mob, id, level);
+            _skillBuilder.EquipMobWeapon(mob, mobBlueprint.ActiveSkill);
             return mob;
-        }
-
-        private void EquipWeapon(UnitsEntity entity, string id, byte level)
-        {
-            _skillBuilder.EquipMobWeapon(entity, id, level);
         }
 
         public UnitsEntity CreateEnemyMobBoson(UnitsEntity owner)
@@ -78,10 +73,11 @@ namespace RoyalAxe.GameEntitas
         }
 
 
-        private UnitsEntity CreateUnit(string unitId, byte level = 1)
+        private UnitsEntity CreateUnit(UnitBlueprint blueprint)
         {
             var entity = CreateBlankUnit();
-            _unitStatsBuilder.AddStats(entity, unitId, level);
+            entity.AddUnit(blueprint.Id, blueprint.Level);
+            _unitStatsBuilder.SetStats(entity, blueprint.Stats);
             return entity;
         }
 
@@ -95,4 +91,6 @@ namespace RoyalAxe.GameEntitas
             return entity;
         }
     }
+
+  
 }

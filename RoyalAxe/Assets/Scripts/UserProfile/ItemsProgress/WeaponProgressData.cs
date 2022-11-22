@@ -5,13 +5,12 @@ namespace Core.UserProfile {
     [Serializable]
     public class WeaponProgressData
     {
-        public string WeaponID = "Weapon_Player_default";
-        public int Level = 1;
+        public SaveEntityRecord Weapon;
     }
     
     [Serializable]
     public class UserAllWeaponsProgress : BaseUserProgressData
     {
-        public List<WeaponProgressData> ProgressData = new List<WeaponProgressData>();
+        public List<WeaponProgressData> WeaponProgressData = new List<WeaponProgressData>();
     }
 }

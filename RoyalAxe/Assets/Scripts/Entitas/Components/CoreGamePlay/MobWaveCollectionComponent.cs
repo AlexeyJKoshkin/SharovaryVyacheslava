@@ -6,7 +6,7 @@ using RoyalAxe.CoreLevel;
 using RoyalAxe.LevelBuff;
 
 namespace RoyalAxe.GameEntitas {
-    [CoreGamePlay]
+    /*[CoreGamePlay]
     public class MobWaveCollectionComponent : AbstractCollectionComponent<List<MobAtLevelData>, MobAtLevelData>
     {
         public bool HasMobs => Count > 0;
@@ -15,7 +15,7 @@ namespace RoyalAxe.GameEntitas {
         {
             _list.Clear();
             _list.AddRange(mobData);
-        }*/
+        }#1#
 
         public MobAtLevelData Generate()
         {
@@ -24,7 +24,7 @@ namespace RoyalAxe.GameEntitas {
             if (item.TotalAmount == 0) this.Remove(item);
             return item;
         }
-    }
+    }*/
     [CoreGamePlay]
     [Unique]
     public class LevelWaveComponent : IComponent

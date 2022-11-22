@@ -22,7 +22,7 @@ namespace RoyalAxe.Configs
 
         public List<StatsConfig> Stats = new List<StatsConfig>();
 
-        public StatsConfig GetByLevel(byte lvl)
+        public StatsConfig GetByLevel(int lvl)
         {
             lvl--; // уровнь всегда на 1 больше чем индекс
             if (lvl < Stats.Count)

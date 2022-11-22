@@ -4,11 +4,12 @@ namespace RoyalAxe.GameEntitas
 {
     public interface IUnitsEntityFactory
     {
-        UnitsEntity CreateEnemyMobUnit(string id, byte level = 1);
+        UnitsEntity CreateEnemyMobUnit(MobBlueprint mobBlueprint);
 
         UnitsEntity CreateEnemyMobBoson(UnitsEntity owner);
         UnitsEntity CreatePlayerBoson(UnitsEntity owner);
-        UnitsEntity CreatePlayer(HeroProgressData characterConfigUniqueId, WeaponProgressData selectedWeapon);
+        //UnitsEntity CreatePlayer(HeroProgressData characterConfigUniqueId, WeaponProgressData selectedWeapon);
+        UnitsEntity CreatePlayer(UnitBlueprint unitBlueprint);
         UnitsEntity CreateWizardUnit();
     }
 }

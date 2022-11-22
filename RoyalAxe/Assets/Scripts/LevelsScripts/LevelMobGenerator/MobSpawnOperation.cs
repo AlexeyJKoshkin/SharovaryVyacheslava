@@ -45,7 +45,7 @@ namespace RoyalAxe.CoreLevel {
             while (counter < needMob && _levelWaveProvider.HasMob) // создаем мобов пока можем
             {
                 var mobData = _levelWaveProvider.GenerateMobData();
-                mobGeneratorHelper.GenerateEnemy(mobData.MobId, mobData.Level);
+                mobGeneratorHelper.GenerateEnemy(mobData);
                 counter++;
             }
             HLogger.LogCoreLevel($"Need {needMob} Created {counter}");

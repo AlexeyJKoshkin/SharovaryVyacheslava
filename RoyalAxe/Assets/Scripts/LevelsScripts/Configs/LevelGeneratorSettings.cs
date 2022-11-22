@@ -22,6 +22,7 @@ namespace RoyalAxe.CoreLevel
         public WaveDestiny Destiny = new WaveDestiny();
         [JsonIgnore]
         public string UniqueID => LevelNumber.ToString();
+        public bool IsSafePoint;
     }
 
 

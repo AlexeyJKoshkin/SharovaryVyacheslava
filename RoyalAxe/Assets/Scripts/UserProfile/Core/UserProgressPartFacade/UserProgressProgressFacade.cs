@@ -1,32 +1,48 @@
-﻿namespace Core.UserProfile
+﻿using System;
+
+namespace Core.UserProfile
 {
     public abstract class UserProfileProgressFacade<TData> :IUserProgressPartFacade where TData : BaseUserProgressData
     {
         private readonly IUserProgressPartFactory<TData> _loader;
-        private readonly IUserProfileProgressEntityBuilder<TData> _userProfileProgressEntityBuilder;
-        private readonly IUserProfileProgressHarvester<TData> _harvester;
+        public event Action<IUserProgressPartFacade> OnSaveProgress;
         protected abstract string Key { get; }
 
-        public UserProfileProgressFacade(IUserProgressPartFactory<TData> loader,  IUserProfileProgressEntityBuilder<TData> userProfileProgressEntityBuilder, IUserProfileProgressHarvester<TData> harvester)
+        protected TData Progress { get; private set; }
+
+        public UserProfileProgressFacade(IUserProgressPartFactory<TData> loader)
         {
             _loader = loader;
-            _userProfileProgressEntityBuilder = userProfileProgressEntityBuilder;
-            _harvester = harvester;
         }
 
         public void SaveProgress(IProfileProgressStorageContext context)
         {
-            var data = _harvester.GetCurrentSaveData();
-            var json = _loader.ToJson(data);
+            var json = _loader.ToJson(Progress);
             context.Save(json,Key);
         }
 
-        public void LoadProgress(IProfileProgressStorageContext context, IUserProfileProgressRoot currentUserProgressProfileFacade)
+        public void LoadProgress(IProfileProgressStorageContext context, CurrentGeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade)
         {
             var json =context.Load(Key);
-            var progressData =  _loader.LoadTo(json);
-            IUserProgressProfile progress =  _userProfileProgressEntityBuilder.BuildGameEntity(progressData);
-           currentUserProgressProfileFacade.AddPartProgress(progress);
+            Progress =  _loader.LoadTo(json);
+            SetToMainFacade(currentGeneralUserProgressProfileFacade);
+            UpdateProgressData();
+        }
+
+        protected abstract void UpdateProgressData();
+
+
+        protected void SetDirty()
+        {
+            OnSaveProgress?.Invoke(this);
+        }
+
+
+        protected abstract void SetToMainFacade(CurrentGeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade);
+
+        public void Save()
+        {
+            SetDirty();
         }
     }
 }

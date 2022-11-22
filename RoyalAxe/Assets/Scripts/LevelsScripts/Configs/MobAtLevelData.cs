@@ -5,7 +5,7 @@ namespace RoyalAxe.CoreLevel {
     public class MobAtLevelData
     {
         public string MobId;
-        public byte Level;
+        public int Level;
         public byte TotalAmount;
 
         public MobAtLevelData() { }

@@ -6,24 +6,12 @@ namespace RoyalAxe.GameEntitas
 {
     internal class UnitStatsBuilder
     {
-        private readonly IDataStorage _dataStorage;
-
-        public UnitStatsBuilder(IDataStorage dataStorage)
-        {
-            _dataStorage = dataStorage;
-        }
 
         #region STATS
 
-        public UnitsEntity AddStats(UnitsEntity unit, string unitId, byte level = 1)
-        {
-            var statsConfig = _dataStorage.ById<StatCollection>(unitId).Stats[level];
-            SetStats(unit, statsConfig);
-            return unit;
-        }
 
         //установили все статы на персонажа
-        private void SetStats(UnitsEntity unit, StatsConfig config)
+        public void SetStats(UnitsEntity unit, StatsConfig config)
         {
             AddStat(unit, UnitsComponentsLookup.Health, CharacterStatValue.CreateState(config.Health, config.Health));
             AddStat(unit, UnitsComponentsLookup.AttackSpeed, CharacterStatValue.CreateState());

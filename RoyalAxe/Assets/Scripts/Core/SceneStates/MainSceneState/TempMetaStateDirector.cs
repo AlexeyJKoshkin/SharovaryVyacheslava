@@ -47,7 +47,7 @@ namespace Core.Launcher
         {
             if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
             var current = _userSaveProfileStorage.Current;
-            return current.Get<IUserLevelsProgress>().LastLevel;
+            return current.LevelProgressFacade.SavedLevel;
         }
 
         public ISceneLoaderHelper GetCurrentSceneLoader()

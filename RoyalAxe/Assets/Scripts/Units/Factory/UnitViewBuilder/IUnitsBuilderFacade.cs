@@ -6,9 +6,9 @@ namespace RoyalAxe.GameEntitas
 {
     public interface IUnitsBuilderFacade
     {
-        UnitsEntity CreateEnemyMobUnit(string testMobUniqueId, byte level, Vector2 pos);
+        UnitsEntity CreateEnemyMobUnit(MobBlueprint mobBlueprint);
 
-        void CreatePlayer(HeroProgressData selectedHero, WeaponProgressData selectedWeapon);
+        void CreatePlayer(UnitBlueprint unitBlueprint);
 
         UnitsEntity CreateWizardShowUnit();
     }

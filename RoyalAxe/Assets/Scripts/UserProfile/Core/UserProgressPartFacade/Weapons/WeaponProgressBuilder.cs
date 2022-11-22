@@ -1,20 +1,24 @@
+using System.Linq;
 using Core.Configs;
 
 namespace Core.UserProfile 
 {
-    public class WeaponProfileProgressFacade : UserProfileProgressFacade<UserAllWeaponsProgress>
+    public class WeaponProfileProgressFacade : UserProfileProgressFacade<UserAllWeaponsProgress>,IUserProfileWeaponsProgress
     {
         protected override string Key => "Weapons";
-        public WeaponProfileProgressFacade(IUserProgressPartFactory<UserAllWeaponsProgress> loader, IUserProfileProgressEntityBuilder<UserAllWeaponsProgress> userProfileProgressEntityBuilder, IUserProfileProgressHarvester<UserAllWeaponsProgress> harvester) : base(loader, userProfileProgressEntityBuilder, harvester) { }
-    }
-    
-    public class WeaponProfileProgressEntityBuilder : IUserProfileProgressEntityBuilder<UserAllWeaponsProgress>
-    {
-        public IUserProgressProfile BuildGameEntity(UserAllWeaponsProgress progressData)
+
+        public WeaponProfileProgressFacade(IUserProgressPartFactory<UserAllWeaponsProgress> loader) : base(loader) { }
+        public WeaponProgressData GetWeaponProgress(string weaponID)
         {
-            return new UserProfileWeaponsProgress(progressData); 
+            return Progress.WeaponProgressData.FirstOrDefault(o => o.Weapon.Id == weaponID);
+        }
+        protected override void UpdateProgressData()
+        {
+        }
+
+        protected override void SetToMainFacade(CurrentGeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade)
+        {
+            currentGeneralUserProgressProfileFacade.WeaponProgress = this;
         }
     }
-    
-
 }

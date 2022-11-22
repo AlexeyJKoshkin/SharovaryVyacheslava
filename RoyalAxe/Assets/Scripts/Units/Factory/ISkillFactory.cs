@@ -2,9 +2,9 @@
 {
     public interface ISkillFactory
     {
-        void EquipMobWeapon(UnitsEntity unitsEntity, string weaponId, int weaponLevel);
+        void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint);
 
-        void CreateTestPlayerSkill(UnitsEntity player, string weaponId, int weaponLevel);
+        void CreateTestPlayerSkill(UnitsEntity player, SkillBlueprint skillBlueprint);
         void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner);
     }
 }

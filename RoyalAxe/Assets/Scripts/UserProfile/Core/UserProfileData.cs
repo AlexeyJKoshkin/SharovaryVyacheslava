@@ -12,8 +12,12 @@ namespace Core.UserProfile
     {
         //версия структуры
         public int FormatVersion { get; set; }
-        
-        //имя файла в котором хранится прогресс
-        //public abstract string FileName { get; }
+    }
+
+    [Serializable]
+    public struct SaveEntityRecord
+    {
+        public string Id;
+        public int Level;
     }
 }

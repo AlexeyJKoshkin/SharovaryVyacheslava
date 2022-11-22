@@ -1,62 +1,71 @@
 #region
-
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Configs;
-using TinyJSON;
-using UnityEngine;
+
+using GameKit;
 using VContainer.Unity;
-using static UnityEngine.PlayerPrefs;
+
 
 #endregion
 
 namespace Core.UserProfile
 {
-    public interface IUserSaveProfileStorage
+    public interface IUserSaveProfileStorage : IUserProgressProfile
     {
         ICurrentUserProgressProfileFacade Current { get; }
-        void ReloadSaves();
     }
 
-    public class UserSaveProfileStorage : IUserSaveProfileStorage, ICurrentUserProgressProfileFacade
+    public class UserSaveProfileStorage : IUserSaveProfileStorage,  IInitializable,ICurrentUserProgressProfileFacade
     {
+        public string ProfileName => _current.ProfileName;
+        public IUserLevelsProgress LevelProgressFacade => _current.LevelProgressFacade;
+        public IUserProfileHeroesProgress HeroesProgress => _current.HeroesProgress;
+        public IUserProfileWeaponsProgress WeaponProgress => _current.WeaponProgress;
         public ICurrentUserProgressProfileFacade Current => _current;
 
         private ICurrentUserProgressProfileFacade _current;
 
         private readonly IProfileProgressPartContextFactory _factory;
-        private readonly IReadOnlyList<IUserProgressPartFacade> _builders;
+        private readonly IReadOnlyList<IUserProgressPartFacade> _progressFacade;
 
-        public UserSaveProfileStorage(IProfileProgressPartContextFactory factory, IReadOnlyList<IUserProgressPartFacade> builders)
+        private readonly HashSet<IUserProgressPartFacade> _saveData = new HashSet<IUserProgressPartFacade>();
+
+        public UserSaveProfileStorage(IProfileProgressPartContextFactory factory, IReadOnlyList<IUserProgressPartFacade> progressFacade)
         {
             _factory = factory;
-            _builders = builders;
-        }
-
-        public void ReloadSaves()
+            _progressFacade = progressFacade;
+       }
+        public void Initialize()
         {
             _current = Load("DefaultProfile");
+            _progressFacade.ForEach(e=> e.OnSaveProgress += SaveProgressHandler);
         }
+
+        void SaveProgressHandler(IUserProgressPartFacade progressPartFacade)
+        {
+            _saveData.Add(progressPartFacade);
+        }
+
 
         ICurrentUserProgressProfileFacade Load(string profileName)
         {
             var context = _factory.CreateLocale(profileName); // Создаем текущий контекст для загрузки профиля
-            var result = new CurrentUserProgressProfileFacade(profileName);
-
-            foreach (var builder in _builders)
-            {
-                builder.LoadProgress(context, result);
-            }
+            var result = new CurrentGeneralUserProgressProfileFacade(profileName);
+            _progressFacade.ForEach((e=> e.LoadProgress(context, result)));
             return result;
         }
 
-        public string ProfileName => _current.ProfileName;
-        public T Get<T>()
+
+        public void Save()
         {
-            return _current.Get<T>();
+            if (_saveData.Count > 0)
+            {
+                var context = _factory.CreateLocale(_current.ProfileName); //создаем контекст текущего профайла
+                _saveData.ForEach(e=> e.SaveProgress(context));
+                _saveData.Clear();
+            }
         }
+
+   
+        
     }
 }

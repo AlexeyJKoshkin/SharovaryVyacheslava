@@ -1,9 +1,11 @@
 ﻿
+using RoyalAxe.GameEntitas;
+
 namespace RoyalAxe.CoreLevel
 {
     public interface IEnemyWaveGenerator 
     { 
-        void GenerateEnemy(string modDataMobId, byte modDataMobLevel);
+        void GenerateEnemy(MobBlueprint mobBlueprint);
         int CurrentMobAmount { get; }
     }
 

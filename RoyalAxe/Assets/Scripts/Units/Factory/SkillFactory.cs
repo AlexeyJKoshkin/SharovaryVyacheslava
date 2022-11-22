@@ -8,31 +8,30 @@ namespace RoyalAxe.GameEntitas
     public class SkillFactory : AbstractEntityFactory<SkillEntity, SkillContext>, ISkillFactory
     {
         private readonly ITimerFactory _timerFactory;
-        private readonly IDataStorage _storage;
         private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
         public SkillFactory(SkillContext skillContext,
                             ITimerFactory timerFactory,
-                            IDataStorage storage,
                             IUnitDamageApplierFactory unitDamageApplierFactory) : base(skillContext)
         {
             _timerFactory = timerFactory;
-            _storage      = storage;
             _unitDamageApplierFactory = unitDamageApplierFactory;
         }
-
-        public void EquipMobWeapon(UnitsEntity unit, string weaponId, int weaponLevel)
+        
+        public void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
-            var rangeData = EquipWeaponSkill(unit, weaponId, weaponLevel);
-            TryAddDefaultGunnerSkill(rangeData, unit);
+            EquipWeaponSkill(unit, skillBlueprint);
+            TryAddDefaultGunnerSkill(skillBlueprint.RangeData, unit);
         }
 
-        public void CreateTestPlayerSkill(UnitsEntity player, string weaponId, int weaponLevel)
+        
+        public void CreateTestPlayerSkill(UnitsEntity player, SkillBlueprint skillBlueprint)
         {
-            var range       = EquipWeaponSkill(player, weaponId, weaponLevel);
-            var playerSkill = CreateWeaponSkill(range, player);
+            EquipWeaponSkill(player, skillBlueprint);
+            var playerSkill = CreateWeaponSkill(skillBlueprint.RangeData, player);
             playerSkill.isDefaultPlayerSkill = true;
         }
+
 
         public void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner)
         {
@@ -58,12 +57,11 @@ namespace RoyalAxe.GameEntitas
             skill.AddGunnerMobSkill(mob);
         }
 
-        private SkillConfigDef.RangeParams EquipWeaponSkill(UnitsEntity unit, string weaponId, int level)
+        
+        private void EquipWeaponSkill(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
-            var weaponData = _storage.ById<WeaponsSkillConfigDef>(weaponId).GetByLevel(level);
-            unit.AddUnitEquipWeaponData(weaponData.damage, weaponData.rangeParams, weaponId, level);
-            AddDamageComponent(unit, weaponData.damage);
-            return weaponData.rangeParams;
+            unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
+            AddDamageComponent(unit, skillBlueprint.DamageData);
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)

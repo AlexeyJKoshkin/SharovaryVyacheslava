@@ -37,11 +37,12 @@ namespace RoyalAxe.CoreLevel
             return this;
         }
 
-        void IEnemyWaveGenerator.GenerateEnemy(string modDataMobId, byte modDataMobLevel)
+        void IEnemyWaveGenerator.GenerateEnemy(MobBlueprint mobBlueprint)
         {
             var mobReward = _levelWaveProvider.CurrentMobReward;
-            var pos = _generator.GetPosForNewMob(modDataMobId);
-            var entity = _unitsBuilder.CreateEnemyMobUnit(modDataMobId, modDataMobLevel, pos.startPoint);
+            var pos = _generator.GetPosForNewMob(mobBlueprint.Id);
+            mobBlueprint.Position = pos.startPoint;
+            var entity = _unitsBuilder.CreateEnemyMobUnit(mobBlueprint);
 
             if (!pos.endPoint.Equals(pos.startPoint))
             {

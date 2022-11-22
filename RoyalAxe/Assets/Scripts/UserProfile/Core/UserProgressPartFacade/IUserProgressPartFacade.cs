@@ -1,8 +1,11 @@
-﻿namespace Core.UserProfile
+﻿using System;
+
+namespace Core.UserProfile
 {
-    public interface IUserProgressPartFacade
+    public interface IUserProgressPartFacade : IUserProgressProfile
     {
         void SaveProgress(IProfileProgressStorageContext context);
-        void LoadProgress(IProfileProgressStorageContext context, IUserProfileProgressRoot currentUserProgressProfileFacade);
+        void LoadProgress(IProfileProgressStorageContext context, CurrentGeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade);
+        event Action<IUserProgressPartFacade> OnSaveProgress;
     }
 }

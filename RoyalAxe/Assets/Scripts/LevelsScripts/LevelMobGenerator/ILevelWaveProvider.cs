@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using RoyalAxe.GameEntitas;
 using RoyalAxe.LevelBuff;
 
 namespace RoyalAxe.CoreLevel 
@@ -11,7 +12,7 @@ namespace RoyalAxe.CoreLevel
         MobDeathReward CurrentMobReward { get;  }
         bool HasMob { get; }
         LevelBuffType[] CurrentBuffs { get; }
-        MobAtLevelData GenerateMobData();
+        MobBlueprint GenerateMobData();
         bool HasWave { get; }
     }
 

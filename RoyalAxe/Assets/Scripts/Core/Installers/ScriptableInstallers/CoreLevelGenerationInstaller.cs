@@ -54,6 +54,7 @@ namespace Core
             Container.Register<MobSpawnOperation>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<MobSpawnFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<WaveLevelSwitcher>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<MobBlueprintsForSpawnStorage>(Lifetime.Singleton).AsImplementedInterfaces();
 
         }
 

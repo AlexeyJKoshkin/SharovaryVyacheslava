@@ -6,12 +6,16 @@ namespace Core.UserProfile
     {
         public UserAllHeroesProgress CreateDefault()
         {
-            var current = new HeroProgressData();
+            var current = new HeroProgressData()
+            {
+               CharacterRecord = new SaveEntityRecord(){Id = "Default_Hero", Level = 1},
+               EquipWeapon = "Weapon_Player_default"
+            };
 
             return new UserAllHeroesProgress()
             {
-                ProgressData = new List<HeroProgressData>(){current},
-                SelectedHeroId = current.CharacterId
+                SavedHeroes = new List<HeroProgressData>(){current},
+                SelectedHeroId = current.CharacterRecord.Id
             };
         }
     }

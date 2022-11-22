@@ -26,7 +26,7 @@ namespace Core.Configs
         {
             if (!File.Exists(path))
             {
-                File.Create(path);
+                File.Create(path).Close();
             }
 
             File.WriteAllText(path, json);
