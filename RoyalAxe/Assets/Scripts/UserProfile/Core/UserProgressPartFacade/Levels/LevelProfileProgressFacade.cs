@@ -1,34 +1,26 @@
-﻿using RoyalAxe.CoreLevel;
-
-namespace Core.UserProfile
+﻿namespace Core.UserProfile
 {
-    public class LevelProfileProgressSaveLoaderAdapter : UserProfileProgressSaveLoaderAdapter<UserLevelProgress>,IUserLevelsProgress
+    public class LevelProfileProgressFacade : UserProgressPartFacade<UserLevelProgress>, IUserLevelsProgress
     {
         protected override string Key => "Levels";
-        
-        public LevelProfileProgressSaveLoaderAdapter(IUserProgressPartFactory<UserLevelProgress> loader) : base(loader) { }
-        public LastLevel SavedLevel   {
-            get { return Progress.LastSavedLevel; }
+        public LastLevel SavedLevel
+        {
+            get => Progress.LastSavedLevel;
             set
             {
                 Progress.LastSavedLevel = value;
                 SetDirty();
             }
-        } 
+        }
         public LastLevel LastPlayed
         {
-            get { return Progress.LastPlayedLevel; }
+            get => Progress.LastPlayedLevel;
             set
             {
                 Progress.LastPlayedLevel = value;
                 SetDirty();
             }
-        } 
-        
-
-        protected override void SetToMainFacade(GeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade)
-        {
-            currentGeneralUserProgressProfileFacade.LevelProgressFacade = this;
         }
+        public LevelProfileProgressFacade(IUserProgressPartSaveLoader progressAdapter) : base(progressAdapter) { }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Core.UserProfile
 {
     /// <summary>
-    /// Общий прогресс профиля
+    ///     Общий прогресс профиля
     /// </summary>
     public interface IGeneralProfileProgress : IUserProgressProfile
     {
@@ -27,7 +27,7 @@
         public int CurrentEnergy;
     }
 
-    public class GeneralProfileProgress: BaseUserProgressData
+    public class GeneralProfileProgress : BaseUserProgressData
     {
         public ProfileWalletProgress Wallet;
         public EnergyProgressSaveData Energy;

@@ -21,6 +21,9 @@ namespace RoyalAxe.GameEntitas
     
     [Units]
     public class PoisonDamageStatComponent : ModifiableStat { }
+    
+    [Units]
+    public class BloodDamageStatComponent : ModifiableStat { }
 
     [Units]
     public class AttackSpeedComponent : ModifiableStat { }

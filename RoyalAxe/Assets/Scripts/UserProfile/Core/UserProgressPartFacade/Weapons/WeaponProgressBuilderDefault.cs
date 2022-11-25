@@ -2,19 +2,19 @@
 
 namespace Core.UserProfile
 {
-    public class WeaponProgressBuilderDefault : IDefaultProgressFactory<UserAllWeaponsProgress>
+    public class WeaponProgressBuilderDefault : BaseDefaultProgressFactory<UserAllWeaponsProgress>
     {
-        public UserAllWeaponsProgress CreateDefault()
+        public override UserAllWeaponsProgress CreateDefault()
         {
-            var current = new WeaponProgressData()
+            var current = new WeaponProgressData
             {
                 Id = "weapon_grey_axe_1", Level = 1
             };
 
-            return new UserAllWeaponsProgress()
+            return new UserAllWeaponsProgress
             {
-                WeaponProgressData = new List<WeaponProgressData>(){current},
-    };
+                WeaponProgressData = new List<WeaponProgressData> {current}
+            };
         }
     }
 }

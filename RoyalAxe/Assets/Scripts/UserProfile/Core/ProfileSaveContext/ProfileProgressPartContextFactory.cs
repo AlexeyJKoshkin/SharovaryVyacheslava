@@ -8,8 +8,9 @@ namespace Core.UserProfile
     {
         LocalUserProfileContext CreateLocale(string profileName);
     }
+
     /// <summary>
-    /// Создаем контекст сохранения, для немедленного использования
+    ///     Создаем контекст сохранения, для немедленного использования
     /// </summary>
     public class ProfileProgressPartContextFactory : IProfileProgressPartContextFactory, IInitializable
     {
@@ -19,7 +20,7 @@ namespace Core.UserProfile
         public ProfileProgressPartContextFactory(ITextFileOperation textFileOperation, IUserSavePathSettings settings)
         {
             _textFileOperation = textFileOperation;
-            _settings = settings;
+            _settings          = settings;
         }
 
         public LocalUserProfileContext CreateLocale(string profileName)
@@ -34,9 +35,13 @@ namespace Core.UserProfile
             CreateFolder(_settings.RootPath);
         }
 
-        void CreateFolder(string path)
+        private void CreateFolder(string path)
         {
-            if (Directory.Exists(path)) return;
+            if (Directory.Exists(path))
+            {
+                return;
+            }
+
             Directory.CreateDirectory(path);
         }
     }

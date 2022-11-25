@@ -1,15 +1,13 @@
-﻿using RoyalAxe.CoreLevel;
-
-namespace Core.UserProfile
+﻿namespace Core.UserProfile
 {
-    public class LevelProgressBuilderDefault : IDefaultProgressFactory<UserLevelProgress>
+    public class LevelProgressBuilderDefault : BaseDefaultProgressFactory<UserLevelProgress>
     {
-        public UserLevelProgress CreateDefault()
+        public override UserLevelProgress CreateDefault()
         {
-            return new UserLevelProgress()
+            return new UserLevelProgress
             {
                 LastPlayedLevel = LastLevel.Default,
-                LastSavedLevel = LastLevel.Default
+                LastSavedLevel  = LastLevel.Default
             };
         }
     }

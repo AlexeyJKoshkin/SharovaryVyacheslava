@@ -2,40 +2,42 @@
 
 namespace Core.UserProfile
 {
-    public interface IUserProgressPartFactory<TProgressData> where TProgressData : BaseUserProgressData
+    public interface IUserProgressPartSaveLoader
     {
-        TProgressData LoadTo(string json);
-        string ToJson(TProgressData data);
+        TProgressData LoadTo<TProgressData>(string json) where TProgressData : BaseUserProgressData, new();
+        string ToJson<TProgressData>(TProgressData data) where TProgressData : BaseUserProgressData, new();
     }
 
-    public class UserProgressLoader<TData> : IUserProgressPartFactory<TData> where TData : BaseUserProgressData 
+    public class UserProgressLoader : IUserProgressPartSaveLoader
     {
         private readonly IJsonConverter _jsonConverter;
-        private readonly IDefaultProgressFactory<TData> _defaultProgressFactory;
+        private readonly IDefaultProgressCompositeFactory _defaultProgressFactory;
+
         public UserProgressLoader(IJsonConverter jsonConverter,
-                                  IDefaultProgressFactory<TData> defaultProgressFactory
-        )
+                                  IDefaultProgressCompositeFactory defaultProgressFactory)
         {
             _jsonConverter          = jsonConverter;
             _defaultProgressFactory = defaultProgressFactory;
         }
 
 
-        public TData LoadTo(string json)
+        public TData LoadTo<TData>(string json) where TData : BaseUserProgressData, new()
         {
-            return  Parse(json) ?? _defaultProgressFactory.CreateDefault();
+            return Parse<TData>(json) ?? _defaultProgressFactory.CreateDefault<TData>();
         }
 
-        public string ToJson(TData data)
+        public string ToJson<TData>(TData data) where TData : BaseUserProgressData, new()
         {
-            data ??= _defaultProgressFactory.CreateDefault();
+            data ??= _defaultProgressFactory.CreateDefault<TData>();
             return _jsonConverter.SerializeObject(data);
-
         }
 
-        private TData Parse(string json)
+        private TData Parse<TData>(string json) where TData : BaseUserProgressData, new()
         {
-            if (string.IsNullOrEmpty(json)) return null;
+            if (string.IsNullOrEmpty(json))
+            {
+                return null;
+            }
 
             try
             {
@@ -44,7 +46,7 @@ namespace Core.UserProfile
             catch (Exception e)
             {
                 HLogger.LogException(e);
-                return _defaultProgressFactory.CreateDefault();
+                return _defaultProgressFactory.CreateDefault<TData>();
             }
         }
     }

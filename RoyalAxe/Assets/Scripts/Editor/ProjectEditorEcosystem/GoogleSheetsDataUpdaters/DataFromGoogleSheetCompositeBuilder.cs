@@ -9,6 +9,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
     public class DataFromGoogleSheetCompositeBuilder<T>
     {
+      
         private readonly Dictionary<string, IGameDataParser> _fieldCustomParsers = new Dictionary<string, IGameDataParser>();
         private readonly Dictionary<string, FieldInfo> _fieldNameMap = new Dictionary<string, FieldInfo>();
 
@@ -41,7 +42,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 
         private void LoadField(Type type)
         {
-            foreach (var fieldInfo in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public))
+            foreach (var fieldInfo in Fields(type))
             {
                 AddPageField(fieldInfo);
             }
@@ -57,8 +58,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         {
             var attribute = fieldInfo.GetCustomAttribute<GoogleSheetPageNameAttribute>();
             if (attribute == null) return;
-            string pageName = attribute.SameAsFieldName ? fieldInfo.Name : attribute.PageName;
-
+            string pageName = GetPageName(attribute, fieldInfo);
 
             if (_fieldCustomParsers.ContainsKey(pageName))
             {
@@ -66,9 +66,34 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                 return;
             }
 
-            var parserType = typeof(GenericParser<>).MakeGenericType(fieldInfo.FieldType);
-            _fieldCustomParsers.Add(pageName, Activator.CreateInstance(parserType) as IGameDataParser);
+            var parser = Activator.CreateInstance(typeof(CompositeGenericParser)) as CompositeGenericParser;
+            parser.Bind(fieldInfo.FieldType);
+            
+            
+            _fieldCustomParsers.Add(pageName,parser);
             _fieldNameMap.Add(pageName, fieldInfo);
+        }
+
+       
+
+        FieldInfo[] Fields(Type type)
+        {
+            return type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+        }
+
+        private string GetPageName(GoogleSheetPageNameAttribute attribute, FieldInfo fieldInfo)
+        {
+            switch (attribute.FieldName)
+            {
+                case GoogleSheetPageNameAttribute.FieldNameType.SameAsFieldName:
+                    return fieldInfo.Name;
+                case GoogleSheetPageNameAttribute.FieldNameType.Custom:
+                    return attribute.PageName;
+                case GoogleSheetPageNameAttribute.FieldNameType.SameAsTypeName:
+                    return fieldInfo.FieldType.Name;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

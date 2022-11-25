@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.UserProfile {
+namespace Core.UserProfile
+{
     [Serializable]
     public class UserAllHeroesProgress : BaseUserProgressData
     {

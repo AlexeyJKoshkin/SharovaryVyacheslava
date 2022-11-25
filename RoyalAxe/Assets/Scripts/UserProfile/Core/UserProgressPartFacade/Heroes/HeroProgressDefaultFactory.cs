@@ -2,18 +2,18 @@
 
 namespace Core.UserProfile
 {
-    class HeroProgressDefaultFactory :  IDefaultProgressFactory<UserAllHeroesProgress>
+    internal class HeroProgressDefaultFactory : BaseDefaultProgressFactory<UserAllHeroesProgress>
     {
-        public UserAllHeroesProgress CreateDefault()
+        public override UserAllHeroesProgress CreateDefault()
         {
-            var current = new HeroProgressData()
+            var current = new HeroProgressData
             {
                 Id = "Default_Hero", Level = 1
             };
 
-            return new UserAllHeroesProgress()
+            return new UserAllHeroesProgress
             {
-                SavedHeroes = new List<HeroProgressData>(){current},
+                SavedHeroes    = new List<HeroProgressData> {current},
                 SelectedHeroId = current.Id
             };
         }

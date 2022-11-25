@@ -2,41 +2,57 @@
 
 namespace Core.UserProfile
 {
-    public interface IUserProgressSaveLoader : IUserProgressProfile
-    {
-        void SaveProgress(IProfileProgressStorageContext context);
-        void LoadProgress(IProfileProgressStorageContext context, GeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade);
-        event Action<IUserProgressSaveLoader> OnSaveProgress;
-    }
-
-    public interface IIUserProgressAdapter<TData> :IUserProgressProfile where TData : BaseUserProgressData
-    {
-        TData Progress { get; }
-    }
-
     public interface IUserProgressPartFacade
     {
-        void InitTo(GeneralUserProgressProfileFacade result);
+        event Action<IUserProgressPartFacade> OnSaveProgress;
+        void SaveProgress(IProfileProgressStorageContext context);
+        void LoadProgress(IProfileProgressStorageContext context);
     }
 
-    public abstract class UserProgressPartFacade<TData> :IUserProgressPartFacade  where TData : BaseUserProgressData
+    public abstract class UserProgressPartFacade<TData> : IUserProgressPartFacade, IUserProgressProfile where TData : BaseUserProgressData, new()
+
     {
-        private readonly IIUserProgressAdapter<TData> _progressAdapter;
+        private readonly IUserProgressPartSaveLoader _loader;
+        public event Action<IUserProgressPartFacade> OnSaveProgress;
+        protected abstract string Key { get; }
 
-        protected TData Progress => _progressAdapter.Progress;
+        private bool _isSetDirty;
 
-        public UserProgressPartFacade(IIUserProgressAdapter<TData> progressAdapter)
+
+        protected TData Progress { get; private set; }
+
+        public UserProgressPartFacade(IUserProgressPartSaveLoader loader)
         {
-            _progressAdapter = progressAdapter;
+            _loader = loader;
         }
-        
+
         protected void SetDirty()
         {
-            _progressAdapter?.Save();
+            if (_isSetDirty)
+            {
+                return;
+            }
+
+            OnSaveProgress?.Invoke(this);
+            _isSetDirty = true;
         }
 
-        public abstract void InitTo(GeneralUserProgressProfileFacade result);
+        void IUserProgressPartFacade.SaveProgress(IProfileProgressStorageContext context)
+        {
+            var json = _loader.ToJson(Progress);
+            context.Save(json, Key);
+            _isSetDirty = false;
+        }
 
-        
+        void IUserProgressPartFacade.LoadProgress(IProfileProgressStorageContext context)
+        {
+            var json = context.Load(Key);
+            Progress = _loader.LoadTo<TData>(json);
+        }
+
+        void IUserProgressProfile.Save()
+        {
+            SetDirty();
+        }
     }
 }

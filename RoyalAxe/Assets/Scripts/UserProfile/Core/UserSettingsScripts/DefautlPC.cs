@@ -8,8 +8,8 @@ namespace Core.UserProfile
     public class DefautlPC : UserSavePathSettings
     {
         public override string RootPath => _rootPath;
-        [field: SerializeField] [FolderPath]
-        protected string _rootPath;
+        [field: SerializeField] [FolderPath] protected string _rootPath;
+
         public DefautlPC()
         {
             _rootPath = "Assets/Temp/[Editor_Save_folder]/";

@@ -2,14 +2,14 @@
 
 namespace Core.UserProfile
 {
-    class InventoryProfileProgressDefaultFactory :  IDefaultProgressFactory<ProfileInventoryProgress>
+    internal class InventoryProfileProgressDefaultFactory : BaseDefaultProgressFactory<ProfileInventoryProgress>
     {
-        public ProfileInventoryProgress CreateDefault()
+        public override ProfileInventoryProgress CreateDefault()
         {
-            return new ProfileInventoryProgress()
+            return new ProfileInventoryProgress
             {
-                BagItems  = new List<ItemInBagRecord>(),
-                EquipItemsProgress = new EquipItemsProgress()
+                BagItems = new List<ItemInBagRecord>(),
+                EquipItemsProgress = new EquipItemsProgress
                 {
                     EquipWeaponId = "weapon_grey_axe_1"
                 }

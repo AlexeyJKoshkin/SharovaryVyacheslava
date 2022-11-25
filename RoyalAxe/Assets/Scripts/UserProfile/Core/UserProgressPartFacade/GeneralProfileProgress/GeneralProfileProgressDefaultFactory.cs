@@ -1,13 +1,13 @@
 ﻿namespace Core.UserProfile
 {
-    class GeneralProfileProgressDefaultFactory :  IDefaultProgressFactory<GeneralProfileProgress>
+    internal class GeneralProfileProgressDefaultFactory : BaseDefaultProgressFactory<GeneralProfileProgress>
     {
-        public GeneralProfileProgress CreateDefault()
+        public override GeneralProfileProgress CreateDefault()
         {
-            return new GeneralProfileProgress()
+            return new GeneralProfileProgress
             {
                 ProfileLevel = 1,
-                Wallet = new ProfileWalletProgress(){SoftCurrency = 100, HardCurrency = 100}
+                Wallet       = new ProfileWalletProgress {SoftCurrency = 100, HardCurrency = 100}
             };
         }
     }

@@ -11,7 +11,7 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.DamageComponent damage { get { return (RoyalAxe.GameEntitas.DamageComponent)GetComponent(UnitsComponentsLookup.Damage); } }
     public bool hasDamage { get { return HasComponent(UnitsComponentsLookup.Damage); } }
 
-    public void AddDamage(System.Collections.Generic.List<RoyalAxe.ISimpleDamageApplier> newSingleDamage, System.Collections.Generic.List<RoyalAxe.IPeriodicDamageApplier> newPeriodicDamage) {
+    public void AddDamage(System.Collections.Generic.List<RoyalAxe.ISimpleInfluenceApplier> newSingleDamage, System.Collections.Generic.List<RoyalAxe.IPeriodicInfluenceApplier> newPeriodicDamage) {
         var index = UnitsComponentsLookup.Damage;
         var component = (RoyalAxe.GameEntitas.DamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.DamageComponent));
         component.SingleDamage = newSingleDamage;
@@ -19,7 +19,7 @@ public partial class UnitsEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceDamage(System.Collections.Generic.List<RoyalAxe.ISimpleDamageApplier> newSingleDamage, System.Collections.Generic.List<RoyalAxe.IPeriodicDamageApplier> newPeriodicDamage) {
+    public void ReplaceDamage(System.Collections.Generic.List<RoyalAxe.ISimpleInfluenceApplier> newSingleDamage, System.Collections.Generic.List<RoyalAxe.IPeriodicInfluenceApplier> newPeriodicDamage) {
         var index = UnitsComponentsLookup.Damage;
         var component = (RoyalAxe.GameEntitas.DamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.DamageComponent));
         component.SingleDamage = newSingleDamage;

@@ -1,4 +1,1 @@
-namespace Core.UserProfile 
-{
-
-}
+namespace Core.UserProfile {}

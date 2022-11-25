@@ -1,6 +1,4 @@
-using RoyalAxe.CoreLevel;
-
-namespace Core.UserProfile 
+namespace Core.UserProfile
 {
     public interface IUserLevelsProgress : IUserProgressProfile
     {

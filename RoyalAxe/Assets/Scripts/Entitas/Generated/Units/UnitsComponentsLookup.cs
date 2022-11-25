@@ -12,47 +12,51 @@ public static class UnitsComponentsLookup {
     public const int ActiveUnitBuff = 1;
     public const int AdditionalBoson = 2;
     public const int AttackSpeed = 3;
-    public const int Boson = 4;
-    public const int ColdDamageStat = 5;
-    public const int Damage = 6;
-    public const int DeadUnit = 7;
-    public const int DestroyUnit = 8;
-    public const int EnterPhysicInteraction = 9;
-    public const int ExitPhysicInteraction = 10;
-    public const int FireDamageStat = 11;
-    public const int Health = 12;
-    public const int HitUnit = 13;
-    public const int Mob = 14;
-    public const int MobDeathReward = 15;
-    public const int MoveSpeed = 16;
-    public const int MovingToPoint = 17;
-    public const int PhysicalDamageStat = 18;
-    public const int PlayerBoson = 19;
-    public const int Player = 20;
-    public const int PoisonDamageStat = 21;
-    public const int PossibleTargets = 22;
-    public const int SpriteRender = 23;
-    public const int UniqueUnitGUID = 24;
-    public const int UnitActiveSkill = 25;
-    public const int UnitAnimationEntity = 26;
-    public const int UnitBehavior = 27;
-    public const int Unit = 28;
-    public const int UnitEquipWeaponData = 29;
-    public const int UnitPhysicCollider = 30;
-    public const int UnitsView = 31;
-    public const int UnitsViewListener = 32;
+    public const int BloodDamageStat = 4;
+    public const int Boson = 5;
+    public const int ColdDamageStat = 6;
+    public const int Damage = 7;
+    public const int DeadUnit = 8;
+    public const int DeBuffInfluence = 9;
+    public const int DestroyUnit = 10;
+    public const int EnterPhysicInteraction = 11;
+    public const int ExitPhysicInteraction = 12;
+    public const int FireDamageStat = 13;
+    public const int Health = 14;
+    public const int HitUnit = 15;
+    public const int Mob = 16;
+    public const int MobDeathReward = 17;
+    public const int MoveSpeed = 18;
+    public const int MovingToPoint = 19;
+    public const int PhysicalDamageStat = 20;
+    public const int PlayerBoson = 21;
+    public const int Player = 22;
+    public const int PoisonDamageStat = 23;
+    public const int PossibleTargets = 24;
+    public const int SpriteRender = 25;
+    public const int UniqueUnitGUID = 26;
+    public const int UnitActiveSkill = 27;
+    public const int UnitAnimationEntity = 28;
+    public const int UnitBehavior = 29;
+    public const int Unit = 30;
+    public const int UnitEquipWeaponData = 31;
+    public const int UnitPhysicCollider = 32;
+    public const int UnitsView = 33;
+    public const int UnitsViewListener = 34;
 
-    public const int TotalComponents = 33;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "HealthListener",
         "ActiveUnitBuff",
         "AdditionalBoson",
         "AttackSpeed",
+        "BloodDamageStat",
         "Boson",
         "ColdDamageStat",
         "Damage",
         "DeadUnit",
+        "DeBuffInfluence",
         "DestroyUnit",
         "EnterPhysicInteraction",
         "ExitPhysicInteraction",
@@ -85,10 +89,12 @@ public static class UnitsComponentsLookup {
         typeof(RoyalAxe.GameEntitas.ActiveUnitBuffComponent),
         typeof(RoyalAxe.GameEntitas.AdditionalBosonComponent),
         typeof(RoyalAxe.GameEntitas.AttackSpeedComponent),
+        typeof(RoyalAxe.GameEntitas.BloodDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.BosonComponent),
         typeof(RoyalAxe.GameEntitas.ColdDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.DamageComponent),
         typeof(RoyalAxe.GameEntitas.DeadUnit),
+        typeof(RoyalAxe.GameEntitas.DeBuffInfluenceComponent),
         typeof(RoyalAxe.GameEntitas.DestroyUnitComponent),
         typeof(RoyalAxe.GameEntitas.EnterPhysicInteractionComponent),
         typeof(RoyalAxe.GameEntitas.ExitPhysicInteractionComponent),

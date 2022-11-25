@@ -26,7 +26,8 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         }
         public CompositeGenericParser Bind(Type type)
         {
-            return _dataParser.Bind(type);
+            _dataParser.Bind(type);
+            return _dataParser;
         }
 
         public void UpdateConfigs(List<GoogleSheetGameData> allPages, IJsonConfigModelsOperation operation)

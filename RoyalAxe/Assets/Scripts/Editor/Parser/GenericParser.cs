@@ -54,8 +54,6 @@ namespace Core.Parser
         private readonly Dictionary<Type, IComplexTypeParser> _complexTypeParsers = new Dictionary<Type, IComplexTypeParser>();
 //имя колонки -> описание поля
         private readonly Dictionary<string, FieldInfo> _fieldNameMap = new Dictionary<string, FieldInfo>();
-      
-
         private readonly Dictionary<Type, MethodInfo> _simpleTypeParserMethod = new Dictionary<Type, MethodInfo>();
 
         public GenericParser()

@@ -1,4 +1,5 @@
-namespace Core.UserProfile {
+namespace Core.UserProfile
+{
     public interface IUserProfileHeroesProgress : IUserProgressProfile
     {
         HeroProgressData CurrentHero { get; }

@@ -8,14 +8,14 @@ namespace RoyalAxe.GameEntitas
     public class SkillFactory : AbstractEntityFactory<SkillEntity, SkillContext>, ISkillFactory
     {
         private readonly ITimerFactory _timerFactory;
-        private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
+        private IUnitAddDamageToSkillUtility _toSkillUtility;
 
         public SkillFactory(SkillContext skillContext,
                             ITimerFactory timerFactory,
-                            IUnitDamageApplierFactory unitDamageApplierFactory) : base(skillContext)
+                            IUnitAddDamageToSkillUtility toSkillUtility) : base(skillContext)
         {
             _timerFactory = timerFactory;
-            _unitDamageApplierFactory = unitDamageApplierFactory;
+            _toSkillUtility = toSkillUtility;
         }
         
         public void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint)
@@ -36,8 +36,8 @@ namespace RoyalAxe.GameEntitas
         public void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner)
         {
             var weaponData = owner.unitEquipWeaponData;
-
-            AddDamageComponent(boson, weaponData.Damage);
+         
+            _toSkillUtility. AddDamageToUnit(boson.damage, weaponData.Damage);
 
             boson.ReplaceMoveSpeed(new CharacterStatValue
             {
@@ -61,7 +61,7 @@ namespace RoyalAxe.GameEntitas
         private void EquipWeaponSkill(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
             unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
-            AddDamageComponent(unit, skillBlueprint.DamageData);
+            _toSkillUtility.AddDamageToUnit(unit.damage, skillBlueprint.DamageData);
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)
@@ -72,41 +72,8 @@ namespace RoyalAxe.GameEntitas
             unit.AddUnitActiveSkill(skill);
             return skill;
         }
-
-
-        private void AddDamageComponent(UnitsEntity unit, SkillConfigDef.Damage damage)
-        {
-            var list = new List<ISimpleDamageApplier>();
-
-            IPeriodicDamageApplier periodicDamage = null;
-
-            var simplePhysDamage = _unitDamageApplierFactory.CreateOneMomentDamage(DamageType.Physical, damage.PhysicalDamage); 
-            list.Add(simplePhysDamage);
-
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
-            {
-                var simpleElementalDamage = _unitDamageApplierFactory.CreateOneMomentDamage(damage.ElementalDamageType, damage.ElementalDamage);
-                list.Add(simpleElementalDamage);
-            }
-
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
-            {
-                var periodicDamageInfluenceData = new PeriodicDamageInfluenceData
-                {
-                    MagicDuration       = damage.MagicDuration,
-                    DamageCooldown      = damage.DamageCooldown,
-                    Damage              = damage.ElementalDamage,
-                    ElementalDamageType = damage.ElementalDamageType
-                };
-
-                periodicDamage = _unitDamageApplierFactory.CreatePeriodicDamage(periodicDamageInfluenceData);
-            }
-
-            var periodic = periodicDamage == null
-                ? new List<IPeriodicDamageApplier>()
-                : new List<IPeriodicDamageApplier> {periodicDamage};
-
-            unit.AddDamage(list, periodic);
-        }
+     
     }
+
+  
 }

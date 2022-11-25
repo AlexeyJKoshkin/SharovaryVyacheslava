@@ -2,19 +2,24 @@ using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe
 {
-    public interface IDamageApplier
+    public interface IInfluenceApplier
     {
         void Apply(UnitsEntity attacker, UnitsEntity target);
-        DamageType Type { get; }
+     
     }
 
-    public interface ISimpleDamageApplier : IDamageApplier
+    public interface ISimpleInfluenceApplier : IInfluenceApplier
     {
+        DamageType Type { get; }
         float Value { get; }
         void AddDamage(float damageValue);
     }
 
-    public interface IPeriodicDamageApplier : IDamageApplier
+    public interface IPeriodicInfluenceApplier : IInfluenceApplier
+    {
+    }
+
+    public interface IDeBuffApplier : IInfluenceApplier
     {
         
     }

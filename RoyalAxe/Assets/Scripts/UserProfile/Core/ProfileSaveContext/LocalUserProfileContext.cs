@@ -11,7 +11,7 @@ namespace Core.UserProfile
 
         public LocalUserProfileContext(ITextFileOperation textFileOperation, string rootProfileDirectory)
         {
-            _textFileOperation = textFileOperation;
+            _textFileOperation    = textFileOperation;
             _rootProfileDirectory = rootProfileDirectory;
         }
 

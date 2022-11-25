@@ -5,14 +5,16 @@ using Entitas;
 namespace RoyalAxe.GameEntitas
 {
     /// <summary>
-    ///     Дефолтное оружие ближнего боя
+    ///    Вооще весь урон который наносит игрок
     /// </summary>
     [Units]
-    public class DamageComponent : IComponent, IEnumerable<IDamageApplier>
+    public class DamageComponent : IComponent, IEnumerable<IInfluenceApplier>
     {
-        public List<ISimpleDamageApplier> SingleDamage;
-        public List<IPeriodicDamageApplier> PeriodicDamage;
-        public IEnumerator<IDamageApplier> GetEnumerator()
+        public ISimpleInfluenceApplier MainSimpleInfluence => SingleDamage.Count == 0 ? null : SingleDamage[0];
+        
+        public List<ISimpleInfluenceApplier> SingleDamage;
+        public List<IPeriodicInfluenceApplier> PeriodicDamage;
+        public IEnumerator<IInfluenceApplier> GetEnumerator()
         {
             for (int i = 0; i < SingleDamage.Count; i++)
             {
@@ -29,5 +31,11 @@ namespace RoyalAxe.GameEntitas
         {
             return GetEnumerator();
         }
+    }
+
+    [Units]
+    public class DeBuffInfluenceComponent : AbstractCollectionComponent<HashSet<IDeBuffApplier>,IDeBuffApplier>
+    {
+        
     }
 }

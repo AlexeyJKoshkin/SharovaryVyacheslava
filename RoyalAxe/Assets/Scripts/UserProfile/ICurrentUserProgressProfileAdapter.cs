@@ -8,7 +8,6 @@
         IUserProfileHeroesProgress HeroesProgress { get; }
         IUserProfileWeaponsProgress WeaponProgress { get; }
         IInventoryProgress InventoryProgress { get; }
-
     }
 
     public interface IUserProgressProfile

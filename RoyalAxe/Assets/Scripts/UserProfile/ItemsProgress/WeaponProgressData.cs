@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.UserProfile {
+namespace Core.UserProfile
+{
     [Serializable]
-    public class WeaponProgressData : SaveEntityRecord
-    {
-    }
-    
+    public class WeaponProgressData : SaveEntityRecord { }
+
     [Serializable]
     public class UserAllWeaponsProgress : BaseUserProgressData
     {

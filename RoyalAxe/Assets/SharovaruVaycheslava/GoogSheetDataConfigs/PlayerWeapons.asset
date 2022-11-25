@@ -16,7 +16,7 @@ MonoBehaviour:
   _configUpdater:
     id: 0
   _pages:
-  - PageName: Weapon_Player_default
+  - PageName: weapon_grey_axe_1
     FolderState: 10
   references:
     version: 1

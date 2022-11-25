@@ -2,7 +2,7 @@
 
 namespace Core.UserProfile
 {
-    public class GeneralProfileProgressSaveLoaderAdapter : UserProfileProgressSaveLoaderAdapter<GeneralProfileProgress>, IGeneralProfileProgress, IWalletProfile
+    public class GeneralProfileProgressFacade : UserProgressPartFacade<GeneralProfileProgress>, IGeneralProfileProgress, IWalletProfile
     {
         public int Gold => Progress.Wallet.SoftCurrency;
         public int Gems => Progress.Wallet.HardCurrency;
@@ -10,13 +10,8 @@ namespace Core.UserProfile
         public IWalletProfile Wallet => this;
         public int ProfileLevel => Progress.ProfileLevel;
 
-        public GeneralProfileProgressSaveLoaderAdapter(IUserProgressPartFactory<GeneralProfileProgress> loader) : base(loader) { }
+        public GeneralProfileProgressFacade(IUserProgressPartSaveLoader progressAdapter) : base(progressAdapter) { }
         protected override string Key => "Common";
-
-        protected override void SetToMainFacade(GeneralUserProgressProfileFacade currentGeneralUserProgressProfileFacade)
-        {
-            currentGeneralUserProgressProfileFacade.GeneralProgress = this;
-        }
 
         void IWalletProfile.AddGems(int delta)
         {

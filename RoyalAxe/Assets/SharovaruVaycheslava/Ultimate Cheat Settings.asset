@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869ab2d6207848c0b2a87c06b9a2330f, type: 3}
+  m_Script: {fileID: 11500000, guid: fcef557e5d6677647bdde6e1f9a72947, type: 3}
   m_Name: Ultimate Cheat Settings
   m_EditorClassIdentifier: 
   EnableCheats: 1
   EnableRender: 1
-  StartCustomLevel: 1
+  StartCustomLevel: 0
   LevelParams:
-    BiomeType: 0
-    StartLevel: 3
+    Biome: 0
+    LevelNumber: 0

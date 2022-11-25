@@ -1,5 +1,4 @@
-﻿
-namespace Core.UserProfile
+﻿namespace Core.UserProfile
 {
     public interface IUserProfileWeaponsProgress : IUserProgressProfile
     {
