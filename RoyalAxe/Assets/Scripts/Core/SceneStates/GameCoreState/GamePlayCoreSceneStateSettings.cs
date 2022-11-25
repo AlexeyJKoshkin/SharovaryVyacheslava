@@ -66,7 +66,11 @@ namespace Core.Launcher
         {
             return FeatureBindInfo.Create("Общие кор системы")
                                   .Bind<ChunkMovingSystem>()
-                                  .Bind<LevelExperienceSystem>();
+                                  .Bind<LevelExperienceSystem>()
+                                  .Bind<SaveTempProgressEachLevel>()
+                                  .Bind<SaveUserProgressEvery10Level>();
+
+
         }
 
         private FeatureBindInfo CleaningSystems()

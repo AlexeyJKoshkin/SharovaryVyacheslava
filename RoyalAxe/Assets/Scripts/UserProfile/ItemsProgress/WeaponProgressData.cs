@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Core.UserProfile {
     [Serializable]
-    public class WeaponProgressData
+    public class WeaponProgressData : SaveEntityRecord
     {
-        public SaveEntityRecord Weapon;
     }
     
     [Serializable]

@@ -6,27 +6,27 @@ using RoyalAxe.CoreLevel;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
-    internal class LevelConfigSettingDefToFile : ModelsToJsonFile<LevelGeneratorSettings>
+    internal class LevelConfigSettingDefToFile : ModelsToJsonFile<LevelSettingsData>
     {
         readonly MobSpawnConfigData _mobSpawnParserHelper = new MobSpawnConfigData();
         
         public LevelConfigSettingDefToFile()
         {
-            Bind<LevelGeneratorSettings>();
+            Bind<LevelSettingsData>();
             Bind<MobDeathReward>();
             Bind<WaveDestiny>();
         }
 
-        protected override void RemoveUpdateConfigs(List<LevelGeneratorSettings> allExistItems, List<GoogleSheetGameData> allPages)
+        protected override void RemoveUpdateConfigs(List<LevelSettingsData> allExistItems, List<GoogleSheetGameData> allPages)
         {
             allExistItems.Clear();
         }
 
-        protected override IEnumerable<LevelGeneratorSettings> Parse(GoogleSheetGameData page, IGameDataParser parser)
+        protected override IEnumerable<LevelSettingsData> Parse(GoogleSheetGameData page, IGameDataParser parser)
         {
             for (int i = 0; i < page.Cells.Count; i++)
             {
-                LevelGeneratorSettings result = new LevelGeneratorSettings();
+                LevelSettingsData result = new LevelSettingsData();
                 var levelCells = page.Cells[i];                       // тут содержится инфа об волнах уровня
                 parser.UpdateObject(levelCells, result);              // общий класс
                 parser.UpdateObject(levelCells, result.MobDeathReward); // мобьи награды
@@ -39,7 +39,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
       
         private const int MaxDifferentMobs = 5;
 
-        private void FillMobSpawnData(List<ICellValue> levelCells, LevelGeneratorSettings result)
+        private void FillMobSpawnData(List<ICellValue> levelCells, LevelSettingsData result)
         {
             var neededCells = levelCells.Where(o => o.ColumnName.Contains(_mobSpawnParserHelper.BlankMobAmount) ||
                                                     o.ColumnName.Contains(_mobSpawnParserHelper.BlankMobId) ||

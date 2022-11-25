@@ -5,7 +5,7 @@ namespace RoyalAxe.CoreLevel
     //Инфраструктура с данными для работы текущего уровня
     public interface ICoreLevelDataInfrastructure
     {
-        IReadOnlyList<LevelGeneratorSettings> PackLevels { get; }
+        IReadOnlyList<LevelSettingsData> PackLevels { get; }
 
         int LevelNumber { get; }
 
@@ -14,7 +14,7 @@ namespace RoyalAxe.CoreLevel
 
     public class CoreLevelDataInfrastructure : ICoreLevelDataInfrastructure
     {
-        public IReadOnlyList<LevelGeneratorSettings> PackLevels { get; set; }
+        public IReadOnlyList<LevelSettingsData> PackLevels { get; set; }
         public int LevelNumber { get; set; }
         public BiomeScriptableDef BiomeDef { get; set; }
 

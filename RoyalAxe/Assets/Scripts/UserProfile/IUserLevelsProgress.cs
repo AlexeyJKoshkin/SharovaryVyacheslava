@@ -4,10 +4,8 @@ namespace Core.UserProfile
 {
     public interface IUserLevelsProgress : IUserProgressProfile
     {
-        LastLevel SavedLevel { get; }
+        LastLevel SavedLevel { get; set; }
 
-        LastLevel LastPlayed { get; }
-
-        void UpdateLastPlayedLevel(LevelGeneratorSettings nextWaveSettings);
+        LastLevel LastPlayed { get; set; }
     }
 }

@@ -13,30 +13,32 @@ namespace RoyalAxe.CoreLevel
     {
         public bool HasWave => _waveQueue.Count > 0;
         public int WaveNumber => _waveEntity.levelNumber.Number;
-        public float SpawnCooldown => _currentSettings.SpawnCooldown;
-        public int MaxMobAmount => _currentSettings.MaxMobAmount;
-        public MobDeathReward CurrentMobReward => _currentSettings.MobDeathReward;
+        public float SpawnCooldown => _currentSettingsData.SpawnCooldown;
+        public int MaxMobAmount => _currentSettingsData.MaxMobAmount;
+        public MobDeathReward CurrentMobReward => _currentSettingsData.MobDeathReward;
         public bool HasMob => _blueprints.Count > 0;
         public LevelBuffType[] CurrentBuffs => _waveEntity.hasWizardShopReady ? _waveEntity.wizardShopReady.LevelBuffTypes : new LevelBuffType[0];
 
-        readonly Queue<LevelGeneratorSettings> _waveQueue = new Queue<LevelGeneratorSettings>();
+        readonly Queue<LevelSettingsData> _waveQueue = new Queue<LevelSettingsData>();
 
         private readonly CoreGamePlayEntity _waveEntity;
 
-        private LevelGeneratorSettings _currentSettings;
+        private LevelSettingsData _currentSettingsData;
 
         private readonly IDataStorage _dataStorage;
 
         private readonly IMobBlueprintsSpawnStorage _mobBlueprintsSpawnStorage;
-        readonly ICurrentUserProgressProfileFacade _userProgressProfileFacade;
+    
         private readonly List<GenerateMobBlueprintCounter> _blueprints = new List<GenerateMobBlueprintCounter>();
 
-        public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext, IDataStorage dataStorage, IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage, ICurrentUserProgressProfileFacade userProgressProfileFacade)
+        public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext,
+                                 IDataStorage dataStorage,
+                                 IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage,
+                                 ICurrentUserProgressProfileFacade userProgressProfileFacade)
         {
-            _dataStorage            = dataStorage;
+            _dataStorage = dataStorage;
             _mobBlueprintsSpawnStorage = mobBlueprintsSpawnStorage;
-            _userProgressProfileFacade = userProgressProfileFacade;
-            _waveEntity             = coreGamePlayContext.CreateEntity();
+            _waveEntity = coreGamePlayContext.CreateEntity();
             _waveEntity.isLevelWave = true;
         }
 
@@ -44,10 +46,10 @@ namespace RoyalAxe.CoreLevel
         {
             if (_waveQueue.Count == 0) return false;
 
-            int nextWave         = WaveNumber + 1;
+            int nextWave = WaveNumber + 1;
             var nextWaveSettings = _waveQueue.Dequeue();
 
-            if (_currentSettings == null || _currentSettings.Type == nextWaveSettings.Type)
+            if (_currentSettingsData == null || _currentSettingsData.Type == nextWaveSettings.Type)
             {
                 SetNewWave(nextWaveSettings);
                 _waveEntity.ReplaceLevelNumber(nextWave);
@@ -66,19 +68,23 @@ namespace RoyalAxe.CoreLevel
             _waveEntity.AddLevelNumber(0);
         }
 
-    
-
-
-        private void SetNewWave(LevelGeneratorSettings nextWaveSettings)
+        private void SetNewWave(LevelSettingsData nextWaveSettingsData)
         {
-            _currentSettings = nextWaveSettings;
+            _currentSettingsData = nextWaveSettingsData;
             _waveEntity.ReplaceLevelNumber(WaveNumber);
-            _mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettings.MobsData);
-            _blueprints.AddRange(_mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettings.MobsData)); // подготовили следующую пачку мобов
+            _mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData);
+            _blueprints.AddRange(_mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData)); // подготовили следующую пачку мобов
             _waveEntity.isWaveFinished = false;
-            HandleDestiny(nextWaveSettings.Destiny);
 
-            _userProgressProfileFacade.LevelProgressFacade.UpdateLastPlayedLevel(nextWaveSettings);
+            HandleDestiny(nextWaveSettingsData.Destiny);
+
+            _waveEntity.ReplaceCurrentLevelInfo(new LastLevel()
+            {
+                LevelNumber = nextWaveSettingsData.LevelNumber,
+                Biome = nextWaveSettingsData.Type
+            });
+
+        
         }
 
         private void HandleDestiny(WaveDestiny destiny) // todo: корявый метод. По хорошему надо как-то обрабатывать разные ID. 
@@ -86,6 +92,7 @@ namespace RoyalAxe.CoreLevel
             if (destiny.HasDestiny)
             {
                 var wizardData = GetWizardShop(destiny);
+
                 if (wizardData != null) // если установлен какой-то магазин
                 {
                     _waveEntity.ReplaceWizardShopReady(wizardData.PossibleBuffs);
@@ -94,8 +101,7 @@ namespace RoyalAxe.CoreLevel
                 }
             }
 
-            if (_waveEntity.hasWizardShopReady)
-                _waveEntity.RemoveWizardShopReady();
+            if (_waveEntity.hasWizardShopReady) _waveEntity.RemoveWizardShopReady();
         }
 
         private WizardShopSettings GetWizardShop(WaveDestiny destiny)
@@ -111,8 +117,8 @@ namespace RoyalAxe.CoreLevel
             return item.MobBlueprint;
         }
     }
-    
-   public class GenerateMobBlueprintCounter
+
+    public class GenerateMobBlueprintCounter
     {
         public MobBlueprint MobBlueprint;
         public int TotalAmount;

@@ -4,22 +4,20 @@ using Entitas.CodeGeneration.Attributes;
 namespace RoyalAxe.GameEntitas
 {
     [CoreGamePlay, Event(EventTarget.Self)]
-    public class ExperienceComponent : IComponent
+    public class EarnedExperienceComponent : IComponent
     {
         public int Value;
     }
     
     [CoreGamePlay, Event(EventTarget.Self)]
-    public class GoldComponent : IComponent
+    public class EarnedGoldComponent : IComponent
     {
         public int Value;
     }
     
     [CoreGamePlay, Event(EventTarget.Self)]
-    public class GemsComponent : IComponent
+    public class EarnedGemsComponent : IComponent
     {
         public int Value;
     }
-
-   
 }

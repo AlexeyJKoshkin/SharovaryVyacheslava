@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public static class CoreGamePlayComponentsLookup {
 
-    public const int ExperienceListener = 0;
-    public const int GemsListener = 1;
-    public const int GoldListener = 2;
+    public const int EarnedExperienceListener = 0;
+    public const int EarnedGemsListener = 1;
+    public const int EarnedGoldListener = 2;
     public const int LevelNumberListener = 3;
     public const int BearingSpawnChunk = 4;
     public const int ChunkBounds = 5;
     public const int ChunkView = 6;
-    public const int Experience = 7;
-    public const int Gems = 8;
-    public const int Gold = 9;
-    public const int LevelNumber = 10;
-    public const int LevelWave = 11;
-    public const int MobWaveCollection = 12;
+    public const int CurrentLevelInfo = 7;
+    public const int EarnedExperience = 8;
+    public const int EarnedGems = 9;
+    public const int EarnedGold = 10;
+    public const int LevelNumber = 11;
+    public const int LevelWave = 12;
     public const int MovingChunk = 13;
     public const int Player = 14;
     public const int WaveFinished = 15;
@@ -29,19 +29,19 @@ public static class CoreGamePlayComponentsLookup {
     public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
-        "ExperienceListener",
-        "GemsListener",
-        "GoldListener",
+        "EarnedExperienceListener",
+        "EarnedGemsListener",
+        "EarnedGoldListener",
         "LevelNumberListener",
         "BearingSpawnChunk",
         "ChunkBounds",
         "ChunkView",
-        "Experience",
-        "Gems",
-        "Gold",
+        "CurrentLevelInfo",
+        "EarnedExperience",
+        "EarnedGems",
+        "EarnedGold",
         "LevelNumber",
         "LevelWave",
-        "MobWaveCollection",
         "MovingChunk",
         "Player",
         "WaveFinished",
@@ -49,16 +49,17 @@ public static class CoreGamePlayComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ExperienceListenerComponent),
-        typeof(GemsListenerComponent),
-        typeof(GoldListenerComponent),
+        typeof(EarnedExperienceListenerComponent),
+        typeof(EarnedGemsListenerComponent),
+        typeof(EarnedGoldListenerComponent),
         typeof(LevelNumberListenerComponent),
         typeof(RoyalAxe.GameEntitas.BearingSpawnChunk),
         typeof(RoyalAxe.GameEntitas.ChunkBoundsComponent),
         typeof(RoyalAxe.GameEntitas.ChunkViewComponent),
-        typeof(RoyalAxe.GameEntitas.ExperienceComponent),
-        typeof(RoyalAxe.GameEntitas.GemsComponent),
-        typeof(RoyalAxe.GameEntitas.GoldComponent),
+        typeof(RoyalAxe.GameEntitas.CurrentLevelInfoComponent),
+        typeof(RoyalAxe.GameEntitas.EarnedExperienceComponent),
+        typeof(RoyalAxe.GameEntitas.EarnedGemsComponent),
+        typeof(RoyalAxe.GameEntitas.EarnedGoldComponent),
         typeof(RoyalAxe.GameEntitas.LevelNumberComponent),
         typeof(RoyalAxe.GameEntitas.LevelWaveComponent),
         typeof(RoyalAxe.GameEntitas.MovingChunkComponent),

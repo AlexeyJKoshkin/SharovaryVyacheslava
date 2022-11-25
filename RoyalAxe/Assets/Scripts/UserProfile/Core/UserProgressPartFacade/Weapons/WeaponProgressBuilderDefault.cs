@@ -8,7 +8,7 @@ namespace Core.UserProfile
         {
             var current = new WeaponProgressData()
             {
-                Weapon = new SaveEntityRecord(){Id = "Weapon_Player_default", Level = 1}
+                Id = "weapon_grey_axe_1", Level = 1
             };
 
             return new UserAllWeaponsProgress()

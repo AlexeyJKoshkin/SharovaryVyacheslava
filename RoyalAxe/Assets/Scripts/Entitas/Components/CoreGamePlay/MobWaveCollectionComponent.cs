@@ -1,30 +1,20 @@
 using System.Collections.Generic;
+using Core.UserProfile;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using GameKit;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.LevelBuff;
 
-namespace RoyalAxe.GameEntitas {
-    /*[CoreGamePlay]
-    public class MobWaveCollectionComponent : AbstractCollectionComponent<List<MobAtLevelData>, MobAtLevelData>
+namespace RoyalAxe.GameEntitas 
+{
+    [CoreGamePlay]
+    public class CurrentLevelInfoComponent : IComponent
     {
-        public bool HasMobs => Count > 0;
+        public LastLevel Level;
+    }
 
-        /*public void Load(MobAtLevelData[] mobData)
-        {
-            _list.Clear();
-            _list.AddRange(mobData);
-        }#1#
 
-        public MobAtLevelData Generate()
-        {
-            var item = this.Collection.GetRandom(false);
-            item.TotalAmount--;
-            if (item.TotalAmount == 0) this.Remove(item);
-            return item;
-        }
-    }*/
     [CoreGamePlay]
     [Unique]
     public class LevelWaveComponent : IComponent
@@ -45,7 +35,6 @@ namespace RoyalAxe.GameEntitas {
     public class WaveFinishedComponent : IComponent
     {
     }
-
 
     
     [CoreGamePlay]

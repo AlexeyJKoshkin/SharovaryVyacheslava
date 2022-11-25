@@ -25,22 +25,25 @@ namespace Core
 
         private void BindProgressBuilder()
         {
-            Container.Register<HeroProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<HeroProgressDefaultFactory>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressLoader<UserAllHeroesProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            BindSingletonWithAllInterfaces<HeroProfileProgressSaveLoaderAdapter>();
+            BindSingletonWithAllInterfaces<HeroProgressDefaultFactory>();
+            BindSingletonWithAllInterfaces<UserProgressLoader<UserAllHeroesProgress>>();
             
+            BindSingletonWithAllInterfaces<LevelProfileProgressSaveLoaderAdapter>();
+            BindSingletonWithAllInterfaces<LevelProgressBuilderDefault>();
+            BindSingletonWithAllInterfaces<UserProgressLoader<UserLevelProgress>>();
             
-            Container.Register<LevelProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<LevelProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressLoader<UserLevelProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
+            BindSingletonWithAllInterfaces<WeaponProgressBuilderDefault>();
+            BindSingletonWithAllInterfaces<WeaponProfileProgressSaveLoaderAdapter>();
+            BindSingletonWithAllInterfaces<UserProgressLoader<UserAllWeaponsProgress>>();
             
+            BindSingletonWithAllInterfaces<GeneralProfileProgressDefaultFactory>();
+            BindSingletonWithAllInterfaces<GeneralProfileProgressSaveLoaderAdapter>();
+            BindSingletonWithAllInterfaces<UserProgressLoader<GeneralProfileProgress>>();
             
-            
-            Container.Register<WeaponProgressBuilderDefault>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<WeaponProfileProgressFacade>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<UserProgressLoader<UserAllWeaponsProgress>>(Lifetime.Singleton).AsImplementedInterfaces();
-
-
+            BindSingletonWithAllInterfaces<InventoryProfileProgressDefaultFactory>();
+            BindSingletonWithAllInterfaces<InventoryProfileProgressSaveLoaderAdapter>();
+            BindSingletonWithAllInterfaces<UserProgressLoader<ProfileInventoryProgress>>();
         }
     }
 }

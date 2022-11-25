@@ -15,7 +15,7 @@ namespace Core.UserProfile
     }
 
     [Serializable]
-    public struct SaveEntityRecord
+    public abstract class SaveEntityRecord
     {
         public string Id;
         public int Level;

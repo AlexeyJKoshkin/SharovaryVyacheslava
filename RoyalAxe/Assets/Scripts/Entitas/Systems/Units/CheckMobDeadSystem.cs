@@ -38,11 +38,11 @@ namespace RoyalAxe.EntitasSystems
             var mobReward = e.mobDeathReward;
 
             if (mobReward.ExpReward != 0)
-                CorePlayer.ReplaceExperience(CorePlayer.experience.Value + mobReward.ExpReward);
+                CorePlayer.ReplaceEarnedExperience(CorePlayer.earnedExperience.Value + mobReward.ExpReward);
             if (mobReward.GoldReward != 0)
-                CorePlayer.ReplaceGold(CorePlayer.gold.Value + mobReward.GoldReward);
+                CorePlayer.ReplaceEarnedGold(CorePlayer.earnedGold.Value + mobReward.GoldReward);
             if (mobReward.GemReward != 0)
-                CorePlayer.ReplaceGems(CorePlayer.gems.Value + mobReward.GemReward);
+                CorePlayer.ReplaceEarnedGems(CorePlayer.earnedGems.Value + mobReward.GemReward);
         }
     }
 }

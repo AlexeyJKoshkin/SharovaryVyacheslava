@@ -9,9 +9,9 @@
 public sealed class CoreGamePlayEventSystems : Feature {
 
     public CoreGamePlayEventSystems(Contexts contexts) {
-        Add(new ExperienceEventSystem(contexts)); // priority: 0
-        Add(new GemsEventSystem(contexts)); // priority: 0
-        Add(new GoldEventSystem(contexts)); // priority: 0
+        Add(new EarnedExperienceEventSystem(contexts)); // priority: 0
+        Add(new EarnedGemsEventSystem(contexts)); // priority: 0
+        Add(new EarnedGoldEventSystem(contexts)); // priority: 0
         Add(new LevelNumberEventSystem(contexts)); // priority: 0
     }
 }

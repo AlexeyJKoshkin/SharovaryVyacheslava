@@ -16,8 +16,8 @@ namespace Core.UserProfile
     [Serializable]
     public struct LastLevel
     {
-        public static LastLevel Default = new LastLevel() {Biome = BiomeType.Forest, StartLevel = 1};
+        public static LastLevel Default = new LastLevel() {Biome = BiomeType.Forest, LevelNumber = 1};
         public BiomeType Biome;
-        public int StartLevel;
+        public int LevelNumber;
     }
 }

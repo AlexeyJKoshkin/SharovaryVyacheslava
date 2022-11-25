@@ -3,9 +3,7 @@ using System;
 namespace Core.UserProfile
 {
     [Serializable]
-    public class HeroProgressData
+    public class HeroProgressData : SaveEntityRecord
     {
-        public SaveEntityRecord CharacterRecord;
-        public string EquipWeapon;
     }
 }

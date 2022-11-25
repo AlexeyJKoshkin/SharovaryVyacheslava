@@ -17,32 +17,38 @@ namespace Core.UserProfile
     public class UserSaveProfileStorage : IUserSaveProfileStorage,  IInitializable,ICurrentUserProgressProfileFacade
     {
         public string ProfileName => _current.ProfileName;
+        public IGeneralProfileProgress GeneralProgress => _current.GeneralProgress;
         public IUserLevelsProgress LevelProgressFacade => _current.LevelProgressFacade;
         public IUserProfileHeroesProgress HeroesProgress => _current.HeroesProgress;
         public IUserProfileWeaponsProgress WeaponProgress => _current.WeaponProgress;
+        public IInventoryProgress InventoryProgress => _current.InventoryProgress;
         public ICurrentUserProgressProfileFacade Current => _current;
 
         private ICurrentUserProgressProfileFacade _current;
 
         private readonly IProfileProgressPartContextFactory _factory;
-        private readonly IReadOnlyList<IUserProgressPartFacade> _progressFacade;
+        private readonly IReadOnlyList<IUserProgressSaveLoader> _progressSaveLoaderAdapter;
+        private readonly IReadOnlyCollection<IUserProgressPartFacade> _progressPartFacade;
 
-        private readonly HashSet<IUserProgressPartFacade> _saveData = new HashSet<IUserProgressPartFacade>();
+        private readonly HashSet<IUserProgressSaveLoader> _saveData = new HashSet<IUserProgressSaveLoader>();
 
-        public UserSaveProfileStorage(IProfileProgressPartContextFactory factory, IReadOnlyList<IUserProgressPartFacade> progressFacade)
+        public UserSaveProfileStorage(IProfileProgressPartContextFactory factory,
+                                      IReadOnlyCollection<IUserProgressPartFacade> partFacade,
+                                      IReadOnlyList<IUserProgressSaveLoader> progressSaveLoaderAdapter)
         {
             _factory = factory;
-            _progressFacade = progressFacade;
+            _progressPartFacade = partFacade;
+            _progressSaveLoaderAdapter = progressSaveLoaderAdapter;
        }
         public void Initialize()
         {
             _current = Load("DefaultProfile");
-            _progressFacade.ForEach(e=> e.OnSaveProgress += SaveProgressHandler);
+            _progressSaveLoaderAdapter.ForEach(e=> e.OnSaveProgress += SaveProgressHandler);
         }
 
-        void SaveProgressHandler(IUserProgressPartFacade progressPartFacade)
+        void SaveProgressHandler(IUserProgressSaveLoader progressSaveLoader)
         {
-            _saveData.Add(progressPartFacade);
+            _saveData.Add(progressSaveLoader);
         }
 
 
@@ -50,7 +56,8 @@ namespace Core.UserProfile
         {
             var context = _factory.CreateLocale(profileName); // Создаем текущий контекст для загрузки профиля
             var result = new CurrentGeneralUserProgressProfileFacade(profileName);
-            _progressFacade.ForEach((e=> e.LoadProgress(context, result)));
+            _progressSaveLoaderAdapter.ForEach((e=> e.LoadProgress(context, result)));
+            _progressPartFacade.ForEach(e=> e.InitTo(result));
             return result;
         }
 

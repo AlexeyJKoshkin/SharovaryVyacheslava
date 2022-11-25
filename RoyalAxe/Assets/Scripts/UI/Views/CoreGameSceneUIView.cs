@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RoyalAxe
 {
-    public class CoreGameSceneUIView : MonoBehaviour, IExperienceListener, IUseCounterSkillListener, IGoldListener, IViewEntityBehaviour, ILevelNumberListener
+    public class CoreGameSceneUIView : MonoBehaviour, IEarnedExperienceListener, IUseCounterSkillListener, IEarnedGoldListener, IViewEntityBehaviour, ILevelNumberListener
     {
         [SerializeField]
         private TextMeshProUGUI _expaText;
@@ -19,16 +19,17 @@ namespace RoyalAxe
         {
             _axeCounterText.text = $"Axe {currentValue}/{maxValue}";
         }
-
-        public void OnExperience(CoreGamePlayEntity entity, int value)
+        
+        public void OnEarnedExperience(CoreGamePlayEntity entity, int value)
         {
             _expaText.text = $"Exp: {value}";
         }
 
-        public void OnGold(CoreGamePlayEntity entity, int value)
+        public void OnEarnedGold(CoreGamePlayEntity entity, int value)
         {
             _goldText.text = $"Gold: {value}";
         }
+        
         
         public void OnLevelNumber(CoreGamePlayEntity entity, int number)
         {
@@ -39,11 +40,11 @@ namespace RoyalAxe
         {
             if (entity is CoreGamePlayEntity playEntity && playEntity.isPlayer)
             {
-                playEntity.AddExperienceListener(this);
-                playEntity.AddGoldListener(this);
+                playEntity.AddEarnedExperienceListener(this);
+                playEntity.AddEarnedGoldListener(this);
                 
-                OnExperience(playEntity, playEntity.experience.Value);
-                OnGold(playEntity, playEntity.gold.Value);
+                OnEarnedExperience(playEntity, playEntity.earnedExperience.Value);
+                OnEarnedGold(playEntity, playEntity.earnedGold.Value);
                 return;
             }
 
@@ -62,6 +63,6 @@ namespace RoyalAxe
             }
         }
 
-      
+       
     }
 }

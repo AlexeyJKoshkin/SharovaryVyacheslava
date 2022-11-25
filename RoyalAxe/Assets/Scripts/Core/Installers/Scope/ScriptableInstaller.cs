@@ -15,5 +15,10 @@ namespace Core
         }
 
         protected abstract void InstallBindings();
+
+        protected void BindSingletonWithAllInterfaces<T>()
+        {
+            Container.Register<T>(Lifetime.Singleton).AsImplementedInterfaces();
+        }
     }
 }

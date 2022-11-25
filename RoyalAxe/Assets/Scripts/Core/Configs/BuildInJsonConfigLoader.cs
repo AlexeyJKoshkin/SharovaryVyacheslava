@@ -17,7 +17,7 @@ namespace RoyalAxe.Configs
         public string LoadText<T>(string path) where T : class
         {
             if (typeof(T) == typeof(StatCollection)) return _buildInJsonDataProvider.UnitStatText;
-            if (typeof(T) == typeof(LevelGeneratorSettings)) return _buildInJsonDataProvider.LevelDataText;
+            if (typeof(T) == typeof(LevelSettingsData)) return _buildInJsonDataProvider.LevelDataText;
             if (typeof(T) == typeof(WeaponsSkillConfigDef)) return _buildInJsonDataProvider.WeaponSkillText;
             if (typeof(T) == typeof(WizardLevelCollection)) return _buildInJsonDataProvider.WizardLevelText;
             if (typeof(T) == typeof(LevelBuffSettingsComposite)) return _buildInJsonDataProvider.LevelBufSettings;
