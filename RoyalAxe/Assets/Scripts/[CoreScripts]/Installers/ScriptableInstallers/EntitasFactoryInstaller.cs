@@ -13,8 +13,6 @@ namespace Core
         {
             Container.Register<UnitsEntityFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             BindViewBuilder();
-           
-            BindSingletonWithAllInterfaces<UnitAddDamageUtility>();
             Container.Register<SkillFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<BosonUnitPipeline>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitsInfluenceCalculator>(Lifetime.Singleton).AsImplementedInterfaces();

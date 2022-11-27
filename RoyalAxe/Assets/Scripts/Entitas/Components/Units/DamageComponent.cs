@@ -8,29 +8,11 @@ namespace RoyalAxe.GameEntitas
     ///    Вооще весь урон который наносит игрок
     /// </summary>
     [Units]
-    public class DamageComponent : IComponent, IEnumerable<IInfluenceApplier>
+    public class DamageComponent : ListCollectionComponent<IInfluenceApplierComposite>
     {
-        public ISimpleInfluenceApplier MainSimpleInfluence => SingleDamage.Count == 0 ? null : SingleDamage[0];
+        public IInfluenceApplierComposite MainSimpleInfluence => Count == 0 ? null : Collection[0];
         
-        public List<ISimpleInfluenceApplier> SingleDamage;
-        public List<IPeriodicInfluenceApplier> PeriodicDamage;
-        public IEnumerator<IInfluenceApplier> GetEnumerator()
-        {
-            for (int i = 0; i < SingleDamage.Count; i++)
-            {
-                yield return SingleDamage[i];
-            }
-            
-            for (int i = 0; i < PeriodicDamage.Count; i++)
-            {
-                yield return PeriodicDamage[i];
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+      
     }
 
     [Units]

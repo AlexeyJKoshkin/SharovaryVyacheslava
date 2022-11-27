@@ -8,11 +8,11 @@ namespace RoyalAxe.GameEntitas
     public class SkillFactory : AbstractEntityFactory<SkillEntity, SkillContext>, ISkillFactory
     {
         private readonly ITimerFactory _timerFactory;
-        private IUnitAddDamageToSkillUtility _toSkillUtility;
+        private readonly IUnitDamageApplierFactory _toSkillUtility;
 
         public SkillFactory(SkillContext skillContext,
                             ITimerFactory timerFactory,
-                            IUnitAddDamageToSkillUtility toSkillUtility) : base(skillContext)
+                            IUnitDamageApplierFactory toSkillUtility) : base(skillContext)
         {
             _timerFactory = timerFactory;
             _toSkillUtility = toSkillUtility;
@@ -36,8 +36,9 @@ namespace RoyalAxe.GameEntitas
         public void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner)
         {
             var weaponData = owner.unitEquipWeaponData;
-         
-            _toSkillUtility. AddDamageToUnit(boson.damage, weaponData.Damage);
+            
+ var damage =            _toSkillUtility.CreateComposite(weaponData.Damage);
+ boson.damage.Add(damage);
 
             boson.ReplaceMoveSpeed(new CharacterStatValue
             {
@@ -61,7 +62,7 @@ namespace RoyalAxe.GameEntitas
         private void EquipWeaponSkill(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
             unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
-            _toSkillUtility.AddDamageToUnit(unit.damage, skillBlueprint.DamageData);
+            unit.damage.Add(_toSkillUtility.CreateComposite(skillBlueprint.DamageData));
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)

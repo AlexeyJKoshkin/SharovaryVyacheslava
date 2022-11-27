@@ -1,3 +1,4 @@
+using RoyalAxe.CharacterStat;
 using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.LevelBuff
@@ -7,9 +8,9 @@ namespace RoyalAxe.LevelBuff
         private UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
-        private readonly IUnitAddDamageToSkillUtility _unitAddDamageToSkillUtility;
+        private readonly IUnitDamageApplierFactory _unitAddDamageToSkillUtility;
 
-        protected AdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, IUnitAddDamageToSkillUtility unitAddDamageToSkillUtility, UnitsContext unitsContext) : base(provider)
+        protected AdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, IUnitDamageApplierFactory unitAddDamageToSkillUtility, UnitsContext unitsContext) : base(provider)
         {
             _unitAddDamageToSkillUtility = unitAddDamageToSkillUtility;
             _unitsContext             = unitsContext;
@@ -18,14 +19,8 @@ namespace RoyalAxe.LevelBuff
 
         public override void DoBuffStrategyActivate()
         {
-            _unitAddDamageToSkillUtility.AddDamageToUnit(Player.damage, Settings.Damage);
-            /*var damage = Player.damage.SingleDamage.FirstOrDefault(o => o.Type == Settings.DamageTypeType) ?? CreateSingleDamage();
-            if (Settings.PercentActiveDamage > 0)
-            {
-                var maxPhysDamage = damageComponent.SingleDamage.Where(o => o.Type == DamageType.Physical).Max(o => o.Value);
-                damage.AddDamage(maxPhysDamage * Settings.PercentActiveDamage * .01f);
-            }*/
-        
+            var attack = _unitAddDamageToSkillUtility.CreateComposite(Settings.Damage);
+            Player.damage.Add(attack);
         }
        
     }

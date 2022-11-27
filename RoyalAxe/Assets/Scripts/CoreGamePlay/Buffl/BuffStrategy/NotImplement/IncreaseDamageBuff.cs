@@ -25,20 +25,8 @@ namespace RoyalAxe.LevelBuff
 
             var damageComponent = Player.damage;
 
-            var physDamage = damageComponent.MainSimpleInfluence;
-            if (physDamage != null) // есть основной урон.
-            {
-                if (physDamage.Type != DamageType.Physical)                                                       // если это не физи урон
-                    physDamage = damageComponent.SingleDamage.FirstOrDefault(o => o.Type == DamageType.Physical); // ищем из доп уронов
+            damageComponent.MainSimpleInfluence.IncreaseDamage(DamageType.Physical, Settings.Value);
 
-                if (physDamage != null) // 
-                {
-                    physDamage.AddDamage(Settings.Value); // увеличи урон от физика
-                    return;
-                }
-            }
-
-            damageComponent.SingleDamage.Add(_unitDamageApplierFactory.CreateOneMomentDamage(DamageType.Physical, Settings.Value));
         }
     }
 }
