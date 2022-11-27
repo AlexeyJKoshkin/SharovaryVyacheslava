@@ -15,12 +15,12 @@ namespace RoyalAxe.CoreLevel
         private readonly IMobPositionGenerator _generator;
         private readonly IGroup<UnitsEntity> _allMobs;
         private readonly IUnitsBuilderFacade _unitsBuilder;
-        private readonly ILevelWaveProvider _levelWaveProvider;
+        private readonly CoreGamePlayContext _coreGamePlay;
 
         public MockLevelCoreMap(UnitsContext unitsContext,
                                 IUnitsBuilderFacade unitsBuilder,
                                 IMobPositionGenerator mobPositionGenerator,
-                                ILevelWaveProvider levelWaveProvider)
+                                CoreGamePlayContext levelWaveProvider)
         {
             _unitsBuilder = unitsBuilder;
 
@@ -28,7 +28,7 @@ namespace RoyalAxe.CoreLevel
                                                                  .NoneOf(UnitsMatcher.DeadUnit, UnitsMatcher.Boson, UnitsMatcher.DestroyUnit));
 
             _generator = mobPositionGenerator;
-            _levelWaveProvider = levelWaveProvider;
+            _coreGamePlay = levelWaveProvider;
         }
 
         IEnemyWaveGenerator IRoyalAxeCoreMap.StartGenerateMobPosition()
@@ -39,7 +39,7 @@ namespace RoyalAxe.CoreLevel
 
         void IEnemyWaveGenerator.GenerateEnemy(MobBlueprint mobBlueprint)
         {
-            var mobReward = _levelWaveProvider.CurrentMobReward;
+            var mobReward = _coreGamePlay.levelWaveEntity.levelWaveQueue.Current.MobDeathReward;
             var pos = _generator.GetPosForNewMob(mobBlueprint.Id);
             mobBlueprint.Position = pos.startPoint;
             var entity = _unitsBuilder.CreateEnemyMobUnit(mobBlueprint);

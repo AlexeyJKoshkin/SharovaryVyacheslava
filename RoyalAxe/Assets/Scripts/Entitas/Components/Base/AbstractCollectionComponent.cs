@@ -45,4 +45,16 @@ namespace RoyalAxe.GameEntitas
             return GetEnumerator();
         }
     }
+
+    [DontGenerate]
+    public abstract class ListCollectionComponent<TValue> : AbstractCollectionComponent<List<TValue>, TValue>
+    {
+        
+    }
+    
+    [DontGenerate]
+    public abstract class HashSetCollectionComponent<TValue> : AbstractCollectionComponent<HashSet<TValue>, TValue>
+    {
+        
+    }
 }

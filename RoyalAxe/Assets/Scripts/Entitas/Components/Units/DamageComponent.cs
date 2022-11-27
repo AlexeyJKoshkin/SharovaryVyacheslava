@@ -34,7 +34,7 @@ namespace RoyalAxe.GameEntitas
     }
 
     [Units]
-    public class DeBuffInfluenceComponent : AbstractCollectionComponent<HashSet<IDeBuffApplier>,IDeBuffApplier>
+    public class DeBuffInfluenceComponent : HashSetCollectionComponent<IDeBuffApplier>
     {
         
     }

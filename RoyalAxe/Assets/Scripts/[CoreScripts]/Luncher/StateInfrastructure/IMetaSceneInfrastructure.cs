@@ -2,15 +2,14 @@
 {
     public interface IMetaSceneInfrastructure : IStateInfrastructure
     {
-        IStateLoaderProvider StateLoaderProvider { get; }
+        
+        
     }
     
     public class MetaSceneInfrastructure : StateInfrastructure,IMetaSceneInfrastructure
     {
-        public MetaSceneInfrastructure(Contexts context,ISceneLoader sceneLoader, IStateLoaderProvider stateLoaderProvider) : base(context, sceneLoader)
+        public MetaSceneInfrastructure(Contexts context,ISceneLoader sceneLoader, IStateLoaderProvider stateLoaderProvider) : base(context, sceneLoader,stateLoaderProvider)
         {
-            StateLoaderProvider = stateLoaderProvider;
         }
-        public IStateLoaderProvider StateLoaderProvider { get; }
     }
 }

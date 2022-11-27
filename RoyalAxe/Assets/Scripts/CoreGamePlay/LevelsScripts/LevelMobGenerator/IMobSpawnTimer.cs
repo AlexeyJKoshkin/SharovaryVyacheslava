@@ -10,11 +10,12 @@ namespace RoyalAxe.CoreLevel
 
     public class MobSpawnFacade : IMobSpawnFacade,IDoneTimerListener
     {
-        private readonly ILevelWaveProvider _waveProvider;
+        private readonly CoreGamePlayContext _waveProvider;
         private readonly IMobSpawnOperation _mobSpawnOperation;
         private readonly IRATimer _spawnCooldownTimer;
         
-        public MobSpawnFacade(ITimerFactory timerFactory, ILevelWaveProvider waveProvider, IMobSpawnOperation mobSpawnOperation)
+        public MobSpawnFacade(ITimerFactory timerFactory, 
+                              CoreGamePlayContext waveProvider, IMobSpawnOperation mobSpawnOperation)
         {
             _waveProvider = waveProvider;
             _mobSpawnOperation = mobSpawnOperation;
@@ -46,7 +47,7 @@ namespace RoyalAxe.CoreLevel
 
         public void StartSpawnMob()
         {
-            _spawnCooldownTimer.Run(_waveProvider.SpawnCooldown);; // запускаем таймер
+            _spawnCooldownTimer.Run(_waveProvider.levelWaveEntity.levelWaveQueue.Current.SpawnCooldown);; // запускаем таймер
             _mobSpawnOperation.SpawnMobs();  // первую волну спавним на старте
         }
 

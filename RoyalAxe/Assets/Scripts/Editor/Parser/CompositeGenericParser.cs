@@ -61,32 +61,32 @@ namespace Core.Parser
             }
         }
 
-        public void UpdateObject(List<ICellValue> cells, object data)
+        public object UpdateObject(List<ICellValue> cells, object data)
         {
-            if (data == null) return;
+            if (data == null) return null;
 
-            RecursiveUpdate(cells, data);
+            return RecursiveUpdate(cells, data);
         }
 
-        private bool RecursiveUpdate(List<ICellValue> cells,  object data)
+        private object RecursiveUpdate(List<ICellValue> cells,  object data)
         {
             var typeKey = data.GetType();
-            if(!_typesParsers.ContainsKey(typeKey)) return false;
-            if(!CheckType(typeKey)) return false;
+            if(!_typesParsers.ContainsKey(typeKey)) return data;
+            if(!CheckType(typeKey)) return data;
             
             if (_typesParsers.TryGetValue(typeKey, out var parser))
             {
-                parser.UpdateObject(cells, data);
+                data = parser.UpdateObject(cells, data);
             }
 
             foreach (var field in Fields(data.GetType()))
             {
                 var value = field.GetValue(data) ?? Activator.CreateInstance(field.FieldType);
-                if(RecursiveUpdate(cells, value))
-                    field.SetValue(data, value);
+                value = RecursiveUpdate(cells, value);
+                field.SetValue(data, value);
             }
 
-            return true;
+            return data;
         }
 
         FieldInfo[] Fields(Type type)

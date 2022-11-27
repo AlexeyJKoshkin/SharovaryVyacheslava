@@ -49,18 +49,11 @@ namespace Core.Launcher
 
             _alwaysUpdate = new List<FeatureBindInfo>()
             {
-              //  CoreGamePlaySystems() 
+             
             };
         }
         
-        /*private FeatureBindInfo CoreGamePlaySystems()
-        {
-            return FeatureBindInfo.Create("Cистемы уровня")
-                              //    .Bind<LoadNextWaveSystem>()
-                              //    .Bind<CheckHasWizardShopSystem>()
-                               //   .Bind<StartSpawnMobSystem>()
-                                  .Bind<CoreGameBehaviourSystem>();
-        }*/
+
 
         private FeatureBindInfo GeneralCoreGameSystems()
         {

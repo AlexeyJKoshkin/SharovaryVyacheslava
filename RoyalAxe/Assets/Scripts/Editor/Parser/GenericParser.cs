@@ -63,7 +63,7 @@ namespace Core.Parser
             CheckHasAllTypes();
         }
 
-        public void UpdateObject(List<ICellValue> cells, object result)
+        public object UpdateObject(List<ICellValue> cells, object result)
         {
             foreach (var cell in cells.Where(e => !string.IsNullOrEmpty(e.Value)))
                 if (_fieldNameMap.TryGetValue(cell.ColumnName, out var fieldInfo))
@@ -71,6 +71,8 @@ namespace Core.Parser
                     var value = GetValue(fieldInfo.FieldType, cell.Value);
                     fieldInfo.SetValue(result, value);
                 }
+
+            return result;
         }
 
         public object GetValue(string columnName, string cellValue)

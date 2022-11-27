@@ -10,41 +10,20 @@ namespace Core.Launcher
     {
         private ILevelCreation LevelCreation => Infrastructure.LevelCreation;
 
-        private IStateLoaderProvider StateLoaderProvider => Infrastructure.StateLoaderProvider;
-        IBehaviourTreeNode _behaviour;
 
-        public CoreGameState(ICoreGameInfrastructure coreGameInfrastructure) : base(coreGameInfrastructure)
+
+        public CoreGameState(ICoreGameInfrastructure coreGameInfrastructure) : base(coreGameInfrastructure) { }
+
+        protected override IBehaviourTreeNode GetBehavior()
         {
-        }
-
-        protected override void OnExecute(TimeData dt)
-        {
-            _behaviour.Execute(dt);
-            var sceneLoader = StateLoaderProvider.GetCurrentSceneLoader();
-
-            if (sceneLoader == null)
-                Continue();
-            else
-            {
-                LoadScene(sceneLoader);
-            }
-        }
-
-        protected override void OnEnterState()
-        {
-            _behaviour = LevelCreation.CreateLevel();
-            //по хорошему надо ждать анимации, всякое такое
-            //стейт начал работать
-
-            //  _axeSceneDependenciesConnector.EnterState(this);   
+            var behaviour = LevelCreation.CreateLevel();
             LevelCreation.StartLevel();
+            return behaviour;
         }
 
         protected override void OnExitState()
         {
             Infrastructure.LevelUtility.ClearAllBeforeLeaveCoreScene();
         }
-
-      
     }
 }

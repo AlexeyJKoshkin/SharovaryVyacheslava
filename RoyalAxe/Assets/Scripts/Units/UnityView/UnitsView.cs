@@ -11,14 +11,14 @@ namespace RoyalAxe.Units
 
         [field: SerializeField] public AbstractUnitBehaviour Behaviour { get; private set; }
 
-        [SerializeField] private HealthBarTempComponent _healthBarTemp = new HealthBarTempComponent();
+        [SerializeField] private HealthBarUnitView healthBarUnitTemp;
 
         [SerializeReference] private IAnimationUnitViewBuilder _spineEnemyAnimation;
 
         public override IEnumerable<IViewEntityBehaviour> EntityBehaviours()
         {
             yield return MeleeTriggerHandler;
-            yield return _healthBarTemp;
+            yield return healthBarUnitTemp;
             yield return _spineEnemyAnimation;
             yield return Behaviour;
         }

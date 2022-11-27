@@ -8,7 +8,7 @@ using RoyalAxe.LevelBuff;
 
 namespace RoyalAxe.GameEntitas 
 {
-    [CoreGamePlay]
+    [CoreGamePlay,Event(EventTarget.Self)]
     public class CurrentLevelInfoComponent : IComponent
     {
         public LastLevel Level;
@@ -19,10 +19,31 @@ namespace RoyalAxe.GameEntitas
     [Unique]
     public class LevelWaveComponent : IComponent
     {
-        
     }
 
-    [CoreGamePlay, Event(EventTarget.Self)]
+    [CoreGamePlay]
+    public class LevelWaveQueueComponent : IComponent
+    {
+      public  Queue<LevelSettingsData> Queue;
+        public LevelSettingsData Current => Queue.Peek();
+    }
+    
+
+    [CoreGamePlay]
+    public class LevelMobBluePrints : ListCollectionComponent<GenerateMobBlueprintCounter>
+    {
+        public MobBlueprint GenerateMobData()
+        {
+             var item = this.Collection.GetRandom(false);
+                       item.TotalAmount--;
+                       if (item.TotalAmount == 0) this.Remove(item);
+                       return item.MobBlueprint;
+        }
+    }
+    
+    
+
+    [CoreGamePlay,Event(EventTarget.Self)]
     public class LevelNumberComponent : IComponent
     {
         public int Number;

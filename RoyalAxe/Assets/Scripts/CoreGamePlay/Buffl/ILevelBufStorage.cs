@@ -22,20 +22,20 @@ namespace RoyalAxe.LevelBuff
     {
         public const int MAX_REWARDS = 3;
         private readonly ILevelBuffStorage _storage;
-        private ILevelWaveProvider _levelWaveProvider;
+        private CoreGamePlayContext _coreGamePlay;
         private ILevelBuff[] _cashed;
 
 
-        public CurrentLevelBuffDistributor(ILevelBuffStorage storage, ILevelWaveProvider levelWaveProvider)
+        public CurrentLevelBuffDistributor(ILevelBuffStorage storage, CoreGamePlayContext levelWaveProvider)
         {
             _storage           = storage;
-            _levelWaveProvider = levelWaveProvider;
+            _coreGamePlay = levelWaveProvider;
         }
 
 
         public ILevelBuff[] GenerateBuff()
         {
-            LevelBuffType[] buffs = _levelWaveProvider.CurrentBuffs;
+            LevelBuffType[] buffs = _coreGamePlay.levelWaveEntity.hasWizardShopReady ? _coreGamePlay.levelWaveEntity.wizardShopReady.LevelBuffTypes : null;
 
             _cashed = (buffs == null || buffs.Length == 0)
                 ? GenerateRandom()

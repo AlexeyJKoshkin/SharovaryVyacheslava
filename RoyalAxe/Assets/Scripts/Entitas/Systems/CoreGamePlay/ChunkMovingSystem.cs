@@ -10,7 +10,7 @@ namespace RoyalAxe.CoreLevel
         private readonly IGroup<CoreGamePlayEntity> _movingChunks;
 
         private readonly ILevelAdapter _axeCoreMap;
-        private ILevelPositionCalculation _levelPositionCalculation;
+        private readonly ILevelPositionCalculation _levelPositionCalculation;
         private readonly TileCoreMapSettings _settings;
 
         public ChunkMovingSystem(CoreGamePlayContext coreGamePlayContext,

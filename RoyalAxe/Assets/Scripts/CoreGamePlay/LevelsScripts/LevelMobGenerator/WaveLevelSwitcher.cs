@@ -13,49 +13,37 @@ namespace RoyalAxe.CoreLevel
     {
         public bool HasWave => _waveQueue.Count > 0;
         public int WaveNumber => _waveEntity.levelNumber.Number;
-        public float SpawnCooldown => _currentSettingsData.SpawnCooldown;
-        public int MaxMobAmount => _currentSettingsData.MaxMobAmount;
-        public MobDeathReward CurrentMobReward => _currentSettingsData.MobDeathReward;
-        public bool HasMob => _blueprints.Count > 0;
-        public LevelBuffType[] CurrentBuffs => _waveEntity.hasWizardShopReady ? _waveEntity.wizardShopReady.LevelBuffTypes : new LevelBuffType[0];
 
         readonly Queue<LevelSettingsData> _waveQueue = new Queue<LevelSettingsData>();
 
-        private readonly CoreGamePlayEntity _waveEntity;
+        private CoreGamePlayEntity _waveEntity => _coreGamePlayContext.levelWaveEntity;
 
-        private LevelSettingsData _currentSettingsData;
 
+        private readonly CoreGamePlayContext _coreGamePlayContext;
         private readonly IDataStorage _dataStorage;
 
         private readonly IMobBlueprintsSpawnStorage _mobBlueprintsSpawnStorage;
-    
-        private readonly List<GenerateMobBlueprintCounter> _blueprints = new List<GenerateMobBlueprintCounter>();
+
 
         public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext,
                                  IDataStorage dataStorage,
-                                 IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage,
-                                 ICurrentUserProgressProfileFacade userProgressProfileFacade)
+                                 IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage
+                                 )
         {
-            _dataStorage = dataStorage;
+            _coreGamePlayContext       = coreGamePlayContext;
+            _dataStorage               = dataStorage;
             _mobBlueprintsSpawnStorage = mobBlueprintsSpawnStorage;
-            _waveEntity = coreGamePlayContext.CreateEntity();
-            _waveEntity.isLevelWave = true;
         }
 
         public bool NextWave()
         {
             if (_waveQueue.Count == 0) return false;
 
-            int nextWave = WaveNumber + 1;
+            int nextWave         = WaveNumber + 1;
             var nextWaveSettings = _waveQueue.Dequeue();
 
-            if (_currentSettingsData == null || _currentSettingsData.Type == nextWaveSettings.Type)
-            {
-                SetNewWave(nextWaveSettings);
-                _waveEntity.ReplaceLevelNumber(nextWave);
-                return true;
-            }
-
+            SetNewWave(nextWaveSettings);
+            _waveEntity.ReplaceLevelNumber(nextWave);
             return false;
         }
 
@@ -63,6 +51,7 @@ namespace RoyalAxe.CoreLevel
         {
             _waveQueue.Clear();
             levelData.PackLevels.ForEach(e => _waveQueue.Enqueue(e));
+            _waveEntity.ReplaceLevelWaveQueue(_waveQueue);
             _mobBlueprintsSpawnStorage.PrepareBlueprints(levelData.PackLevels.SelectMany(o => o.MobsData));
 
             _waveEntity.AddLevelNumber(0);
@@ -70,10 +59,8 @@ namespace RoyalAxe.CoreLevel
 
         private void SetNewWave(LevelSettingsData nextWaveSettingsData)
         {
-            _currentSettingsData = nextWaveSettingsData;
-            _waveEntity.ReplaceLevelNumber(WaveNumber);
-            _mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData);
-            _blueprints.AddRange(_mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData)); // подготовили следующую пачку мобов
+            var pack = _mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData);
+            _waveEntity.levelMobBluePrints.Collection.AddRange(pack); // подготовили следующую пачку мобов
             _waveEntity.isWaveFinished = false;
 
             HandleDestiny(nextWaveSettingsData.Destiny);
@@ -81,10 +68,8 @@ namespace RoyalAxe.CoreLevel
             _waveEntity.ReplaceCurrentLevelInfo(new LastLevel()
             {
                 LevelNumber = nextWaveSettingsData.LevelNumber,
-                Biome = nextWaveSettingsData.Type
+                Biome       = nextWaveSettingsData.Type
             });
-
-        
         }
 
         private void HandleDestiny(WaveDestiny destiny) // todo: корявый метод. По хорошему надо как-то обрабатывать разные ID. 
@@ -109,13 +94,7 @@ namespace RoyalAxe.CoreLevel
             return _dataStorage.ById<WizardLevelCollection>(destiny.IdDestiny)?.GetByLevel(destiny.Level);
         }
 
-        public MobBlueprint GenerateMobData()
-        {
-            var item = _blueprints.GetRandom(false);
-            item.TotalAmount--;
-            if (item.TotalAmount == 0) _blueprints.Remove(item);
-            return item.MobBlueprint;
-        }
+
     }
 
     public class GenerateMobBlueprintCounter

@@ -1,3 +1,4 @@
+using Core.UserProfile;
 using Entitas;
 using RoyalAxe.Units;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace RoyalAxe
 {
-    public class CoreGameSceneUIView : MonoBehaviour, IEarnedExperienceListener, IUseCounterSkillListener, IEarnedGoldListener, IViewEntityBehaviour, ILevelNumberListener
+    public class CoreGameSceneUIView : MonoBehaviour, IEarnedExperienceListener, IUseCounterSkillListener, IEarnedGoldListener, IViewEntityBehaviour, ICurrentLevelInfoListener
     {
         [SerializeField]
         private TextMeshProUGUI _expaText;
@@ -29,12 +30,12 @@ namespace RoyalAxe
         {
             _goldText.text = $"Gold: {value}";
         }
-        
-        
-        public void OnLevelNumber(CoreGamePlayEntity entity, int number)
+        public void OnCurrentLevelInfo(CoreGamePlayEntity entity, LastLevel level)
         {
-            _levelNumberText.text = $"Level: {number}";
+            _levelNumberText.text = $"Level: {level.LevelNumber}";
         }
+        
+        
 
         public void InitEntity(IEntity entity)
         {
@@ -48,9 +49,9 @@ namespace RoyalAxe
                 return;
             }
 
-            if (entity is CoreGamePlayEntity levelNumber && levelNumber.hasLevelNumber)
+            if (entity is CoreGamePlayEntity levelNumber && levelNumber.hasCurrentLevelInfo)
             {
-                levelNumber.AddLevelNumberListener(this);
+                levelNumber.AddCurrentLevelInfoListener(this);
                 return;
             }
 
@@ -63,6 +64,7 @@ namespace RoyalAxe
             }
         }
 
-       
+
+     
     }
 }

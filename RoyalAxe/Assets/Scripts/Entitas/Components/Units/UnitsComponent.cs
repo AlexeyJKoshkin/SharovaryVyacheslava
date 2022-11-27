@@ -32,10 +32,10 @@ namespace RoyalAxe.GameEntitas
     }
 
     [Units]
-    public class ActiveUnitBuffComponent : AbstractCollectionComponent<HashSet<IEntityBuff>, IEntityBuff> { }
+    public class ActiveUnitBuffComponent : HashSetCollectionComponent<IEntityBuff> { }
 
     [Units]
-    public class PossibleTargetsComponent : AbstractCollectionComponent<List<UnitsEntity>, UnitsEntity> { }
+    public class PossibleTargetsComponent : ListCollectionComponent<UnitsEntity> { }
 
  
     [Units]

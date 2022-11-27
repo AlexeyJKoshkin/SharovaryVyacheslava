@@ -7,12 +7,7 @@ namespace RoyalAxe.CoreLevel
 {
     public interface ILevelWaveProvider
     {
-        float SpawnCooldown { get; }
-        int MaxMobAmount { get;  }
-        MobDeathReward CurrentMobReward { get;  }
-        bool HasMob { get; }
-        LevelBuffType[] CurrentBuffs { get; }
-        MobBlueprint GenerateMobData();
+    
         bool HasWave { get; }
     }
 

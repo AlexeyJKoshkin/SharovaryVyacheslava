@@ -1,18 +1,16 @@
-using System;
 using Entitas;
 using RoyalAxe.CharacterStat;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RoyalAxe.Units
-{
-    //временная штуковина для хелсбара
-    [Serializable]
-    public class HealthBarTempComponent : IViewEntityBehaviour
+namespace RoyalAxe.Units {
+    public class HealthBarUnitView : MonoBehaviour, IViewEntityBehaviour
     {
-        private UnitsEntity _owner;
+       
         [SerializeField] private Slider _healthBar;
-
+        [SerializeField] private TextMeshProUGUI _healthText;
+        
         public void InitEntity(IEntity entity)
         {
             if (_healthBar == null)
@@ -22,9 +20,15 @@ namespace RoyalAxe.Units
 
             if (entity is UnitsEntity e)
             {
-                _owner                =  e;
+      
                 e.OnComponentReplaced += EOnOnComponentReplaced;
+                e.OnDestroyEntity += EOnOnDestroyEntity;
             }
+        }
+
+        private void EOnOnDestroyEntity(IEntity entity)
+        {
+            entity.OnComponentReplaced -= EOnOnComponentReplaced;
         }
 
         private void EOnOnComponentReplaced(IEntity entity, int index, IComponent previouscomponent, IComponent newcomponent)
@@ -33,6 +37,7 @@ namespace RoyalAxe.Units
             {
                 ModifiableStat health = newcomponent as ModifiableStat;
                 _healthBar.value = health.CurrentValue / health.MaxValue;
+                _healthText.text = $"{health.CurrentValue}/{health.MaxValue}";
             }
         }
     }
