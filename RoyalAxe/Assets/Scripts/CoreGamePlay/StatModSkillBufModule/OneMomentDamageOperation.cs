@@ -28,6 +28,15 @@ namespace RoyalAxe.CharacterStat
             HandleDamage(attacker, target, damageInfo);
         }
 
+
+        public HitDamageInfo CalcDamage(UnitsEntity attacker, UnitsEntity target, DamageInfluenceData damageInfluenceData)
+        {
+            var calculator = _calculator.GetBy(damageInfluenceData.ElementalDamageType);
+            var damage     = calculator.PowerDamage(attacker, damageInfluenceData.Damage);
+            var damageInfo = calculator.ApplyTo(target,damage);
+            return damageInfo;
+        }
+
         private void HandleDamage(UnitsEntity attacker, UnitsEntity target, HitDamageInfo hitDamageInfo)
         {
             attacker.unitAnimationEntity.AnimationEntity.isAttackTrigger = true;

@@ -7,9 +7,9 @@ namespace RoyalAxe.EntitasSystems
     /// <summary>
     ///     мобы наносят урон
     /// </summary>
-    public class MeleeMobAttackSystem : RAReactiveSystem<UnitsEntity>, IGamePlaySceneSystem
+    public class MeleeAttackCalculationSystem : RAReactiveSystem<UnitsEntity>, IGamePlaySceneSystem
     {
-        public MeleeMobAttackSystem(IContext<UnitsEntity> context) : base(context)
+        public MeleeAttackCalculationSystem(IContext<UnitsEntity> context) : base(context)
         {
         }
 

@@ -9,7 +9,6 @@ namespace RoyalAxe.CharacterStat
 {
     public class ElementalDamageBuf : BaseEntityBuf
     {
-      
         //ссылка на того, кто навесил этот отрицательный баф.
         //нельзя хранить просто ссылку на сущность. т.к юнити может умереть пока действует елементальный урон
         public readonly Guid OwnerGuid;
@@ -72,9 +71,12 @@ namespace RoyalAxe.CharacterStat
             public void Apply(UnitsEntity attacker, UnitsEntity target)
             {
                 if(target == null || !target.isEnabled) return;
+                // в списке активных бафов ищем                      элементальный урон
                 var existsBuf = target.activeUnitBuff.FirstOrDefault(o => o is ElementalDamageBuf elementalDamageBuf
+                                                                          //который навесил текущий юнит
                                                                         && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
-                                                                        && elementalDamageBuf._damage.ElementalDamageType ==
+                                                                          // такой же
+                                                                       && elementalDamageBuf._damage.ElementalDamageType ==
                                                                            _damage.ElementalDamageType) as ElementalDamageBuf;
 
                 if (existsBuf != null)
@@ -91,5 +93,15 @@ namespace RoyalAxe.CharacterStat
 
             
         }
+    }
+
+    public class ColdSpeedBuf : BaseEntityBuf
+    {
+        public override BehaviourTreeStatus Execute(TimeData time)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string NodeName { get; }
     }
 }

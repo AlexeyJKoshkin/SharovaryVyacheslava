@@ -1,5 +1,4 @@
 using RoyalAxe.CharacterStat;
-using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.LevelBuff
 {
