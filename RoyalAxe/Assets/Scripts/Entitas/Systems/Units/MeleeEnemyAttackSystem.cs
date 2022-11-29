@@ -34,12 +34,16 @@ namespace RoyalAxe.EntitasSystems
         
         void InfluenceAllDamage(UnitsEntity attacker, UnitsEntity target)
         {
+          
             if(attacker == null || !attacker.hasDamage) return;
-
+        
             foreach (var damageOperation in attacker.damage)
             {
                 damageOperation.Apply(attacker, target);
             }
+            //todo: переделать. Анимация удара - должна происходить в месте удара
+            attacker.unitAnimationEntity.AnimationEntity.isAttackTrigger = true;
+        
         }
     }
 }

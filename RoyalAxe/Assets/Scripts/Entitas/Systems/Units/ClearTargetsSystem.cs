@@ -45,25 +45,6 @@ namespace RoyalAxe.EntitasSystems
         public ClearPhysicalInteractionSystem(IContext<UnitsEntity> context) : base(context) { }
     }
 
-    public class ClearHitAndAttackSystem : RAReactiveSystem<UnitsEntity>
-    {
-        protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
-        {
-            return context.CreateCollector(UnitsMatcher.AnyOf(UnitsMatcher.HitUnit).Added());
-        }
-
-        protected override bool Filter(UnitsEntity entity)
-        {
-            return true;
-        }
-
-        protected override void Execute(UnitsEntity e)
-        {
-            e.RemoveHitUnit();
-        }
-
-        public ClearHitAndAttackSystem(IContext<UnitsEntity> context) : base(context) { }
-    }
 
    
 }

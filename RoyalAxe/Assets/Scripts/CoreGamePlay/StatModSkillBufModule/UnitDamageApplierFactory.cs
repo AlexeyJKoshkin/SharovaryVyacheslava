@@ -2,11 +2,9 @@
 {
     public interface IUnitDamageApplierFactory
     {
-        ISimpleInfluenceApplier CreateOneMomentDamage(DamageType type, float damage);
         IPeriodicInfluenceApplier CreatePeriodicDamage(PeriodicDamageInfluenceData periodicDamageInfluenceData);
         IEntityBuff CreateElementalDamage(UnitsEntity attacker, PeriodicDamageInfluenceData damage);
-        
-        
+
         IInfluenceApplierComposite CreateComposite(params SkillConfigDef.Damage[] damageData);
     }
     
@@ -28,12 +26,11 @@
         {
             if(damageData == null || damageData.Length == 0) return null;
             
-            var composite = new InfluenceApplierComposite(this);
+            var composite = new InfluenceApplierComposite(this,_calculator);
             for (int i = 0; i < damageData.Length; i++)
             {
                 Add(damageData[i]);
             }
-
 
             void Add(SkillConfigDef.Damage data)
             {
@@ -62,12 +59,6 @@
             return composite;
         }
 
-        public ISimpleInfluenceApplier CreateOneMomentDamage(DamageType type, float damage)
-        {
-            var damageData = new DamageInfluenceData(damage, type);
-            return new OneMomentInfluenceOperation(damageData,_calculator);
-            
-        }
 
         public IPeriodicInfluenceApplier CreatePeriodicDamage(PeriodicDamageInfluenceData periodicDamageInfluenceData)
         {

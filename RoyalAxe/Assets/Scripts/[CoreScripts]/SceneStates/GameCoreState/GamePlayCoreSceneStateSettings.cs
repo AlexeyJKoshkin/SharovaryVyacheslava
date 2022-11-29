@@ -73,7 +73,7 @@ namespace Core.Launcher
                                     
                                           typeof(ClearTargetsSystem),             // очистка списка целей  
                                           typeof(ClearPhysicalInteractionSystem), // очистка взаимодействией
-                                          typeof(ClearHitAndAttackSystem),        // очистка списка урона
+                                    
                                           typeof(HealthEventSystem),              // обновение система слежения здоровья по юнитам
                                           typeof(HandlePlayerDeadSystem),         // проверяем помер ли игрок
                                           typeof(CheckMobDeadSystem),             // проверяем померли мобы

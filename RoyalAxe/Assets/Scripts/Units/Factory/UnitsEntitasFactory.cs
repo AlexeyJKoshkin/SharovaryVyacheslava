@@ -67,7 +67,7 @@ namespace RoyalAxe.GameEntitas
         {
             var entity = CreateBlankUnit();
             _unitStatsBuilder.CopyStats(entity, owner);
-            entity.AddDamage(new List<IInfluenceApplierComposite>());
+
             entity.AddUnit(owner.unit.Id + "boson", owner.unit.Level);
             _skillBuilder.CreateMeleeAttackSkill(entity, owner);
             return entity;
@@ -79,7 +79,7 @@ namespace RoyalAxe.GameEntitas
             var entity = CreateBlankUnit();
             entity.AddUnit(blueprint.Id, blueprint.Level);
             _unitStatsBuilder.SetStats(entity, blueprint.Stats);
-            entity.AddDamage(new List<IInfluenceApplierComposite>());
+         
             return entity;
         }
 

@@ -28,7 +28,7 @@ namespace RoyalAxe.CharacterStat
             _node = new ElementalDamageNode(damage,IsTargetAlive, DoDamageCooldown, DoBufTimer);
         }
 
-        private bool IsTargetAlive(TimeData arg)
+        private bool IsTargetAlive(TimeData arg) // если цель жива
         {
             return !Target.isDeadUnit && Target.health.CurrentValue > 0;
         }
@@ -38,9 +38,12 @@ namespace RoyalAxe.CharacterStat
             RemoveFrom(Target);
         }
 
+        //применить урон к цели
         private void DoDamageCooldown()
         {
-            _influenceCalculator.GetBy(_damage.ElementalDamageType).ApplyTo(Target, _damage.Damage);
+            //получаем калькулятор расчета урона                    // просто применяем урон.
+            _influenceCalculator.GetBy(_damage.ElementalDamageType)
+                                .ApplyTo(Target, _damage.Damage); // Урон не может быть усилен/быть критом. возможно только уменьшение урона
         }
 
         public override BehaviourTreeStatus Execute(TimeData time)
@@ -95,13 +98,5 @@ namespace RoyalAxe.CharacterStat
         }
     }
 
-    public class ColdSpeedBuf : BaseEntityBuf
-    {
-        public override BehaviourTreeStatus Execute(TimeData time)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NodeName { get; }
-    }
+   
 }

@@ -4,7 +4,7 @@ namespace RoyalAxe.LevelBuff
 {
     public abstract class AdditionalDamageBuff<T> : AbstractBuffStrategy<T> where T : AdditionalDamageBuffSettings
     {
-        private UnitsEntity Player => _unitsContext.playerEntity;
+        protected UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
         private readonly IUnitDamageApplierFactory _unitAddDamageToSkillUtility;
@@ -18,8 +18,7 @@ namespace RoyalAxe.LevelBuff
 
         public override void DoBuffStrategyActivate()
         {
-            var attack = _unitAddDamageToSkillUtility.CreateComposite(Settings.Damage);
-            Player.damage.Add(attack);
+            Player.damage.MainInfluence.IncreaseDamage(Settings.DamageTypeType, Settings.Damage.ElementalDamage);
         }
        
     }

@@ -17,14 +17,13 @@ namespace RoyalAxe.GameEntitas
             _timerFactory = timerFactory;
             _toSkillUtility = toSkillUtility;
         }
-        
+
         public void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
             EquipWeaponSkill(unit, skillBlueprint);
             TryAddDefaultGunnerSkill(skillBlueprint.RangeData, unit);
         }
 
-        
         public void CreateTestPlayerSkill(UnitsEntity player, SkillBlueprint skillBlueprint)
         {
             EquipWeaponSkill(player, skillBlueprint);
@@ -32,37 +31,37 @@ namespace RoyalAxe.GameEntitas
             playerSkill.isDefaultPlayerSkill = true;
         }
 
-
         public void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner)
         {
             var weaponData = owner.unitEquipWeaponData;
-            
- var damage =            _toSkillUtility.CreateComposite(weaponData.Damage);
- boson.damage.Add(damage);
+
+            var damage = _toSkillUtility.CreateComposite(weaponData.Damage);
+            boson.AddDamage(damage, null);
+            boson.damage.Add(damage);
 
             boson.ReplaceMoveSpeed(new CharacterStatValue
             {
                 MinValue = 0,
                 MaxValue = 100,
-                Value    = weaponData.Range.MissileSpeed
+                Value = weaponData.Range.MissileSpeed
             });
         }
 
         private void TryAddDefaultGunnerSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity mob)
         {
             if (rangeParams.RangeCooldownAttack <= 0) return;
-            
+
             var skill = CreateWeaponSkill(rangeParams, mob);
             var timer = _timerFactory.CreateRestoreUsageSkillTimer(skill, rangeParams.RangeCooldownAttack);
             skill.AddRestoreAttemptsTimer(1, timer);
             skill.AddGunnerMobSkill(mob);
         }
 
-        
         private void EquipWeaponSkill(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
             unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
-            unit.damage.Add(_toSkillUtility.CreateComposite(skillBlueprint.DamageData));
+            var damage = _toSkillUtility.CreateComposite(skillBlueprint.DamageData);
+            unit.AddDamage(damage, new List<IInfluenceApplier>());
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)
@@ -73,8 +72,5 @@ namespace RoyalAxe.GameEntitas
             unit.AddUnitActiveSkill(skill);
             return skill;
         }
-     
     }
-
-  
 }

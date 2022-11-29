@@ -25,7 +25,7 @@ namespace RoyalAxe.LevelBuff
 
             var damageComponent = Player.damage;
 
-            damageComponent.MainSimpleInfluence.IncreaseDamage(DamageType.Physical, Settings.Value);
+            damageComponent.MainInfluence.IncreaseDamage(DamageType.Physical, Settings.Value);
 
         }
     }
