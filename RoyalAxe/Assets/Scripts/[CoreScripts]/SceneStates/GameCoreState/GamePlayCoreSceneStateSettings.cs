@@ -14,7 +14,7 @@ namespace Core.Launcher
 
         public override IEnumerable<Feature> EventListenerSystem(Contexts contexts)
         {
-            //yield return new GameRootLoopEventSystems(contexts);
+            yield return new GameRootLoopEventSystems(contexts);
             yield return new CoreGamePlayEventSystems(contexts);
             yield return new SkillEventSystems(contexts);
             yield return new UnitsEventSystems(contexts);

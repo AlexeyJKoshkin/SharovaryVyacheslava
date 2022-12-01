@@ -5,16 +5,16 @@ namespace Core.Launcher
 {
     public class MetaSceneState : RoyalAxeSceneState<IMetaSceneInfrastructure>, IMetaSceneContext
     {
-
-        private IStateLoaderProvider TempMetaStateDirector => Infrastructure.StateLoaderProvider;
+        private readonly TempMetaStateDirector _director;
         
-        public MetaSceneState(IMetaSceneInfrastructure metaSceneInfrastructure) : base(metaSceneInfrastructure)
+        public MetaSceneState(IMetaSceneInfrastructure metaSceneInfrastructure,TempMetaStateDirector director) : base(metaSceneInfrastructure)
         {
+            _director = director;
         }
 
         protected override IBehaviourTreeNode GetBehavior()
         {
-            TempMetaStateDirector.Initialize();
+            _director.Initialize();
             return new ActionNode("Mock", (ts) => BehaviourTreeStatus.Running);
             
             /*var allStatesAsNode = _maineSceneStateProvider.AllStates().Cast<IBehaviourTreeNode>().ToArray();
@@ -25,9 +25,5 @@ namespace Core.Launcher
             return builder.Build();*/
            //_maineSceneStateProvider.GetState<MainStateMetaScene>().EnterState(); // первый стейт активируем принудительно*/
         }
-
-
-      
-       
     }
 }

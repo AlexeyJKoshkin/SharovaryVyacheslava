@@ -33,7 +33,7 @@ namespace RoyalAxe.LevelBuff
         [LevelAdditionSettings(true)]
         TripleWeapon = 190,
         [LevelAdditionSettings(true)]
-        IncreaseSkillUsage = 190,
+        IncreaseSkillUsage = 200,
     }
     
     [AttributeUsage(AttributeTargets.Field)]

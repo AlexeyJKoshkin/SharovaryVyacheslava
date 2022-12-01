@@ -11,7 +11,9 @@ namespace Core
         protected override void InstallBindings()
         {
             Container.RegisterComponentOnNewGameObject<GameRootUnityCallbackReceiver>(Lifetime.Singleton, "[MainFrame]").AsSelf()
-                     .AsImplementedInterfaces();
+                     .AsSelf();
+
+            Container.Register<RoyalAxePauseSystemSwitcher>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }
 }

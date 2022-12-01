@@ -22,9 +22,4 @@ namespace RoyalAxe
     public interface IPeriodicInfluenceApplier : IInfluenceApplier
     {
     }
-
-    public interface IDeBuffApplier : IInfluenceApplier
-    {
-        
-    }
 }

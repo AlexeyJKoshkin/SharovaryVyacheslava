@@ -15,18 +15,18 @@ public static class UnitsComponentsLookup {
     public const int BloodDamageStat = 4;
     public const int Boson = 5;
     public const int ColdDamageStat = 6;
-    public const int Damage = 7;
-    public const int DeadUnit = 8;
-    public const int DeBuffInfluence = 9;
-    public const int DestroyUnit = 10;
-    public const int EnterPhysicInteraction = 11;
-    public const int ExitPhysicInteraction = 12;
-    public const int FireDamageStat = 13;
-    public const int Health = 14;
-    public const int Mob = 15;
-    public const int MobDeathReward = 16;
-    public const int MoveSpeed = 17;
-    public const int MovingToPoint = 18;
+    public const int DeadUnit = 7;
+    public const int DestroyUnit = 8;
+    public const int EnterPhysicInteraction = 9;
+    public const int ExitPhysicInteraction = 10;
+    public const int FireDamageStat = 11;
+    public const int Health = 12;
+    public const int MainDamage = 13;
+    public const int Mob = 14;
+    public const int MobDeathReward = 15;
+    public const int MoveSpeed = 16;
+    public const int MovingToPoint = 17;
+    public const int OtherDamage = 18;
     public const int PhysicalDamageStat = 19;
     public const int PlayerBoson = 20;
     public const int Player = 21;
@@ -53,18 +53,18 @@ public static class UnitsComponentsLookup {
         "BloodDamageStat",
         "Boson",
         "ColdDamageStat",
-        "Damage",
         "DeadUnit",
-        "DeBuffInfluence",
         "DestroyUnit",
         "EnterPhysicInteraction",
         "ExitPhysicInteraction",
         "FireDamageStat",
         "Health",
+        "MainDamage",
         "Mob",
         "MobDeathReward",
         "MoveSpeed",
         "MovingToPoint",
+        "OtherDamage",
         "PhysicalDamageStat",
         "PlayerBoson",
         "Player",
@@ -90,17 +90,18 @@ public static class UnitsComponentsLookup {
         typeof(RoyalAxe.GameEntitas.BloodDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.BosonComponent),
         typeof(RoyalAxe.GameEntitas.ColdDamageStatComponent),
-        typeof(RoyalAxe.GameEntitas.DamageComponent),
         typeof(RoyalAxe.GameEntitas.DeadUnit),
         typeof(RoyalAxe.GameEntitas.DestroyUnitComponent),
         typeof(RoyalAxe.GameEntitas.EnterPhysicInteractionComponent),
         typeof(RoyalAxe.GameEntitas.ExitPhysicInteractionComponent),
         typeof(RoyalAxe.GameEntitas.FireDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.HealthComponent),
+        typeof(RoyalAxe.GameEntitas.MainDamageComponent),
         typeof(RoyalAxe.GameEntitas.MobComponent),
         typeof(RoyalAxe.GameEntitas.MobDeathRewardComponent),
         typeof(RoyalAxe.GameEntitas.MoveSpeedComponent),
         typeof(RoyalAxe.GameEntitas.MovingToPointComponent),
+        typeof(RoyalAxe.GameEntitas.OtherDamageComponent),
         typeof(RoyalAxe.GameEntitas.PhysicalDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.PlayerBosonComponent),
         typeof(RoyalAxe.GameEntitas.PlayerComponent),

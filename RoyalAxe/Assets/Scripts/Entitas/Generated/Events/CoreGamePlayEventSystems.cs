@@ -13,6 +13,7 @@ public sealed class CoreGamePlayEventSystems : Feature {
         Add(new EarnedExperienceEventSystem(contexts)); // priority: 0
         Add(new EarnedGemsEventSystem(contexts)); // priority: 0
         Add(new EarnedGoldEventSystem(contexts)); // priority: 0
+        Add(new LevelMobBluePrintsEventSystem(contexts)); // priority: 0
         Add(new LevelNumberEventSystem(contexts)); // priority: 0
     }
 }

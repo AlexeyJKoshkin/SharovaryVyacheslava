@@ -21,8 +21,8 @@ namespace RoyalAxe
             
             Container.Register<MainStateMetaScene>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Container.Register<MaineSceneStateProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-
-            Container.Register<TempMetaStateDirector>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<StateLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            Container.Register<TempMetaStateDirector>(Lifetime.Singleton).AsSelf();
         }
     }
 }

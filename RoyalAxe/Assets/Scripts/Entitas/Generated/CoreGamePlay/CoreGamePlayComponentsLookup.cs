@@ -12,30 +12,32 @@ public static class CoreGamePlayComponentsLookup {
     public const int EarnedExperienceListener = 1;
     public const int EarnedGemsListener = 2;
     public const int EarnedGoldListener = 3;
-    public const int LevelNumberListener = 4;
-    public const int BearingSpawnChunk = 5;
-    public const int ChunkBounds = 6;
-    public const int ChunkView = 7;
-    public const int CurrentLevelInfo = 8;
-    public const int EarnedExperience = 9;
-    public const int EarnedGems = 10;
-    public const int EarnedGold = 11;
-    public const int LevelMobBluePrints = 12;
-    public const int LevelNumber = 13;
-    public const int LevelWave = 14;
-    public const int LevelWaveQueue = 15;
-    public const int MovingChunk = 16;
-    public const int Player = 17;
-    public const int WaveFinished = 18;
-    public const int WizardShopReady = 19;
+    public const int LevelMobBluePrintsListener = 4;
+    public const int LevelNumberListener = 5;
+    public const int BearingSpawnChunk = 6;
+    public const int ChunkBounds = 7;
+    public const int ChunkView = 8;
+    public const int CurrentLevelInfo = 9;
+    public const int EarnedExperience = 10;
+    public const int EarnedGems = 11;
+    public const int EarnedGold = 12;
+    public const int LevelMobBluePrints = 13;
+    public const int LevelNumber = 14;
+    public const int LevelWave = 15;
+    public const int LevelWaveQueue = 16;
+    public const int MovingChunk = 17;
+    public const int Player = 18;
+    public const int WaveFinished = 19;
+    public const int WizardShopReady = 20;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "CurrentLevelInfoListener",
         "EarnedExperienceListener",
         "EarnedGemsListener",
         "EarnedGoldListener",
+        "LevelMobBluePrintsListener",
         "LevelNumberListener",
         "BearingSpawnChunk",
         "ChunkBounds",
@@ -59,6 +61,7 @@ public static class CoreGamePlayComponentsLookup {
         typeof(EarnedExperienceListenerComponent),
         typeof(EarnedGemsListenerComponent),
         typeof(EarnedGoldListenerComponent),
+        typeof(LevelMobBluePrintsListenerComponent),
         typeof(LevelNumberListenerComponent),
         typeof(RoyalAxe.GameEntitas.BearingSpawnChunk),
         typeof(RoyalAxe.GameEntitas.ChunkBoundsComponent),

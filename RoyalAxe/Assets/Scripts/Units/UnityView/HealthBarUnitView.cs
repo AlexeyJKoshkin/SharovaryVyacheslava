@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace RoyalAxe.Units {
-    public class HealthBarUnitView : MonoBehaviour, IViewEntityBehaviour
+    public class HealthBarUnitView : MonoBehaviour, IViewEntityBehaviour, IHealthListener
     {
        
         [SerializeField] private Slider _healthBar;
@@ -20,25 +20,16 @@ namespace RoyalAxe.Units {
 
             if (entity is UnitsEntity e)
             {
-      
-                e.OnComponentReplaced += EOnOnComponentReplaced;
-                e.OnDestroyEntity += EOnOnDestroyEntity;
+                e.AddHealthListener(this);
+                OnHealth(e, e.health.UnitStatValue);
             }
         }
 
-        private void EOnOnDestroyEntity(IEntity entity)
-        {
-            entity.OnComponentReplaced -= EOnOnComponentReplaced;
-        }
 
-        private void EOnOnComponentReplaced(IEntity entity, int index, IComponent previouscomponent, IComponent newcomponent)
+        public void OnHealth(UnitsEntity entity, CharacterStatValue health)
         {
-            if (index == UnitsComponentsLookup.Health)
-            {
-                ModifiableStat health = newcomponent as ModifiableStat;
-                _healthBar.value = health.CurrentValue / health.MaxValue;
-                _healthText.text = $"{health.CurrentValue}/{health.MaxValue}";
-            }
+            _healthBar.value = health.Value / health.MaxValue;
+            _healthText.text = $"{health.Value}/{health.MaxValue}";
         }
     }
 }

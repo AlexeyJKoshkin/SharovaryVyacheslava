@@ -7,7 +7,6 @@
         public bool IsCritical;
     }
 
-
     public class DamageInfluenceData
     {
         public float Damage;
@@ -15,7 +14,7 @@
 
         public DamageInfluenceData()
         {
-            Damage = 10;
+            Damage = 0;
             ElementalDamageType = DamageType.Physical;
         }
         public DamageInfluenceData(float damage, DamageType type)

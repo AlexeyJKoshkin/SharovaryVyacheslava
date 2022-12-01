@@ -10,6 +10,7 @@ public sealed class GameRootLoopEventSystems : Feature {
 
     public GameRootLoopEventSystems(Contexts contexts) {
         Add(new DoneTimerEventSystem(contexts)); // priority: 0
+        Add(new GamePauseEventSystem(contexts)); // priority: 0
         Add(new TimerEventSystem(contexts)); // priority: 0
     }
 }

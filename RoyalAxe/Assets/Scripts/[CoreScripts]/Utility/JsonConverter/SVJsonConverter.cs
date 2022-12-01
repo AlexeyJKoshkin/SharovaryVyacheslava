@@ -12,7 +12,7 @@ namespace Core
         {
             _jsonSettings = new JsonSerializerSettings
             {
-                Formatting       = Formatting.None,
+                Formatting       = Formatting.Indented,
                 ContractResolver = new EnumToIntKeyContractResolver()
             };
         }

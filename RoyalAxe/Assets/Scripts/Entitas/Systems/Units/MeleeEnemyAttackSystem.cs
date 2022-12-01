@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Entitas;
-using RoyalAxe.CharacterStat;
-using RoyalAxe.GameEntitas;
+
 
 namespace RoyalAxe.EntitasSystems
 {
@@ -15,7 +15,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            return context.CreateCollector(UnitsMatcher.AllOf(UnitsMatcher.PossibleTargets, UnitsMatcher.Damage)
+            return context.CreateCollector(UnitsMatcher.AllOf(UnitsMatcher.PossibleTargets).AnyOf(UnitsMatcher.OtherDamage, UnitsMatcher.MainDamage)
                                                        .NoneOf(UnitsMatcher.DestroyUnit).Added());
         }
 
@@ -27,23 +27,33 @@ namespace RoyalAxe.EntitasSystems
 
         protected override void Execute(UnitsEntity e)
         {
-            var target = e.possibleTargets.Collection[0];
-            InfluenceAllDamage(e,target); // нанесли урон. потом будем что-то возращать
-            e.possibleTargets.Remove(target);
-        }
-        
-        void InfluenceAllDamage(UnitsEntity attacker, UnitsEntity target)
-        {
-          
-            if(attacker == null || !attacker.hasDamage) return;
-        
-            foreach (var damageOperation in attacker.damage)
+            foreach (var damageOperation in GetInfluenceApplier(e)) //обходим каждую пачку урона
             {
-                damageOperation.Apply(attacker, target);
+                foreach (var target in e.possibleTargets)
+                {
+                    damageOperation.Apply(e, target); // нанесли урон. 
+                }
+              
             }
+            e.possibleTargets.Collection.Clear();
+            e.ReplacePossibleTargets(e.possibleTargets.Collection);
             //todo: переделать. Анимация удара - должна происходить в месте удара
-            attacker.unitAnimationEntity.AnimationEntity.isAttackTrigger = true;
-        
+            e.unitAnimationEntity.AnimationEntity.isAttackTrigger = true;
+            
+        }
+
+        private IEnumerable<IInfluenceApplier> GetInfluenceApplier(UnitsEntity attacker)
+        {
+            if (attacker.hasMainDamage)
+                 yield return attacker.mainDamage.Influence;
+            if (!attacker.hasOtherDamage) yield break;
+            
+
+            foreach (var damage in attacker.otherDamage)
+            {
+                yield return damage;
+            }
         }
     }
+    
 }

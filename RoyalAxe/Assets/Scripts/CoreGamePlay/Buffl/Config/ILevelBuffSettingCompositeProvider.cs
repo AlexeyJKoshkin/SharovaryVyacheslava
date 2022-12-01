@@ -22,9 +22,10 @@ namespace RoyalAxe.LevelBuff
         }
 
         public LevelBuffSettingsComposite SettingsComposite { get; private set; }
-        public AbstractBuffStrategy<T>.StrategySettings GetSettings<T>(Func<LevelBuffSettingsComposite, T> settingGetter) where T : BaseLevelBuffSettings
+       
+        public AbstractBuffStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings
         {
-            var settings = settingGetter?.Invoke(SettingsComposite);
+            var settings = SettingsComposite.AllSettings().FirstOrDefault(o => o is T) as T;
             if(settings== null) return new AbstractBuffStrategy<T>.StrategySettings();
 
             var additionalSettings = _helper[settings.Type];
@@ -32,15 +33,12 @@ namespace RoyalAxe.LevelBuff
             var result = new AbstractBuffStrategy<T>.StrategySettings()
             {
                 Settings = settings,
-                Type = settings.Type,
+                Type     = settings.Type,
                 IsSingle = additionalSettings != null && additionalSettings.IsSingle
             };
             return result;
-        }
-        
-        public AbstractBuffStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings
-        {
-            return GetSettings<T>((composite) => { return composite.AllSettings().First(o => o is T) as T; });
+            
+
         }
 
         class Helper : Dictionary<LevelBuffType,LevelAdditionSettingsAttribute>

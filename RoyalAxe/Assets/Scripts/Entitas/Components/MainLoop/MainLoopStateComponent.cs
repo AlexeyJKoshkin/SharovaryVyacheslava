@@ -12,6 +12,12 @@ namespace RoyalAxe.GameEntitas
         public IProjectSceneState State;
     }
 
+    [GameRootLoop, Unique, Event(EventTarget.Self)]
+    public class GamePauseComponent : IComponent
+    {
+        public bool IsPause;
+    }
+
     [GameRootLoop]
     public class AdditionalDataBoxComponent : AbstractCollectionComponent<DataBox[], DataBox> { }
 
@@ -20,6 +26,4 @@ namespace RoyalAxe.GameEntitas
 
     [GameRootLoop]
     public class PauseableUpdateSystemsComponent : UpdateSystemsComponent { }
-
- 
 }

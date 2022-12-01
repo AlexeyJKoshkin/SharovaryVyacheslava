@@ -10,6 +10,7 @@ namespace RoyalAxe
         {
             Container.Register<StartSceneState>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Container.Register<StateInfrastructure>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<StateLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }
 }

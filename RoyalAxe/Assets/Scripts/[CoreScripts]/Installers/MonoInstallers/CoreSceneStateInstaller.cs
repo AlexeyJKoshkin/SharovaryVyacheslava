@@ -14,6 +14,8 @@ namespace RoyalAxe
         [FoldoutGroup("UI")] [SerializeField] private BuffSelectWindowView _buffSelectWindowView;
         [FoldoutGroup("UI")] [SerializeField] private WinWindowView _winWindowView;
         [FoldoutGroup("UI")] [SerializeField] private LoseWindowView _loseWindowView;
+        
+        [FoldoutGroup("Debug")] [SerializeField] private CoreDebugWaveInfoUIView _debugWindowView;
 
         protected override void InstallBindings()
         {
@@ -39,7 +41,13 @@ namespace RoyalAxe
             Container.Register<WinLevelCommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<StopCoreGameLogicCommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<LoseLevelUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<PrepareGameUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            
+            Container.Register<DefaultCoreGameUIPrepareCommand>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<DebugCoreGameUICommandPrepare>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            Container.Register<PrepareGameUICommandComposite>(Lifetime.Singleton).As<IPrepareGameUICommandComposite>();
+            
 
             Container.Register<ResetCoreGameToRetryCommand>(Lifetime.Singleton).AsImplementedInterfaces();
         }
@@ -56,6 +64,7 @@ namespace RoyalAxe
             Container.RegisterInstance(_buffSelectWindowView).AsSelf();
             Container.RegisterInstance(_winWindowView).AsSelf();
             Container.RegisterInstance(_loseWindowView).AsSelf();
+            Container.RegisterInstance(_debugWindowView).AsSelf();
         }
     }
 }

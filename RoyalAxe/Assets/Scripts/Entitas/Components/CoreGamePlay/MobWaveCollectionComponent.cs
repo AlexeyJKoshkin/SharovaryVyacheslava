@@ -24,12 +24,12 @@ namespace RoyalAxe.GameEntitas
     [CoreGamePlay]
     public class LevelWaveQueueComponent : IComponent
     {
-      public  Queue<LevelSettingsData> Queue;
+        public Queue<LevelSettingsData> Queue;
         public LevelSettingsData Current => Queue.Peek();
     }
     
 
-    [CoreGamePlay]
+    [CoreGamePlay,Event(EventTarget.Self)]
     public class LevelMobBluePrints : ListCollectionComponent<GenerateMobBlueprintCounter>
     {
         public MobBlueprint GenerateMobData()

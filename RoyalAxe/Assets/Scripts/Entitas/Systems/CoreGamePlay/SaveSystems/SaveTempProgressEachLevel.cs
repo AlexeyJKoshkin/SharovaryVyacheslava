@@ -15,7 +15,7 @@ namespace RoyalAxe.CoreLevel
 
         protected override void Execute(CoreGamePlayEntity e)
         {
-            HLogger.LogError("SAVE ");
+            HLogger.TempLog("Save temp"); // todo remove log
             //тут же надо сохранять гемы, опыт, всю всю поеботу во временный профиль-сейв
             UserProgressProfileFacade.LevelProgressFacade.LastPlayed = e.currentLevelInfo.Level;
         }

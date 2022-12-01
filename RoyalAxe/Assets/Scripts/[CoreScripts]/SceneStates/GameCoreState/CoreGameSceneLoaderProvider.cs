@@ -22,8 +22,6 @@ namespace Core.Launcher
             return _currentLoader;
         }
 
-        public void Initialize() { }
-
         public void LoadMetaScene()
         {
             _pauseSwitcher.UnPause();

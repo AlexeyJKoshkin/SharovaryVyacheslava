@@ -12,15 +12,11 @@ namespace RoyalAxe.CoreLevel {
         private CoreGamePlayEntity Wave => _coreGamePlay.levelWaveEntity;
         private readonly CoreGamePlayContext _coreGamePlay;
 
-        private readonly ILevelWaveLoader _levelWaveProvider;
-
 
         public MobSpawnOperation(IRoyalAxeCoreMap map,
-                                 ILevelWaveLoader levelWaveLoader,
                                  CoreGamePlayContext coreGamePlay)
         {
             _map               = map;
-            _levelWaveProvider = levelWaveLoader;
             _coreGamePlay      = coreGamePlay;
         }
 
@@ -53,6 +49,7 @@ namespace RoyalAxe.CoreLevel {
                 mobGeneratorHelper.GenerateEnemy(mobData);
                 counter++;
             }
+            Wave.ReplaceLevelMobBluePrints(blueprints.Collection); // обновили состояние
             HLogger.LogCoreLevel($"Need {needMob} Created {counter}");
         }
     }

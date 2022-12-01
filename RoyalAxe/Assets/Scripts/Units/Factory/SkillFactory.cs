@@ -36,8 +36,7 @@ namespace RoyalAxe.GameEntitas
             var weaponData = owner.unitEquipWeaponData;
 
             var damage = _toSkillUtility.CreateComposite(weaponData.Damage);
-            boson.AddDamage(damage, null);
-            boson.damage.Add(damage);
+            boson.AddMainDamage(damage);
 
             boson.ReplaceMoveSpeed(new CharacterStatValue
             {
@@ -61,7 +60,7 @@ namespace RoyalAxe.GameEntitas
         {
             unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
             var damage = _toSkillUtility.CreateComposite(skillBlueprint.DamageData);
-            unit.AddDamage(damage, new List<IInfluenceApplier>());
+            unit.AddMainDamage(damage);
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)

@@ -9,22 +9,28 @@
 public static class GameRootLoopComponentsLookup {
 
     public const int DoneTimerListener = 0;
-    public const int AdditionalDataBox = 1;
-    public const int MainLoopState = 2;
-    public const int PauseableUpdateSystems = 3;
-    public const int ActiveTimer = 4;
-    public const int DoneTimer = 5;
-    public const int Pause = 6;
-    public const int Repeat = 7;
-    public const int Timer = 8;
-    public const int UpdateSystems = 9;
-    public const int TimerListener = 10;
+    public const int GamePauseListener = 1;
+    public const int AdditionalDataBox = 2;
+    public const int Cheats = 3;
+    public const int GamePause = 4;
+    public const int MainLoopState = 5;
+    public const int PauseableUpdateSystems = 6;
+    public const int ActiveTimer = 7;
+    public const int DoneTimer = 8;
+    public const int Pause = 9;
+    public const int Repeat = 10;
+    public const int Timer = 11;
+    public const int UpdateSystems = 12;
+    public const int TimerListener = 13;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "DoneTimerListener",
+        "GamePauseListener",
         "AdditionalDataBox",
+        "Cheats",
+        "GamePause",
         "MainLoopState",
         "PauseableUpdateSystems",
         "ActiveTimer",
@@ -38,7 +44,10 @@ public static class GameRootLoopComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(DoneTimerListenerComponent),
+        typeof(GamePauseListenerComponent),
         typeof(RoyalAxe.GameEntitas.AdditionalDataBoxComponent),
+        typeof(RoyalAxe.GameEntitas.CheatsComponent),
+        typeof(RoyalAxe.GameEntitas.GamePauseComponent),
         typeof(RoyalAxe.GameEntitas.MainLoopStateComponent),
         typeof(RoyalAxe.GameEntitas.PauseableUpdateSystemsComponent),
         typeof(RoyalAxe.GameEntitas.Timer.ActiveTimerComponent),

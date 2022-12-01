@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.GameEntitas;
@@ -5,7 +6,7 @@ using RoyalAxe.GameEntitas;
 namespace RoyalAxe.LevelBuff {
     public class ColdAdditionalDamageBuff : AdditionalDamageBuff<ColdAdditionalDamageBuffSettings>, IInfluenceApplierComposite
     {
-        public ColdAdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, IUnitDamageApplierFactory unitDamageApplierFactory, UnitsContext unitsContext) : base(provider, unitDamageApplierFactory, unitsContext) { }
+        public ColdAdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider, unitsContext) { }
         
         
         void IInfluenceApplier.Apply(UnitsEntity attacker, UnitsEntity target)
@@ -15,6 +16,7 @@ namespace RoyalAxe.LevelBuff {
             target.ApplyBuf(new FreezeUnitBuf(Settings.DecelerationPercent));
         }
 
+        // баф невозможно улучшить.
         void IInfluenceApplierComposite.IncreaseDamage(DamageType physical, float settingsValue)
         {
         }
@@ -22,7 +24,10 @@ namespace RoyalAxe.LevelBuff {
         public override void DoBuffStrategyActivate()
         {
             base.DoBuffStrategyActivate(); // в базе добавили урон
-            this.Player.damage.Add(this); // добавили самого себя, в качестве сущности, которая будет навешивать баф/заморозку
+            var list = this.Player.hasOtherDamage ? this.Player.otherDamage.Collection : new List<IInfluenceApplier>();
+            list.Add(this); // добавили самого себя, в качестве сущности, которая будет навешивать баф/заморозку
+            
+            this.Player.ReplaceOtherDamage(list); // обновили сущность 
         }
     }
 }

@@ -40,9 +40,9 @@ namespace RoyalAxe.CoreLevel
 
         private BehaviourTreeStatus TryLoadNext(TimeData arg)
         {
-            _mobSpawnFacade.StopSpawn();
             if (_levelWaveLoader.NextWave()) // пробуем загрузить следующую волну один раз
             {
+                _mobSpawnFacade.StartSpawnMob();
                 HLogger.LogError("Load Next wave");
                 return BehaviourTreeStatus.Success;
             }

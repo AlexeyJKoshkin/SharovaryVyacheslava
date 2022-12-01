@@ -27,12 +27,13 @@ namespace RoyalAxe.CoreLevel
 
         public WaveLevelSwitcher(CoreGamePlayContext coreGamePlayContext,
                                  IDataStorage dataStorage,
-                                 IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage
-                                 )
+                                 IMobBlueprintsSpawnStorage mobBlueprintsSpawnStorage)
         {
             _coreGamePlayContext       = coreGamePlayContext;
             _dataStorage               = dataStorage;
             _mobBlueprintsSpawnStorage = mobBlueprintsSpawnStorage;
+            _coreGamePlayContext.isLevelWave = true;
+            _coreGamePlayContext.levelWaveEntity.AddLevelMobBluePrints(new List<GenerateMobBlueprintCounter>());
         }
 
         public bool NextWave()

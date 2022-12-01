@@ -1,4 +1,3 @@
-using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.LevelBuff
 {
@@ -7,18 +6,16 @@ namespace RoyalAxe.LevelBuff
         protected UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
-        private readonly IUnitDamageApplierFactory _unitAddDamageToSkillUtility;
 
-        protected AdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, IUnitDamageApplierFactory unitAddDamageToSkillUtility, UnitsContext unitsContext) : base(provider)
+        protected AdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
         {
-            _unitAddDamageToSkillUtility = unitAddDamageToSkillUtility;
             _unitsContext             = unitsContext;
         }
         
 
         public override void DoBuffStrategyActivate()
         {
-            Player.damage.MainInfluence.IncreaseDamage(Settings.DamageTypeType, Settings.Damage.ElementalDamage);
+            Player.mainDamage.IncreaseDamage(Settings.DamageTypeType, Settings.Damage.ElementalDamage);
         }
        
     }

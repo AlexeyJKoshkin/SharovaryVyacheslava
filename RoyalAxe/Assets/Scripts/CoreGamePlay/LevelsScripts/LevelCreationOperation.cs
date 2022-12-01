@@ -15,7 +15,7 @@ namespace RoyalAxe.CoreLevel
     //todo: переписать используя декораторы. Надо ждать всякие анимации, колбэки всякое такое. 
     public class LevelCreationOperation : ILevelCreation
     {
-        private readonly IPrepareGameUICommand _prepareGameUiCommand;
+        private readonly IPrepareGameUICommandComposite _prepareGameUiCommand;
         private readonly ICoreLevelBuilder _coreLevelBuilder;
         private readonly ICoreLevelDataInfrastructure _coreLevelDataInfrastructure;
         private readonly ILevelWaveLoader _levelWaveProvider;
@@ -28,7 +28,7 @@ namespace RoyalAxe.CoreLevel
                                       CoreGameBehaviourNode coreGameBehaviourNode,
                                       
                                       IMobSpawnFacade mobSpawnFacade,
-                                      IPrepareGameUICommand prepareGameUiCommand,
+                                      IPrepareGameUICommandComposite prepareGameUiCommand,
                                       ILevelWaveLoader levelWaveProvider, IPlayerCoreGameFacade playerCoreGameFacade)
         {
             _coreLevelBuilder            = coreLevelBuilder;
@@ -42,12 +42,10 @@ namespace RoyalAxe.CoreLevel
             _playerCoreGameFacade = playerCoreGameFacade;
         }
 
-        public void StartLevel()
+        public void StartLevel() 
         {
             _levelWaveProvider.NextWave(); // по факту грузится первый уровень
-            _mobSpawnFacade.StartSpawnMob();
-            
-
+            _mobSpawnFacade.StartSpawnMob(); // пошел цикл спавна мобов
         }
 
         IBehaviourTreeNode ILevelCreation.CreateLevel()

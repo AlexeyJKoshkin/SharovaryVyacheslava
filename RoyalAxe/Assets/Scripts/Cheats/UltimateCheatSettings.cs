@@ -1,6 +1,7 @@
 ﻿using Core.UserProfile;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -11,16 +12,25 @@ namespace RoyalAxe.CoreLevel
         LastLevel LevelParams { get; }
     }
 
-    public class UltimateCheatAdapter : IUltimateCheatAdapter
+    public class UltimateCheatStarter : IUltimateCheatAdapter, IInitializable
     {
         private readonly UltimateCheatSettings _cheatSettings;
-        public bool EnableRender => !_cheatSettings.EnableCheats || _cheatSettings.EnableRender;
+        private readonly GameRootLoopContext _rootLoopContext;
+        public bool EnableRender => !_rootLoopContext.hasCheats || _cheatSettings.EnableRender;
         public bool UseLevelFromCheat => _cheatSettings.EnableCheats && _cheatSettings.StartCustomLevel;
         public LastLevel LevelParams => _cheatSettings.LevelParams;
 
-        public UltimateCheatAdapter(UltimateCheatSettings cheatSettings)
+        public UltimateCheatStarter(UltimateCheatSettings cheatSettings, GameRootLoopContext rootLoopContext)
         {
             _cheatSettings = cheatSettings;
+            _rootLoopContext = rootLoopContext;
+        }
+
+        public void Initialize()
+        {
+            if(!_cheatSettings.EnableCheats) return;
+            _rootLoopContext.ReplaceCheats(_cheatSettings);
+                
         }
     }
 

@@ -45,7 +45,7 @@ namespace Core
         
         private void BindCheats()
         {
-            Container.Register<UltimateCheatAdapter>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UltimateCheatStarter>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.RegisterInstance(_cheatSettings).AsSelf();
         }
 

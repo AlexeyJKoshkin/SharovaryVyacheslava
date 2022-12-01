@@ -41,7 +41,6 @@ namespace RoyalAxe.LevelBuff
         public PoisonAdditionalDamageBuffSettings PoisonAdditional = new PoisonAdditionalDamageBuffSettings();
         [GoogleSheetPageName]
         public ChainReactionDamageBuffSettings ChainReactionDamage =new ChainReactionDamageBuffSettings();
-        
         [GoogleSheetPageName]
         public IncreasePlayerSkillUsageBuffSettings IncreasePlayerSkillUsage =new IncreasePlayerSkillUsageBuffSettings();
         

@@ -21,8 +21,7 @@ namespace Core
             Container.RegisterInstance(_prefabStorage);
 
             Container.Register<CoreGameSceneLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-            
-            
+
             InstallMap();
             InstallWizardShop();
 

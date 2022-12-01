@@ -12,7 +12,8 @@ namespace Core
         {
             Container.Register<CoreGameSceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<SceneLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-
+           
+            
             Container.Register<CoreLevelDataInfrastructure>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
     }

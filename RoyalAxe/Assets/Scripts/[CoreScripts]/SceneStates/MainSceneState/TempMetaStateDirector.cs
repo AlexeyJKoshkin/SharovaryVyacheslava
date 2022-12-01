@@ -1,31 +1,25 @@
 ﻿using Core.UserProfile;
 using ProjectUI;
 using RoyalAxe.CoreLevel;
+using VContainer.Unity;
+
 namespace Core.Launcher
 {
-    public interface IStateLoaderProvider
-    {
-        ISceneLoaderHelper GetCurrentSceneLoader();
-        void Initialize();
-    }
-
-    public class TempMetaStateDirector : IStateLoaderProvider
+    public class TempMetaStateDirector
     {
         private readonly MetaSceneUIView _metaSceneUIView;
-        private readonly ISceneLoaderProvider _sceneLoaderProvider;
+        private readonly StateLoaderProvider _stateLoaderProvider;
         private readonly IUltimateCheatAdapter _ultimateCheatAdapter;
-        private GameRootLoopContext _gameRootLoopContext;
         private readonly IUserSaveProfileStorage _userSaveProfileStorage;
 
-        private ISceneLoaderHelper _currentSceneLoader;
-
-        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView, ISceneLoaderProvider sceneLoaderProvider, IUltimateCheatAdapter ultimateCheatAdapter, GameRootLoopContext gameRootLoopContext,
+        public TempMetaStateDirector(MetaSceneUIView metaSceneUIView,
+                                     StateLoaderProvider sceneLoaderProvider,
+                                     IUltimateCheatAdapter ultimateCheatAdapter,
                                      IUserSaveProfileStorage userSaveProfileStorage)
         {
             _metaSceneUIView = metaSceneUIView;
-            _sceneLoaderProvider = sceneLoaderProvider;
+            _stateLoaderProvider = sceneLoaderProvider;
             _ultimateCheatAdapter = ultimateCheatAdapter;
-            _gameRootLoopContext = gameRootLoopContext;
             _userSaveProfileStorage = userSaveProfileStorage;
          
         }
@@ -38,9 +32,7 @@ namespace Core.Launcher
         void OnStartGameHandler()
         {
             var coreLevelParams = GetLevelParams();
-             var currentSceneLoader = _sceneLoaderProvider.GetLoader<CoreGameSceneLoader>();
-            currentSceneLoader.SetPlayerParameters(coreLevelParams);
-            _currentSceneLoader = currentSceneLoader;
+            _stateLoaderProvider.Set<CoreGameSceneLoader>().SetPlayerParameters(coreLevelParams);
         }
 
         private LastLevel GetLevelParams()
@@ -48,11 +40,6 @@ namespace Core.Launcher
             if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
             var current = _userSaveProfileStorage.Current;
             return current.LevelProgressFacade.SavedLevel;
-        }
-
-        public ISceneLoaderHelper GetCurrentSceneLoader()
-        {
-            return _currentSceneLoader;
         }
     }
   
