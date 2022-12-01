@@ -7,15 +7,17 @@ namespace RoyalAxe.LevelBuff
 {
     public interface ILevelBuffStorage
     {
-        IReadOnlyCollection<LevelBuffType> ExistsBuffs { get; }
-        void ReturnUnUsedSingle(ILevelBuff buff);
-        ILevelBuff Get(LevelBuffType reward);
+        IEnumerable<LevelBuffType> UnActiveBuffs();
+       IReadOnlyCollection<LevelBuffType> ExistsBuffs { get; }
+        void ReturnUnUsedSingle(ILevelPowerStrategy powerStrategy);
+        ILevelPowerStrategy Get(LevelBuffType reward);
+        ILevelPowerStrategy Peek(LevelBuffType type);
     }
 
     public interface ICurrentLevelBuffDistributor
     {
-        ILevelBuff[] GenerateBuff();
-        void HandleSelection(ILevelBuff selectedBuff);
+        ILevelPowerStrategy[] GenerateBuff();
+        void HandleSelection(ILevelPowerStrategy selectedPowerStrategy);
     }
 
     public class CurrentLevelBuffDistributor : ICurrentLevelBuffDistributor
@@ -23,7 +25,7 @@ namespace RoyalAxe.LevelBuff
         public const int MAX_REWARDS = 3;
         private readonly ILevelBuffStorage _storage;
         private CoreGamePlayContext _coreGamePlay;
-        private ILevelBuff[] _cashed;
+        private ILevelPowerStrategy[] _cashed;
 
 
         public CurrentLevelBuffDistributor(ILevelBuffStorage storage, CoreGamePlayContext levelWaveProvider)
@@ -33,7 +35,7 @@ namespace RoyalAxe.LevelBuff
         }
 
 
-        public ILevelBuff[] GenerateBuff()
+        public ILevelPowerStrategy[] GenerateBuff()
         {
             LevelBuffType[] buffs = _coreGamePlay.levelWaveEntity.hasWizardShopReady ? _coreGamePlay.levelWaveEntity.wizardShopReady.LevelBuffTypes : null;
 
@@ -43,7 +45,7 @@ namespace RoyalAxe.LevelBuff
             return _cashed;
         }
 
-        public void HandleSelection(ILevelBuff selectedBuff)
+        public void HandleSelection(ILevelPowerStrategy selectedPowerStrategy)
         {
             foreach (var buff in _cashed)
             {
@@ -51,18 +53,18 @@ namespace RoyalAxe.LevelBuff
                     _storage.ReturnUnUsedSingle(buff); // вернем только неиспользуемый сингловый баф
             }
 
-            bool CheckCanReturn(ILevelBuff buff) // возращаем только не текущий баф и одноразовый
+            bool CheckCanReturn(ILevelPowerStrategy buff) // возращаем только не текущий баф и одноразовый
             {
-                return buff != null && buff != selectedBuff && buff.IsSingle;
+                return buff != null && buff != selectedPowerStrategy && buff.IsSingle;
             }
 
             _cashed = null;
         }
 
-        private ILevelBuff[] GenerateRandom()
+        private ILevelPowerStrategy[] GenerateRandom()
         {
-            var result = new ILevelBuff[MAX_REWARDS];
-            var copy   = _storage.ExistsBuffs.ToList();
+            var result = new ILevelPowerStrategy[MAX_REWARDS];
+            var copy   = _storage.UnActiveBuffs().ToList();
             for (int i = 0; i < MAX_REWARDS; i++)
             {
                 var reward = copy.GetRandom(true);

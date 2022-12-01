@@ -3,18 +3,18 @@ using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.LevelBuff
 {
-    public class IncreaseDamageBuff : AbstractBuffStrategy<IncreaseDamageBuffSettings>
+    public class IncreaseDamagePower : AbstractPowerStrategyStrategy<IncreaseDamageBuffSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
 
-        public IncreaseDamageBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
+        public IncreaseDamagePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
         {
             _unitsContext             = unitsContext;
         }
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
             //либо увеличиваем физ дамаг как стат
             // player.physicalDamage.ChangeValue(_increaseDamage).ApplyPermanentMod();
@@ -23,6 +23,12 @@ namespace RoyalAxe.LevelBuff
             var damageComponent = Player.mainDamage;
             damageComponent.IncreaseDamage(DamageType.Physical, Settings.Value);
 
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            var damageComponent = Player.mainDamage;
+            damageComponent.IncreaseDamage(DamageType.Physical, -Settings.Value);
         }
     }
 }

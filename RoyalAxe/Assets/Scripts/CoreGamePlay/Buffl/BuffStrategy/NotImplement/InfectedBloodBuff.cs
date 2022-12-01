@@ -1,7 +1,16 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class InfectedBloodBuff : AbstractBuffStrategy<InfectedBloodBuffSettings>
+    public class InfectedBloodPower : AbstractPowerStrategyStrategy<InfectedBloodBuffSettings>
     {
-        public InfectedBloodBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public InfectedBloodPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public override void DoLevelPowerActivate()
+        {
+            
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            
+        }
     }
 }

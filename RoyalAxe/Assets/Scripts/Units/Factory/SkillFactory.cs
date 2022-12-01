@@ -35,9 +35,10 @@ namespace RoyalAxe.GameEntitas
         {
             var weaponData = owner.unitEquipWeaponData;
 
-            var damage = _toSkillUtility.CreateComposite(weaponData.Damage);
-            boson.AddMainDamage(damage);
-
+            //var damage = _toSkillUtility.CreateComposite(weaponData.Damage);
+            boson.AddMainDamage(owner.mainDamage.Influence);
+            if(owner.hasOtherDamage)
+                boson.AddOtherDamage(owner.otherDamage.Collection);
             boson.ReplaceMoveSpeed(new CharacterStatValue
             {
                 MinValue = 0,

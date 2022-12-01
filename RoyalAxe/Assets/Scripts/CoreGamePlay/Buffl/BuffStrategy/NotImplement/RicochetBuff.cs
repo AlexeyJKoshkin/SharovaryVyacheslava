@@ -1,7 +1,16 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class RicochetBuff : AbstractBuffStrategy<RicochetBuffSettings>
+    public class RicochetPower : AbstractPowerStrategyStrategy<RicochetBuffSettings>
     {
-        public RicochetBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public RicochetPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public override void DoLevelPowerActivate()
+        {
+            
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            
+        }
     }
 }

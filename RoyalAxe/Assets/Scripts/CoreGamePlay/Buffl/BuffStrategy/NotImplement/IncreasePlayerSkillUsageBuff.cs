@@ -1,6 +1,6 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class IncreasePlayerSkillUsageBuff : AbstractBuffStrategy<IncreasePlayerSkillUsageBuffSettings>
+    public class IncreasePlayerSkillUsagePower : AbstractPowerStrategyStrategy<IncreasePlayerSkillUsageBuffSettings>
     {
        
         private UnitsEntity Player => _unitsContext.playerEntity;
@@ -9,14 +9,18 @@ namespace RoyalAxe.LevelBuff
 
         
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
             var         skillEntity = Player.unitActiveSkill.SkillEntity;
             var         usages      = skillEntity.useCounterSkill;
             skillEntity.ReplaceUseCounterSkill(usages.CurrentValue + Settings.AddAxe, usages.MaxValue + Settings.AddAxe);
         }
 
-        public IncreasePlayerSkillUsageBuff(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
+        public override void DoLevelPowerDeActivate()
+        {
+        }
+
+        public IncreasePlayerSkillUsagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
         {
             _unitsContext = unitsContext;
         }

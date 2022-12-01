@@ -11,7 +11,7 @@ namespace RoyalAxe.CharacterStat
         public Action DoDamageEvent;
         public Action EndBufEvent;
 
-        public ElementalDamageNode(PeriodicDamageInfluenceData damage,
+        public ElementalDamageNode(SkillConfigDef.Damage damage,
                                    Func<TimeData, bool> checkIsTargetIdDead,
                                    Action doDamage = null,
                                    Action endBuff = null) :

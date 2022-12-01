@@ -16,31 +16,30 @@ namespace Core
             Container.Register<LevelBuffStorage>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<CurrentLevelBuffDistributor>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelBuff>(); });
+            AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelPowerStrategy>(); });
 
          
         }
 
         IEnumerable<Type> AllGameBuffs()
         {
-            yield return typeof(RoyalAxe.LevelBuff.DoubleParallelWeaponThrowBuff);
-            yield return typeof(RoyalAxe.LevelBuff.FiringBladeBuff);
-            yield return typeof(RoyalAxe.LevelBuff.FireAdditionalDamageBuff);
-            yield return typeof(RoyalAxe.LevelBuff.ColdAdditionalDamageBuff);
-            yield return typeof(RoyalAxe.LevelBuff.PoisonAdditionalDamageBuff);
+            yield return typeof(RoyalAxe.LevelBuff.FiringBladePower);
+            yield return typeof(RoyalAxe.LevelBuff.FireAdditionalDamagePower);
+            yield return typeof(RoyalAxe.LevelBuff.ColdAdditionalDamagePower);
+            yield return typeof(RoyalAxe.LevelBuff.PoisonAdditionalDamagePower);
           //  yield return typeof(RoyalAxe.LevelBuff.FiringFirecrackersBuff);
           //  yield return typeof(RoyalAxe.LevelBuff.FloatingShieldsBuff);
-            yield return typeof(RoyalAxe.LevelBuff.HealPlayerLifeBuff);
-            yield return typeof(RoyalAxe.LevelBuff.IncreaseCriticalChanceBuff);
-            yield return typeof(RoyalAxe.LevelBuff.IncreaseDamageBuff);
-            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerMaxLifeBuff);
-            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerSkillSpeedBuff);
-            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerSkillUsageBuff);
+            yield return typeof(RoyalAxe.LevelBuff.HealPlayerLifePower);
+            yield return typeof(RoyalAxe.LevelBuff.IncreaseCriticalChancePower);
+            yield return typeof(RoyalAxe.LevelBuff.IncreaseDamagePower);
+            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerMaxLifePower);
+            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerSkillSpeedPower);
+            yield return typeof(RoyalAxe.LevelBuff.IncreasePlayerSkillUsagePower);
           //  yield return typeof(RoyalAxe.LevelBuff.InfectedBloodBuff);
            // yield return typeof(RoyalAxe.LevelBuff.RicochetBuff);
-            yield return typeof(RoyalAxe.LevelBuff.SequentialWeaponRollBuff);
+            yield return typeof(RoyalAxe.LevelBuff.SequentialWeaponRollPower);
           //  yield return typeof(RoyalAxe.LevelBuff.ThroughDamageBuff);
-            yield return typeof(RoyalAxe.LevelBuff.TripleWeaponRollBuff);
+            yield return typeof(RoyalAxe.LevelBuff.TripleWeaponRollPower);
         }
     }
 }

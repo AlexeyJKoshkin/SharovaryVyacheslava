@@ -3,14 +3,14 @@ using Core;
 
 namespace RoyalAxe.LevelBuff
 {
-    public class FiringBladeBuff : AbstractBuffStrategy<FiringBladeBuffSettings>
+    public class FiringBladePower : AbstractPowerStrategyStrategy<FiringBladeBuffSettings>
     {
         
 
 
 
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
             /*
              * располагается справа от персонажа. Наносит урон по ближним врагам каждое Х время. 
@@ -23,6 +23,11 @@ namespace RoyalAxe.LevelBuff
             HLogger.LogError("Парящие щиты");
         }
 
-        public FiringBladeBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public override void DoLevelPowerDeActivate()
+        {
+            
+        }
+
+        public FiringBladePower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
     }
 }

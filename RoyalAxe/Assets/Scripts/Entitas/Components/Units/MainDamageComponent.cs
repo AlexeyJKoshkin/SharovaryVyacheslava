@@ -19,5 +19,15 @@ namespace RoyalAxe.GameEntitas
         {
             Influence.IncreaseDamage(type, value);
         }
+
+        public void Upgrade(SkillConfigDef.Damage settingsDamage)
+        {
+            Influence.Upgrade(settingsDamage);
+        }
+
+        public void Downgrade(SkillConfigDef.Damage settingsDamage)
+        {
+            Influence.Downgrade(settingsDamage);
+        }
     }
 }

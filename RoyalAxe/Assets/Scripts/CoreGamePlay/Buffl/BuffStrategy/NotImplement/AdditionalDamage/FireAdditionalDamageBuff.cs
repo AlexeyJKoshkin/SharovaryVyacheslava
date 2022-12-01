@@ -1,7 +1,8 @@
 
 namespace RoyalAxe.LevelBuff {
-    public class FireAdditionalDamageBuff : AbstractBuffStrategy<FiringFirecrackersBuffSettings>
+    public class FireAdditionalDamagePower : AdditionalDamagePower<FireAdditionalDamageBuffSettings>
     {
-        public FireAdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FireAdditionalDamagePower(ILevelBuffSettingCompositeProvider provider,UnitsContext unitsContext) : base(provider,unitsContext) { }
+       
     }
 }

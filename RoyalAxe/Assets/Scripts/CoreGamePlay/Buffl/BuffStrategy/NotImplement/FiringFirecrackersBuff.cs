@@ -1,7 +1,16 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class FiringFirecrackersBuff : AbstractBuffStrategy<FiringFirecrackersBuffSettings>
+    public class FiringFirecrackersPower : AbstractPowerStrategyStrategy<FiringFirecrackersBuffSettings>
     {
-        public FiringFirecrackersBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FiringFirecrackersPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public override void DoLevelPowerActivate()
+        {
+            
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            
+        }
     }
 }

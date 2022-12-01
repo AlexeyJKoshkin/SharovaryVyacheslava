@@ -15,11 +15,11 @@ namespace RoyalAxe.CharacterStat
         private readonly IUnitsInfluenceCalculator _influenceCalculator;
         public override string NodeName => "Maгический урон";
 
-        private readonly DamageInfluenceData _damage;
+        private readonly SkillConfigDef.Damage _damage;
 
         private readonly ElementalDamageNode _node;
 
-        public ElementalDamageBuf(IUnitsInfluenceCalculator influenceCalculator, UnitsEntity owner, PeriodicDamageInfluenceData damage)
+        public ElementalDamageBuf(IUnitsInfluenceCalculator influenceCalculator, UnitsEntity owner, SkillConfigDef.Damage damage)
         {
             _influenceCalculator = influenceCalculator;
             OwnerGuid            = owner.uniqueUnitGUID.Guid;
@@ -43,7 +43,7 @@ namespace RoyalAxe.CharacterStat
         {
             //получаем калькулятор расчета урона                    // просто применяем урон.
             _influenceCalculator.GetBy(_damage.ElementalDamageType)
-                                .ApplyTo(Target, _damage.Damage); // Урон не может быть усилен/быть критом. возможно только уменьшение урона
+                                .ApplyTo(Target, _damage.ElementalDamage); // Урон не может быть усилен/быть критом. возможно только уменьшение урона
         }
 
         public override BehaviourTreeStatus Execute(TimeData time)
@@ -60,12 +60,13 @@ namespace RoyalAxe.CharacterStat
 
         public class ElementalBufApplyHelper : IPeriodicInfluenceApplier
         {
+            public SkillConfigDef.Damage DamageData => _damage;
             public DamageType Type => _damage.ElementalDamageType;
             
-            private readonly PeriodicDamageInfluenceData _damage;
+            private readonly SkillConfigDef.Damage _damage;
             private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
-            public ElementalBufApplyHelper(PeriodicDamageInfluenceData damage, IUnitDamageApplierFactory unitDamageApplierFactory)
+            public ElementalBufApplyHelper(SkillConfigDef.Damage damage, IUnitDamageApplierFactory unitDamageApplierFactory)
             {
                 _damage              = damage;
                 _unitDamageApplierFactory = unitDamageApplierFactory;
@@ -93,6 +94,7 @@ namespace RoyalAxe.CharacterStat
                     target.ApplyBuf(buff);
                 }
             }
+
 
             
         }

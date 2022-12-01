@@ -1,7 +1,8 @@
 
 namespace RoyalAxe.LevelBuff {
-    public class PoisonAdditionalDamageBuff : AdditionalDamageBuff<PoisonAdditionalDamageBuffSettings>
+    public class PoisonAdditionalDamagePower : AdditionalDamagePower<PoisonAdditionalDamageBuffSettings>
     {
-        public PoisonAdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider, unitsContext) { }
+        public PoisonAdditionalDamagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider, unitsContext) { }
+      
     }
 }

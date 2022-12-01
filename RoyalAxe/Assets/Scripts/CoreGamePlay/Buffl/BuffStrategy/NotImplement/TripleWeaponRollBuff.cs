@@ -1,19 +1,24 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class TripleWeaponRollBuff : AbstractBuffStrategy
+    public class TripleWeaponRollPower : AbstractPowerStrategyStrategy
     {
         private readonly UnitsContext _unitsContext;
         public override LevelBuffType Type => LevelBuffType.TripleWeapon;
         public override bool IsSingle => true;
 
-        public TripleWeaponRollBuff(UnitsContext unitsContext)
+        public TripleWeaponRollPower(UnitsContext unitsContext)
         {
             _unitsContext = unitsContext;
         }
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
             _unitsContext.playerEntity.unitActiveSkill.SkillEntity.isTripleAxe = true;
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            _unitsContext.playerEntity.unitActiveSkill.SkillEntity.isTripleAxe = false;
         }
     }
 }

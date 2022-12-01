@@ -1,17 +1,22 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class IncreasePlayerSkillSpeedBuff : AbstractBuffStrategy<IncreasePlayerSkillSpeedBuffSettings>
+    public class IncreasePlayerSkillSpeedPower : AbstractPowerStrategyStrategy<IncreasePlayerSkillSpeedBuffSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
         private readonly UnitsContext _unitsContext;
         
-        public IncreasePlayerSkillSpeedBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
+        public IncreasePlayerSkillSpeedPower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
         {
             _unitsContext = unitsContext;
         }
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            
         }
     }
 }

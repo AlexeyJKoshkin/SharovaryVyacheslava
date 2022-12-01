@@ -11,6 +11,8 @@ namespace RoyalAxe
     {
         //Усиливаем урон от урона на абсолютную величину
         void IncreaseDamage(DamageType physical, float settingsValue);
+        void Upgrade(SkillConfigDef.Damage settingsDamage);
+        void Downgrade(SkillConfigDef.Damage settingsDamage);
     }
 
     public interface IInfluenceApplier
@@ -21,5 +23,6 @@ namespace RoyalAxe
 
     public interface IPeriodicInfluenceApplier : IInfluenceApplier
     {
+        SkillConfigDef.Damage DamageData { get; }
     }
 }

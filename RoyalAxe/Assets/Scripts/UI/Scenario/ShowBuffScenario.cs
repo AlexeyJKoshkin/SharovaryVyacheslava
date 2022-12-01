@@ -6,7 +6,7 @@ namespace RoyalAxe.CoreLevel
 {
     public class SelectBuffScenario : WindowScenario<BuffSelectWindowView>, ISelectBuffScenario
     {
-        private ILevelBuff[] _generatedBuffs;
+        private ILevelPowerStrategy[] _generatedBuffs;
 
   
         private readonly ICurrentLevelBuffDistributor _currentWaveDistributor;
@@ -43,23 +43,23 @@ namespace RoyalAxe.CoreLevel
             }
         }
 
-        private void InitBuff(BuffSelectWindowView.BuffBntView buffBtn, ILevelBuff generatedBuff)
+        private void InitBuff(BuffSelectWindowView.BuffBntView buffBtn, ILevelPowerStrategy generatedPowerStrategy)
         {
-            if (generatedBuff == null)
+            if (generatedPowerStrategy == null)
             {
                 buffBtn.Reset();
                 return;
             }
 
             buffBtn.TurnOn();
-            buffBtn.Text = generatedBuff.GetType().Name;
-            buffBtn.AddCallback(() => OnSelectBufHandler(generatedBuff));
+            buffBtn.Text = generatedPowerStrategy.GetType().Name;
+            buffBtn.AddCallback(() => OnSelectBufHandler(generatedPowerStrategy));
         }
 
-        void OnSelectBufHandler(ILevelBuff selectedBuff)
+        void OnSelectBufHandler(ILevelPowerStrategy selectedPowerStrategy)
         {
-            selectedBuff.Activate();
-            _currentWaveDistributor.HandleSelection(selectedBuff);
+            selectedPowerStrategy.Activate();
+            _currentWaveDistributor.HandleSelection(selectedPowerStrategy);
             View.Close();
             FinishSuccess();
         }

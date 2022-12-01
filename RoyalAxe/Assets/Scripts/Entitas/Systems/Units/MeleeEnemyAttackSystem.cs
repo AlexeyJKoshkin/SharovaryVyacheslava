@@ -15,12 +15,12 @@ namespace RoyalAxe.EntitasSystems
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            return context.CreateCollector(UnitsMatcher.AllOf(UnitsMatcher.PossibleTargets).AnyOf(UnitsMatcher.OtherDamage, UnitsMatcher.MainDamage)
-                                                       .NoneOf(UnitsMatcher.DestroyUnit).Added());
+            return context.CreateCollector(UnitsMatcher.AllOf(UnitsMatcher.PossibleTargets).NoneOf(UnitsMatcher.DestroyUnit).Added());
         }
 
         protected override bool Filter(UnitsEntity entity)
         {
+            if (!entity.isEnabled) return false;
             entity.possibleTargets.Collection.RemoveAll(o => !o.isEnabled || o.isDestroyUnit || o.isDeadUnit);
             return entity.possibleTargets.Count > 0;
         }

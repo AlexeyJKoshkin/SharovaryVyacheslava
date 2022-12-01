@@ -9,7 +9,7 @@ namespace RoyalAxe.LevelBuff
 {
     public interface ILevelBuffSettingCompositeProvider
     {
-        AbstractBuffStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings;
+        AbstractPowerStrategyStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings;
     }
 
     public class LevelBuffSettingCompositeProvider : ILevelBuffSettingCompositeProvider
@@ -23,14 +23,14 @@ namespace RoyalAxe.LevelBuff
 
         public LevelBuffSettingsComposite SettingsComposite { get; private set; }
        
-        public AbstractBuffStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings
+        public AbstractPowerStrategyStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelBuffSettings
         {
             var settings = SettingsComposite.AllSettings().FirstOrDefault(o => o is T) as T;
-            if(settings== null) return new AbstractBuffStrategy<T>.StrategySettings();
+            if(settings== null) return new AbstractPowerStrategyStrategy<T>.StrategySettings();
 
             var additionalSettings = _helper[settings.Type];
             
-            var result = new AbstractBuffStrategy<T>.StrategySettings()
+            var result = new AbstractPowerStrategyStrategy<T>.StrategySettings()
             {
                 Settings = settings,
                 Type     = settings.Type,

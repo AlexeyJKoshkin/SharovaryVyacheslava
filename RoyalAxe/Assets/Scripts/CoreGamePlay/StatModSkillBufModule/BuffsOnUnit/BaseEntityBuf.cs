@@ -7,7 +7,7 @@ namespace RoyalAxe.CharacterStat
     public interface IModificatorProvider
     {
         IEnumerable<ICharacterStatModificator> ApplyTempStats();
-        IEnumerable<ICharacterStatModificator> ApplyPermanentStatMods();
+        void ApplyPermanentStatMods();
     }
 
     /// <summary>
@@ -42,9 +42,8 @@ namespace RoyalAxe.CharacterStat
         }
 
         //Применять перманентные изменения
-        public virtual IEnumerable<ICharacterStatModificator> ApplyPermanentStatMods()
+        public virtual void ApplyPermanentStatMods()
         {
-            yield break;
         }
 
 

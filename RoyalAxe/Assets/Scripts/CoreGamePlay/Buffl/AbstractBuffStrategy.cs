@@ -4,11 +4,11 @@ using RoyalAxe.EntitasSystems;
 
 namespace RoyalAxe.LevelBuff
 {
-    public abstract class AbstractBuffStrategy : ILevelBuff
+    public abstract class AbstractPowerStrategyStrategy : ILevelPowerStrategy
     {
-   
         public abstract LevelBuffType Type { get; }
         public virtual bool IsSingle => false;
+        public bool IsActive => _isActivated;
         private bool _isActivated;
         
         public void Activate()
@@ -18,14 +18,25 @@ namespace RoyalAxe.LevelBuff
                 HLogger.LogError($"{Type} IsSingle : {IsSingle} is alreadyActivated");
                 return;
             }
-            DoBuffStrategyActivate();
+            DoLevelPowerActivate();
             _isActivated = IsSingle;
         }
         
-        public virtual void DoBuffStrategyActivate()
+        public void DeActivate()
         {
-            HLogger.LogError("Надо реализовать");
+            if (!_isActivated)
+            {
+                HLogger.LogError($"{Type} IsSingle : {IsSingle} is unactive");
+                return;
+            }
+            DoLevelPowerDeActivate();
+            _isActivated = false;
         }
+
+        public abstract void DoLevelPowerActivate();
+
+        public abstract void DoLevelPowerDeActivate();
+        
         
     }
 
@@ -33,7 +44,7 @@ namespace RoyalAxe.LevelBuff
     /// todo: подумать о создании билдера стратегии. чтобы не паредавать слишком дофига параметров в конструктор
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class AbstractBuffStrategy<T> : AbstractBuffStrategy where T : BaseLevelBuffSettings
+    public abstract class AbstractPowerStrategyStrategy<T> : AbstractPowerStrategyStrategy where T : BaseLevelBuffSettings
     {
         public sealed override LevelBuffType Type => _settings.Type;
         public struct StrategySettings
@@ -47,7 +58,7 @@ namespace RoyalAxe.LevelBuff
         private StrategySettings _settings;
         public sealed override bool IsSingle => _settings.IsSingle;
 
-        public AbstractBuffStrategy(ILevelBuffSettingCompositeProvider provider)
+        public AbstractPowerStrategyStrategy(ILevelBuffSettingCompositeProvider provider)
         {
             _settings = provider.GetSettings<T>();
         }

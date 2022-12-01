@@ -1,22 +1,34 @@
+using System.Collections.Generic;
 
 namespace RoyalAxe.LevelBuff
 {
-    public abstract class AdditionalDamageBuff<T> : AbstractBuffStrategy<T> where T : AdditionalDamageBuffSettings
+    public abstract class AdditionalDamagePower<T> : AbstractPowerStrategyStrategy<T> where T : AdditionalDamageBuffSettings
     {
         protected UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
 
-        protected AdditionalDamageBuff(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
+        protected AdditionalDamagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
         {
-            _unitsContext             = unitsContext;
+            _unitsContext = unitsContext;
+        }
+
+        protected void AddOtherDamage(IInfluenceApplier applier)
+        {
+            var list = this.Player.hasOtherDamage ? this.Player.otherDamage.Collection : new List<IInfluenceApplier>();
+            list.Add(applier); // добавили самого себя, в качестве сущности, которая будет навешивать баф/заморозку
+
+            this.Player.ReplaceOtherDamage(list); // обновили сущность 
         }
         
-
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
-            Player.mainDamage.IncreaseDamage(Settings.DamageTypeType, Settings.Damage.ElementalDamage);
+            Player.mainDamage.Upgrade(Settings.Damage);
         }
-       
+
+        public override void DoLevelPowerDeActivate()
+        {
+            Player.mainDamage.Downgrade(Settings.Damage);
+        }
     }
 }

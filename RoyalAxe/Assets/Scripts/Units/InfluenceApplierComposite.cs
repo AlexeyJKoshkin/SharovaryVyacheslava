@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe
@@ -60,11 +61,38 @@ namespace RoyalAxe
             }
         }
         
-        public void AddPeriodicDamage(PeriodicDamageInfluenceData periodicDamageInfluenceData)
+
+
+        public void Upgrade(SkillConfigDef.Damage damage)
         {
-            if(periodicDamageInfluenceData == null) return;
-            PeriodicDamage.Add(_unitDamageApplierFactory.CreatePeriodicDamage(periodicDamageInfluenceData));
+            this.IncreaseDamage(DamageType.Physical, damage.PhysicalDamage);
+                        
+            
+            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
+            {
+                IncreaseDamage(damage.ElementalDamageType,damage.ElementalDamage);
+            }
+            
+            if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
+            {
+                var timeDamage = _unitDamageApplierFactory.CreatePeriodicDamage(damage);
+                PeriodicDamage.Add(timeDamage);
+            }
         }
 
+        public void Downgrade(SkillConfigDef.Damage damage)
+        {
+            this.IncreaseDamage(DamageType.Physical, -damage.PhysicalDamage);
+            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
+            {
+                IncreaseDamage(damage.ElementalDamageType,-damage.ElementalDamage);
+            }
+            if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
+            {
+                var applier = PeriodicDamage.FirstOrDefault(o => o.DamageData == damage);
+                if (applier != null)
+                    PeriodicDamage.Remove(applier);
+            }
+        }
     }
 }

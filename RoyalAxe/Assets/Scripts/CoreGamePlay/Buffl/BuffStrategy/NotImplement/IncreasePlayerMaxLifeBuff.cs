@@ -1,18 +1,22 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class IncreasePlayerMaxLifeBuff : AbstractBuffStrategy<IncreasePlayerMaxLifeBuffSettings>
+    public class IncreasePlayerMaxLifePower : AbstractPowerStrategyStrategy<IncreasePlayerMaxLifeBuffSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
         private readonly UnitsContext _unitsContext;
         
-        public IncreasePlayerMaxLifeBuff(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
+        public IncreasePlayerMaxLifePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
         {
             _unitsContext = unitsContext;
         }
 
-        public override void DoBuffStrategyActivate()
+        public override void DoLevelPowerActivate()
         {
             Player.health.ChangeMaxValue(Settings.IncreaseValue).ApplyPermanentMod();
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
         }
     }
 }

@@ -1,7 +1,15 @@
 namespace RoyalAxe.LevelBuff
 {
-    public class FloatingShieldsBuff : AbstractBuffStrategy<FloatingShieldsBuffSettings>
+    public class FloatingShieldsPower : AbstractPowerStrategyStrategy<FloatingShieldsBuffSettings>
     {
-        public FloatingShieldsBuff(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FloatingShieldsPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public override void DoLevelPowerActivate()
+        {
+            
+        }
+
+        public override void DoLevelPowerDeActivate()
+        {
+            }
     }
 }

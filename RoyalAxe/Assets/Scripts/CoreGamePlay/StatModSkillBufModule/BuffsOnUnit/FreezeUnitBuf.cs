@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentBehaviourTree;
 
 namespace RoyalAxe.CharacterStat
@@ -13,7 +14,7 @@ namespace RoyalAxe.CharacterStat
         private float _speedDecreaseValue;
         public FreezeUnitBuf(float speedDecreaseValue)
         {
-            _speedDecreaseValue = speedDecreaseValue;
+            _speedDecreaseValue  = speedDecreaseValue ;
         }
 
         public override BehaviourTreeStatus Execute(TimeData time)
@@ -22,9 +23,9 @@ namespace RoyalAxe.CharacterStat
             return BehaviourTreeStatus.Success;
         }
 
-        public override IEnumerable<ICharacterStatModificator> ApplyPermanentStatMods()
+        public override void ApplyPermanentStatMods()
         {
-            yield return this.Target.moveSpeed.ChangeValue().FromActualCurrent(-_speedDecreaseValue);
+            this.Target.moveSpeed.ChangeValue().FromActualCurrent(-_speedDecreaseValue).ApplyPermanentMod();
         }
     }
 }
