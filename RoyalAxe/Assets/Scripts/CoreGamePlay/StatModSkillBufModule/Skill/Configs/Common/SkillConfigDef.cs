@@ -8,6 +8,16 @@ using UnityEngine;
 namespace RoyalAxe.CharacterStat
 {
     [Serializable]
+    public struct SingleDamageInfo
+    {
+        [JsonProperty("md"), ColumnName("Magic_damage")]
+        public float Value;
+        [JsonProperty("tm"), ColumnName("Type_magic")]
+        public DamageType DamageType;
+
+    }
+    
+    [Serializable]
     public abstract class SkillConfigDef : IDataObject
     {
         public string UniqueID { get; set; }
@@ -36,15 +46,22 @@ namespace RoyalAxe.CharacterStat
             return (new Damage(), new RangeParams());
         }
 
+      
+        
         [Serializable]
         public class Damage
         {
+            [JsonProperty("md"), ColumnName("Magic_damage")]
+            public float ElementalDamage;
+            [JsonProperty("tm"), ColumnName("Type_magic")]
+            public DamageType ElementalDamageType;
+
+            public SingleDamageInfo SingleDamageInfo => new SingleDamageInfo() {DamageType = ElementalDamageType, Value = ElementalDamage};
+            
             [JsonProperty("pd"), ColumnName("Physic_damage")]
             public float PhysicalDamage;
 
-            [JsonProperty("md"), ColumnName("Magic_damage")]
-            public float ElementalDamage;
-
+          
             //Длительность елементального воздействия
             [JsonProperty("mc"), ColumnName("Cooldown_magic")]
             public float MagicDuration;
@@ -54,10 +71,6 @@ namespace RoyalAxe.CharacterStat
             /// </summary>
             [JsonProperty("CRA"), ColumnName("Cooldown_range_attack")]
             public float DamageCooldown;
-
-            [JsonProperty("tm"), ColumnName("Type_magic")]
-            public DamageType ElementalDamageType;
-
         
         }
 

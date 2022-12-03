@@ -13,10 +13,10 @@ namespace Core
     {
         protected override void InstallBindings()
         {
-            Container.Register<LevelBuffStorage>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<CurrentLevelBuffDistributor>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LevelSkillStorage>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<CurrentPlayerSkillDistributor>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelPowerStrategy>(); });
+            AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelSkill>(); });
 
          
         }

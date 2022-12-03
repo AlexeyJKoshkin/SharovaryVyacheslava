@@ -1,9 +1,19 @@
+using System.Collections.Generic;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.GameEntitas
 {
     public static class UnitsEntityExtension
     {
+        public static void AddMoreDamage(this UnitsEntity unit, IInfluenceApplier applier)
+        {
+            if(unit == null || applier == null) return;
+            var list = unit.hasOtherDamage ? unit.otherDamage.Collection : new List<IInfluenceApplier>();
+            list.Add(applier); // добавили эплайер себя, в качестве сущности, которая будет навешивать баф/заморозку
+
+            unit.ReplaceOtherDamage(list); // обновили сущность 
+        }
+
         public static void ApplyStatConstDamage(this UnitsEntity victim, int component, float damage)
         {
             if (!victim.HasComponent(component))

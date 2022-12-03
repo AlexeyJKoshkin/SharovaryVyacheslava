@@ -10,6 +10,8 @@ namespace RoyalAxe.CharacterStat
         IDamageApplyOperation Poison { get; }
         IDamageApplyOperation Blood { get; }
         IDamageApplyOperation GetBy(DamageType damageType);
+        HitDamageInfo ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data);
+        HitDamageInfo ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data);
     }
 
     public class UnitsInfluenceCalculator : IUnitsInfluenceCalculator
@@ -30,6 +32,22 @@ namespace RoyalAxe.CharacterStat
                 case DamageType.Poison:   return Poison;
                 default:                  throw new ArgumentOutOfRangeException(nameof(damageType), damageType, null);
             }
+        }
+        
+        
+        public HitDamageInfo ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data)
+        {
+            var calculator = this.GetBy(data.DamageType);
+            var damage     = calculator.PowerDamage(attacker, data.Value);
+            return  calculator.ApplyTo(target,damage);
+        }
+        
+        public HitDamageInfo ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data) // елементальный урон от времени не усиливаем
+        {
+            //получаем калькулятор расчета урона                    // просто применяем урон.
+            // Урон не может быть усилен/быть критом. возможно только уменьшение урона
+            var calculator = this.GetBy(data.DamageType);
+            return calculator.ApplyTo(target,data.Value);
         }
     }
 }

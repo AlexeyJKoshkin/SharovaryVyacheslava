@@ -8,6 +8,7 @@ namespace Core.Parser
     public class CompositeGenericParser : IGameDataParser
     {
         private static Dictionary<Type, IGameDataParser> _typesParsers = new Dictionary<Type, IGameDataParser>();
+        private static HashSet<Type> _availableTypes = new HashSet<Type>();
 
         public CompositeGenericParser Bind<T>()
         {
@@ -24,7 +25,8 @@ namespace Core.Parser
         private void BindRecursive(Type fieldInfoFieldType)
         {
             if(!CheckType(fieldInfoFieldType)) return;
-            if(_typesParsers.ContainsKey(fieldInfoFieldType)) return;
+            if(_availableTypes.Contains(fieldInfoFieldType)) return;
+         
             
             AddType(fieldInfoFieldType);
             var fields = Fields(fieldInfoFieldType);
@@ -37,7 +39,6 @@ namespace Core.Parser
 
         bool CheckType(Type type)
         {
-           
             if(type.IsPrimitive) return false;
             if(!type.IsSerializable) return false;
             var nameSpace = type.Namespace;
@@ -52,6 +53,8 @@ namespace Core.Parser
 
         private void AddType(Type type)
         {
+            _availableTypes.Add(type);
+            
             var parser = Activator.CreateInstance(typeof(GenericParser<>).MakeGenericType(type)) as IGameDataParser;
             if (parser != null)
                 _typesParsers.Add(type, parser);
@@ -64,6 +67,7 @@ namespace Core.Parser
         public object UpdateObject(List<ICellValue> cells, object data)
         {
             if (data == null) return null;
+            
 
             return RecursiveUpdate(cells, data);
         }
@@ -71,14 +75,8 @@ namespace Core.Parser
         private object RecursiveUpdate(List<ICellValue> cells,  object data)
         {
             var typeKey = data.GetType();
-            if(!_typesParsers.ContainsKey(typeKey)) return data;
-            if(!CheckType(typeKey)) return data;
-            
-            if (_typesParsers.TryGetValue(typeKey, out var parser))
-            {
-                data = parser.UpdateObject(cells, data);
-            }
-
+            if (!CheckCanParse(typeKey)) return data;
+            data = _typesParsers[typeKey].UpdateObject(cells, data);
             foreach (var field in Fields(data.GetType()))
             {
                 var value = field.GetValue(data) ?? Activator.CreateInstance(field.FieldType);
@@ -88,6 +86,12 @@ namespace Core.Parser
 
             return data;
         }
+
+        private bool CheckCanParse(Type typeKey)
+        {
+            return CheckType(typeKey) && _typesParsers.ContainsKey(typeKey);
+        }
+
 
         FieldInfo[] Fields(Type type)
         {

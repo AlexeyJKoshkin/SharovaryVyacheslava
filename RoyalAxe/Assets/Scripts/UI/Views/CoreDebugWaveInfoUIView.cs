@@ -51,27 +51,27 @@ namespace RoyalAxe
         
         private List<PlayerLevelPowerViewModel> _viewModels = new List<PlayerLevelPowerViewModel>();
 
-        public void Init(ILevelBuffStorage storage)
+        public void Init(ILevelSkillStorage storage)
         {
-            foreach (var type in storage.ExistsBuffs)
+            foreach (var skill in storage)
             {
                 var go = GameObject.Instantiate(Prefab, Root);
                 go.SetActive(true);
-                var buff = new PlayerLevelPowerViewModel(go, storage.Peek(type));
+                var buff = new PlayerLevelPowerViewModel(go, skill);
                 _viewModels.Add(buff);
             }
         }
 
         class PlayerLevelPowerViewModel
         {
-            public ILevelPowerStrategy LevelPowerStrategy;
+            public ILevelSkill LevelSkill;
 
             private TextMeshProUGUI _text;
             public Image Image;
 
-            public PlayerLevelPowerViewModel(GameObject gameObject, ILevelPowerStrategy levelPowerStrategy)
+            public PlayerLevelPowerViewModel(GameObject gameObject, ILevelSkill levelSkill)
             {
-                LevelPowerStrategy = levelPowerStrategy;
+                LevelSkill = levelSkill;
                 var _button = gameObject.GetComponentInChildren<Button>();
                 _button.onClick.AddListener(OnClickHandler);
                 _text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -81,15 +81,15 @@ namespace RoyalAxe
 
             private void UpdateView()
             {
-                var t = LevelPowerStrategy.IsSingle ? LevelPowerStrategy.IsActive ?"Active" :"Not"  : "inf";
-                _text.text = $"{LevelPowerStrategy.Type} {t}";
+                var t = LevelSkill.IsSingle ? LevelSkill.IsActive ?"Active" :"Not"  : "inf";
+                _text.text = $"{LevelSkill.Type} {t}";
             }
 
             private void OnClickHandler()
             {
-                if(LevelPowerStrategy.IsActive)
-                    LevelPowerStrategy.DeActivate();
-                else LevelPowerStrategy.Activate();
+                if(LevelSkill.IsActive)
+                    LevelSkill.DeActivate();
+                else LevelSkill.Activate();
                 
                 UpdateView();
             }

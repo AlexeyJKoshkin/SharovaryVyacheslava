@@ -3,20 +3,26 @@
     public interface IUnitDamageApplierFactory
     {
         IPeriodicInfluenceApplier CreatePeriodicDamage(SkillConfigDef.Damage periodicDamageInfluenceData);
-        IEntityBuff CreateElementalDamage(UnitsEntity attacker, SkillConfigDef.Damage damage);
+        IEntityBuff CreateElementalDamageBuf(UnitsEntity attacker, SkillConfigDef.Damage damage);
 
         IInfluenceApplierComposite CreateComposite(params SkillConfigDef.Damage[] damageData);
+        IInfluenceApplier CreateAdditionalDamageApplier(SkillConfigDef.Damage settingsDamage);
     }
-    
+
+
+
+
+
     public class UnitDamageApplierFactory : IUnitDamageApplierFactory
     {
         private readonly IUnitsInfluenceCalculator _calculator;
+
         public UnitDamageApplierFactory(IUnitsInfluenceCalculator calculator)
         {
             _calculator = calculator;
         }
 
-        public IEntityBuff CreateElementalDamage(UnitsEntity attacker, SkillConfigDef.Damage damage)
+        public IEntityBuff CreateElementalDamageBuf(UnitsEntity attacker, SkillConfigDef.Damage damage)
         {
             var result =  new ElementalDamageBuf(_calculator, attacker, damage);
             return result;
@@ -34,10 +40,17 @@
             return composite;
         }
 
+        public IInfluenceApplier CreateAdditionalDamageApplier(SkillConfigDef.Damage settingsDamage)
+        {
+           return new AdditionalDamageApplier(_calculator, settingsDamage);
+        }
+
 
         public IPeriodicInfluenceApplier CreatePeriodicDamage(SkillConfigDef.Damage periodicDamageInfluenceData)
         {
             return new ElementalDamageBuf.ElementalBufApplyHelper(periodicDamageInfluenceData, this);
         }
     }
+    
+    //может применятся и сниматься в разных местах и по нескольку раз.
 }

@@ -18,27 +18,38 @@ namespace RoyalAxe.CharacterStat
             base("Наносим урон размазанный по времени")
         {
             _damageCooldownTimer = new TimerNode(damage.DamageCooldown, "damage timer");
-            _bufDurationTimer    = new TimerNode(damage.MagicDuration, "buff duration");
+            _bufDurationTimer    = damage.MagicDuration <0 ? null : new TimerNode(damage.MagicDuration, "buff duration");
             DoDamageEvent        = doDamage;
             EndBufEvent          = endBuff;
-            
             _removeBuf = new ActionNode("Снимаем бафф", DoBufTimer);
 
+            BuildTree(checkIsTargetIdDead);
+
+           
+        }
+
+        private void BuildTree(Func<TimeData, bool> checkIsTargetIdDead)
+        {
             new BehaviourTreeBuilder().Parent(this)
-                                      .Parallel("Счетчики", 0,5)
-                                        .Sequence("Если цель мерта, снимаем баф")
-                                            .Condition("Цель мертва", checkIsTargetIdDead)
-                                            .Do(_removeBuf)
-                                        .Sequence("Таймер нанесения урона")
-                                            .Do(_damageCooldownTimer)
-                                            .Do("Наносим урон", DoDamageCooldown)
-                                        .End()
-                                        .Sequence("Таймер бафа")
-                                            .Do(_bufDurationTimer)
-                                            .Do(_removeBuf)
-                                        .End()
+                                        .Parallel("Счетчики", 0,5)
+                                            .Sequence("Если цель мерта, снимаем баф")
+                                                .Condition("Цель мертва", checkIsTargetIdDead)
+                                                .Do(_removeBuf)
+                                            .Sequence("Таймер нанесения урона")
+                                                .Do(_damageCooldownTimer)
+                                                .Do("Наносим урон", DoDamageCooldown)
+                                            .End()
                                       .End()
-                                 .Build();
+                                      .Build();
+
+            if (_bufDurationTimer != null) // удаляем баф, только если есть врем действия
+            {
+                var child = new BehaviourTreeBuilder().Sequence("Таймер бафа")
+                                                      .Do(_bufDurationTimer)
+                                                      .Do(_removeBuf)
+                                                      .End().Build();
+                this.AddChild(child);
+            }
         }
 
         private BehaviourTreeStatus DoBufTimer(TimeData arg)

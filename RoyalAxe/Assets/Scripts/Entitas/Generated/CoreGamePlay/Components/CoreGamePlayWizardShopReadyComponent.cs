@@ -11,14 +11,14 @@ public partial class CoreGamePlayEntity {
     public RoyalAxe.GameEntitas.WizardShopReadyComponent wizardShopReady { get { return (RoyalAxe.GameEntitas.WizardShopReadyComponent)GetComponent(CoreGamePlayComponentsLookup.WizardShopReady); } }
     public bool hasWizardShopReady { get { return HasComponent(CoreGamePlayComponentsLookup.WizardShopReady); } }
 
-    public void AddWizardShopReady(RoyalAxe.LevelBuff.LevelBuffType[] newLevelBuffTypes) {
+    public void AddWizardShopReady(RoyalAxe.LevelBuff.LevelSkillType[] newLevelBuffTypes) {
         var index = CoreGamePlayComponentsLookup.WizardShopReady;
         var component = (RoyalAxe.GameEntitas.WizardShopReadyComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent));
         component.LevelBuffTypes = newLevelBuffTypes;
         AddComponent(index, component);
     }
 
-    public void ReplaceWizardShopReady(RoyalAxe.LevelBuff.LevelBuffType[] newLevelBuffTypes) {
+    public void ReplaceWizardShopReady(RoyalAxe.LevelBuff.LevelSkillType[] newLevelBuffTypes) {
         var index = CoreGamePlayComponentsLookup.WizardShopReady;
         var component = (RoyalAxe.GameEntitas.WizardShopReadyComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent));
         component.LevelBuffTypes = newLevelBuffTypes;

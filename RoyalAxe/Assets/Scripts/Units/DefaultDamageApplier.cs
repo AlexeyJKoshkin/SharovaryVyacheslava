@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Linq;
-using GameKit;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe
@@ -13,6 +9,8 @@ namespace RoyalAxe
         void IncreaseDamage(DamageType physical, float settingsValue);
         void Upgrade(SkillConfigDef.Damage settingsDamage);
         void Downgrade(SkillConfigDef.Damage settingsDamage);
+        float GetSingleValue(DamageType physical);
+        
     }
 
     public interface IInfluenceApplier

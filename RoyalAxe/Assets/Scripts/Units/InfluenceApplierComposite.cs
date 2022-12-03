@@ -1,9 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Core.Parser;
+using Newtonsoft.Json;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe
 {
+
+
+
+    [Serializable]
+
+
     /// <summary>
     /// Пачка урона одной сущности   (весь урон от оружия, бафов другое.)
     /// </summary>
@@ -12,16 +21,15 @@ namespace RoyalAxe
         //public readonly List<DamageInfluenceData> SingleDamage = new List<DamageInfluenceData>(); // простой одномоментный урон
 
         private Dictionary<DamageType, float> _singleDamage = new Dictionary<DamageType, float>();
+        private IUnitsInfluenceCalculator _influenceCalculator;
         public readonly List<IPeriodicInfluenceApplier> PeriodicDamage = new List<IPeriodicInfluenceApplier>();
         private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
-        private readonly IUnitsInfluenceCalculator _calculator;
-
         public InfluenceApplierComposite(IUnitDamageApplierFactory unitDamageApplierFactory,
-                                         IUnitsInfluenceCalculator influenceOperation)
+                                         IUnitsInfluenceCalculator singleDamageOperation)
         {
             _unitDamageApplierFactory = unitDamageApplierFactory;
-            _calculator = influenceOperation;
+            _influenceCalculator = singleDamageOperation;
         }
 
         //где-то дергается метод - атакующий пиздит цель
@@ -31,10 +39,8 @@ namespace RoyalAxe
             
             foreach (var data in _singleDamage)
             {
-                var calculator = _calculator.GetBy(data.Key);
-                var damage     = calculator.PowerDamage(attacker, data.Value);
-                var damageInfo = calculator.ApplyTo(target,damage);
-
+                var damageInfo = _influenceCalculator.ApplySingleDamage(attacker, target,new SingleDamageInfo(){DamageType = data.Key, Value = data.Value});
+                
                 if (!triggerAnimation && damageInfo.HitValue > 0) 
                 {
                     //анимация уроная должна дергаться если урон действительно вызывается
@@ -93,6 +99,14 @@ namespace RoyalAxe
                 if (applier != null)
                     PeriodicDamage.Remove(applier);
             }
+        }
+
+        public float GetSingleValue(DamageType physical)
+        {
+            float result = 0;
+            if (_singleDamage.TryGetValue(physical, out var operation))
+                result = operation;
+            return result;
         }
     }
 }

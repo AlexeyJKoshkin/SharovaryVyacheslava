@@ -10,7 +10,9 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     {
         public WeaponsSkillConfigDefToFile()
         {
-            Bind<SkillConfigDef.RangeParams>().Bind<SkillConfigDef.Damage>();
+            Bind<SkillConfigDef.RangeParams>()
+                .Bind<SkillConfigDef.Damage>()
+                .Bind<SingleDamageInfo>();
         }
 
         protected override void RemoveUpdateConfigs(List<WeaponsSkillConfigDef> allExistItems, List<GoogleSheetGameData> allPages)
@@ -32,6 +34,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                 var lvlCells = page.Cells[i];                       // тут содержится инфа об уровне оружия
                 AddToListData(result.SkillDamage, parser, lvlCells); // Добавили уровень
                 AddToListData(result.RangeConfig, parser, lvlCells);
+              
             }
             return result;
         }

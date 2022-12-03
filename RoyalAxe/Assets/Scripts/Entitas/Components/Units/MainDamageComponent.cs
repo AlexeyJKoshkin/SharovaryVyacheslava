@@ -29,5 +29,10 @@ namespace RoyalAxe.GameEntitas
         {
             Influence.Downgrade(settingsDamage);
         }
+
+        public float GetSingleValue(DamageType physical)
+        {
+            return Influence.GetSingleValue(physical);
+        }
     }
 }

@@ -5,6 +5,6 @@ namespace RoyalAxe.CoreLevel {
     [Serializable]
     public class WizardShopSettings
     {
-        public LevelBuffType[] PossibleBuffs;
+        public LevelSkillType[] PossibleBuffs;
     }
 }

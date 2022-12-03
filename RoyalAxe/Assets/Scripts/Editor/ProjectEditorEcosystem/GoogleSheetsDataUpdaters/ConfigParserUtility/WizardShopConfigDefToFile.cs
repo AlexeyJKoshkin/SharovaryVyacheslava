@@ -10,7 +10,7 @@ using RoyalAxe.LevelBuff;
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
     internal class WizardShopConfigDefToFile : ModelsToJsonFile<WizardLevelCollection>
     {
-        private readonly Dictionary<string, LevelBuffType> _settingsToType = new Dictionary<string, LevelBuffType>();
+        private readonly Dictionary<string, LevelSkillType> _settingsToType = new Dictionary<string, LevelSkillType>();
         public WizardShopConfigDefToFile()
         {
             LevelBuffSettingsComposite mock = new LevelBuffSettingsComposite();
@@ -45,7 +45,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
             return result;
         }
 
-        private IEnumerable<LevelBuffType> GetBuffsType(List<ICellValue> lvlCells)
+        private IEnumerable<LevelSkillType> GetBuffsType(List<ICellValue> lvlCells)
         {
              foreach (var cell in lvlCells)
                      {

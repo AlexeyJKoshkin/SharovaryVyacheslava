@@ -25,7 +25,7 @@ namespace RoyalAxe.CharacterStat
             OwnerGuid            = owner.uniqueUnitGUID.Guid;
             _damage              = damage;
 
-            _node = new ElementalDamageNode(damage,IsTargetAlive, DoDamageCooldown, DoBufTimer);
+            _node = new ElementalDamageNode(damage, IsTargetAlive, DoDamageCooldown, DoBufTimer);
         }
 
         private bool IsTargetAlive(TimeData arg) // если цель жива
@@ -41,9 +41,9 @@ namespace RoyalAxe.CharacterStat
         //применить урон к цели
         private void DoDamageCooldown()
         {
-            //получаем калькулятор расчета урона                    // просто применяем урон.
-            _influenceCalculator.GetBy(_damage.ElementalDamageType)
-                                .ApplyTo(Target, _damage.ElementalDamage); // Урон не может быть усилен/быть критом. возможно только уменьшение урона
+            _influenceCalculator.ApplyElementalTimingDamage(Target, _damage.SingleDamageInfo);
+            
+             
         }
 
         public override BehaviourTreeStatus Execute(TimeData time)
@@ -61,27 +61,26 @@ namespace RoyalAxe.CharacterStat
         public class ElementalBufApplyHelper : IPeriodicInfluenceApplier
         {
             public SkillConfigDef.Damage DamageData => _damage;
-            public DamageType Type => _damage.ElementalDamageType;
-            
+
             private readonly SkillConfigDef.Damage _damage;
             private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
 
             public ElementalBufApplyHelper(SkillConfigDef.Damage damage, IUnitDamageApplierFactory unitDamageApplierFactory)
             {
-                _damage              = damage;
+                _damage                   = damage;
                 _unitDamageApplierFactory = unitDamageApplierFactory;
             }
 
             public void Apply(UnitsEntity attacker, UnitsEntity target)
             {
-                if(target == null || !target.isEnabled) return;
+                if (target == null || !target.isEnabled) return;
                 // в списке активных бафов ищем                      элементальный урон
                 var existsBuf = target.activeUnitBuff.FirstOrDefault(o => o is ElementalDamageBuf elementalDamageBuf
                                                                           //который навесил текущий юнит
-                                                                        && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
+                                                                       && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
                                                                           // такой же
                                                                        && elementalDamageBuf._damage.ElementalDamageType ==
-                                                                           _damage.ElementalDamageType) as ElementalDamageBuf;
+                                                                          _damage.ElementalDamageType) as ElementalDamageBuf;
 
                 if (existsBuf != null)
                 {
@@ -89,16 +88,11 @@ namespace RoyalAxe.CharacterStat
                 }
                 else
                 {
-                    var buff = _unitDamageApplierFactory.CreateElementalDamage(attacker, _damage);
-                  
+                    var buff = _unitDamageApplierFactory.CreateElementalDamageBuf(attacker, _damage);
+
                     target.ApplyBuf(buff);
                 }
             }
-
-
-            
         }
     }
-
-   
 }

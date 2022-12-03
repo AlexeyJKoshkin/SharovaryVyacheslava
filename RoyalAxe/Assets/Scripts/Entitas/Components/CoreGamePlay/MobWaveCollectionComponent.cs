@@ -61,6 +61,6 @@ namespace RoyalAxe.GameEntitas
     [CoreGamePlay]
     public class WizardShopReadyComponent : IComponent
     {
-        public LevelBuffType[] LevelBuffTypes;
+        public LevelSkillType[] LevelBuffTypes;
     }
 }
