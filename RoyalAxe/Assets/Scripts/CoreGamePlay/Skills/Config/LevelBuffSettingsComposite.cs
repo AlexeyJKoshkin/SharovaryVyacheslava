@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core.Data.Provider;
 using Core.Parser;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
     /*
      * т.к. каждый баф настраивается отдельно. То заводим большой серриализуемый конфиг

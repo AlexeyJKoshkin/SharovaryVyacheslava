@@ -1,5 +1,5 @@
 using System;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.CoreLevel {
     [Serializable]

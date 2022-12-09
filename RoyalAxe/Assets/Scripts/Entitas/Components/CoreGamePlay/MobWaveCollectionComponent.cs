@@ -4,7 +4,7 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using GameKit;
 using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.GameEntitas 
 {

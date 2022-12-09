@@ -1,17 +1,18 @@
-using System.Collections.Generic;
 using System.Linq;
+using Core;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.GameEntitas;
+using UnityEngine;
 
-namespace RoyalAxe.LevelBuff {
-    public class ColdAdditionalDamagePower : AdditionalDamagePower<ColdAdditionalDamageSkillSettings>, IInfluenceApplier
+namespace RoyalAxe.LevelSkill {
+    public class ColdAdditionalDamagePlayerSkill : AdditionalDamagePlayerSkill<ColdAdditionalDamageSkillSettings>,IWeaponItem
     {
-        void IInfluenceApplier.Apply(UnitsEntity attacker, UnitsEntity target)
+        public ColdAdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider, unitsContext, factory)
         {
-            if(target.activeUnitBuff.Any(o=> o is FreezeUnitBuf)) return;
-            
-            target.ApplyBuf(new FreezeUnitBuf(Settings.DecelerationPercent));
+            HLogger.TempLog("Cold Skill Create");
         }
+        
+        
 
         public override void DoLevelPowerActivate()
         {
@@ -27,6 +28,20 @@ namespace RoyalAxe.LevelBuff {
             this.Player.ReplaceOtherDamage(list); // обновили сущность 
         }
 
-        public ColdAdditionalDamagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider, unitsContext, factory) { }
+        #region IWeaponItem
+      
+        void IWeaponItem.AttackTarget(UnitsEntity target)
+        {
+            if(target.activeUnitBuff.Any(o=> o is FreezeUnitBuf)) return;
+            
+            target.ApplyBuf(new FreezeUnitBuf(Settings.DecelerationPercent));
+        }
+
+        float IWeaponItem.GetSingleValue(DamageType type)
+        {
+            return 0; // Скилл не атакует. только навешивает баф.
+        }
+        #endregion
+        
     }
 }

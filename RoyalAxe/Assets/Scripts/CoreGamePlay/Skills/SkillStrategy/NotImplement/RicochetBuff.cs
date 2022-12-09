@@ -1,8 +1,8 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class RicochetPower : AbstractPowerStrategyStrategy<RicochetSkillSettings>
+    public class RicochetPlayerSkill : AbstractPlayerSkillStrategy<RicochetSkillSettings>
     {
-        public RicochetPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public RicochetPlayerSkill(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
         public override void DoLevelPowerActivate()
         {
             

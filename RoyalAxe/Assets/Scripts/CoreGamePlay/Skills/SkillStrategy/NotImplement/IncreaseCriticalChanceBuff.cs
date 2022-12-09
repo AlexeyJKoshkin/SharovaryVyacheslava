@@ -1,13 +1,13 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class IncreaseCriticalChancePower : AbstractPowerStrategyStrategy<IncreaseCriticalChanceSkillSettings>
+    public class IncreaseCriticalChancePlayerSkill : AbstractPlayerSkillStrategy<IncreaseCriticalChanceSkillSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
 
 
-        public IncreaseCriticalChancePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
+        public IncreaseCriticalChancePlayerSkill(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
         {
             _unitsContext = unitsContext;
         }

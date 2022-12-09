@@ -1,14 +1,14 @@
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class HealPlayerLifePower : AbstractPowerStrategyStrategy<HealPlayerLifeSkillSettings>
+    public class HealPlayerLifePlayerSkill : AbstractPlayerSkillStrategy<HealPlayerLifeSkillSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
         
         private readonly UnitsContext _unitsContext;
         
 
-        public HealPlayerLifePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
+        public HealPlayerLifePlayerSkill(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
         {
             _unitsContext = unitsContext;
         }

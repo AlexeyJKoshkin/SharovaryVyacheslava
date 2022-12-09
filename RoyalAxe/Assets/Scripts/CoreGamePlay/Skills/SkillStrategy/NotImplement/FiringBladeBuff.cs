@@ -1,14 +1,9 @@
-using System;
 using Core;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class FiringBladePower : AbstractPowerStrategyStrategy<FiringBladeSkillSettings>
+    public class FiringBladePlayerSkill : AbstractPlayerSkillStrategy<FiringBladeSkillSettings>
     {
-        
-
-
-
 
         public override void DoLevelPowerActivate()
         {
@@ -28,6 +23,6 @@ namespace RoyalAxe.LevelBuff
             
         }
 
-        public FiringBladePower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FiringBladePlayerSkill(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
     }
 }

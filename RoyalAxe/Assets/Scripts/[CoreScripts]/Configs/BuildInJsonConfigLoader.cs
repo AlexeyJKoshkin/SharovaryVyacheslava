@@ -2,7 +2,7 @@
 using Core.Configs;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.Configs
 {

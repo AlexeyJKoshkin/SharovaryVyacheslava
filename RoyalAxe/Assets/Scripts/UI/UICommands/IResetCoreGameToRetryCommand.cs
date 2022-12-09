@@ -2,6 +2,7 @@
 using Entitas;
 using GameKit;
 using RoyalAxe.CharacterStat;
+using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -44,7 +45,7 @@ namespace RoyalAxe.CoreLevel
             var tickDamages = buffs.Where(o => o is ElementalDamageBuf).Cast<ElementalDamageBuf>().ToArray();
             tickDamages.ForEach(e=>
                                 {
-                                    e.RemoveFrom(player, true);
+                                    player.RemoveBuf(e);
                                     buffs.Remove(e);
                                 });
             player.ReplaceActiveUnitBuff(buffs);

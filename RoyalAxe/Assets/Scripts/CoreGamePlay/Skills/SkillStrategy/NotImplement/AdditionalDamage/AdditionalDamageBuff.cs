@@ -1,25 +1,47 @@
 using RoyalAxe.CharacterStat;
 using RoyalAxe.GameEntitas;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public abstract class AdditionalDamagePower<T> : AbstractPowerStrategyStrategy<T> where T : AdditionalDamageSkillSettings
+    public abstract class AdditionalDamagePlayerSkill<T> : AbstractPlayerSkillStrategy<T> where T : AdditionalDamageSkillSettings
     {
         protected UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
-        private readonly IInfluenceApplier _additionalDamageApplier;
-        
-        
+        private readonly IWeaponItem _additionalDamageApplier;
 
-        protected AdditionalDamagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider)
+        class DamageApplier : IWeaponItem
         {
-            _unitsContext = unitsContext;
-            _additionalDamageApplier = factory.CreateAdditionalDamageApplier(Settings.Damage);
+            private AdditionalDamagePlayerSkill<T> _skill;
+            private IInfluenceApplier _influenceApplier;
+
+            public DamageApplier(AdditionalDamagePlayerSkill<T> skill, IInfluenceApplier influenceApplier)
+            {
+                _skill            = skill;
+                _influenceApplier = influenceApplier;
+            }
+
+            public void AttackTarget(UnitsEntity target)
+            {
+                _influenceApplier.Apply(_skill.Player, target);
+            }
+
+            public float GetSingleValue(DamageType type)
+            {
+                return _skill.Settings.Damage.ElementalDamage;
+            }
         }
 
-       
-        
+
+        protected AdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider)
+        {
+            _unitsContext = unitsContext;
+            var applier = factory.CreateAdditionalDamageApplier(Settings.Damage);
+            var damage  = new DamageApplier(this, applier);
+            _additionalDamageApplier = damage;
+        }
+
+
         public override void DoLevelPowerActivate()
         {
             this.Player.AddMoreDamage(_additionalDamageApplier);
@@ -30,6 +52,5 @@ namespace RoyalAxe.LevelBuff
             Player.otherDamage.Remove(_additionalDamageApplier);
             Player.ReplaceOtherDamage(Player.otherDamage.Collection);
         }
-    
     }
 }

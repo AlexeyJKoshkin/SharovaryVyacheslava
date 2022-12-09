@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 using RoyalAxe.GameEntitas;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.CoreLevel 
 {

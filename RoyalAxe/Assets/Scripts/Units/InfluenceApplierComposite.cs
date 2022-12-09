@@ -16,19 +16,15 @@ namespace RoyalAxe
     /// <summary>
     /// Пачка урона одной сущности   (весь урон от оружия, бафов другое.)
     /// </summary>
-    public class InfluenceApplierComposite : IInfluenceApplierComposite
+    public class InfluenceApplierComposite
     {
-        //public readonly List<DamageInfluenceData> SingleDamage = new List<DamageInfluenceData>(); // простой одномоментный урон
-
         private Dictionary<DamageType, float> _singleDamage = new Dictionary<DamageType, float>();
         private IUnitsInfluenceCalculator _influenceCalculator;
         public readonly List<IPeriodicInfluenceApplier> PeriodicDamage = new List<IPeriodicInfluenceApplier>();
-        private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
+       
 
-        public InfluenceApplierComposite(IUnitDamageApplierFactory unitDamageApplierFactory,
-                                         IUnitsInfluenceCalculator singleDamageOperation)
+        public InfluenceApplierComposite(IUnitsInfluenceCalculator singleDamageOperation)
         {
-            _unitDamageApplierFactory = unitDamageApplierFactory;
             _influenceCalculator = singleDamageOperation;
         }
 
@@ -68,38 +64,6 @@ namespace RoyalAxe
         }
         
 
-
-        public void Upgrade(SkillConfigDef.Damage damage)
-        {
-            this.IncreaseDamage(DamageType.Physical, damage.PhysicalDamage);
-                        
-            
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
-            {
-                IncreaseDamage(damage.ElementalDamageType,damage.ElementalDamage);
-            }
-            
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
-            {
-                var timeDamage = _unitDamageApplierFactory.CreatePeriodicDamage(damage);
-                PeriodicDamage.Add(timeDamage);
-            }
-        }
-
-        public void Downgrade(SkillConfigDef.Damage damage)
-        {
-            this.IncreaseDamage(DamageType.Physical, -damage.PhysicalDamage);
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
-            {
-                IncreaseDamage(damage.ElementalDamageType,-damage.ElementalDamage);
-            }
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
-            {
-                var applier = PeriodicDamage.FirstOrDefault(o => o.DamageData == damage);
-                if (applier != null)
-                    PeriodicDamage.Remove(applier);
-            }
-        }
 
         public float GetSingleValue(DamageType physical)
         {

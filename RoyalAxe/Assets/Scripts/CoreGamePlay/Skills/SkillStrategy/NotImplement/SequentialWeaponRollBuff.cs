@@ -1,10 +1,10 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class SequentialWeaponRollPower : AbstractPowerStrategyStrategy
+    public class SequentialWeaponRollPlayerSkill : AbstractPlayerSkillStrategy
     {
         private readonly UnitsContext _unitsContext;
 
-        public SequentialWeaponRollPower(UnitsContext unitsContext)
+        public SequentialWeaponRollPlayerSkill(UnitsContext unitsContext)
         {
             _unitsContext = unitsContext;
         }

@@ -1,6 +1,6 @@
 using System.Linq;
 using GameKit;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.CoreLevel
 {

@@ -1,7 +1,7 @@
 using System;
 using Core.Parser;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
     [Serializable]
     public class HealPlayerLifeSkillSettings: BaseLevelSkillSettings

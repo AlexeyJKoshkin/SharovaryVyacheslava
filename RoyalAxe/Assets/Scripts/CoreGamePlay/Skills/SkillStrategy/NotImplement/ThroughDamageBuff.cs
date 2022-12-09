@@ -1,6 +1,6 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class ThroughDamagePower : AbstractPowerStrategyStrategy
+    public class ThroughDamagePlayerSkill : AbstractPlayerSkillStrategy
     {
         public override LevelSkillType Type => LevelSkillType.ThroughDamage;
         public override void DoLevelPowerActivate()

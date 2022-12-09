@@ -5,11 +5,11 @@ using System.Linq;
 using System.Reflection;
 using Core.Configs;
 
-namespace RoyalAxe.LevelBuff 
+namespace RoyalAxe.LevelSkill 
 {
     public interface ILevelBuffSettingCompositeProvider
     {
-        AbstractPowerStrategyStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelSkillSettings;
+        AbstractPlayerSkillStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelSkillSettings;
     }
 
     public class LevelBuffSettingCompositeProvider : ILevelBuffSettingCompositeProvider
@@ -23,14 +23,14 @@ namespace RoyalAxe.LevelBuff
 
         public LevelBuffSettingsComposite SettingsComposite { get; private set; }
        
-        public AbstractPowerStrategyStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelSkillSettings
+        public AbstractPlayerSkillStrategy<T>.StrategySettings GetSettings<T>() where T : BaseLevelSkillSettings
         {
             var settings = SettingsComposite.AllSettings().FirstOrDefault(o => o is T) as T;
-            if(settings== null) return new AbstractPowerStrategyStrategy<T>.StrategySettings();
+            if(settings== null) return new AbstractPlayerSkillStrategy<T>.StrategySettings();
 
             var additionalSettings = _helper[settings.Type];
             
-            var result = new AbstractPowerStrategyStrategy<T>.StrategySettings()
+            var result = new AbstractPlayerSkillStrategy<T>.StrategySettings()
             {
                 Settings = settings,
                 Type     = settings.Type,

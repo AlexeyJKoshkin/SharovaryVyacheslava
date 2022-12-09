@@ -5,10 +5,10 @@ namespace RoyalAxe.GameEntitas
 {
     public static class UnitsEntityExtension
     {
-        public static void AddMoreDamage(this UnitsEntity unit, IInfluenceApplier applier)
+        public static void AddMoreDamage(this UnitsEntity unit, IWeaponItem applier)
         {
             if(unit == null || applier == null) return;
-            var list = unit.hasOtherDamage ? unit.otherDamage.Collection : new List<IInfluenceApplier>();
+            var list = unit.hasOtherDamage ? unit.otherDamage.Collection : new List<IWeaponItem>();
             list.Add(applier); // добавили эплайер себя, в качестве сущности, которая будет навешивать баф/заморозку
 
             unit.ReplaceOtherDamage(list); // обновили сущность 
@@ -49,26 +49,23 @@ namespace RoyalAxe.GameEntitas
             buff.RemoveFrom(unit);
         }
 
-        public static void Equip(this UnitsEntity unit, SlotType mainWeapon, IEquipItem activeWeapon)
-        {
-            if (unit == null || activeWeapon == null)
-            {
-                return;
-            }
+      
 
-            //по идее тут проверки, что в слоте ничего нету и мы можем туда что-то экипировать
-            //далее передаем себя в вещь, чтобы она применила модификаторы и бафы на хозяина
-            activeWeapon.ApplyTo(unit);
-            if (mainWeapon == SlotType.MainWeapon) // как-то определяем что это оружие, которым можно пользоваться
+        public static void EquipMainItem(this UnitsEntity unit, IUnitMainItem unitMainItem)
+        {
+            if(unit == null) return;
+            if (unit.hasMainDamage)
             {
-                //  ActiveWeapon.Add(activeWeapon); // тоже самое что и в бафах
+                unit.mainDamage.Influence.RemoveFrom(unit); // тут снимуться все бафы
+            }
+            if(unitMainItem == null)
+                unit.RemoveMainDamage();
+            else
+            {
+                unitMainItem.ApplyTo(unit);
+                unit.ReplaceMainDamage(unitMainItem);
             }
         }
-
-        public static void Equip(this UnitsEntity unit, IWeaponItem activeWeapon)
-        {
-            Equip(unit, activeWeapon.AvailableSlot, activeWeapon);
-            // ActiveWeapon.Add(activeWeapon); // тоже самое что и в бафах
-        }
+  
     }
 }

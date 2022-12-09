@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be134566d5dc4fc0807c6c5728f17f23, type: 3}
-  m_Name: LevelBuffsInstaller
+  m_Script: {fileID: 11500000, guid: 5953e76909a84e64b35d42cf581ad3dd, type: 3}
+  m_Name: LevelSkillInstaller
   m_EditorClassIdentifier: 

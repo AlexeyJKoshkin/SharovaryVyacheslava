@@ -2,7 +2,7 @@ using Core.Configs;
 using RoyalAxe.CharacterStat;
 using RoyalAxe.Configs;
 using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 using UnityEngine;
 using VContainer;
 

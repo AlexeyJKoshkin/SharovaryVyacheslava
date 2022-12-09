@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entitas;
 using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 using RoyalAxe.Units;
 using TMPro;
 using UnityEngine;

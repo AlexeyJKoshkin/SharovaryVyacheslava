@@ -5,7 +5,7 @@ using Core.Parser;
 using GameKit;
 using GameKit.Editor;
 using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
     internal class WizardShopConfigDefToFile : ModelsToJsonFile<WizardLevelCollection>

@@ -25,27 +25,27 @@ namespace Core
 
         private void BindProgressBuilder()
         {
-            BindSingletonWithAllInterfaces<DefaultProgressFactoryComposite>();
-            BindSingletonWithAllInterfaces<UserProgressLoader>();
+            SingletonAllInterfaces<DefaultProgressFactoryComposite>();
+            SingletonAllInterfaces<UserProgressLoader>();
 
 
-            BindSingletonWithAllInterfaces<HeroProgressDefaultFactory>();
-            BindSingletonWithAllInterfaces<HeroProfileProgressFacade>();
+            SingletonAllInterfaces<HeroProgressDefaultFactory>();
+            SingletonAllInterfaces<HeroProfileProgressFacade>();
 
 
-            BindSingletonWithAllInterfaces<LevelProgressBuilderDefault>();
-            BindSingletonWithAllInterfaces<LevelProfileProgressFacade>();
+            SingletonAllInterfaces<LevelProgressBuilderDefault>();
+            SingletonAllInterfaces<LevelProfileProgressFacade>();
 
 
-            BindSingletonWithAllInterfaces<WeaponProgressBuilderDefault>();
-            BindSingletonWithAllInterfaces<WeaponProfileProgressFacade>();
+            SingletonAllInterfaces<WeaponProgressBuilderDefault>();
+            SingletonAllInterfaces<WeaponProfileProgressFacade>();
 
 
-            BindSingletonWithAllInterfaces<GeneralProfileProgressDefaultFactory>();
-            BindSingletonWithAllInterfaces<GeneralProfileProgressFacade>();
+            SingletonAllInterfaces<GeneralProfileProgressDefaultFactory>();
+            SingletonAllInterfaces<GeneralProfileProgressFacade>();
 
-            BindSingletonWithAllInterfaces<InventoryProfileProgressDefaultFactory>();
-            BindSingletonWithAllInterfaces<InventoryProfileProgressFacade>();
+            SingletonAllInterfaces<InventoryProfileProgressDefaultFactory>();
+            SingletonAllInterfaces<InventoryProfileProgressFacade>();
         }
     }
 }

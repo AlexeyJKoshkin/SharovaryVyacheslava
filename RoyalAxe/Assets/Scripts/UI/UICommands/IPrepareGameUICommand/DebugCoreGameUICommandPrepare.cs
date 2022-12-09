@@ -1,4 +1,4 @@
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.CoreLevel 
 {

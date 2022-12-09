@@ -3,7 +3,7 @@ namespace RoyalAxe.GameEntitas {
     ///    остальной набор уронов на юните (бафы, усиления, все что не относится к урону основного удара)
     /// </summary>
     [Units]
-    public class OtherDamageComponent : ListCollectionComponent<IInfluenceApplier>
+    public class OtherDamageComponent : ListCollectionComponent<IWeaponItem>
     {
 
     }

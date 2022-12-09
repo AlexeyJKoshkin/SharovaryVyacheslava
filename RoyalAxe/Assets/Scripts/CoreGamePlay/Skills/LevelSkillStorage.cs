@@ -4,7 +4,7 @@ using System.Linq;
 using Core;
 using GameKit;
 
-namespace RoyalAxe.LevelBuff 
+namespace RoyalAxe.LevelSkill 
 {
     static class ILevelSkillStorageExtension
     {
@@ -20,9 +20,9 @@ namespace RoyalAxe.LevelBuff
         
         private readonly Dictionary<LevelSkillType,ILevelSkill> _allExistsRewards = new Dictionary<LevelSkillType, ILevelSkill>();
 
-        public LevelSkillStorage(IReadOnlyList<ILevelSkill> allBuffs)
+        public LevelSkillStorage(IReadOnlyList<ILevelSkill> allSkills)
         {
-            allBuffs.ForEach(e=> _allExistsRewards.Add(e.Type,e));
+            allSkills.ForEach(e=> _allExistsRewards.Add(e.Type,e));
         }
 
         public ILevelSkill Get(LevelSkillType type)

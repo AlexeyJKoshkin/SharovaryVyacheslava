@@ -1,15 +1,15 @@
 using System.Linq;
 using RoyalAxe.CharacterStat;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class IncreaseDamagePower : AbstractPowerStrategyStrategy<IncreaseDamageSkillSettings>
+    public class IncreaseDamagePlayerSkill : AbstractPlayerSkillStrategy<IncreaseDamageSkillSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
 
         private readonly UnitsContext _unitsContext;
 
-        public IncreaseDamagePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
+        public IncreaseDamagePlayerSkill(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider) : base(provider)
         {
             _unitsContext             = unitsContext;
         }

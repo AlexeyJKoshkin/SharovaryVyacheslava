@@ -5,7 +5,7 @@ using Core.Data.Provider;
 using Core.UserProfile;
 using GameKit;
 using RoyalAxe.GameEntitas;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.CoreLevel
 {

@@ -1,4 +1,4 @@
-namespace RoyalAxe.LevelBuff {
+namespace RoyalAxe.LevelSkill {
     public interface ILevelSkill
     {
         LevelSkillType Type { get; }

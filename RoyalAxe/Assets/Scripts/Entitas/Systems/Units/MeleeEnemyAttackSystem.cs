@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Entitas;
+using RoyalAxe.GameEntitas;
 
 
 namespace RoyalAxe.EntitasSystems
@@ -31,7 +32,7 @@ namespace RoyalAxe.EntitasSystems
             {
                 foreach (var target in e.possibleTargets)
                 {
-                    damageOperation.Apply(e, target); // нанесли урон. 
+                    damageOperation.AttackTarget(target); // нанесли урон. 
                 }
               
             }
@@ -42,7 +43,7 @@ namespace RoyalAxe.EntitasSystems
             
         }
 
-        private IEnumerable<IInfluenceApplier> GetInfluenceApplier(UnitsEntity attacker)
+        private IEnumerable<IWeaponItem> GetInfluenceApplier(UnitsEntity attacker)
         {
             if (attacker.hasMainDamage)
                  yield return attacker.mainDamage.Influence;

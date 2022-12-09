@@ -1,8 +1,8 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class InfectedBloodPower : AbstractPowerStrategyStrategy<InfectedBloodSkillSettings>
+    public class InfectedBloodPlayerSkill : AbstractPlayerSkillStrategy<InfectedBloodSkillSettings>
     {
-        public InfectedBloodPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public InfectedBloodPlayerSkill(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
         public override void DoLevelPowerActivate()
         {
             

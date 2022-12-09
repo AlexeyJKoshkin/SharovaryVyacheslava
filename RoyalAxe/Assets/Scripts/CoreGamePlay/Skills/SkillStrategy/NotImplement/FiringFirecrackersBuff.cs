@@ -1,8 +1,8 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class FiringFirecrackersPower : AbstractPowerStrategyStrategy<FiringFirecrackersSkillSettings>
+    public class FiringFirecrackersPlayerSkill : AbstractPlayerSkillStrategy<FiringFirecrackersSkillSettings>
     {
-        public FiringFirecrackersPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FiringFirecrackersPlayerSkill(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
         public override void DoLevelPowerActivate()
         {
             

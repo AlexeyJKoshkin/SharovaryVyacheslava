@@ -35,7 +35,7 @@ namespace RoyalAxe.CharacterStat
 
         private void DoBufTimer()
         {
-            RemoveFrom(Target);
+            Target.RemoveBuf(this);
         }
 
         //применить урон к цели

@@ -16,14 +16,14 @@ namespace RoyalAxe.CoreLevel
         private readonly CoreGamePlayContext _coreGamePlay;
         private readonly ICurrentUserProgressProfileFacade _currentUserProgressProfileFacade;
         private readonly IUnitsBuilderFacade _unitBuilder;
-        private readonly IDataStorage _dataStorage;
+        private readonly IBluePrintsFactoryStorage _bluePrintsFactoryStorage;
         public PlayerCoreGameFacade(CoreGamePlayContext coreGamePlay, IUnitsBuilderFacade unitBuilder,
-                                    ICurrentUserProgressProfileFacade currentUserProgressProfileFacade, IDataStorage dataStorage)
+                                    ICurrentUserProgressProfileFacade currentUserProgressProfileFacade, IBluePrintsFactoryStorage bluePrintsFactoryStorage)
         {
             _coreGamePlay = coreGamePlay;
             _unitBuilder  = unitBuilder;
             _currentUserProgressProfileFacade = currentUserProgressProfileFacade;
-            _dataStorage = dataStorage;
+            _bluePrintsFactoryStorage = bluePrintsFactoryStorage;
         }
 
         public void CreatePlayer()
@@ -37,17 +37,9 @@ namespace RoyalAxe.CoreLevel
         {
             var heroRecord   = _currentUserProgressProfileFacade.HeroesProgress.CurrentHero;
             SaveEntityRecord weaponRecord = GetEquippedWeapon();
+            return _bluePrintsFactoryStorage.Units.CreatePlayerBluePrint(heroRecord, weaponRecord);
 
-            var weapon = _dataStorage.ById<WeaponsSkillConfigDef>(weaponRecord.Id).GetByLevel(weaponRecord.Level);
-            return new UnitBlueprint(heroRecord)
-            {
-                Stats = _dataStorage.ById<StatCollection>(heroRecord.Id).GetByLevel(heroRecord.Level),
-                ActiveSkill = new SkillBlueprint(weaponRecord)
-                {
-                    DamageData = weapon.damage,
-                    RangeData  = weapon.rangeParams
-                }
-            };
+            
         }
 
         private SaveEntityRecord GetEquippedWeapon()

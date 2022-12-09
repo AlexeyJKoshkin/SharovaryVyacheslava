@@ -1,6 +1,6 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class IncreasePlayerSkillUsagePower : AbstractPowerStrategyStrategy<IncreasePlayerSkillUsageSkillSettings>
+    public class IncreasePlayerSkillUsagePlayerSkill : AbstractPlayerSkillStrategy<IncreasePlayerSkillUsageSkillSettings>
     {
        
         private UnitsEntity Player => _unitsContext.playerEntity;
@@ -20,7 +20,7 @@ namespace RoyalAxe.LevelBuff
         {
         }
 
-        public IncreasePlayerSkillUsagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
+        public IncreasePlayerSkillUsagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext) : base(provider)
         {
             _unitsContext = unitsContext;
         }

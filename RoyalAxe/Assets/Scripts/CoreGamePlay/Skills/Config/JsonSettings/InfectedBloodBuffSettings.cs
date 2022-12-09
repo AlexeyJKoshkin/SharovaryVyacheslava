@@ -2,7 +2,7 @@ using System;
 using Core.Parser;
 using RoyalAxe.CharacterStat;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
     [Serializable]
     public class InfectedBloodSkillSettings: BaseLevelSkillSettings

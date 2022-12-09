@@ -5,7 +5,7 @@ using Core.Configs;
 using Core.EditorCore.Parser;
 using Core.Parser;
 using ProjectEditorEcoSystem;
-using RoyalAxe.LevelBuff;
+using RoyalAxe.LevelSkill;
 using UnityEngine;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters 

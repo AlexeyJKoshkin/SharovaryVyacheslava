@@ -1,8 +1,8 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class FloatingShieldsPower : AbstractPowerStrategyStrategy<FloatingShieldsSkillSettings>
+    public class FloatingShieldsPlayerSkill : AbstractPlayerSkillStrategy<FloatingShieldsSkillSettings>
     {
-        public FloatingShieldsPower(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
+        public FloatingShieldsPlayerSkill(ILevelBuffSettingCompositeProvider provider) : base(provider) { }
         public override void DoLevelPowerActivate()
         {
             

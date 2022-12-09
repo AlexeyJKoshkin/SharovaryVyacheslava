@@ -7,28 +7,16 @@ namespace RoyalAxe.GameEntitas
     /// основной урон персонажа
     /// </summary>
     [Units]
-    public class MainDamageComponent : IComponent, IInfluenceApplierComposite
+    public class MainDamageComponent : IComponent
     {
-        public IInfluenceApplierComposite Influence;
-        public void Apply(UnitsEntity attacker, UnitsEntity target)
-        {
-            Influence.Apply(attacker,target);
-        }
-
+        public IUnitMainItem Influence;
+     
         public void IncreaseDamage(DamageType type, float value)
         {
             Influence.IncreaseDamage(type, value);
         }
 
-        public void Upgrade(SkillConfigDef.Damage settingsDamage)
-        {
-            Influence.Upgrade(settingsDamage);
-        }
-
-        public void Downgrade(SkillConfigDef.Damage settingsDamage)
-        {
-            Influence.Downgrade(settingsDamage);
-        }
+        
 
         public float GetSingleValue(DamageType physical)
         {

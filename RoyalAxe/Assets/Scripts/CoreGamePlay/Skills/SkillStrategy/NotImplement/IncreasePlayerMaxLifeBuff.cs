@@ -1,11 +1,11 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class IncreasePlayerMaxLifePower : AbstractPowerStrategyStrategy<IncreasePlayerMaxLifeSkillSettings>
+    public class IncreasePlayerMaxLifePlayerSkill : AbstractPlayerSkillStrategy<IncreasePlayerMaxLifeSkillSettings>
     {
         private UnitsEntity Player => _unitsContext.playerEntity;
         private readonly UnitsContext _unitsContext;
         
-        public IncreasePlayerMaxLifePower(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
+        public IncreasePlayerMaxLifePlayerSkill(UnitsContext unitsContext, ILevelBuffSettingCompositeProvider provider):base(provider)
         {
             _unitsContext = unitsContext;
         }

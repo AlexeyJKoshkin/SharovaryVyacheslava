@@ -1,4 +1,5 @@
 ﻿using RoyalAxe.CharacterStat;
+using RoyalAxe.CoreLevel;
 using RoyalAxe.EntitasSystems;
 using RoyalAxe.GameEntitas;
 using UnityEngine;
@@ -13,10 +14,28 @@ namespace Core
         {
             Container.Register<UnitsEntityFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             BindViewBuilder();
+
+            BindBluePrints();
+
+            BindItemWrapperHelpers();
+            
             Container.Register<SkillFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<BosonUnitPipeline>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitsInfluenceCalculator>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitDamageApplierFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+        }
+
+        private void BindItemWrapperHelpers()
+        {
+            Container.Register<UnitItemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+        }
+
+        private void BindBluePrints()
+        {
+            SingletonAllInterfaces<BluePrintsFactoryStorage>();
+            SingletonAllInterfaces<UnitsBlueprintFactory>();
+            SingletonAllInterfaces<SkillBluePrintFactory>();
+          
         }
 
         private void BindViewBuilder()

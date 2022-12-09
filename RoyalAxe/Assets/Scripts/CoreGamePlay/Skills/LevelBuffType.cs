@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class LevelAdditionSettingsAttribute : Attribute

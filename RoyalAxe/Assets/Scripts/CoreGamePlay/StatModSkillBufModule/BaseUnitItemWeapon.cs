@@ -1,18 +1,17 @@
-/*using System.Collections.Generic;
-using FluentBehaviourTree;
+using System.Collections.Generic;
 using RoyalAxe.CharacterStat;
 
 namespace RoyalAxe.GameEntitas
 {
     public abstract class BaseUnitItemWeapon : IEquipItem, IModificatorProvider
     {
-        public UnitsEntity Owner => _equipable.Target;
+        public UnitsEntity Owner => _helper.Target;
         public SlotType AvailableSlot => SlotType.MainWeapon;
-        private readonly EquipableSetterHelper _equipable;
+        private readonly EquipableSetterHelper _helper;
 
         public BaseUnitItemWeapon()
         {
-            _equipable = new EquipableSetterHelper(this);
+            _helper = new EquipableSetterHelper(this);
         }
 
         IEnumerable<ICharacterStatModificator> IModificatorProvider.ApplyTempStats()
@@ -20,33 +19,21 @@ namespace RoyalAxe.GameEntitas
             return GetTemStats();
         }
 
-        IEnumerable<ICharacterStatModificator> IModificatorProvider.ApplyPermanentStatMods()
-        {
-            return ApplyPermanentStatMods();
-        }
+        public abstract void ApplyPermanentStatMods();
 
-        protected virtual IEnumerable<ICharacterStatModificator> GetTemStats()
-        {
-            yield break;
-        }
 
-        protected virtual IEnumerable<ICharacterStatModificator> ApplyPermanentStatMods()
-        {
-            yield break;
-        }
 
-        public abstract BehaviourTreeStatus Execute(TimeData time);
+        protected abstract IEnumerable<ICharacterStatModificator> GetTemStats();
 
-        public abstract string NodeName { get; }
 
         public virtual void ApplyTo(UnitsEntity owner)
         {
-            _equipable.ApplyTo(owner);
+            _helper.ApplyTo(owner);
         }
 
-        public void RemoveFrom(UnitsEntity owner, bool isSilent)
+        public void RemoveFrom(UnitsEntity owner)
         {
-            _equipable.RemoveFrom(owner);
+            _helper.RemoveFrom(owner);
         }
     }
-}*/
+}

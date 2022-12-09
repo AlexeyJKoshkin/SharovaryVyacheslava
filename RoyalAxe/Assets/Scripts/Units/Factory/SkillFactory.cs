@@ -8,14 +8,14 @@ namespace RoyalAxe.GameEntitas
     public class SkillFactory : AbstractEntityFactory<SkillEntity, SkillContext>, ISkillFactory
     {
         private readonly ITimerFactory _timerFactory;
-        private readonly IUnitDamageApplierFactory _toSkillUtility;
+        private readonly IUnitItemFactory _unitItemFactory;
 
         public SkillFactory(SkillContext skillContext,
                             ITimerFactory timerFactory,
-                            IUnitDamageApplierFactory toSkillUtility) : base(skillContext)
+                            IUnitItemFactory unitItemFactory) : base(skillContext)
         {
             _timerFactory = timerFactory;
-            _toSkillUtility = toSkillUtility;
+            _unitItemFactory = unitItemFactory;
         }
 
         public void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint)
@@ -60,8 +60,9 @@ namespace RoyalAxe.GameEntitas
         private void EquipWeaponSkill(UnitsEntity unit, SkillBlueprint skillBlueprint)
         {
             unit.AddUnitEquipWeaponData(skillBlueprint.DamageData, skillBlueprint.RangeData, skillBlueprint.Id, skillBlueprint.Level);
-            var damage = _toSkillUtility.CreateComposite(skillBlueprint.DamageData);
-            unit.AddMainDamage(damage);
+            var mainItem = _unitItemFactory.CreateMainItem(skillBlueprint.DamageData);
+            unit.EquipMainItem(mainItem);
+          
         }
 
         private SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit)

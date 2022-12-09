@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameKit;
 
-namespace RoyalAxe.LevelBuff {
+namespace RoyalAxe.LevelSkill {
     public class CurrentPlayerSkillDistributor : ICurrentLevelSkillDistributor
     {
         public const int MAX_REWARDS = 3;

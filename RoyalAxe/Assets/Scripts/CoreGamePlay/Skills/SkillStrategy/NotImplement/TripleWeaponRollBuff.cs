@@ -1,12 +1,12 @@
-namespace RoyalAxe.LevelBuff
+namespace RoyalAxe.LevelSkill
 {
-    public class TripleWeaponRollPower : AbstractPowerStrategyStrategy
+    public class TripleWeaponRollPlayerSkill : AbstractPlayerSkillStrategy
     {
         private readonly UnitsContext _unitsContext;
         public override LevelSkillType Type => LevelSkillType.TripleWeapon;
         public override bool IsSingle => true;
 
-        public TripleWeaponRollPower(UnitsContext unitsContext)
+        public TripleWeaponRollPlayerSkill(UnitsContext unitsContext)
         {
             _unitsContext = unitsContext;
         }

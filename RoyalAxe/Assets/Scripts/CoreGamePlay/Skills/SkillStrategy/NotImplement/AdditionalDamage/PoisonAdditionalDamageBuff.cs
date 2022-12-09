@@ -1,9 +1,10 @@
 
 using RoyalAxe.CharacterStat;
 
-namespace RoyalAxe.LevelBuff {
-    public class PoisonAdditionalDamagePower : AdditionalDamagePower<PoisonAdditionalDamageSkillSettings>
+namespace RoyalAxe.LevelSkill 
+{
+    public class PoisonAdditionalDamagePlayerSkill : AdditionalDamagePlayerSkill<PoisonAdditionalDamageSkillSettings>
     {
-        public PoisonAdditionalDamagePower(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider, unitsContext, factory) { }
+        public PoisonAdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider, unitsContext, factory) { }
     }
 }
