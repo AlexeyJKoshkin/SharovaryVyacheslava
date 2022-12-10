@@ -1,5 +1,5 @@
 using Core.UserProfile;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.GameEntitas {
     public class SkillBlueprint : BaseBlueprint
@@ -14,5 +14,12 @@ namespace RoyalAxe.GameEntitas {
         public SkillBlueprint(string id, int level):base(id, level)
         {
         }
+    }
+
+    public class WeaponBluePrint : BaseBlueprint
+    {
+        public SkillBlueprint SkillBlueprint;
+        public float CriticalChance;
+        public float CriticalDamage;
     }
 }

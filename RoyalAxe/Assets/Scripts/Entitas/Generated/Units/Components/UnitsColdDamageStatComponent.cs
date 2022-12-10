@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.ColdDamageStatComponent coldDamageStat { get { return (RoyalAxe.GameEntitas.ColdDamageStatComponent)GetComponent(UnitsComponentsLookup.ColdDamageStat); } }
     public bool hasColdDamageStat { get { return HasComponent(UnitsComponentsLookup.ColdDamageStat); } }
 
-    public void AddColdDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddColdDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.ColdDamageStat;
         var component = (RoyalAxe.GameEntitas.ColdDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.ColdDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceColdDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplaceColdDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.ColdDamageStat;
         var component = (RoyalAxe.GameEntitas.ColdDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.ColdDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;

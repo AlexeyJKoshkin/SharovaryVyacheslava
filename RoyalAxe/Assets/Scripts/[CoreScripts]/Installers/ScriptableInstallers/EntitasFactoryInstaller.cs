@@ -1,4 +1,4 @@
-﻿using RoyalAxe.CharacterStat;
+﻿using RoyalAxe.Units.Stats;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.EntitasSystems;
 using RoyalAxe.GameEntitas;
@@ -20,6 +20,7 @@ namespace Core
             BindItemWrapperHelpers();
             
             Container.Register<SkillFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<BuffEntityFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<BosonUnitPipeline>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitsInfluenceCalculator>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<UnitDamageApplierFactory>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -28,6 +29,7 @@ namespace Core
         private void BindItemWrapperHelpers()
         {
             Container.Register<UnitItemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<UnitsEquipmentBuilder>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindBluePrints()
@@ -35,6 +37,7 @@ namespace Core
             SingletonAllInterfaces<BluePrintsFactoryStorage>();
             SingletonAllInterfaces<UnitsBlueprintFactory>();
             SingletonAllInterfaces<SkillBluePrintFactory>();
+            SingletonAllInterfaces<ItemsBluePrintsFactory>();
           
         }
 

@@ -1,9 +1,9 @@
 using RoyalAxe.GameEntitas;
 
-namespace RoyalAxe.CharacterStat 
+namespace RoyalAxe.Units.Stats 
 {
     public interface IUnitItemFactory
     {
-        MainWeaponItem CreateMainItem(params SkillConfigDef.Damage[] damageData);
+        MainWeaponItem CreateMainItem(WeaponBluePrint weaponBluePrint);
     }
 }

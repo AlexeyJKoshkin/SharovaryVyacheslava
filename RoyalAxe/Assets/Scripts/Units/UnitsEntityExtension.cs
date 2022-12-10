@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using RoyalAxe.CharacterStat;
+using GameKit;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.GameEntitas
 {
@@ -26,7 +27,7 @@ namespace RoyalAxe.GameEntitas
             victim.ReplaceComponent(component, stat);
         }
 
-        public static void ApplyBuf(this UnitsEntity unit, IEntityBuff buff)
+        public static void ApplyBuf(this UnitsEntity unit, SkillEntity buff)
         {
             //нельзя повесить пустой баф или тот который уже весит
             if (unit == null || buff == null || unit.activeUnitBuff.Contains(buff))
@@ -35,10 +36,12 @@ namespace RoyalAxe.GameEntitas
             }
 
             unit.ReplaceActiveUnitBuff(unit.activeUnitBuff.Add(buff));
-            buff.ApplyTo(unit);
+            buff.ReplaceBuffTarget(unit);
+            if(buff.hasBuffApplier)
+                buff.buffApplier.ForEach(e=> e.ApplyTo(unit));
         }
 
-        public static void RemoveBuf(this UnitsEntity unit, IEntityBuff buff)
+        public static void RemoveBuf(this UnitsEntity unit, SkillEntity buff)
         {
             if (unit == null || buff == null)
             {
@@ -46,7 +49,10 @@ namespace RoyalAxe.GameEntitas
             }
 
             unit.ReplaceActiveUnitBuff(unit.activeUnitBuff.Remove(buff));
-            buff.RemoveFrom(unit);
+            if(buff.hasBuffApplier)
+                buff.buffApplier.ForEach(e=> e.RemoveFrom(unit));
+            buff.RemoveBuffTarget();
+            buff.Destroy();
         }
 
       
@@ -54,7 +60,7 @@ namespace RoyalAxe.GameEntitas
         public static void EquipMainItem(this UnitsEntity unit, IUnitMainItem unitMainItem)
         {
             if(unit == null) return;
-            if (unit.hasMainDamage)
+            if (unit.hasMainDamage) // уже экирирован
             {
                 unit.mainDamage.Influence.RemoveFrom(unit); // тут снимуться все бафы
             }

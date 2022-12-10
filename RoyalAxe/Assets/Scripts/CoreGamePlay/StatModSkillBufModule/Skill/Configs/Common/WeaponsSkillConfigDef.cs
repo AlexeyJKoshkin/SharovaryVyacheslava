@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     [Serializable]
     public class WeaponsSkillConfigDef : SkillConfigDef

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.Units.UnitBehaviour;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace RoyalAxe.GameEntitas
     }
 
     [Units]
-    public class ActiveUnitBuffComponent : HashSetCollectionComponent<IEntityBuff> { }
+    public class ActiveUnitBuffComponent : HashSetCollectionComponent<SkillEntity> { }
 
     [Units]
     public class PossibleTargetsComponent : ListCollectionComponent<UnitsEntity> { }
@@ -54,9 +54,8 @@ namespace RoyalAxe.GameEntitas
     [Units]
     public class UnitEquipWeaponDataComponent : IComponent
     {
-        public SkillConfigDef.Damage Damage;     // возможно данные стоит убрать отсюда
-        public SkillConfigDef.RangeParams Range; // возможно данные стоит убрать отсюда
         public string Id;
         public int Level;
+        public float MissileSpeed;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 public class DamageUnitTest
 {
@@ -15,21 +15,7 @@ public class DamageUnitTest
     [Test]
     public void TestEquipWeapon() { }
 
-    private UnitsEntity CreateTestUnit(int health, string id)
-    {
-        var result = _unitsContext.CreateEntity();
 
-
-        /*result.AddHealth(new ModifiableStat(new CharacterStatValue()
-        {
-            MinValue = 0,
-            MaxValue = 100,
-            Value = health
-        }));*/
-
-        result.AddActiveUnitBuff(new HashSet<IEntityBuff>());
-        return result;
-    }
 
     [Test]
     public void Test2() { }

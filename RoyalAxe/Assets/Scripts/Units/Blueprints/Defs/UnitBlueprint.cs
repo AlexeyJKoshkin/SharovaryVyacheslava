@@ -5,7 +5,7 @@ namespace RoyalAxe.GameEntitas {
     public class UnitBlueprint : BaseBlueprint
     {
         public StatsConfig Stats;
-        public SkillBlueprint ActiveSkill;
+        public WeaponBluePrint MainItemBluePrint;
 
         public UnitBlueprint(SaveEntityRecord saveRecord):this(saveRecord.Id, saveRecord.Level)
         {

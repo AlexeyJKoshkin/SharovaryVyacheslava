@@ -1,19 +1,18 @@
-﻿namespace RoyalAxe.CharacterStat
+﻿using RoyalAxe.GameEntitas;
+
+namespace RoyalAxe.Units.Stats
 {
     public class UnitDamageApplierFactory : IUnitDamageApplierFactory
     {
         private readonly IUnitsInfluenceCalculator _calculator;
+        private readonly IBuffFactory _buffFactory;
 
-        public UnitDamageApplierFactory(IUnitsInfluenceCalculator calculator)
+        public UnitDamageApplierFactory(IUnitsInfluenceCalculator calculator, IBuffFactory buffFactory)
         {
             _calculator = calculator;
+            _buffFactory = buffFactory;
         }
 
-        public IEntityBuff CreateElementalDamageBuf(UnitsEntity attacker, SkillConfigDef.Damage damage)
-        {
-            var result = new ElementalDamageBuf(_calculator, attacker, damage);
-            return result;
-        }
 
         public InfluenceApplierComposite CreateComposite()
         {
@@ -29,9 +28,8 @@
 
         public IPeriodicInfluenceApplier CreatePeriodicDamage(SkillConfigDef.Damage periodicDamageInfluenceData)
         {
-            return new ElementalDamageBuf.ElementalBufApplyHelper(periodicDamageInfluenceData, this);
+            return new ElementalBufApplyHelper(periodicDamageInfluenceData, _buffFactory);
         }
     }
-
-    //может применятся и сниматься в разных местах и по нескольку раз.
+    
 }

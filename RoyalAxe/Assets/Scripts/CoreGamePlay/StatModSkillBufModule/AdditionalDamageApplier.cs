@@ -1,4 +1,4 @@
-namespace RoyalAxe.CharacterStat {
+namespace RoyalAxe.Units.Stats {
     public class AdditionalDamageApplier : IInfluenceApplier
     {
         private readonly IUnitsInfluenceCalculator _calculator;

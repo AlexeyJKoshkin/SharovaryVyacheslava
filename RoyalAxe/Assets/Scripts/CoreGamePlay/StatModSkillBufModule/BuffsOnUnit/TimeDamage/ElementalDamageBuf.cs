@@ -1,98 +1,129 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentBehaviourTree;
-using RoyalAxe.EntitasSystems;
 using RoyalAxe.GameEntitas;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
-    public class ElementalDamageBuf : BaseEntityBuf
+    public interface IBuffBehavior : IBehaviourTreeNode
     {
-        //ссылка на того, кто навесил этот отрицательный баф.
-        //нельзя хранить просто ссылку на сущность. т.к юнити может умереть пока действует елементальный урон
-        public readonly Guid OwnerGuid;
+        
+    }
+
+    public class ElementalDamageNode : SequenceNode,IBuffBehavior
+    {
+        private readonly SkillEntity _buf;
         private readonly IUnitsInfluenceCalculator _influenceCalculator;
-        public override string NodeName => "Maгический урон";
 
         private readonly SkillConfigDef.Damage _damage;
 
-        private readonly ElementalDamageNode _node;
+        private readonly TimerNode _bufDurationTimer;
+        private readonly TimerNode _damageCooldownTimer;
+        private readonly ActionNode _removeBuf, _damageCooldown;
+        private UnitsEntity Target =>  _buf.buffTarget.Target;
 
-        public ElementalDamageBuf(IUnitsInfluenceCalculator influenceCalculator, UnitsEntity owner, SkillConfigDef.Damage damage)
+        public ElementalDamageNode( SkillEntity buff,
+            IUnitsInfluenceCalculator influenceCalculator,
+                                  SkillConfigDef.Damage damage) : base("Магический огонь")
         {
+            _buf = buff;
             _influenceCalculator = influenceCalculator;
-            OwnerGuid            = owner.uniqueUnitGUID.Guid;
             _damage              = damage;
-
-            _node = new ElementalDamageNode(damage, IsTargetAlive, DoDamageCooldown, DoBufTimer);
+            
+            _damageCooldownTimer = new TimerNode(damage.DamageCooldown, "damage timer");
+            _bufDurationTimer    = damage.MagicDuration <0 ? null : new TimerNode(damage.MagicDuration, "buff duration");
+            _removeBuf = new ActionNode("Снимаем бафф", DoRemoveBuffTimer);
+            _damageCooldown = new ActionNode("Наносим урон по кулдауну", DoDamageCooldown);
+            
+            BuildTree();
         }
 
         private bool IsTargetAlive(TimeData arg) // если цель жива
         {
             return !Target.isDeadUnit && Target.health.CurrentValue > 0;
         }
-
-        private void DoBufTimer()
+        
+        
+        private void BuildTree()
         {
-            Target.RemoveBuf(this);
+            new BehaviourTreeBuilder().Parent(this)
+                                        .Parallel("Счетчики", 0,5)
+                                             .Sequence("Если цель мерта, снимаем баф")
+                                                .Condition("Цель мертва", IsTargetAlive)
+                                                .Do(_removeBuf)
+                                             .Sequence("Таймер нанесения урона")
+                                                .Do(_damageCooldownTimer)
+                                                .Do(_damageCooldown)
+                                        .End()
+                                      .End()
+                               .Build();
+
+            if (_bufDurationTimer != null) // удаляем баф, только если есть врем действия
+            {
+                var child = new BehaviourTreeBuilder().Sequence("Таймер бафа")
+                                                      .Do(_bufDurationTimer)
+                                                      .Do(_removeBuf)
+                                                      .End().Build();
+                this.AddChild(child);
+            }
         }
 
-        //применить урон к цели
-        private void DoDamageCooldown()
+        private BehaviourTreeStatus DoRemoveBuffTimer(TimeData arg)
         {
+            Target.RemoveBuf(_buf);
+            return BehaviourTreeStatus.Success;
+        }
+
+        private BehaviourTreeStatus DoDamageCooldown(TimeData arg)
+        {
+            _damageCooldownTimer.ResetTimer();
             _influenceCalculator.ApplyElementalTimingDamage(Target, _damage.SingleDamageInfo);
-            
-             
+            return BehaviourTreeStatus.Success;
         }
 
-        public override BehaviourTreeStatus Execute(TimeData time)
+        public void IncreaseDuration(float damageMagicDuration)
         {
-            return _node.Execute(time);
+            _bufDurationTimer.Timer += damageMagicDuration;
         }
-
-        //Создаем модификаторы, которые потом снимуться
-        // в магическом уроне таких нет
-        public override IEnumerable<ICharacterStatModificator> ApplyTempStats()
-        {
-            yield break;
-        }
-
-        public class ElementalBufApplyHelper : IPeriodicInfluenceApplier
+    }
+    
+    //штука, которая умеет накладывать бафы элементального урона на других юнитов
+         public class ElementalBufApplyHelper : IPeriodicInfluenceApplier
         {
             public SkillConfigDef.Damage DamageData => _damage;
 
             private readonly SkillConfigDef.Damage _damage;
-            private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
+          
+            private readonly IBuffFactory _buffFactory;
 
-            public ElementalBufApplyHelper(SkillConfigDef.Damage damage, IUnitDamageApplierFactory unitDamageApplierFactory)
+            public ElementalBufApplyHelper(SkillConfigDef.Damage damage, IBuffFactory buffFactory)
             {
                 _damage                   = damage;
-                _unitDamageApplierFactory = unitDamageApplierFactory;
+                _buffFactory = buffFactory;
             }
 
             public void Apply(UnitsEntity attacker, UnitsEntity target)
             {
                 if (target == null || !target.isEnabled) return;
                 // в списке активных бафов ищем                      элементальный урон
-                var existsBuf = target.activeUnitBuff.FirstOrDefault(o => o is ElementalDamageBuf elementalDamageBuf
-                                                                          //который навесил текущий юнит
-                                                                       && elementalDamageBuf.OwnerGuid == attacker.uniqueUnitGUID.Guid
-                                                                          // такой же
-                                                                       && elementalDamageBuf._damage.ElementalDamageType ==
-                                                                          _damage.ElementalDamageType) as ElementalDamageBuf;
+                var existsBuf = target.activeUnitBuff.FirstOrDefault(o => o.hasElementalDamageBuf
+                                                                       && o.elementalDamageBuf.Type == _damage.ElementalDamageType // такой же как
+                                                                       && o.buffOwner.Guid == attacker.uniqueUnitGUID.Guid); //и текущего персонажа
+                //Важо проверять гуиды. т.к. нельзя проверить ссылки на прямую. На цели могут висеть бафы, уже умерших персонажей. 
+                
 
                 if (existsBuf != null)
                 {
-                    existsBuf._node.IncreaseDuration(_damage.MagicDuration);
+                    var node =  existsBuf.buffBehaviour.BehaviourTreeNode as ElementalDamageNode;
+                    node?.IncreaseDuration(_damage.MagicDuration);
+
                 }
                 else
                 {
-                    var buff = _unitDamageApplierFactory.CreateElementalDamageBuf(attacker, _damage);
 
-                    target.ApplyBuf(buff);
+                    SkillEntity buf = _buffFactory.CreateElementalBuff(attacker, _damage);
+
+                    target.ApplyBuf(buf);
                 }
             }
         }
-    }
 }

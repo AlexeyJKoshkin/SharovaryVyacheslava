@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 public class ModifiableStateMock : ModifiableStat
 {

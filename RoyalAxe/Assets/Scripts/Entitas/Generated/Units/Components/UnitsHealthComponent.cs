@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.HealthComponent health { get { return (RoyalAxe.GameEntitas.HealthComponent)GetComponent(UnitsComponentsLookup.Health); } }
     public bool hasHealth { get { return HasComponent(UnitsComponentsLookup.Health); } }
 
-    public void AddHealth(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddHealth(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.Health;
         var component = (RoyalAxe.GameEntitas.HealthComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.HealthComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceHealth(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplaceHealth(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.Health;
         var component = (RoyalAxe.GameEntitas.HealthComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.HealthComponent));
         component.UnitStatValue = newUnitStatValue;

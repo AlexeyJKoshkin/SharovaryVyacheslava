@@ -1,4 +1,4 @@
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     internal class GetMaxValue : IStatValueProvider
     {

@@ -3,7 +3,7 @@ using Core.Data.Provider;
 using GameKit;
 using UnityEngine;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     [AllowMultiItems]
     public class DamageTypeParameterConfig : ScriptableObject, IDataObject

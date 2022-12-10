@@ -1,31 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentBehaviourTree;
+using RoyalAxe.CoreGamePlay;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
-    /// <summary>
-    /// Заморозка
-    /// </summary>
-    public class FreezeUnitBuf : BaseEntityBuf
+    public  class FreesBuffSpeedModificator : IModificatorProvider
     {
-        public override string NodeName { get; } = "Заморозка";
-
-        private float _speedDecreaseValue;
-        public FreezeUnitBuf(float speedDecreaseValue)
+        private readonly float _speedDecreaseValue;
+        public FreesBuffSpeedModificator(float speedDecreaseValue)
         {
-            _speedDecreaseValue  = speedDecreaseValue ;
+            _speedDecreaseValue = speedDecreaseValue;
         }
 
-        public override BehaviourTreeStatus Execute(TimeData time)
+        public IEnumerable<ICharacterStatModificator> ApplyTempStats(UnitsEntity target)
         {
-            //баф висит все время пока его не снимут/ либо юнит не умрет
-            return BehaviourTreeStatus.Success;
+            yield break;
         }
 
-        public override void ApplyPermanentStatMods()
+        public void ApplyPermanentStatMods(UnitsEntity target)
         {
-            this.Target.moveSpeed.ChangeValue().FromActualCurrent(-_speedDecreaseValue).ApplyPermanentMod();
+            target.moveSpeed.ChangeValue().FromActualCurrent(-_speedDecreaseValue).ApplyPermanentMod();
         }
     }
 }

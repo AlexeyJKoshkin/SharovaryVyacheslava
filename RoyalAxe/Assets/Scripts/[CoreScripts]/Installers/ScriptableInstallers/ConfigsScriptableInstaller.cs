@@ -1,5 +1,5 @@
 using Core.Configs;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.Configs;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.LevelSkill;

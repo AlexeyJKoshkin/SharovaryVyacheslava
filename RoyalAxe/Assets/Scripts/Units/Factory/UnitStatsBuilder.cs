@@ -1,5 +1,5 @@
 using Core.Data.Provider;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.Configs;
 
 namespace RoyalAxe.GameEntitas

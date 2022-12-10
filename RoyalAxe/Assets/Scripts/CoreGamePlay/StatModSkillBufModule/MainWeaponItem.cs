@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.GameEntitas 
 {
@@ -8,40 +8,32 @@ namespace RoyalAxe.GameEntitas
     {
         void IncreaseDamage(SkillConfigDef.Damage damage);
         //Усиливаем урон от урона на абсолютную величину
-        void IncreaseDamage(DamageType physical, float settingsValue);
+        void IncreaseDamage(DamageType type, float amount);
+        
+        void DecreaseDamage(SkillConfigDef.Damage damage);
+        //Усиливаем урон от урона на абсолютную величину
+        void DecreaseDamage(DamageType type, float amount);
     }
 
     public class MainWeaponItem : BaseUnitItemWeapon,IUnitMainItem
     {
         private readonly InfluenceApplierComposite _composite;
         private readonly IUnitDamageApplierFactory _unitDamageApplierFactory;
+        
         public MainWeaponItem(InfluenceApplierComposite composite, IUnitDamageApplierFactory unitDamageApplierFactory)
         {
             _composite = composite;
             _unitDamageApplierFactory = unitDamageApplierFactory;
-        }
-        
-        public void AttackTarget(UnitsEntity target)
-        {
-            _composite.Apply(Owner, target);
         }
 
         public void IncreaseDamage(DamageType type, float settingsValue)
         {
             _composite.IncreaseDamage(type, settingsValue);
         }
-        
-
 
         public void IncreaseDamage(SkillConfigDef.Damage damage)
         {
-            this.IncreaseDamage(DamageType.Physical, damage.PhysicalDamage);
-                        
-            
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
-            {
-                IncreaseDamage(damage.ElementalDamageType,damage.ElementalDamage);
-            }
+            IncreaseSimpleDamage(damage, 1);
             
             if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
             {
@@ -53,11 +45,7 @@ namespace RoyalAxe.GameEntitas
 
         public void DecreaseDamage(SkillConfigDef.Damage damage)
         {
-            this.IncreaseDamage(DamageType.Physical, -damage.PhysicalDamage);
-            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
-            {
-                IncreaseDamage(damage.ElementalDamageType,-damage.ElementalDamage);
-            }
+            IncreaseSimpleDamage(damage, -1);
             if (damage.ElementalDamage > 0 && damage.DamageCooldown > 0) // есть елементальный урон размазанный по времени
             {
                 var applier = _composite.PeriodicDamage.FirstOrDefault(o => o.DamageData == damage);
@@ -66,22 +54,31 @@ namespace RoyalAxe.GameEntitas
             }
         }
 
-        public float GetSingleValue(DamageType physical)
+        public void DecreaseDamage(DamageType type, float amount)
         {
-            return _composite.GetSingleValue(physical);
+            _composite.IncreaseDamage(type,-amount);
         }
 
+        void IncreaseSimpleDamage(SkillConfigDef.Damage damage, int sign)
+        {
+            this.IncreaseDamage(DamageType.Physical, -damage.PhysicalDamage);
+            if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
+            {
+                IncreaseDamage(damage.ElementalDamageType,damage.ElementalDamage*sign);
+            }
+        }
+
+        #region IWeaponItem
+        void IWeaponItem.AttackTarget(UnitsEntity target)
+        {
+            _composite.Apply(Owner, target);
+        }
         
-        public override void ApplyPermanentStatMods()
+        float  IWeaponItem.GetSingleValue(DamageType type)
         {
-            
+            return _composite.GetSingleValue(type);
         }
-
-        protected override IEnumerable<ICharacterStatModificator> GetTemStats()
-        {
-            yield break;
-        }
-
-       
+        #endregion
+     
     }
 }

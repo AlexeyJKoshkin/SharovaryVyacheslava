@@ -5,7 +5,8 @@ using RoyalAxe.LevelSkill;
 using UnityEngine;
 using VContainer;
 
-namespace Core {
+namespace Core 
+{
     [CreateAssetMenu(menuName = "Installers/LevelSkillsInstaller", fileName = "LevelSkillsInstaller")]
     public class LevelSkillsInstaller : ScriptableInstaller
     {
@@ -15,8 +16,6 @@ namespace Core {
             Container.Register<CurrentPlayerSkillDistributor>(Lifetime.Singleton).AsImplementedInterfaces();
 
             AllGameBuffs().ForEach(t => { Container.Register(t, Lifetime.Singleton).As<ILevelSkill>(); });
-
-         
         }
 
         IEnumerable<Type> AllGameBuffs()

@@ -1,4 +1,4 @@
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;

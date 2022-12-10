@@ -2,7 +2,7 @@
 using RoyalAxe.Configs;
 using UnityEngine;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public abstract class SkillsSettings : ScriptableObject, IDataObject
     {

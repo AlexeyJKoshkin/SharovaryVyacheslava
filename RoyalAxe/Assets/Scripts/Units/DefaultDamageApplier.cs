@@ -1,11 +1,7 @@
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe
 {
-
-    
-    
-
 
     public interface IInfluenceApplier
     {

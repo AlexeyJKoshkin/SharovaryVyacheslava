@@ -1,6 +1,6 @@
 ﻿using Core.Data.Provider;
 using Entitas;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.GameEntitas;
 using RoyalAxe.Units.Player;
 

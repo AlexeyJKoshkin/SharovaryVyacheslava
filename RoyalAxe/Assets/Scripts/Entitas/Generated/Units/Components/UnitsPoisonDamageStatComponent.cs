@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.PoisonDamageStatComponent poisonDamageStat { get { return (RoyalAxe.GameEntitas.PoisonDamageStatComponent)GetComponent(UnitsComponentsLookup.PoisonDamageStat); } }
     public bool hasPoisonDamageStat { get { return HasComponent(UnitsComponentsLookup.PoisonDamageStat); } }
 
-    public void AddPoisonDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddPoisonDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.PoisonDamageStat;
         var component = (RoyalAxe.GameEntitas.PoisonDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.PoisonDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePoisonDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplacePoisonDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.PoisonDamageStat;
         var component = (RoyalAxe.GameEntitas.PoisonDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.PoisonDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;

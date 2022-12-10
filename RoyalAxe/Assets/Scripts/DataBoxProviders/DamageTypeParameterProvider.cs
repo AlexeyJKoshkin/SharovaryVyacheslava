@@ -1,6 +1,6 @@
 using Core.Data.Provider;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public class DamageTypeParameterProvider : DataBox<DamageTypeParameterConfig> { }
 }

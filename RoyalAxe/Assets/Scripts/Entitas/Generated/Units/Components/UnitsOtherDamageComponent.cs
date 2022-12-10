@@ -6,22 +6,19 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using RoyalAxe.GameEntitas;
-
 public partial class UnitsEntity {
 
     public RoyalAxe.GameEntitas.OtherDamageComponent otherDamage { get { return (RoyalAxe.GameEntitas.OtherDamageComponent)GetComponent(UnitsComponentsLookup.OtherDamage); } }
     public bool hasOtherDamage { get { return HasComponent(UnitsComponentsLookup.OtherDamage); } }
 
-    public void AddOtherDamage(System.Collections.Generic.List<IWeaponItem> newCollection) {
+    public void AddOtherDamage(System.Collections.Generic.List<RoyalAxe.GameEntitas.IWeaponItem> newCollection) {
         var index = UnitsComponentsLookup.OtherDamage;
         var component = (RoyalAxe.GameEntitas.OtherDamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.OtherDamageComponent));
         component.Collection = newCollection;
         AddComponent(index, component);
     }
 
-    public void ReplaceOtherDamage(System.Collections.Generic.List<IWeaponItem> newCollection) {
+    public void ReplaceOtherDamage(System.Collections.Generic.List<RoyalAxe.GameEntitas.IWeaponItem> newCollection) {
         var index = UnitsComponentsLookup.OtherDamage;
         var component = (RoyalAxe.GameEntitas.OtherDamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.OtherDamageComponent));
         component.Collection = newCollection;

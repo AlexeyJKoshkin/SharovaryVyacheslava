@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.FireDamageStatComponent fireDamageStat { get { return (RoyalAxe.GameEntitas.FireDamageStatComponent)GetComponent(UnitsComponentsLookup.FireDamageStat); } }
     public bool hasFireDamageStat { get { return HasComponent(UnitsComponentsLookup.FireDamageStat); } }
 
-    public void AddFireDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddFireDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.FireDamageStat;
         var component = (RoyalAxe.GameEntitas.FireDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.FireDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFireDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplaceFireDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.FireDamageStat;
         var component = (RoyalAxe.GameEntitas.FireDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.FireDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;

@@ -6,22 +6,19 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using RoyalAxe.GameEntitas;
-
 public partial class UnitsEntity {
 
     public RoyalAxe.GameEntitas.MainDamageComponent mainDamage { get { return (RoyalAxe.GameEntitas.MainDamageComponent)GetComponent(UnitsComponentsLookup.MainDamage); } }
     public bool hasMainDamage { get { return HasComponent(UnitsComponentsLookup.MainDamage); } }
 
-    public void AddMainDamage(IUnitMainItem newInfluence) {
+    public void AddMainDamage(RoyalAxe.GameEntitas.IUnitMainItem newInfluence) {
         var index = UnitsComponentsLookup.MainDamage;
         var component = (RoyalAxe.GameEntitas.MainDamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.MainDamageComponent));
         component.Influence = newInfluence;
         AddComponent(index, component);
     }
 
-    public void ReplaceMainDamage(IUnitMainItem newInfluence) {
+    public void ReplaceMainDamage(RoyalAxe.GameEntitas.IUnitMainItem newInfluence) {
         var index = UnitsComponentsLookup.MainDamage;
         var component = (RoyalAxe.GameEntitas.MainDamageComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.MainDamageComponent));
         component.Influence = newInfluence;

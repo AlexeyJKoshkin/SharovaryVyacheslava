@@ -1,6 +1,6 @@
 using System;
 using Core.Parser;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.LevelSkill
 {

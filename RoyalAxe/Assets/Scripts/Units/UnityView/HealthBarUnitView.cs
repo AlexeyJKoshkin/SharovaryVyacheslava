@@ -1,5 +1,5 @@
 using Entitas;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

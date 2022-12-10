@@ -1,5 +1,5 @@
 using Entitas.CodeGeneration.Attributes;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.GameEntitas
 {

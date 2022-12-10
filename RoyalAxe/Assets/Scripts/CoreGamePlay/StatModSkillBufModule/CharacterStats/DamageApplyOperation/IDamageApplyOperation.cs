@@ -1,10 +1,10 @@
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public interface IDamageApplyOperation
     {
-        //Применить урон
-        HitDamageInfo ApplyTo(UnitsEntity modificator, float damage);
         //Усилить урон
-        float PowerDamage(UnitsEntity attacker, float mobDamage);
+        
+        float ApplyDamage(UnitsEntity target, float damage);
+        float ApplyDamage(UnitsEntity attacker, UnitsEntity target, float damage);
     }
 }

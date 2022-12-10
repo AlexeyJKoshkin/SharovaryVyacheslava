@@ -1,5 +1,5 @@
 using System;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using Sirenix.OdinInspector;
 
 namespace RoyalAxe.Configs

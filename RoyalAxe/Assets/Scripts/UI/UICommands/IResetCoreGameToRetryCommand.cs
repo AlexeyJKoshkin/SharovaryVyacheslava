@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Entitas;
 using GameKit;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.GameEntitas;
 
 namespace RoyalAxe.CoreLevel
@@ -42,7 +42,7 @@ namespace RoyalAxe.CoreLevel
             player.ReplaceComponent(UnitsComponentsLookup.Health, player.health);
 
             var buffs = player.activeUnitBuff.Collection;
-            var tickDamages = buffs.Where(o => o is ElementalDamageBuf).Cast<ElementalDamageBuf>().ToArray();
+            var tickDamages = buffs.Where(o => o.hasElementalDamageBuf).ToArray();
             tickDamages.ForEach(e=>
                                 {
                                     player.RemoveBuf(e);

@@ -1,4 +1,6 @@
-namespace RoyalAxe.CharacterStat
+using RoyalAxe.Units.Stats;
+
+namespace RoyalAxe.Units.Stats
 {
     public interface ICharacterStatModificator : IModApplier
     {

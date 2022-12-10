@@ -1,4 +1,4 @@
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public interface IChangeModificatorBuilder : ICharacterStatModificator
     {

@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.PhysicalDamageStatComponent physicalDamageStat { get { return (RoyalAxe.GameEntitas.PhysicalDamageStatComponent)GetComponent(UnitsComponentsLookup.PhysicalDamageStat); } }
     public bool hasPhysicalDamageStat { get { return HasComponent(UnitsComponentsLookup.PhysicalDamageStat); } }
 
-    public void AddPhysicalDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddPhysicalDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.PhysicalDamageStat;
         var component = (RoyalAxe.GameEntitas.PhysicalDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.PhysicalDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePhysicalDamageStat(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplacePhysicalDamageStat(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.PhysicalDamageStat;
         var component = (RoyalAxe.GameEntitas.PhysicalDamageStatComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.PhysicalDamageStatComponent));
         component.UnitStatValue = newUnitStatValue;

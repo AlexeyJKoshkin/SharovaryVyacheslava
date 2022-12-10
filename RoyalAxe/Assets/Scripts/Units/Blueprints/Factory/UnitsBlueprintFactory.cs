@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Data.Provider;
 using Core.UserProfile;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.Configs;
 using RoyalAxe.GameEntitas;
 
@@ -11,22 +11,21 @@ namespace RoyalAxe.CoreLevel
     public class UnitsBlueprintFactory : IUnitsBlueprintsFactory
     {
         private readonly IDataStorage _dataStorage;
-        private readonly ISkillBlueprintsFactory _skillBluePrintFactory;
+        private readonly IItemsBlueprintsFactory _itemsBlueprintsFactory;
         
         
-        public UnitsBlueprintFactory(IDataStorage dataStorage, ISkillBlueprintsFactory skillBluePrintFactory)
+        public UnitsBlueprintFactory(IDataStorage dataStorage, IItemsBlueprintsFactory itemsBlueprints)
         {
             _dataStorage = dataStorage;
-            _skillBluePrintFactory = skillBluePrintFactory;
+            _itemsBlueprintsFactory = itemsBlueprints;
         }
 
         public MobBlueprint CreateMobBluePrint(WeaponsSkillConfigDef weaponData, StatCollection mobStatCollection, int level, string id)
         {
-           
             return new MobBlueprint(id, level)
             {
                 Stats = mobStatCollection.GetByLevel(level),
-                ActiveSkill = _skillBluePrintFactory.Create(weaponData, level, id)
+                MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData, level)
             };
         }
         
@@ -48,15 +47,10 @@ namespace RoyalAxe.CoreLevel
 
         public UnitBlueprint CreatePlayerBluePrint(HeroProgressData heroRecord, SaveEntityRecord weaponRecord)
         {
-            var weapon = _dataStorage.ById<WeaponsSkillConfigDef>(weaponRecord.Id).GetByLevel(weaponRecord.Level);
             return new UnitBlueprint(heroRecord)
             {
                 Stats = _dataStorage.ById<StatCollection>(heroRecord.Id).GetByLevel(heroRecord.Level),
-                ActiveSkill = new SkillBlueprint(weaponRecord)
-                {
-                    DamageData = weapon.damage,
-                    RangeData  = weapon.rangeParams
-                }
+               MainItemBluePrint  = _itemsBlueprintsFactory.CreateMainWeapon(weaponRecord.Id, weaponRecord.Level)
             };
         }
     }

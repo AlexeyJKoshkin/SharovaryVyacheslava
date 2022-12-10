@@ -1,14 +1,16 @@
 using System.Linq;
 using Core;
-using RoyalAxe.CharacterStat;
 using RoyalAxe.GameEntitas;
-using UnityEngine;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.LevelSkill {
     public class ColdAdditionalDamagePlayerSkill : AdditionalDamagePlayerSkill<ColdAdditionalDamageSkillSettings>,IWeaponItem
     {
-        public ColdAdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory) : base(provider, unitsContext, factory)
+        private IBuffFactory _unitsBuffBuilder;
+        
+        public ColdAdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory, IBuffFactory unitsBuffBuilder) : base(provider, unitsContext, factory)
         {
+            _unitsBuffBuilder = unitsBuffBuilder;
             HLogger.TempLog("Cold Skill Create");
         }
         
@@ -32,9 +34,11 @@ namespace RoyalAxe.LevelSkill {
       
         void IWeaponItem.AttackTarget(UnitsEntity target)
         {
-            if(target.activeUnitBuff.Any(o=> o is FreezeUnitBuf)) return;
-            
-            target.ApplyBuf(new FreezeUnitBuf(Settings.DecelerationPercent));
+           // asdasd
+            if(target.activeUnitBuff.Any(o=> o.isFreezeBuff)) return;
+
+            var freezebuf = _unitsBuffBuilder.BuildFreezeUnitBuf(this.Player,Settings.DecelerationPercent);
+            target.ApplyBuf(freezebuf); // надо подумать, о том, что нужен будет билдер баффов*/
         }
 
         float IWeaponItem.GetSingleValue(DamageType type)
@@ -42,6 +46,7 @@ namespace RoyalAxe.LevelSkill {
             return 0; // Скилл не атакует. только навешивает баф.
         }
         #endregion
-        
     }
+    
+    
 }

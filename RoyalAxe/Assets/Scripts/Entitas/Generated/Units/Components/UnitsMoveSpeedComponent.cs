@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.MoveSpeedComponent moveSpeed { get { return (RoyalAxe.GameEntitas.MoveSpeedComponent)GetComponent(UnitsComponentsLookup.MoveSpeed); } }
     public bool hasMoveSpeed { get { return HasComponent(UnitsComponentsLookup.MoveSpeed); } }
 
-    public void AddMoveSpeed(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void AddMoveSpeed(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.MoveSpeed;
         var component = (RoyalAxe.GameEntitas.MoveSpeedComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.MoveSpeedComponent));
         component.UnitStatValue = newUnitStatValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceMoveSpeed(RoyalAxe.CharacterStat.CharacterStatValue newUnitStatValue) {
+    public void ReplaceMoveSpeed(RoyalAxe.Units.Stats.CharacterStatValue newUnitStatValue) {
         var index = UnitsComponentsLookup.MoveSpeed;
         var component = (RoyalAxe.GameEntitas.MoveSpeedComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.MoveSpeedComponent));
         component.UnitStatValue = newUnitStatValue;

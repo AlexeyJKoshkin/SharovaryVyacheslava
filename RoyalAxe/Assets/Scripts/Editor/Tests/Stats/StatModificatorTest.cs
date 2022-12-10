@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 public class StatModificatorTest
 {

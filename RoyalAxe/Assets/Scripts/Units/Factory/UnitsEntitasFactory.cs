@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core.Data.Provider;
 using Core.UserProfile;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.Configs;
 using UnityEngine;
 
@@ -11,10 +11,10 @@ namespace RoyalAxe.GameEntitas
     public class UnitsEntityFactory : AbstractEntityFactory<UnitsEntity, UnitsContext>, IUnitsEntityFactory
     {
         private readonly RAAnimationContext _animationContext;
-        private readonly ISkillFactory _skillBuilder;
+        private readonly IUnitsEquipmentBuilder _skillBuilder;
         private readonly UnitStatsBuilder _unitStatsBuilder;
 
-        public UnitsEntityFactory(UnitsContext units, RAAnimationContext animationContext, ISkillFactory skillBuilder) : base(units)
+        public UnitsEntityFactory(UnitsContext units, RAAnimationContext animationContext, IUnitsEquipmentBuilder skillBuilder) : base(units)
         {
             _animationContext = animationContext;
             _skillBuilder     = skillBuilder;
@@ -24,16 +24,16 @@ namespace RoyalAxe.GameEntitas
 
         public UnitsEntity CreatePlayer(UnitBlueprint unitBlueprint)
         {
-            var player     = CreateUnit(unitBlueprint);
+            var player = CreateUnit(unitBlueprint);
             player.isPlayer = true;
-            _skillBuilder.CreateTestPlayerSkill(player, unitBlueprint.ActiveSkill);
+            _skillBuilder.EquipPlayer(player, unitBlueprint.MainItemBluePrint);
             return player;
         }
 
         public UnitsEntity CreateWizardUnit()
         {
             var entity = Context.CreateEntity();
-            entity.AddMoveSpeed(new CharacterStatValue(){Value = 3, MaxValue = 10});
+            entity.AddMoveSpeed(new CharacterStatValue() {Value = 3, MaxValue = 10});
             entity.AddMovingToPoint(new FollowUnitPointAdapter(Context.playerEntity));
             return entity;
         }
@@ -42,14 +42,14 @@ namespace RoyalAxe.GameEntitas
         {
             var mob = CreateUnit(mobBlueprint);
             mob.isMob = true;
-            _skillBuilder.EquipMobWeapon(mob, mobBlueprint.ActiveSkill);
+            _skillBuilder.EquipMobWeapon(mob, mobBlueprint.MainItemBluePrint);
             return mob;
         }
 
         public UnitsEntity CreateEnemyMobBoson(UnitsEntity owner)
         {
             var entity = CreateMeleeBoson(owner);
-            entity.isMob                              = true;
+            entity.isMob   = true;
             entity.isBoson = true;
             return entity;
         }
@@ -65,12 +65,27 @@ namespace RoyalAxe.GameEntitas
 
         private UnitsEntity CreateMeleeBoson(UnitsEntity owner)
         {
-            var entity = CreateBlankUnit();
-            _unitStatsBuilder.CopyStats(entity, owner);
+            var boson = CreateBlankUnit();
+            _unitStatsBuilder.CopyStats(boson, owner);
 
-            entity.AddUnit(owner.unit.Id + "boson", owner.unit.Level);
-            _skillBuilder.CreateMeleeAttackSkill(entity, owner);
-            return entity;
+            boson.AddUnit(owner.unit.Id + "boson", owner.unit.Level);
+            CreateMeleeAttackSkill(boson, owner);
+            return boson;
+        }
+
+        private void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner)
+        {
+            var weaponData = owner.unitEquipWeaponData;
+
+            boson.AddMainDamage(owner.mainDamage.Influence);
+            if (owner.hasOtherDamage)
+                boson.AddOtherDamage(owner.otherDamage.Collection);
+            boson.ReplaceMoveSpeed(new CharacterStatValue
+            {
+                MinValue = 0,
+                MaxValue = 100,
+                Value    = weaponData.MissileSpeed
+            });
         }
 
 
@@ -79,21 +94,19 @@ namespace RoyalAxe.GameEntitas
             var entity = CreateBlankUnit();
             entity.AddUnit(blueprint.Id, blueprint.Level);
             _unitStatsBuilder.SetStats(entity, blueprint.Stats);
-         
+
             return entity;
         }
 
         private UnitsEntity CreateBlankUnit()
         {
             var entity = Context.CreateEntity();
-            entity.AddActiveUnitBuff(new HashSet<IEntityBuff>());
+            entity.AddActiveUnitBuff(new HashSet<SkillEntity>());
             entity.AddUniqueUnitGUID(Guid.NewGuid());
             entity.AddPossibleTargets(new List<UnitsEntity>());
             entity.AddUnitAnimationEntity(_animationContext.CreateEntity());
-            
+
             return entity;
         }
     }
-
-  
 }

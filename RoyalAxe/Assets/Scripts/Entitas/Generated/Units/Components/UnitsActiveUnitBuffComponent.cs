@@ -11,14 +11,14 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.ActiveUnitBuffComponent activeUnitBuff { get { return (RoyalAxe.GameEntitas.ActiveUnitBuffComponent)GetComponent(UnitsComponentsLookup.ActiveUnitBuff); } }
     public bool hasActiveUnitBuff { get { return HasComponent(UnitsComponentsLookup.ActiveUnitBuff); } }
 
-    public void AddActiveUnitBuff(System.Collections.Generic.HashSet<RoyalAxe.CharacterStat.IEntityBuff> newCollection) {
+    public void AddActiveUnitBuff(System.Collections.Generic.HashSet<SkillEntity> newCollection) {
         var index = UnitsComponentsLookup.ActiveUnitBuff;
         var component = (RoyalAxe.GameEntitas.ActiveUnitBuffComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.ActiveUnitBuffComponent));
         component.Collection = newCollection;
         AddComponent(index, component);
     }
 
-    public void ReplaceActiveUnitBuff(System.Collections.Generic.HashSet<RoyalAxe.CharacterStat.IEntityBuff> newCollection) {
+    public void ReplaceActiveUnitBuff(System.Collections.Generic.HashSet<SkillEntity> newCollection) {
         var index = UnitsComponentsLookup.ActiveUnitBuff;
         var component = (RoyalAxe.GameEntitas.ActiveUnitBuffComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.ActiveUnitBuffComponent));
         component.Collection = newCollection;

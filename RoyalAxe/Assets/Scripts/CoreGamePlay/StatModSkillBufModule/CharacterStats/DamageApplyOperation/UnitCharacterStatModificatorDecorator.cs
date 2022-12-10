@@ -1,4 +1,4 @@
-namespace RoyalAxe.CharacterStat {
+namespace RoyalAxe.Units.Stats {
     public class UnitCharacterStatModificatorDecorator : ICharacterStatModificator
     {
         public IGameStat Stat => _modificator.Stat;

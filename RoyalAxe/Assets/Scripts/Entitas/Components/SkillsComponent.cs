@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using RoyalAxe.Units.Stats;
 using RoyalAxe.EntitasSystems.TimerUtility;
 using UnityEngine;
 
@@ -72,4 +73,6 @@ namespace RoyalAxe.GameEntitas
             return $"{CurrentValue} / {MaxValue}";
         }
     }
+
+  
 }

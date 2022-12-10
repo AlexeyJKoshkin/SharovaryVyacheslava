@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     /// <summary>
     ///     Базовый вообще любой стат игры -стат персонажей, эквипа, активных способностей.

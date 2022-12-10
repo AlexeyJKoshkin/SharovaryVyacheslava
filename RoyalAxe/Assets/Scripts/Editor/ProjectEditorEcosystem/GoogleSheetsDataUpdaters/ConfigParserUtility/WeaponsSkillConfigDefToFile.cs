@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.EditorCore.Parser;
 using Core.Parser;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {

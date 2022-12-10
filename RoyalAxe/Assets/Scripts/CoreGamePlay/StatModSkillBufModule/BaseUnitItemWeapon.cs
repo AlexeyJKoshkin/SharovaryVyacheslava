@@ -1,39 +1,46 @@
 using System.Collections.Generic;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
+using RoyalAxe.CoreGamePlay;
+using RoyalAxe.Units;
+using UnityEngine;
 
 namespace RoyalAxe.GameEntitas
 {
-    public abstract class BaseUnitItemWeapon : IEquipItem, IModificatorProvider
+    public abstract class BaseUnitItemWeapon : IEquipItem
     {
-        public UnitsEntity Owner => _helper.Target;
         public SlotType AvailableSlot => SlotType.MainWeapon;
-        private readonly EquipableSetterHelper _helper;
+        
+        public UnitsEntity Owner { get; private set; }
 
-        public BaseUnitItemWeapon()
+        public readonly List<IUnitApplierItem> ApplyWorkers = new List<IUnitApplierItem>();
+
+        public void ApplyTo(UnitsEntity target)
         {
-            _helper = new EquipableSetterHelper(this);
-        }
+            if (Owner != null)
+            {
+                Debug.LogError($"Twice apply buf {Owner.creationIndex}");
+                return;
+            }
 
-        IEnumerable<ICharacterStatModificator> IModificatorProvider.ApplyTempStats()
-        {
-            return GetTemStats();
-        }
-
-        public abstract void ApplyPermanentStatMods();
-
-
-
-        protected abstract IEnumerable<ICharacterStatModificator> GetTemStats();
-
-
-        public virtual void ApplyTo(UnitsEntity owner)
-        {
-            _helper.ApplyTo(owner);
+            Owner = target;
+            ApplyWorkers.ForEach(e=>e.RemoveFrom(target));
         }
 
         public void RemoveFrom(UnitsEntity owner)
         {
-            _helper.RemoveFrom(owner);
+            if (Owner != owner)
+            {
+                Debug.LogError($"Current target {Owner.creationIndex} but remove from {owner.creationIndex}");
+                return;
+            }
+            ApplyWorkers.ForEach(e=>e.RemoveFrom(owner));
         }
+        
+      
+     
+
+
+
+    
     }
 }

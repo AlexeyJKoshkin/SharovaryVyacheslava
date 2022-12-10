@@ -8,23 +8,35 @@
 //------------------------------------------------------------------------------
 public static class SkillComponentsLookup {
 
-    public const int DefaultPlayerSkill = 0;
-    public const int DoubleAxe = 1;
-    public const int GunnerMobSkill = 2;
-    public const int MovingToPoint = 3;
-    public const int PriceUseSkill = 4;
-    public const int RestoreAttemptsTimer = 5;
-    public const int SkillReady = 6;
-    public const int SkillUse = 7;
-    public const int TripleAxe = 8;
-    public const int UseCounterSkill = 9;
-    public const int UseCounterSkillListener = 10;
+    public const int BuffApplier = 0;
+    public const int BuffBehaviour = 1;
+    public const int BuffOwner = 2;
+    public const int BuffTarget = 3;
+    public const int DefaultPlayerSkill = 4;
+    public const int DoubleAxe = 5;
+    public const int ElementalDamageBuf = 6;
+    public const int FreezeBuff = 7;
+    public const int GunnerMobSkill = 8;
+    public const int MovingToPoint = 9;
+    public const int PriceUseSkill = 10;
+    public const int RestoreAttemptsTimer = 11;
+    public const int SkillReady = 12;
+    public const int SkillUse = 13;
+    public const int TripleAxe = 14;
+    public const int UseCounterSkill = 15;
+    public const int UseCounterSkillListener = 16;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
+        "BuffApplier",
+        "BuffBehaviour",
+        "BuffOwner",
+        "BuffTarget",
         "DefaultPlayerSkill",
         "DoubleAxe",
+        "ElementalDamageBuf",
+        "FreezeBuff",
         "GunnerMobSkill",
         "MovingToPoint",
         "PriceUseSkill",
@@ -37,8 +49,14 @@ public static class SkillComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(RoyalAxe.GameEntitas.BuffApplierComponent),
+        typeof(RoyalAxe.GameEntitas.BuffBehaviourComponent),
+        typeof(RoyalAxe.GameEntitas.BuffOwnerComponent),
+        typeof(RoyalAxe.GameEntitas.BuffTargetComponent),
         typeof(RoyalAxe.GameEntitas.DefaultPlayerSkillComponent),
         typeof(RoyalAxe.GameEntitas.DoubleAxeComponent),
+        typeof(RoyalAxe.GameEntitas.ElementalDamageBufComponent),
+        typeof(RoyalAxe.GameEntitas.FreezeBuffComponent),
         typeof(RoyalAxe.GameEntitas.GunnerMobSkillComponent),
         typeof(RoyalAxe.GameEntitas.MovingToPointComponent),
         typeof(RoyalAxe.GameEntitas.PriceUseSkillComponent),

@@ -1,5 +1,5 @@
 ﻿using Entitas;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe.EntitasSystems.TimerUtility
 {

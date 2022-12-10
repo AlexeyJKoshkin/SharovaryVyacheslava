@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public class DefaultPlayerSkillSettings : SkillsSettings
     {

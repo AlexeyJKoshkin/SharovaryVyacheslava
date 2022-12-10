@@ -3,25 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Parser;
 using Newtonsoft.Json;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 
 namespace RoyalAxe
 {
-
-
-
     [Serializable]
-
-
     /// <summary>
     /// Пачка урона одной сущности   (весь урон от оружия, бафов другое.)
     /// </summary>
     public class InfluenceApplierComposite
     {
-        private Dictionary<DamageType, float> _singleDamage = new Dictionary<DamageType, float>();
+        class DamageValue
+        {
+            public float Damage 
+            {
+                get => -_defaultDamage;
+                set { _defaultDamage = Math.Max(0, value);}
+            }
+            public float CritDamage
+            {
+                get => -_criticalDamage;
+                set { _criticalDamage = Math.Max(0, value);}
+            }
+
+            private float _criticalDamage, _defaultDamage;
+        }
+        
+        private Dictionary<DamageType, DamageValue> _singleDamage = new Dictionary<DamageType, DamageValue>();
         private IUnitsInfluenceCalculator _influenceCalculator;
         public readonly List<IPeriodicInfluenceApplier> PeriodicDamage = new List<IPeriodicInfluenceApplier>();
-       
+
+        private readonly List<HitDamageInfo> _cashedDamage = new List<HitDamageInfo>();
+
 
         public InfluenceApplierComposite(IUnitsInfluenceCalculator singleDamageOperation)
         {
@@ -29,48 +42,75 @@ namespace RoyalAxe
         }
 
         //где-то дергается метод - атакующий пиздит цель
-        public void Apply(UnitsEntity attacker, UnitsEntity target)
+        public IReadOnlyList<HitDamageInfo> Apply(UnitsEntity attacker, UnitsEntity target)
         {
             bool triggerAnimation = false;
-            
+            _cashedDamage.Clear();
+
+            bool isCrit = false; // todo разобраться с критом
+
             foreach (var data in _singleDamage)
             {
-                var damageInfo = _influenceCalculator.ApplySingleDamage(attacker, target,new SingleDamageInfo(){DamageType = data.Key, Value = data.Value});
-                
-                if (!triggerAnimation && damageInfo.HitValue > 0) 
+                var damage = data.Value;
+                var damageInfo = new SingleDamageInfo()
+                {
+                    DamageType = data.Key,
+                    Value      = isCrit ? damage.Damage : damage.Damage +data.Value.CritDamage
+                };
+                var hitInfo = new HitDamageInfo
+                {
+                    HitValue = _influenceCalculator.ApplySingleDamage(attacker, target, damageInfo),
+                    IsCritical = isCrit,
+                    DamageType = data.Key
+                };
+
+
+                if (!triggerAnimation && hitInfo.HitValue > 0)
                 {
                     //анимация уроная должна дергаться если урон действительно вызывается
                     target.unitAnimationEntity.AnimationEntity.isHitTrigger = true;
-                    triggerAnimation = true;
+                    triggerAnimation                                        = true;
                 }
+
+                hitInfo.IsCritical = isCrit;
+                _cashedDamage.Add(hitInfo);
             }
 
             for (int i = 0; i < PeriodicDamage.Count; i++)
             {
                 PeriodicDamage[i].Apply(attacker, target);
             }
+
+            return _cashedDamage;
         }
 
         public void IncreaseDamage(DamageType type, float settingsValue)
         {
-            if (_singleDamage.ContainsKey(type))
-            {
-                _singleDamage[type] += settingsValue;
-            }
-            else
-            {
-                _singleDamage[type] = settingsValue;
-            }
+            Get(type).Damage += settingsValue;
         }
         
+        public void IncreaseCriticalDamage(DamageType type, float settingsValue)
+        {
+            Get(type).CritDamage += settingsValue;
+        }
 
 
         public float GetSingleValue(DamageType physical)
         {
             float result = 0;
             if (_singleDamage.TryGetValue(physical, out var operation))
-                result = operation;
+                result = operation.Damage;
             return result;
+        }
+
+        DamageValue Get(DamageType type)
+        {
+            DamageValue damage;
+            if (_singleDamage.TryGetValue(type, out damage))
+                return damage;
+            damage = new DamageValue();
+            _singleDamage.Add(type, damage);
+            return damage;
         }
     }
 }

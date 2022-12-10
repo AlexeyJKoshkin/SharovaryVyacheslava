@@ -1,6 +1,6 @@
 using System;
 using Entitas.VisualDebugging.Unity.Editor;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using UnityEditor;
 
 namespace RoyalAxe.EntitasSystems.EditorDrawers

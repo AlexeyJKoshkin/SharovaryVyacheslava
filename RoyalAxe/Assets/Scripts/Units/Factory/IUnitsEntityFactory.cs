@@ -8,7 +8,6 @@ namespace RoyalAxe.GameEntitas
 
         UnitsEntity CreateEnemyMobBoson(UnitsEntity owner);
         UnitsEntity CreatePlayerBoson(UnitsEntity owner);
-        //UnitsEntity CreatePlayer(HeroProgressData characterConfigUniqueId, WeaponProgressData selectedWeapon);
         UnitsEntity CreatePlayer(UnitBlueprint unitBlueprint);
         UnitsEntity CreateWizardUnit();
     }

@@ -1,6 +1,6 @@
 using Core.Data.Provider;
 using GameKit;
-using RoyalAxe.CharacterStat;
+using RoyalAxe.Units.Stats;
 using UnityEngine;
 
 namespace RoyalAxe.Configs

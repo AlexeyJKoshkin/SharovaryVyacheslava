@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     public interface IUnitsInfluenceCalculator
     {
@@ -10,17 +10,32 @@ namespace RoyalAxe.CharacterStat
         IDamageApplyOperation Poison { get; }
         IDamageApplyOperation Blood { get; }
         IDamageApplyOperation GetBy(DamageType damageType);
-        HitDamageInfo ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data);
-        HitDamageInfo ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data);
+        float ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data);
+        float ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data);
     }
 
     public class UnitsInfluenceCalculator : IUnitsInfluenceCalculator
     {
-        public IDamageApplyOperation Physic { get; private set; } = new UniversalDamageCalculation(UnitsComponentsLookup.PhysicalDamageStat);
-        public IDamageApplyOperation Fire { get; private set; } = new UniversalDamageCalculation(UnitsComponentsLookup.FireDamageStat);
-        public IDamageApplyOperation Cold { get; private set; } = new UniversalDamageCalculation(UnitsComponentsLookup.ColdDamageStat);
-        public IDamageApplyOperation Poison { get; private set; } = new UniversalDamageCalculation(UnitsComponentsLookup.PoisonDamageStat);
-        public IDamageApplyOperation Blood { get; private set; } = new UniversalDamageCalculation(UnitsComponentsLookup.BloodDamageStat);
+        public IDamageApplyOperation Physic { get; private set; } = new UniversalDamageCalculation()
+        {
+            PowerDamageOperation = new PowerDamageOperation(UnitsComponentsLookup.PhysicalDamageStat)
+        };
+        public IDamageApplyOperation Fire { get; private set; } = new UniversalDamageCalculation()
+        {
+            PowerDamageOperation = new PowerDamageOperation(UnitsComponentsLookup.FireDamageStat)
+        };
+        public IDamageApplyOperation Cold { get; private set; } = new UniversalDamageCalculation()
+        {
+            PowerDamageOperation = new PowerDamageOperation(UnitsComponentsLookup.ColdDamageStat)
+        };
+        public IDamageApplyOperation Poison { get; private set; } = new UniversalDamageCalculation()
+        {
+            PowerDamageOperation = new PowerDamageOperation(UnitsComponentsLookup.PoisonDamageStat)
+        };
+        public IDamageApplyOperation Blood { get; private set; } = new UniversalDamageCalculation()
+        {
+            PowerDamageOperation = new PowerDamageOperation(UnitsComponentsLookup.BloodDamageStat)
+        };
 
         public IDamageApplyOperation GetBy(DamageType damageType)
         {
@@ -33,21 +48,19 @@ namespace RoyalAxe.CharacterStat
                 default:                  throw new ArgumentOutOfRangeException(nameof(damageType), damageType, null);
             }
         }
-        
-        
-        public HitDamageInfo ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data)
+
+
+        public float ApplySingleDamage(UnitsEntity attacker, UnitsEntity target, SingleDamageInfo data)
         {
             var calculator = this.GetBy(data.DamageType);
-            var damage     = calculator.PowerDamage(attacker, data.Value);
-            return  calculator.ApplyTo(target,damage);
+            return calculator.ApplyDamage(attacker, target, data.Value);
         }
-        
-        public HitDamageInfo ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data) // елементальный урон от времени не усиливаем
+
+        public float ApplyElementalTimingDamage(UnitsEntity target, SingleDamageInfo data) // елементальный урон от времени не усиливаем
         {
             //получаем калькулятор расчета урона                    // просто применяем урон.
-            // Урон не может быть усилен/быть критом. возможно только уменьшение урона
             var calculator = this.GetBy(data.DamageType);
-            return calculator.ApplyTo(target,data.Value);
+            return calculator.ApplyDamage(target, data.Value);
         }
     }
 }

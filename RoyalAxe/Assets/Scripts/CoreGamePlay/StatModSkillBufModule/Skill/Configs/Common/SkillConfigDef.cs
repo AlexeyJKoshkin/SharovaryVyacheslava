@@ -5,7 +5,7 @@ using Core.Parser;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace RoyalAxe.CharacterStat
+namespace RoyalAxe.Units.Stats
 {
     [Serializable]
     public struct SingleDamageInfo
@@ -14,7 +14,6 @@ namespace RoyalAxe.CharacterStat
         public float Value;
         [JsonProperty("tm"), ColumnName("Type_magic")]
         public DamageType DamageType;
-
     }
     
     [Serializable]
@@ -46,7 +45,6 @@ namespace RoyalAxe.CharacterStat
             return (new Damage(), new RangeParams());
         }
 
-      
         
         [Serializable]
         public class Damage
@@ -60,7 +58,6 @@ namespace RoyalAxe.CharacterStat
             
             [JsonProperty("pd"), ColumnName("Physic_damage")]
             public float PhysicalDamage;
-
           
             //Длительность елементального воздействия
             [JsonProperty("mc"), ColumnName("Cooldown_magic")]
@@ -71,7 +68,10 @@ namespace RoyalAxe.CharacterStat
             /// </summary>
             [JsonProperty("CRA"), ColumnName("Cooldown_range_attack")]
             public float DamageCooldown;
-        
+
+            public float CriticalChance;
+            public float CriticalDamage;
+
         }
 
         [Serializable]

@@ -1,4 +1,4 @@
-﻿using RoyalAxe.CharacterStat;
+﻿using RoyalAxe.Units.Stats;
 using UnityEngine;
 
 namespace RoyalAxe.EntitasSystems

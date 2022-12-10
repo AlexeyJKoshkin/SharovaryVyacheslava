@@ -1,10 +1,16 @@
-﻿namespace RoyalAxe.GameEntitas
+﻿using RoyalAxe.Units.Stats;
+
+namespace RoyalAxe.GameEntitas
 {
     public interface ISkillFactory
     {
-        void EquipMobWeapon(UnitsEntity unit, SkillBlueprint skillBlueprint);
+        SkillEntity CreateRangeSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity owner);
+        SkillEntity CreateWeaponSkill(SkillConfigDef.RangeParams rangeParams, UnitsEntity unit);
+    }
 
-        void CreateTestPlayerSkill(UnitsEntity player, SkillBlueprint skillBlueprint);
-        void CreateMeleeAttackSkill(UnitsEntity boson, UnitsEntity owner);
+    public interface IBuffFactory
+    {
+        SkillEntity CreateElementalBuff(UnitsEntity attacker, SkillConfigDef.Damage damage);
+        SkillEntity BuildFreezeUnitBuf(UnitsEntity caster,float settingsDecelerationPercent);
     }
 }

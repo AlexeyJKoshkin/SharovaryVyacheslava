@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IHealthListener {
-    void OnHealth(UnitsEntity entity, RoyalAxe.CharacterStat.CharacterStatValue unitStatValue);
+    void OnHealth(UnitsEntity entity, RoyalAxe.Units.Stats.CharacterStatValue unitStatValue);
 }
