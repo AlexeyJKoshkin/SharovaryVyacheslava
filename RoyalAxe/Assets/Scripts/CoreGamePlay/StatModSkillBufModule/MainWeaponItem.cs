@@ -61,7 +61,7 @@ namespace RoyalAxe.GameEntitas
 
         void IncreaseSimpleDamage(SkillConfigDef.Damage damage, int sign)
         {
-            this.IncreaseDamage(DamageType.Physical, -damage.PhysicalDamage);
+            this.IncreaseDamage(DamageType.Physical, damage.PhysicalDamage * sign);
             if (damage.ElementalDamage > 0 && damage.DamageCooldown <= 0) // есть одномоментный магический урон
             {
                 IncreaseDamage(damage.ElementalDamageType,damage.ElementalDamage*sign);

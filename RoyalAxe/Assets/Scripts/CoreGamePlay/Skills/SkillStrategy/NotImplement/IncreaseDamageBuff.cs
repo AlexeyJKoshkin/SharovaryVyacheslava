@@ -21,14 +21,14 @@ namespace RoyalAxe.LevelSkill
             //либо увеличиваем физ дамаг в способности
           
             var damageComponent = Player.mainDamage;
-            damageComponent.IncreaseDamage(DamageType.Physical, Settings.Value);
+            damageComponent.Influence.IncreaseDamage(DamageType.Physical, Settings.Value);
 
         }
 
         public override void DoLevelPowerDeActivate()
         {
             var damageComponent = Player.mainDamage;
-            damageComponent.IncreaseDamage(DamageType.Physical, -Settings.Value);
+            damageComponent.Influence.IncreaseDamage(DamageType.Physical, -Settings.Value);
         }
     }
 }

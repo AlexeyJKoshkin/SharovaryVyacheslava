@@ -4,6 +4,7 @@ using System.Linq;
 using Core.Parser;
 using Newtonsoft.Json;
 using RoyalAxe.Units.Stats;
+using UnityEngine;
 
 namespace RoyalAxe
 {
@@ -17,16 +18,21 @@ namespace RoyalAxe
         {
             public float Damage 
             {
-                get => -_defaultDamage;
-                set { _defaultDamage = Math.Max(0, value);}
+                get => _defaultDamage;
+                set => _defaultDamage = Math.Max(0, value);
             }
             public float CritDamage
             {
-                get => -_criticalDamage;
-                set { _criticalDamage = Math.Max(0, value);}
+                get => _criticalDamage;
+                set => _criticalDamage = Math.Max(0, value);
             }
 
             private float _criticalDamage, _defaultDamage;
+
+            public override string ToString()
+            {
+                return $"{_defaultDamage} - {_criticalDamage}";
+            }
         }
         
         private Dictionary<DamageType, DamageValue> _singleDamage = new Dictionary<DamageType, DamageValue>();
@@ -87,6 +93,8 @@ namespace RoyalAxe
         public void IncreaseDamage(DamageType type, float settingsValue)
         {
             Get(type).Damage += settingsValue;
+            
+            Debug.LogError(Get(type));
         }
         
         public void IncreaseCriticalDamage(DamageType type, float settingsValue)

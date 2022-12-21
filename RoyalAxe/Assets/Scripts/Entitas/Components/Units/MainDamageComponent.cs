@@ -11,11 +11,7 @@ namespace RoyalAxe.GameEntitas
     {
         public IUnitMainItem Influence;
      
-        public void IncreaseDamage(DamageType type, float value)
-        {
-            Influence.IncreaseDamage(type, value);
-        }
-
+    
         
 
         public float GetSingleValue(DamageType physical)

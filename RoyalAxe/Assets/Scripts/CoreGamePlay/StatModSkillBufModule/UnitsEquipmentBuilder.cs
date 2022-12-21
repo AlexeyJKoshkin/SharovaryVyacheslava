@@ -1,6 +1,7 @@
 using RoyalAxe.GameEntitas;
 
-namespace RoyalAxe.Units.Stats {
+namespace RoyalAxe.Units.Stats 
+{
     public class UnitsEquipmentBuilder : IUnitsEquipmentBuilder
     {
         private readonly ISkillFactory _skillFactory;
