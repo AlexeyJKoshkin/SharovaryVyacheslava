@@ -93,8 +93,6 @@ namespace RoyalAxe
         public void IncreaseDamage(DamageType type, float settingsValue)
         {
             Get(type).Damage += settingsValue;
-            
-            Debug.LogError(Get(type));
         }
         
         public void IncreaseCriticalDamage(DamageType type, float settingsValue)

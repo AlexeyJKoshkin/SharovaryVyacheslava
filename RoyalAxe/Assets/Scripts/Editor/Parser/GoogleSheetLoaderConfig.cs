@@ -35,22 +35,24 @@ namespace Core.EditorCore.Parser
         [SerializeField] private List<UpdatePages> _pages;
 
         [Button, EnableIf("_sheetId", "")]
-        private void ShowUpdateWindow() { UpdateConfigFromGoogleSheetWindow.Open(this); }
+        private void ShowUpdateWindow()
+        {
+            UpdateConfigFromGoogleSheetWindow.Open(this);
+        }
 
 
         public void HandleGetNewPages(IEnumerable<string> availablePages)
         {
             var pagesFrom = availablePages.ToList();
-            foreach (var data in _pages)
-                if (!pagesFrom.Contains(data.PageName))
-                {
-                    data.FolderState = data.FolderState.SetFlag(FolderState.Missed).UnsetFlag(FolderState.New);
-                }
-                else
-                {
-                    data.FolderState = data.FolderState.UnsetFlag(FolderState.New);
-                    pagesFrom.Remove(data.PageName); // удаляем папку из списка
-                }
+            foreach (var savedPageData in _pages) // обходим текущие папки
+            {
+                savedPageData.FolderState = savedPageData.FolderState.UnsetFlag(FolderState.Missed);
+
+                savedPageData.FolderState = pagesFrom.Contains(savedPageData.PageName) // если страница есть
+                    ? savedPageData.FolderState.UnsetFlag(FolderState.New)             
+                    : savedPageData.FolderState.SetFlag(FolderState.Missed);           
+                pagesFrom.Remove(savedPageData.PageName);                              // удаляем папку из списка
+            }
 
             // итого у нас остались только новые
 
@@ -61,7 +63,7 @@ namespace Core.EditorCore.Parser
         public void UpdateNewCellData(GoogleSheetGameData[] result)
         {
             if (_configUpdater == null) return;
-           
+
 
             try
             {

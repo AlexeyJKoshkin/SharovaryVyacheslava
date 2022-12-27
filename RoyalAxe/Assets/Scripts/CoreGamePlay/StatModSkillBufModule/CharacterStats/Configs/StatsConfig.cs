@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace RoyalAxe.Configs
 {
+    [Serializable]
     public class StatsConfig
     {
         [ColumnName("Health"), JsonProperty("he")]

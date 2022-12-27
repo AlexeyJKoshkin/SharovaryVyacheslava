@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnableCheats: 1
   EnableRender: 1
-  StartCustomLevel: 0
+  StartCustomLevel: 1
   LevelParams:
-    Biome: 0
-    LevelNumber: 0
+    Biome: 1
+    LevelNumber: 1

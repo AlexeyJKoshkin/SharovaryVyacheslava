@@ -20,8 +20,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             for (int i = 0; i < page.Cells.Count; i++)
             {
                 var lvlCells = page.Cells[i]; // тут содержится инфа об уровне оружия
-                var item     = new StatsConfig();
-                parser.UpdateObject(lvlCells, item);
+                var item =  parser.UpdateObject(lvlCells, new StatsConfig()) as StatsConfig;
                 result.Stats.Add(item);
             }
 

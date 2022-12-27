@@ -17,13 +17,13 @@ MonoBehaviour:
     id: 0
   _pages:
   - PageName: Swordsman_1
-    FolderState: 10
+    FolderState: 8
   - PageName: Swordsman_2
-    FolderState: 10
+    FolderState: 8
   - PageName: Swordsman_3
-    FolderState: 10
+    FolderState: 8
   - PageName: Gunslinger_1
-    FolderState: 10
+    FolderState: 8
   - PageName: Help
     FolderState: 4
   references:
