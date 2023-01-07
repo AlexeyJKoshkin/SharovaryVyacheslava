@@ -3,10 +3,11 @@ using Entitas;
 using RoyalAxe.Units;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoyalAxe
 {
-    public class CoreGameSceneUIView : MonoBehaviour, IEarnedExperienceListener, IUseCounterSkillListener, IEarnedGoldListener, IViewEntityBehaviour, ICurrentLevelInfoListener
+    public class CoreGameSceneUIView : UIViewComponent, IEarnedExperienceListener, IUseCounterSkillListener, IEarnedGoldListener, IViewEntityBehaviour, ICurrentLevelInfoListener
     {
         [SerializeField]
         private TextMeshProUGUI _expaText;
@@ -15,6 +16,9 @@ namespace RoyalAxe
         [SerializeField] private TextMeshProUGUI _axeCounterText;
         [SerializeField]
         private TextMeshProUGUI _levelNumberText;
+
+        [SerializeField]
+        public Button PauseBtn;
 
         public void OnUseCounterSkill(SkillEntity entity, int currentValue, int maxValue)
         {
@@ -34,8 +38,7 @@ namespace RoyalAxe
         {
             _levelNumberText.text = $"Level: {level.LevelNumber}";
         }
-        
-        
+
 
         public void InitEntity(IEntity entity)
         {
@@ -63,7 +66,6 @@ namespace RoyalAxe
                 OnUseCounterSkill(skill, skill.useCounterSkill.CurrentValue, skill.useCounterSkill.MaxValue);
             }
         }
-
 
      
     }

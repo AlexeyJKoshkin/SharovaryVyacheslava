@@ -66,7 +66,7 @@ namespace RoyalAxe
                 };
 
 
-                if (!triggerAnimation && hitInfo.HitValue > 0)
+                if (!triggerAnimation && hitInfo.HitValue < 0)
                 {
                     //анимация уроная должна дергаться если урон действительно вызывается
                     target.unitAnimationEntity.AnimationEntity.isHitTrigger = true;

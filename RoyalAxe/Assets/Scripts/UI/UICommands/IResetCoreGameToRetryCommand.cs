@@ -4,7 +4,7 @@ using GameKit;
 using RoyalAxe.Units.Stats;
 using RoyalAxe.GameEntitas;
 
-namespace RoyalAxe.CoreLevel
+namespace RoyalAxe.UI
 {
     public interface IResetCoreGameToRetryCommand
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.UI
 {
     public interface IPrepareGameUICommand
     {

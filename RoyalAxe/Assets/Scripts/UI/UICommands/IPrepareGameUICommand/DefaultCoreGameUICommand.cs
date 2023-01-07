@@ -1,5 +1,8 @@
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.UI
 {
+    /// <summary>
+    /// Подготовка UI кор-сцены
+    /// </summary>
     public class DefaultCoreGameUIPrepareCommand : IPrepareGameUICommand
     {
         private readonly CoreGameSceneUIView _coreGameSceneUiView;

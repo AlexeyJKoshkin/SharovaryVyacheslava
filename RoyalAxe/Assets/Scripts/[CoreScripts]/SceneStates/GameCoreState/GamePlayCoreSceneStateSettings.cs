@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.EntitasSystems;
+using RoyalAxe.UI;
 
 namespace Core.Launcher
 {
@@ -23,7 +24,6 @@ namespace Core.Launcher
         public override IEnumerable<FeatureBindInfo> AlwaysUpdate()
         {
             return _alwaysUpdate;
-            
         }
 
         public override IEnumerable<FeatureBindInfo> PauseableUpdate()
@@ -42,17 +42,17 @@ namespace Core.Launcher
         {
             _pauseAble = new List<FeatureBindInfo>
             {
-               new UnitsFeatureBindInfo(),
+                new UnitsFeatureBindInfo(),
                 CleaningSystems(),
                 GeneralCoreGameSystems()
             };
 
             _alwaysUpdate = new List<FeatureBindInfo>()
             {
-             
+                FeatureBindInfo.Create("UI")
+                               .Bind<UICommandExecuteSystem>()
             };
         }
-        
 
 
         private FeatureBindInfo GeneralCoreGameSystems()
@@ -62,18 +62,14 @@ namespace Core.Launcher
                                   .Bind<LevelExperienceSystem>()
                                   .Bind<SaveTempProgressEachLevel>()
                                   .Bind<SaveUserProgressEvery10Level>();
-
-
         }
 
         private FeatureBindInfo CleaningSystems()
         {
             return FeatureBindInfo.Create("Завершающие системы",
                                           typeof(DropSkillsTimerSystem),          // Сбрасываем таймер на скилах
-                                    
                                           typeof(ClearTargetsSystem),             // очистка списка целей  
                                           typeof(ClearPhysicalInteractionSystem), // очистка взаимодействией
-                                    
                                           typeof(HealthEventSystem),              // обновение система слежения здоровья по юнитам
                                           typeof(HandlePlayerDeadSystem),         // проверяем помер ли игрок
                                           typeof(CheckMobDeadSystem),             // проверяем померли мобы

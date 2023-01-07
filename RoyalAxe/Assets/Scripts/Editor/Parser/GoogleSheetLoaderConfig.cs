@@ -64,7 +64,6 @@ namespace Core.EditorCore.Parser
         {
             if (_configUpdater == null) return;
 
-
             try
             {
                 _configUpdater.ParseSheetData(result);

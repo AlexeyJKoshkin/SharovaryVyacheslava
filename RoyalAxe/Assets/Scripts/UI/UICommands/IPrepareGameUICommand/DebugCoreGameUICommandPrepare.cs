@@ -1,6 +1,6 @@
 using RoyalAxe.LevelSkill;
 
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.UI
 {
     public class DebugCoreGameUICommandPrepare : IPrepareGameUICommand
     {

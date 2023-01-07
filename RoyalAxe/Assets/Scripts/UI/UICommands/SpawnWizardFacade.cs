@@ -1,41 +1,37 @@
 ﻿using System;
 using Core.Data.Provider;
+using FluentBehaviourTree;
 using RoyalAxe.EntitasSystems;
 using RoyalAxe.GameEntitas;
 using RoyalAxe.Units;
 using UnityEngine;
+using VContainer.Unity;
 using Object = UnityEngine.Object;
 
-namespace RoyalAxe.CoreLevel
+namespace RoyalAxe.UI
 {
     public class SpawnWizardFacade : IWizardAtLevelFacade
     {
         private readonly IUnitsBuilderFacade _wizardViewBuilder;
-
-        private readonly IShowSelectBuffWindowCommand _selectBuffWindowCommand;
+        private readonly  IUIScenarioExecutor _selectBuffWindowCommand;
 
         private readonly IUnitColliderDataBase _unitColliderDataBase;
 
         private UnitsEntity _wizard;
 
-        private Action _callback;
+
 
         public SpawnWizardFacade(IUnitsBuilderFacade wizardViewBuilder,
                                  IUnitColliderDataBase unitColliderDataBase,
-                                 IShowSelectBuffWindowCommand selectBuffScenario)
+                                 IUIScenarioExecutor selectBuffScenario)
         {
             _wizardViewBuilder    = wizardViewBuilder;
             _unitColliderDataBase = unitColliderDataBase;
             _selectBuffWindowCommand = selectBuffScenario;
         }
 
-        public void SpawnWizard(Action onDoneCallback)
+        public void SpawnWizard()
         {
-            //получаем объект для спавна
-            //инстанциируем его в мир
-            // подписываемся
-            _callback = onDoneCallback;
-            
             _wizard = _wizardViewBuilder.CreateWizardShowUnit();
             _wizard.unitsView.Get<WizardShopUnitView>().OnEnterTriggerEvent += WizardOnOnEnterTriggerEvent;
         }
@@ -47,14 +43,8 @@ namespace RoyalAxe.CoreLevel
             if (unit.isPlayer)
             {
                 _wizard.isDestroyUnit = true;
-                _selectBuffWindowCommand.ExecuteCommand(OnDoneHandler);
+                _selectBuffWindowCommand.ExecuteSelectBufUIScenario();
             }
-        }
-
-        private void OnDoneHandler(bool isSuccess)
-        {
-            if(isSuccess)
-                _callback?.Invoke();
         }
     }
 }

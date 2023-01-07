@@ -1,49 +1,52 @@
 using System;
 using Core.Installers;
 using Core.Launcher;
+using FluentBehaviourTree;
+using RoyalAxe.CoreLevel;
 
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.UI
 {
-    public interface ILoseLevelUICommand : IUICommand
-    {
-    }
+ 
 
-    public class LoseLevelUICommand : ILoseLevelUICommand
+    public class LoseLevelUIScenario : UIScenario<LoseWindowView>
     {
-        private UIHandler _handler;
-        private readonly LoseWindowView _loseWindowView;
-        private IRoyalAxePauseSystemSwitcher _pauseSystemSwitcher;
+        private readonly IRoyalAxePauseSystemSwitcher _pauseSystemSwitcher;
         private readonly IStopCoreGameLogicCommand _stopCoreGameLogicCommand;
         private readonly ICoreGameHandlerAdapter _coreGameHandlerAdapter;
         private readonly IResetCoreGameToRetryCommand _resetCoreGame;
-        public LoseLevelUICommand(LoseWindowView loseWindowView,
+        public LoseLevelUIScenario(LoseWindowView loseWindowView,
                                   IStopCoreGameLogicCommand stopCoreGameLogicCommand,
-                                  ICoreGameHandlerAdapter coreGameHandlerAdapter, IResetCoreGameToRetryCommand resetCoreGame, IRoyalAxePauseSystemSwitcher pauseSystemSwitcher)
+                                  ICoreGameHandlerAdapter coreGameHandlerAdapter,
+                                  IResetCoreGameToRetryCommand resetCoreGame,
+                                  IRoyalAxePauseSystemSwitcher pauseSystemSwitcher)
         {
-            _loseWindowView = loseWindowView;
             _stopCoreGameLogicCommand = stopCoreGameLogicCommand;
             _coreGameHandlerAdapter = coreGameHandlerAdapter;
             _resetCoreGame = resetCoreGame;
             _pauseSystemSwitcher = pauseSystemSwitcher;
-            _loseWindowView.LoadMetaBtn.onClick.AddListener(LoadMetaScene);
-            _loseWindowView.RetryBtn.onClick.AddListener(RetryHandler);
-            _loseWindowView.Open();
+            InitView(loseWindowView);
         }
-        
-        public void ExecuteCommand(Action<bool> onDoneExecuteCommand = null)
+
+        public override void InitView(LoseWindowView view)
         {
-            _handler = new UIHandler(onDoneExecuteCommand);
-            _stopCoreGameLogicCommand.StopGameLogic();
-            _loseWindowView.Open();
+            base.InitView(view);
+            view.LoadMetaBtn.onClick.AddListener(LoadMetaScene);
+            view.RetryBtn.onClick.AddListener(RetryHandler);
         }
+
+        public override void EnterState()
+        {
+            _stopCoreGameLogicCommand.StopGameLogic();
+            View.Open();
+        }
+
 
         private void RetryHandler()
         {
             ClearWindowHandlers();
             _resetCoreGame.RestartGameAfterPlayerDearth();
             _pauseSystemSwitcher.UnPause();
-            _loseWindowView.Close();
-            _handler.FireCallback(true);
+            View.Close();
         }
         
         private void LoadMetaScene()
@@ -51,13 +54,12 @@ namespace RoyalAxe.CoreLevel
             ClearWindowHandlers();
         
             _coreGameHandlerAdapter.LoadMetaScene();
-            _handler.FireCallback(true);
         }
 
         private void ClearWindowHandlers()
         {
-            _loseWindowView.LoadMetaBtn.onClick.RemoveAllListeners();
-            _loseWindowView.RetryBtn.onClick.RemoveAllListeners();
+            View.LoadMetaBtn.onClick.RemoveAllListeners();
+            View.RetryBtn.onClick.RemoveAllListeners();
         }
     }
 }

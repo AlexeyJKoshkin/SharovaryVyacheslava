@@ -1,7 +1,7 @@
-﻿namespace RoyalAxe.CoreLevel
+﻿namespace RoyalAxe.UI
 {
-    public interface ISelectBuffScenario : IWindowScenario
+    public interface ISelectBuffScenario : IUIBehaviour
     {
-        void DoShowExpBuffs();
+     
     }
 }

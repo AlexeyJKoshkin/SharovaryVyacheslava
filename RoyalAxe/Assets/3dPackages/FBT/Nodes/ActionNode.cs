@@ -34,6 +34,16 @@ namespace FluentBehaviourTree
             this.NodeName=name;
             this.fn=fn;
         }
+        
+        public ActionNode(string name, Action singleAction)
+        {
+            this.NodeName = name;
+            this.fn = (t) =>
+                      {
+                          singleAction.Invoke();
+                          return BehaviourTreeStatus.Success;
+                      };
+        }
 
         public sealed override BehaviourTreeStatus Execute(TimeData time)
         {

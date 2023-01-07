@@ -1,6 +1,7 @@
 ﻿using Core.Installers;
+using RoyalAxe.CoreLevel;
 
-namespace RoyalAxe.CoreLevel
+namespace RoyalAxe.UI
 {
     public interface IStopCoreGameLogicCommand
     {

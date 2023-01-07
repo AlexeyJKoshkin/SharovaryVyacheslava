@@ -4,6 +4,7 @@ using RoyalAxe.LevelSkill;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace RoyalAxe 
 {
@@ -20,7 +21,7 @@ namespace RoyalAxe
         {
             foreach (var skill in storage)
             {
-                var go = GameObject.Instantiate(Prefab, Root);
+                var go = Object.Instantiate(Prefab, Root);
                 go.SetActive(true);
                 var buff = new PlayerLevelPowerViewModel(go, skill);
                 _viewModels.Add(buff);
@@ -72,7 +73,6 @@ namespace RoyalAxe
         {
             UnitsEntity unitsEntity;
         }
-
 
     }
 }

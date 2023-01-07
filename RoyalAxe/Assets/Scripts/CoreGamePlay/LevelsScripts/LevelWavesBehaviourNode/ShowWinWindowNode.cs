@@ -1,23 +1,31 @@
 using Core;
 using Entitas;
 using FluentBehaviourTree;
+using RoyalAxe.UI;
 
-namespace RoyalAxe.CoreLevel {
+namespace RoyalAxe.CoreLevel 
+{
+   
+
+
     public class ShowWinWindowNode : SequenceNode
     {
         private readonly IRoyalAxeCoreMap _map;
-        private readonly IWinLevelUICommand _winLevelUiCommand;
+        private readonly IUIScenarioExecutor _winLevelUiCommand;
+        
+    
         private readonly ILevelWaveProvider _levelWaveProvider;
 
         private bool _isWin;
         public ShowWinWindowNode(IRoyalAxeCoreMap map,
                                  CoreGamePlayContext context,
-                                 IWinLevelUICommand winLevelUiCommand,
+                                 IUIScenarioExecutor winLevelUiCommand,
                                  ILevelWaveProvider levelWaveProvider) : base("Проверяем что победили")
         {
             _map               = map;
             _winLevelUiCommand = winLevelUiCommand;
             _levelWaveProvider = levelWaveProvider;
+
 
             /*_levelReadyGroup = context.GetGroup(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayMatcher.WaveFinished)       // волна закончилась
                                                                            .NoneOf(CoreGamePlayMatcher.WaveMobReady,      //мобов нету
@@ -44,7 +52,8 @@ namespace RoyalAxe.CoreLevel {
         private BehaviourTreeStatus WinGameAction(TimeData arg)
         {
             _isWin = true;
-            _winLevelUiCommand.ExecuteCommand();
+            _winLevelUiCommand.ExecuteWinUIScenario();
+            
             return BehaviourTreeStatus.Success;
         }
     }

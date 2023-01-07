@@ -21,7 +21,7 @@ namespace FluentBehaviourTree
         /// <summary>
         /// List of child nodes.
         /// </summary>
-        private List<IBehaviourTreeNode> children = new List<IBehaviourTreeNode>(); //todo: this could be optimized as a baked array.
+        protected readonly List<IBehaviourTreeNode> children = new List<IBehaviourTreeNode>(); //todo: this could be optimized as a baked array.
 
         public SequenceNode(string name)
         {
@@ -49,5 +49,6 @@ namespace FluentBehaviourTree
         {
             children.Add(child);
         }
+
     }
 }

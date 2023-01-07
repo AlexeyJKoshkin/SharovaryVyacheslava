@@ -1,14 +1,11 @@
-using System.Linq;
-using GameKit;
 using RoyalAxe.LevelSkill;
 
-namespace RoyalAxe.CoreLevel
+namespace RoyalAxe.UI
 {
-    public class SelectBuffScenario : WindowScenario<BuffSelectWindowView>, ISelectBuffScenario
+    public class SelectBuffScenario : UIScenario<BuffSelectWindowView>, ISelectBuffScenario
     {
         private ILevelSkill[] _generatedBuffs;
 
-  
         private readonly ICurrentLevelSkillDistributor _currentWaveDistributor;
 
         public SelectBuffScenario(BuffSelectWindowView view, ICurrentLevelSkillDistributor currentWaveDistributor)
@@ -17,7 +14,7 @@ namespace RoyalAxe.CoreLevel
             InitView(view);
         }
 
-        public void DoShowExpBuffs()
+        public override void EnterState()
         {
             _generatedBuffs = _currentWaveDistributor.GenerateSkill();
             InitBuffs();

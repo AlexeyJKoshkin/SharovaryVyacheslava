@@ -1,6 +1,7 @@
 using Core;
 using Core.Launcher;
 using RoyalAxe.CoreLevel;
+using RoyalAxe.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
@@ -28,8 +29,7 @@ namespace RoyalAxe
             Container.RegisterInstance(_levelInfrastructureView).AsSelf();
             
             Container.Register<SpawnWizardFacade>(Lifetime.Singleton).AsImplementedInterfaces();
-            
-            
+            Container.Register<UIScenarioExecutor>(Lifetime.Singleton).AsImplementedInterfaces();
             BindScenarios();
             BindUICommands();
             BindUIViews();
@@ -37,10 +37,8 @@ namespace RoyalAxe
 
         private void BindUICommands()
         {
-            Container.Register<ShowSelectBuffWindowCommand>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<WinLevelCommand>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<StopCoreGameLogicCommand>(Lifetime.Singleton).AsImplementedInterfaces();
-            Container.Register<LoseLevelUICommand>(Lifetime.Singleton).AsImplementedInterfaces();
+            
             
             
             Container.Register<DefaultCoreGameUIPrepareCommand>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -55,8 +53,10 @@ namespace RoyalAxe
         private void BindScenarios()
         {
             Container.Register<SelectBuffScenario>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<ShowSelectBuffWindowCommand>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<WinWindowShowScenario>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<LoseLevelUIScenario>(Lifetime.Singleton).AsImplementedInterfaces();
         }
-
 
         private void BindUIViews()
         {

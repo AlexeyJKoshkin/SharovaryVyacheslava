@@ -1,5 +1,6 @@
 ﻿using Core;
 using FluentBehaviourTree;
+using RoyalAxe.UI;
 
 namespace RoyalAxe.CoreLevel
 {
@@ -33,7 +34,7 @@ namespace RoyalAxe.CoreLevel
 
         private BehaviourTreeStatus SpawnWizard(TimeData arg)
         {
-            _wizardAtLevelFacade.SpawnWizard(()=>HLogger.LogError("Показали волшебника")); 
+            _wizardAtLevelFacade.SpawnWizard(); 
             HLogger.LogError("Спавн волшебника");
             return BehaviourTreeStatus.Success;
         }

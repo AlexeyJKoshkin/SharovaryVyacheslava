@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RoyalAxe.CoreLevel 
+namespace RoyalAxe.UI
 {
     public interface IPrepareGameUICommandComposite : IPrepareGameUICommand
     {

@@ -3,16 +3,17 @@ using Core;
 using Core.Installers;
 using Entitas;
 using RoyalAxe.CoreLevel;
+using RoyalAxe.UI;
 
 namespace RoyalAxe.EntitasSystems 
 {
     public class HandlePlayerDeadSystem : ReactiveSystem<UnitsEntity>
     {
-        private readonly ILoseLevelUICommand _loseLevelUICommand;
+        private readonly IUIScenarioExecutor _loseLevelExecutor;
   
-        public HandlePlayerDeadSystem(IContext<UnitsEntity> context, ILoseLevelUICommand loseLevelUICommand) : base(context)
+        public HandlePlayerDeadSystem(IContext<UnitsEntity> context, IUIScenarioExecutor loseLevelUICommand) : base(context)
         {
-            _loseLevelUICommand = loseLevelUICommand;
+            _loseLevelExecutor = loseLevelUICommand;
 
         }
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
@@ -31,7 +32,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override void Execute(List<UnitsEntity> entities)
         {
-            _loseLevelUICommand.ExecuteCommand();
+            _loseLevelExecutor.ExecuteLoseUIScenario();
         }
     }
 }
