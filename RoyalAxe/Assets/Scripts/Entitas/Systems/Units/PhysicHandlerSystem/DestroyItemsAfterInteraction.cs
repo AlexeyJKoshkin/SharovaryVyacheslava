@@ -17,7 +17,7 @@ namespace RoyalAxe.EntitasSystems
                 DestroyMobBosonAfterInteraction); // Уничтожение мобьих бозонов
             
             Add(UnitsMatcherLibrary.UnitInteractionMatcher(UnitsMatcher.PlayerBoson),
-                DestroyPlayerBoson); // Уничтожение мобьих бозонов
+                DestroyPlayerBoson); // Уничтожение бозонов игрока
 
         }
 
@@ -26,8 +26,8 @@ namespace RoyalAxe.EntitasSystems
         {
             if(playerBoson.enterPhysicInteraction.Count == 0) return;
          
-            //если бозон игрока провзаимодействовал с мобьим бозон - он уничтожается
-            var interactWithOtherBoson = playerBoson.enterPhysicInteraction.Select(o => _unitColliderData.Get(o)).Any(o => o.isMob && o.isBoson);
+            //если бозон игрока провзаимодействовал с мобьим бозон - он НЕ уничтожается
+            var interactWithOtherBoson = playerBoson.enterPhysicInteraction.Select(o => _unitColliderData.Get(o)).Any(o => o.isMob && !o.isBoson);
             playerBoson.isDestroyUnit = interactWithOtherBoson || playerBoson.isAdditionalBoson;
             //   HLogger.TempLog($"{playerBoson.creationIndex} {interactWithOtherBoson} {playerBoson.isAdditionalBoson} { playerBoson.isDestroyUnit}");
         }

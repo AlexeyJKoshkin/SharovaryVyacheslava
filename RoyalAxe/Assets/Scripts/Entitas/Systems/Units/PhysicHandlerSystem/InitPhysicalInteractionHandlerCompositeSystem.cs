@@ -28,19 +28,17 @@ namespace RoyalAxe.EntitasSystems
             }
         }
 
-      
 
         //попали скилом игрока по мобу
         private void HandlePlayerSkill(UnitsEntity skill)
         {
-            var mobInteraction = skill.enterPhysicInteraction.Collection;
-
-            if (mobInteraction.Count > 0)
+            var mobInteraction = skill.enterPhysicInteraction.Collection; // все с чем хочет провзаимодействовать скилл
+            var mobs = mobInteraction.Select(o => _unitColliderData.Get(o)).Where(o => !o.isPlayer && !o.isBoson).ToArray();
+            if (mobs.Length > 0)
             {
                 //Собираем всех мобов
-                var mobs = mobInteraction.Select(o => _unitColliderData.Get(o)).Where(o => !o.isPlayer && !o.isBoson);
-                skill.possibleTargets.Collection.AddRange(mobs);
-                skill.ReplacePossibleTargets(skill.possibleTargets.Collection); // потом обсчитается урон
+                var colldection =  skill.possibleTargets.Add(mobs[0]); // добавляем только одного моба
+                skill.ReplacePossibleTargets(colldection); 
                 skill.ReplaceMovingToPoint(new RichPointAdapter());             // закончили движение
             }
         }
