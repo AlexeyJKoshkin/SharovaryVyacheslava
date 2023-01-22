@@ -28,9 +28,9 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             {
                 LevelSettingsData result = new LevelSettingsData();
                 var levelCells = page.Cells[i];                       // тут содержится инфа об волнах уровня
-                parser.UpdateObject(levelCells, result);              // общий класс
-                parser.UpdateObject(levelCells, result.MobDeathReward); // мобьи награды
-                parser.UpdateObject(levelCells, result.Destiny);        // судьба/магазин
+                result = (LevelSettingsData)  parser.UpdateObject(levelCells, result);              // общий класс
+                /*parser.UpdateObject(levelCells, result.MobDeathReward); // мобьи награды
+                parser.UpdateObject(levelCells, result.Destiny);        // судьба/магазин*/
                 FillMobSpawnData(levelCells, result);
                 yield return result;
             }

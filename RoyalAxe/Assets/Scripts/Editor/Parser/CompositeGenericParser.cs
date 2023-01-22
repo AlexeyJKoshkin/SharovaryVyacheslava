@@ -66,25 +66,30 @@ namespace Core.Parser
 
         public object UpdateObject(List<ICellValue> cells, object data)
         {
-            if (data == null) return null;
-            
-
             return RecursiveUpdate(cells, data);
         }
 
         private object RecursiveUpdate(List<ICellValue> cells,  object data)
         {
+            if (data == null) return null;
             var typeKey = data.GetType();
             if (!CheckCanParse(typeKey)) return data;
             data = _typesParsers[typeKey].UpdateObject(cells, data);
             foreach (var field in Fields(data.GetType()))
             {
-                var value = field.GetValue(data) ?? Activator.CreateInstance(field.FieldType);
+                var value = field.GetValue(data) ?? CreateDefaultValue(field.FieldType);
                 value = RecursiveUpdate(cells, value);
                 field.SetValue(data, value);
             }
 
             return data;
+        }
+
+        private object CreateDefaultValue(Type fieldFieldType)
+        {
+            if (fieldFieldType == typeof(string)) return null;
+            
+            return  Activator.CreateInstance(fieldFieldType);
         }
 
         private bool CheckCanParse(Type typeKey)
