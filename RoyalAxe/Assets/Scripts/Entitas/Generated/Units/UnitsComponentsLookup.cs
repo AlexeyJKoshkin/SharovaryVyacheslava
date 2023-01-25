@@ -26,24 +26,25 @@ public static class UnitsComponentsLookup {
     public const int MobDeathReward = 15;
     public const int MoveSpeed = 16;
     public const int MovingToPoint = 17;
-    public const int OtherDamage = 18;
-    public const int PhysicalDamageStat = 19;
-    public const int PlayerBoson = 20;
-    public const int Player = 21;
-    public const int PoisonDamageStat = 22;
-    public const int PossibleTargets = 23;
-    public const int SpriteRender = 24;
-    public const int UniqueUnitGUID = 25;
-    public const int UnitActiveSkill = 26;
-    public const int UnitAnimationEntity = 27;
-    public const int UnitBehavior = 28;
-    public const int Unit = 29;
-    public const int UnitEquipWeaponData = 30;
-    public const int UnitPhysicCollider = 31;
-    public const int UnitsView = 32;
-    public const int UnitsViewListener = 33;
+    public const int NavMeshAgent = 18;
+    public const int OtherDamage = 19;
+    public const int PhysicalDamageStat = 20;
+    public const int PlayerBoson = 21;
+    public const int Player = 22;
+    public const int PoisonDamageStat = 23;
+    public const int PossibleTargets = 24;
+    public const int SpriteRender = 25;
+    public const int UniqueUnitGUID = 26;
+    public const int UnitActiveSkill = 27;
+    public const int UnitAnimationEntity = 28;
+    public const int UnitBehavior = 29;
+    public const int Unit = 30;
+    public const int UnitEquipWeaponData = 31;
+    public const int UnitPhysicCollider = 32;
+    public const int UnitsView = 33;
+    public const int UnitsViewListener = 34;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 35;
 
     public static readonly string[] componentNames = {
         "HealthListener",
@@ -64,6 +65,7 @@ public static class UnitsComponentsLookup {
         "MobDeathReward",
         "MoveSpeed",
         "MovingToPoint",
+        "NavMeshAgent",
         "OtherDamage",
         "PhysicalDamageStat",
         "PlayerBoson",
@@ -101,6 +103,7 @@ public static class UnitsComponentsLookup {
         typeof(RoyalAxe.GameEntitas.MobDeathRewardComponent),
         typeof(RoyalAxe.GameEntitas.MoveSpeedComponent),
         typeof(RoyalAxe.GameEntitas.MovingToPointComponent),
+        typeof(RoyalAxe.GameEntitas.NavMeshAgentComponent),
         typeof(RoyalAxe.GameEntitas.OtherDamageComponent),
         typeof(RoyalAxe.GameEntitas.PhysicalDamageStatComponent),
         typeof(RoyalAxe.GameEntitas.PlayerBosonComponent),

@@ -15,7 +15,7 @@ namespace RoyalAxe.Units.Stats
         public void EquipMobWeapon(UnitsEntity unit, WeaponBluePrint weaponBluePrint)
         {
             var skb = weaponBluePrint.SkillBlueprint;
-            unit.AddUnitEquipWeaponData(skb.RangeData.MissileSpeed, skb.Id, skb.Level);
+            unit.AddUnitEquipWeaponData( skb.Id, skb.Level,skb.RangeData.MissileSpeed);
             EquipWeaponSkill(unit, weaponBluePrint);
             TryAddDefaultGunnerSkill(skb.RangeData, unit);
         }
@@ -23,7 +23,7 @@ namespace RoyalAxe.Units.Stats
         public void EquipPlayer(UnitsEntity player, WeaponBluePrint mainWeapon)
         {
             var skb = mainWeapon.SkillBlueprint;
-            player.AddUnitEquipWeaponData(skb.RangeData.MissileSpeed, skb.Id, skb.Level);
+            player.AddUnitEquipWeaponData(skb.Id, skb.Level,skb.RangeData.MissileSpeed);
             EquipWeaponSkill(player, mainWeapon);
             _skillFactory.CreateWeaponSkill(skb.RangeData, player).isDefaultPlayerSkill = true;
         }

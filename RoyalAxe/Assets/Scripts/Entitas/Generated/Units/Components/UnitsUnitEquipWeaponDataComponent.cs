@@ -11,23 +11,21 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent unitEquipWeaponData { get { return (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)GetComponent(UnitsComponentsLookup.UnitEquipWeaponData); } }
     public bool hasUnitEquipWeaponData { get { return HasComponent(UnitsComponentsLookup.UnitEquipWeaponData); } }
 
-    public void AddUnitEquipWeaponData(float missileSpeed, string newId, int newLevel) {
+    public void AddUnitEquipWeaponData(string newId, int newLevel, float newMissileSpeed) {
         var index = UnitsComponentsLookup.UnitEquipWeaponData;
         var component = (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent));
-        component.MissileSpeed = missileSpeed;
-      //  component.Range = newRange;
         component.Id = newId;
         component.Level = newLevel;
+        component.MissileSpeed = newMissileSpeed;
         AddComponent(index, component);
     }
 
-    public void ReplaceUnitEquipWeaponData(float missileSpeed, string newId, int newLevel) {
+    public void ReplaceUnitEquipWeaponData(string newId, int newLevel, float newMissileSpeed) {
         var index = UnitsComponentsLookup.UnitEquipWeaponData;
         var component = (RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.UnitEquipWeaponDataComponent));
-        component.MissileSpeed = missileSpeed;
-    //    component.Range = newRange;
         component.Id = newId;
         component.Level = newLevel;
+        component.MissileSpeed = newMissileSpeed;
         ReplaceComponent(index, component);
     }
 

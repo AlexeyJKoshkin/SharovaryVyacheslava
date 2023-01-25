@@ -5,6 +5,7 @@ using Entitas;
 using GameKit;
 using RoyalAxe.GameEntitas;
 using RoyalAxe.Map;
+using RoyalAxe.Units;
 using UnityEngine;
 
 namespace RoyalAxe.CoreLevel
@@ -46,9 +47,9 @@ namespace RoyalAxe.CoreLevel
 
             if (!pos.endPoint.Equals(pos.startPoint))
             {
-                entity.ReplaceMovingToPoint(new SimpleVector2Adapter(pos.endPoint));
+                if(entity.hasNavMeshAgent)
+                    entity.navMeshAgent.SetDestinationPoint(pos.endPoint);
             }
-
             entity.AddMobDeathReward(mobReward.Expa, mobReward.Gold, mobReward.Gems);
         }
     }

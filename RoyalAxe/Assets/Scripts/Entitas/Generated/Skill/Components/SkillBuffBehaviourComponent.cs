@@ -6,24 +6,22 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using FluentBehaviourTree;
-using RoyalAxe.Units.Stats;
-
 public partial class SkillEntity {
 
     public RoyalAxe.GameEntitas.BuffBehaviourComponent buffBehaviour { get { return (RoyalAxe.GameEntitas.BuffBehaviourComponent)GetComponent(SkillComponentsLookup.BuffBehaviour); } }
     public bool hasBuffBehaviour { get { return HasComponent(SkillComponentsLookup.BuffBehaviour); } }
 
-    public void AddBuffBehaviour(IBuffBehavior newBehaviour) {
+    public void AddBuffBehaviour(RoyalAxe.Units.Stats.IBuffBehavior newBehaviourTreeNode) {
         var index = SkillComponentsLookup.BuffBehaviour;
         var component = (RoyalAxe.GameEntitas.BuffBehaviourComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.BuffBehaviourComponent));
+        component.BehaviourTreeNode = newBehaviourTreeNode;
         AddComponent(index, component);
     }
 
-    public void ReplaceBuffBehaviour(IBuffBehavior newBehaviour) {
+    public void ReplaceBuffBehaviour(RoyalAxe.Units.Stats.IBuffBehavior newBehaviourTreeNode) {
         var index = SkillComponentsLookup.BuffBehaviour;
         var component = (RoyalAxe.GameEntitas.BuffBehaviourComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.BuffBehaviourComponent));
+        component.BehaviourTreeNode = newBehaviourTreeNode;
         ReplaceComponent(index, component);
     }
 

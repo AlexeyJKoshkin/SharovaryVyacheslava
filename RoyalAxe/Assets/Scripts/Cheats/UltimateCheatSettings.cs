@@ -30,7 +30,6 @@ namespace RoyalAxe.CoreLevel
         {
             if(!_cheatSettings.EnableCheats) return;
             _rootLoopContext.ReplaceCheats(_cheatSettings);
-                
         }
     }
 

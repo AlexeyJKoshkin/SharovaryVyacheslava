@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6838716201982870419}
   - component: {fileID: -5662723248515720534}
-  - component: {fileID: 1776352314667396464}
-  - component: {fileID: 5372753863755962756}
-  - component: {fileID: 7107067390290218630}
+  - component: {fileID: 1573484833128764962}
   m_Layer: 0
   m_Name: MeleRicar
   m_TagString: Enemy
@@ -32,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8555849836212256952}
+  - {fileID: 1523009957617057340}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,8 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <RootTransform>k__BackingField: {fileID: 6838716201982870419}
   <UnitCanvas>k__BackingField: {fileID: 7024870226140349926}
-  <MeleeTriggerHandler>k__BackingField: {fileID: 7107067390290218630}
+  <MeleeTriggerHandler>k__BackingField: {fileID: 2362021494896011862}
   <Behaviour>k__BackingField: {fileID: 5394700831582258007}
+  _navMeshUnit:
+    _navMeshAgent: {fileID: 1573484833128764962}
   healthBarUnitTemp: {fileID: 6356771515709274127}
   _spineEnemyAnimation:
     id: 0
@@ -60,67 +61,28 @@ MonoBehaviour:
       type: {class: MeleeMobKnightSpineBuilder, ns: RoyalAxe.Units, asm: Assembly-CSharp}
       data:
         _animator: {fileID: 3939741692214828624}
---- !u!61 &1776352314667396464
-BoxCollider2D:
+--- !u!195 &1573484833128764962
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789661480603448234}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.01, y: 3.33}
-    newSize: {x: 1.92, y: 2.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.3, y: 2}
-  m_EdgeRadius: 0
---- !u!50 &5372753863755962756
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789661480603448234}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7107067390290218630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789661480603448234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d639f53533e4d648e01b2319f730772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicTriggerCollider>k__BackingField: {fileID: 1776352314667396464}
-  _possibleTagInteraction: 8
+  m_AgentTypeID: 0
+  m_Radius: 0.65
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2165513088144644368
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +340,100 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathEndTrigger: {fileID: 0}
+--- !u!1 &4911278076407637400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523009957617057340}
+  - component: {fileID: 4566701965639831919}
+  - component: {fileID: 765831854528938805}
+  - component: {fileID: 2362021494896011862}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1523009957617057340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911278076407637400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6838716201982870419}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4566701965639831919
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911278076407637400}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.01, y: 3.33}
+    newSize: {x: 1.92, y: 2.02}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3, y: 2}
+  m_EdgeRadius: 0
+--- !u!50 &765831854528938805
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911278076407637400}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &2362021494896011862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911278076407637400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d639f53533e4d648e01b2319f730772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PhysicTriggerCollider>k__BackingField: {fileID: 4566701965639831919}
+  _possibleTagInteraction: 8
 --- !u!1001 &6314080310957803912
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace Core.Launcher
                  Bind<SetPlayerUnitToChunkRootSystem>()     // Установка игрока в родительский чанк
                 .Bind<SetUnitsToChunkRootSystem>()     // Установка юнитов в родительский чанк
                 .Bind<SetAdditionalBosonColorSystem>() // покраска дополнотельных бозонов
+                .Bind<UpdateMoveSpeedNavMeshAgentsSystem>() // обновляем скорость у мобов с навмешем при измении стата скорость
                 //игровой цикл
 
                 //cкилы

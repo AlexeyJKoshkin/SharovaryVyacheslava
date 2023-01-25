@@ -6,22 +6,19 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using RoyalAxe.Units;
-
 public partial class SkillEntity {
 
     public RoyalAxe.GameEntitas.BuffApplierComponent buffApplier { get { return (RoyalAxe.GameEntitas.BuffApplierComponent)GetComponent(SkillComponentsLookup.BuffApplier); } }
     public bool hasBuffApplier { get { return HasComponent(SkillComponentsLookup.BuffApplier); } }
 
-    public void AddBuffApplier(System.Collections.Generic.List<IUnitApplierItem> newCollection) {
+    public void AddBuffApplier(System.Collections.Generic.List<RoyalAxe.Units.IUnitApplierItem> newCollection) {
         var index = SkillComponentsLookup.BuffApplier;
         var component = (RoyalAxe.GameEntitas.BuffApplierComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.BuffApplierComponent));
         component.Collection = newCollection;
         AddComponent(index, component);
     }
 
-    public void ReplaceBuffApplier(System.Collections.Generic.List<IUnitApplierItem> newCollection) {
+    public void ReplaceBuffApplier(System.Collections.Generic.List<RoyalAxe.Units.IUnitApplierItem> newCollection) {
         var index = SkillComponentsLookup.BuffApplier;
         var component = (RoyalAxe.GameEntitas.BuffApplierComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.BuffApplierComponent));
         component.Collection = newCollection;

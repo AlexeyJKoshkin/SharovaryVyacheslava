@@ -2,7 +2,8 @@ using Entitas;
 using RoyalAxe.GameEntitas;
 using UnityEngine;
 
-namespace RoyalAxe.EntitasSystems {
+namespace RoyalAxe.EntitasSystems 
+{
     public class CheckBosonRichPosition : RAReactiveSystem<UnitsEntity>
     {
         private readonly UnitsContext _context;
@@ -18,8 +19,6 @@ namespace RoyalAxe.EntitasSystems {
            
             return context.CreateCollector(trigger);
         }
-
-      
 
         protected override bool Filter(UnitsEntity entity)
         {
