@@ -16,7 +16,7 @@ namespace RoyalAxe.CoreLevel
         public BiomeType BiomeType => ViewModel.BiomeType;
         [field: SerializeField] public Tilemap TileMap { get; private set; }
 
-        [HideIf("TileMap", null)]
+        [ShowIf("TileMap", null)]
         [Button]
         void CompressBounds()
         {
