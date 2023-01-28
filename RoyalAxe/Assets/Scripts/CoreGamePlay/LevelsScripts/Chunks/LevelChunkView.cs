@@ -41,8 +41,10 @@ namespace RoyalAxe.CoreLevel
             var bounds = CalcChunkBounds();
             Gizmos.color = TileMap.color;
             Gizmos.DrawLine(bounds.min, new Vector2(bounds.max.x, bounds.min.y));
-            Gizmos.DrawLine(new Vector2(bounds.max.x, bounds.max.y), new Vector2(bounds.min.x, bounds.max.y));
+            Gizmos.DrawLine(bounds.max, new Vector2(bounds.min.x, bounds.max.y));
+            Gizmos.DrawLine(bounds.max, new Vector2(bounds.max.x, bounds.min.y));
             Gizmos.DrawLine(new Vector2(bounds.min.x, bounds.max.y), bounds.min);
+           
 
         }
 

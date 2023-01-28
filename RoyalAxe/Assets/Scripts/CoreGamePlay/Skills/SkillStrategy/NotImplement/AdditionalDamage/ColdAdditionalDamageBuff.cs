@@ -3,7 +3,8 @@ using Core;
 using RoyalAxe.GameEntitas;
 using RoyalAxe.Units.Stats;
 
-namespace RoyalAxe.LevelSkill {
+namespace RoyalAxe.LevelSkill 
+{
     public class ColdAdditionalDamagePlayerSkill : AdditionalDamagePlayerSkill<ColdAdditionalDamageSkillSettings>,IWeaponItem
     {
         private IBuffFactory _unitsBuffBuilder;
@@ -11,10 +12,7 @@ namespace RoyalAxe.LevelSkill {
         public ColdAdditionalDamagePlayerSkill(ILevelBuffSettingCompositeProvider provider, UnitsContext unitsContext, IUnitDamageApplierFactory factory, IBuffFactory unitsBuffBuilder) : base(provider, unitsContext, factory)
         {
             _unitsBuffBuilder = unitsBuffBuilder;
-            HLogger.TempLog("Cold Skill Create");
         }
-        
-        
 
         public override void DoLevelPowerActivate()
         {
