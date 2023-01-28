@@ -122,7 +122,6 @@ MonoBehaviour:
     _endPoint: {fileID: 4418121349381822126}
   <PlayerStartPoint>k__BackingField: {fileID: 4418121349353212482}
   TimeMapCoreSettings: {fileID: 11400000, guid: b79b1ce845b26ee418f719d1a5265f0a, type: 2}
-  BiomeDef: {fileID: 11400000, guid: 1dc2a19962ceec64aa435f106a46d446, type: 2}
   _borderCollider: {fileID: 4418121349550313816}
 --- !u!61 &4418121349550313816
 BoxCollider2D:
@@ -148,7 +147,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 24}
+  m_Size: {x: 32, y: 43}
   m_EdgeRadius: 0
 --- !u!1 &4418121349627159203
 GameObject:

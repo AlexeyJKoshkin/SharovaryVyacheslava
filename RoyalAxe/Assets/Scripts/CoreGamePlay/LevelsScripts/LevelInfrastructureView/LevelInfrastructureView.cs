@@ -26,6 +26,12 @@ namespace RoyalAxe.CoreLevel
 
         [SerializeField]
         private BoxCollider2D _borderCollider;
+
+        private void OnValidate()
+        {
+            if(_borderCollider == null) return;
+            _borderCollider.size = TimeMapCoreSettings.AreaSize;
+        }
     }
 
 

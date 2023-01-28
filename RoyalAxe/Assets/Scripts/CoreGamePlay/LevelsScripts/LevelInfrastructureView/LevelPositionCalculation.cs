@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 
 namespace RoyalAxe.CoreLevel {
@@ -17,7 +18,9 @@ namespace RoyalAxe.CoreLevel {
         public LevelPositionCalculation(LevelInfrastructureView levelChunkView)
         {
             _levelChunkView = levelChunkView;
-            _mobZeroYSpawn  = levelChunkView.Bounds.max.y - 1.5f; // когда мобы идут снизу надо отнимать больше. т.к. не учитывается высоты моба
+            _mobZeroYSpawn = levelChunkView.Bounds.max.y; //- 1.5f; // когда мобы идут снизу надо отнимать больше. т.к. не учитывается высоты моба
+            
+            HLogger.TempLog(_mobZeroYSpawn);
         }
 
         public float GetMobYPos(int mobAmount)

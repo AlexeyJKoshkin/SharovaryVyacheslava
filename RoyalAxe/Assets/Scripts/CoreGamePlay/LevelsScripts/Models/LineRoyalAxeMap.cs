@@ -25,6 +25,10 @@ namespace RoyalAxe.CoreLevel
         {
             MobAmount = 0;
         }
-     
+
+        public override string ToString()
+        {
+            return $"[{MinX} - {MaxX}] Mobs : {MobAmount}";
+        }
     }
 }
