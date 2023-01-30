@@ -12,7 +12,7 @@ namespace RoyalAxe.Configs
         [ColumnName("Health"), JsonProperty("he")]
         public float Health = 10;
         
-        [ColumnName("Speed move"), JsonProperty("ms")]
+        [ColumnName("Speed_move"), JsonProperty("ms")]
         public float MoveSpeed = 1;
     }
 
