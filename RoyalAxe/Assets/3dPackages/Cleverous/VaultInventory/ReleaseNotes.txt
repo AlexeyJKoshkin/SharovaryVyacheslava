@@ -1,0 +1,30 @@
+
+==== Major Items ====
+** New Input System is now default
+** Text Mesh Pro is now default
+** Full Controller Support simultaneous with Keyboard/Mouse
+** Entirely new demo scene
+** Context Menu now requires a prefab to populate the buttons
+
+==== Standard Items ====
+* SlotPlug highlighting when hovering
+* SlotPlug highlighting when slot is engaged (choosing/picked/clicked)
+* New UiBlockingPanel class helps flag globally if there are any interactable panels active
+* InventoryUi now inherits from UiBlockingPanel
+* VaultInventory.cs now has new options for ui behavior customization and public queries
+--- ContextStyle { MousePosition, PlugCorner, Custom }
+--- TooltipStyle { OnHoverOrSelect, OnEngage, Custom }
+--- bool CanDragPlugs
+--- bool AnyUiMenuIsOpen
+--- Action OnMoveItemCancel
+--- Action OnSelectedItem
+--- HasAnyOpenSlot(SlotRestriction restriction)
+--- StackCanFit(RootItemStack data)
+* Added more code documentation
+* IInteractableTransform is now IInteractableUi
+* IInteractableUi's Interact() now requires an IUseIntentory argument passed in (default null).
+* IInteractableUi's gets InteractionSelect() and InteractionDeselect()
+* InteractableObject class is now used for Scene objects that are interactable.
+* Merchant and RuntimeItemProxy now inherit from InteractableObject.
+* Character example updated to support new demo
+* So many other small things...
