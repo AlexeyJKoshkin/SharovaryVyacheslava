@@ -12,25 +12,31 @@ public static class GameRootLoopComponentsLookup {
     public const int GamePauseListener = 1;
     public const int AdditionalDataBox = 2;
     public const int Cheats = 3;
-    public const int GamePause = 4;
-    public const int MainLoopState = 5;
-    public const int PauseableUpdateSystems = 6;
-    public const int ActiveTimer = 7;
-    public const int DoneTimer = 8;
-    public const int Pause = 9;
-    public const int Repeat = 10;
-    public const int Timer = 11;
-    public const int UpdateSystems = 12;
-    public const int TimerListener = 13;
+    public const int CheatStartLevel = 4;
+    public const int GamePause = 5;
+    public const int HeroStartLevel = 6;
+    public const int HeroStartWeapon = 7;
+    public const int MainLoopState = 8;
+    public const int PauseableUpdateSystems = 9;
+    public const int ActiveTimer = 10;
+    public const int DoneTimer = 11;
+    public const int Pause = 12;
+    public const int Repeat = 13;
+    public const int Timer = 14;
+    public const int UpdateSystems = 15;
+    public const int TimerListener = 16;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "DoneTimerListener",
         "GamePauseListener",
         "AdditionalDataBox",
         "Cheats",
+        "CheatStartLevel",
         "GamePause",
+        "HeroStartLevel",
+        "HeroStartWeapon",
         "MainLoopState",
         "PauseableUpdateSystems",
         "ActiveTimer",
@@ -47,7 +53,10 @@ public static class GameRootLoopComponentsLookup {
         typeof(GamePauseListenerComponent),
         typeof(RoyalAxe.GameEntitas.AdditionalDataBoxComponent),
         typeof(RoyalAxe.GameEntitas.CheatsComponent),
+        typeof(RoyalAxe.GameEntitas.CheatStartLevelComponent),
         typeof(RoyalAxe.GameEntitas.GamePauseComponent),
+        typeof(RoyalAxe.GameEntitas.HeroStartLevelComponent),
+        typeof(RoyalAxe.GameEntitas.HeroStartWeaponComponent),
         typeof(RoyalAxe.GameEntitas.MainLoopStateComponent),
         typeof(RoyalAxe.GameEntitas.PauseableUpdateSystemsComponent),
         typeof(RoyalAxe.GameEntitas.Timer.ActiveTimerComponent),

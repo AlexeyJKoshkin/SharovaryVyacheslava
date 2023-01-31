@@ -34,6 +34,8 @@ namespace RoyalAxe.Units.Stats
 
         [SerializeField] public List<RangeParams> RangeConfig = new List<RangeParams>();
 
+        public int TotalLevels => SkillDamage.Count;
+        
         public (Damage damage, RangeParams rangeParams) GetByLevel(int lvl)
         {
             lvl--; // уровнь всегда на 1 больше чем индекс

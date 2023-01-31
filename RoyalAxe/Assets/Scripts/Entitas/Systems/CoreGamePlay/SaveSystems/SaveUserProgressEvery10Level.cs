@@ -5,14 +5,15 @@ namespace RoyalAxe.CoreLevel
     public class SaveUserProgressEvery10Level : BaseSaveUserProgressAtLevels
     {
         private readonly CoreGamePlayContext _coreGamePlay;
-        public SaveUserProgressEvery10Level(CoreGamePlayContext context, ICurrentUserProgressProfileFacade userProgressProfileFacade, CoreGamePlayContext coreGamePlay) : base(context,userProgressProfileFacade)
+        public SaveUserProgressEvery10Level(GameRootLoopContext gameRootLoopContext,
+                                            ICurrentUserProgressProfileFacade userProgressProfileFacade,
+                                            CoreGamePlayContext coreGamePlay) : base(coreGamePlay,userProgressProfileFacade,gameRootLoopContext)
         {
             _coreGamePlay = coreGamePlay;
         }
-
-        protected override bool Filter(CoreGamePlayEntity entity)
+        protected override bool CheckCanSave(CoreGamePlayEntity entity)
         {
-            return entity.currentLevelInfo.Level.LevelNumber % 10 == 0; // сохраняем только на 10 уровнях
+            return  entity.currentLevelInfo.Level.LevelNumber % 10 == 0; // сохраняем только на 10 уровнях
         }
 
         protected override void Execute(CoreGamePlayEntity e)

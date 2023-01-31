@@ -16,12 +16,12 @@ namespace RoyalAxe.UI
 
         public void PrepareUIStartGame()
         {
-            if (_contexts.gameRootLoop.hasCheats)
+            /*if (_contexts.gameRootLoop.hasCheats)
             {
                 _debugWave.InitEntity(_contexts.coreGamePlay.levelWaveEntity);
                 _debugWave.PlayerLevelPowerView.Init(_levelSkillStorage);
             }
-            else
+            else*/
             {
                 _debugWave.Close();
             }

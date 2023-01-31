@@ -11,16 +11,18 @@ namespace Core.Launcher
     
     public class CoreGameSceneInfrastructure : StateInfrastructure,ICoreGameInfrastructure
     {
-        public CoreGameSceneInfrastructure(Contexts context,ISceneLoader sceneLoader,
+        public CoreGameSceneInfrastructure(Contexts context,
+                                           ISceneLoader sceneLoader,
                                            ILevelCreation levelCreation,
                                            IStateLoaderProvider stateLoaderProvider,
-                                           ICoreGameUtility levelUtility) : base(context, sceneLoader,stateLoaderProvider)
+                                           ICoreGameUtility levelUtility
+                                          ) : base(context, sceneLoader,stateLoaderProvider)
         {
             LevelCreation = levelCreation;
             LevelUtility = levelUtility;
         }
 
-        public ILevelCreation LevelCreation { get;  }
+    public ILevelCreation LevelCreation { get;  }
         public ICoreGameUtility LevelUtility { get; }
     }
 }

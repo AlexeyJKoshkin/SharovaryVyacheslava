@@ -8,8 +8,6 @@ namespace Core.Launcher
     [Serializable]
     public abstract class ProjectStateSettings : IRoyalAxeSceneFeatureProvider
     {
-
-
         public abstract IEnumerable<Feature> EventListenerSystem(Contexts contexts);
 
         public abstract IEnumerable<FeatureBindInfo> AlwaysUpdate();

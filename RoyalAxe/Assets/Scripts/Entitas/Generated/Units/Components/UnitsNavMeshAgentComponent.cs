@@ -11,18 +11,18 @@ public partial class UnitsEntity {
     public RoyalAxe.GameEntitas.NavMeshAgentComponent navMeshAgent { get { return (RoyalAxe.GameEntitas.NavMeshAgentComponent)GetComponent(UnitsComponentsLookup.NavMeshAgent); } }
     public bool hasNavMeshAgent { get { return HasComponent(UnitsComponentsLookup.NavMeshAgent); } }
 
-    public void AddNavMeshAgent(float newSpeed, UnityEngine.AI.NavMeshAgent newView) {
+    public void AddNavMeshAgent(UnityEngine.AI.NavMeshAgent newNavMeshAgent, float newSpeed) {
         var index = UnitsComponentsLookup.NavMeshAgent;
         var component = (RoyalAxe.GameEntitas.NavMeshAgentComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.NavMeshAgentComponent));
-        component.NavMeshAgent = newView;
+        component.NavMeshAgent = newNavMeshAgent;
         component.Speed = newSpeed;
         AddComponent(index, component);
     }
 
-    public void ReplaceNavMeshAgent(float newSpeed, UnityEngine.AI.NavMeshAgent newView) {
+    public void ReplaceNavMeshAgent(UnityEngine.AI.NavMeshAgent newNavMeshAgent, float newSpeed) {
         var index = UnitsComponentsLookup.NavMeshAgent;
         var component = (RoyalAxe.GameEntitas.NavMeshAgentComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.NavMeshAgentComponent));
-        component.NavMeshAgent = newView;
+        component.NavMeshAgent = newNavMeshAgent;
         component.Speed = newSpeed;
         ReplaceComponent(index, component);
     }

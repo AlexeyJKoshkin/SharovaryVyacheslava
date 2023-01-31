@@ -21,7 +21,6 @@ namespace Core.Launcher
             _stateLoaderProvider = sceneLoaderProvider;
             _ultimateCheatAdapter = ultimateCheatAdapter;
             _userSaveProfileStorage = userSaveProfileStorage;
-         
         }
 
         public void Initialize()
@@ -37,10 +36,9 @@ namespace Core.Launcher
 
         private LastLevel GetLevelParams()
         {
-            if (_ultimateCheatAdapter.UseLevelFromCheat) return _ultimateCheatAdapter.LevelParams;
+          
             var current = _userSaveProfileStorage.Current;
             return current.LevelProgressFacade.SavedLevel;
         }
     }
-  
 }

@@ -9,30 +9,19 @@
 public partial class GameRootLoopContext {
 
     public GameRootLoopEntity cheatsEntity { get { return GetGroup(GameRootLoopMatcher.Cheats).GetSingleEntity(); } }
-    public RoyalAxe.GameEntitas.CheatsComponent cheats { get { return cheatsEntity.cheats; } }
-    public bool hasCheats { get { return cheatsEntity != null; } }
 
-    public GameRootLoopEntity SetCheats(RoyalAxe.CoreLevel.UltimateCheatSettings newCheatSettings) {
-        if (hasCheats) {
-            throw new Entitas.EntitasException("Could not set Cheats!\n" + this + " already has an entity with RoyalAxe.GameEntitas.CheatsComponent!",
-                "You should check if the context already has a cheatsEntity before setting it or use context.ReplaceCheats().");
+    public bool isCheats {
+        get { return cheatsEntity != null; }
+        set {
+            var entity = cheatsEntity;
+            if (value != (entity != null)) {
+                if (value) {
+                    CreateEntity().isCheats = true;
+                } else {
+                    entity.Destroy();
+                }
+            }
         }
-        var entity = CreateEntity();
-        entity.AddCheats(newCheatSettings);
-        return entity;
-    }
-
-    public void ReplaceCheats(RoyalAxe.CoreLevel.UltimateCheatSettings newCheatSettings) {
-        var entity = cheatsEntity;
-        if (entity == null) {
-            entity = SetCheats(newCheatSettings);
-        } else {
-            entity.ReplaceCheats(newCheatSettings);
-        }
-    }
-
-    public void RemoveCheats() {
-        cheatsEntity.Destroy();
     }
 }
 
@@ -46,25 +35,25 @@ public partial class GameRootLoopContext {
 //------------------------------------------------------------------------------
 public partial class GameRootLoopEntity {
 
-    public RoyalAxe.GameEntitas.CheatsComponent cheats { get { return (RoyalAxe.GameEntitas.CheatsComponent)GetComponent(GameRootLoopComponentsLookup.Cheats); } }
-    public bool hasCheats { get { return HasComponent(GameRootLoopComponentsLookup.Cheats); } }
+    static readonly RoyalAxe.GameEntitas.CheatsComponent cheatsComponent = new RoyalAxe.GameEntitas.CheatsComponent();
 
-    public void AddCheats(RoyalAxe.CoreLevel.UltimateCheatSettings newCheatSettings) {
-        var index = GameRootLoopComponentsLookup.Cheats;
-        var component = (RoyalAxe.GameEntitas.CheatsComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.CheatsComponent));
-        component.CheatSettings = newCheatSettings;
-        AddComponent(index, component);
-    }
+    public bool isCheats {
+        get { return HasComponent(GameRootLoopComponentsLookup.Cheats); }
+        set {
+            if (value != isCheats) {
+                var index = GameRootLoopComponentsLookup.Cheats;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : cheatsComponent;
 
-    public void ReplaceCheats(RoyalAxe.CoreLevel.UltimateCheatSettings newCheatSettings) {
-        var index = GameRootLoopComponentsLookup.Cheats;
-        var component = (RoyalAxe.GameEntitas.CheatsComponent)CreateComponent(index, typeof(RoyalAxe.GameEntitas.CheatsComponent));
-        component.CheatSettings = newCheatSettings;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveCheats() {
-        RemoveComponent(GameRootLoopComponentsLookup.Cheats);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

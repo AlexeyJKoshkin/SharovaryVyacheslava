@@ -1,22 +1,23 @@
-﻿using Core;
-using Core.UserProfile;
+﻿using Core.UserProfile;
 using Entitas;
 
 namespace RoyalAxe.CoreLevel
 {
     public class SaveTempProgressEachLevel : BaseSaveUserProgressAtLevels
     {
-        public SaveTempProgressEachLevel(IContext<CoreGamePlayEntity> context, ICurrentUserProgressProfileFacade userProgressProfileFacade) : base(context, userProgressProfileFacade) { }
+        public SaveTempProgressEachLevel(IContext<CoreGamePlayEntity> context,
+                                         GameRootLoopContext gameRootLoopContext,
+                                         ICurrentUserProgressProfileFacade userProgressProfileFacade) : base(context, userProgressProfileFacade, gameRootLoopContext) { }
 
-        protected override bool Filter(CoreGamePlayEntity entity)
+        
+
+        protected override bool CheckCanSave(CoreGamePlayEntity entity)
         {
             return true;
         }
 
         protected override void Execute(CoreGamePlayEntity e)
         {
-            HLogger.TempLog("Save temp"); // todo remove log
-            //тут же надо сохранять гемы, опыт, всю всю поеботу во временный профиль-сейв
             UserProgressProfileFacade.LevelProgressFacade.LastPlayed = e.currentLevelInfo.Level;
         }
     }

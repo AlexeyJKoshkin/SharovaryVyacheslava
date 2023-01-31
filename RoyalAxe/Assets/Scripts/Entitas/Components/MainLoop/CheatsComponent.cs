@@ -1,12 +1,29 @@
+using Core.UserProfile;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using RoyalAxe.CoreLevel;
 
-namespace RoyalAxe.GameEntitas {
+namespace RoyalAxe.GameEntitas 
+{
     [GameRootLoop, Unique]
     public class CheatsComponent : IComponent
     {
-        public UltimateCheatSettings CheatSettings;
+    }
+
+    [GameRootLoop]
+    public class CheatStartLevelComponent : IComponent
+    {
+        public LastLevel Level;
+    }
+
+    [GameRootLoop]
+    public class HeroStartLevelComponent : HeroProgressData, IComponent
+    {
     }
     
+    [GameRootLoop]
+    public class HeroStartWeaponComponent : WeaponProgressData, IComponent
+    {
+    }
+
 }
