@@ -36,9 +36,9 @@ namespace Core.Launcher
 
         private LastLevel GetLevelParams()
         {
-          
-            var current = _userSaveProfileStorage.Current;
-            return current.LevelProgressFacade.SavedLevel;
+            if (_ultimateCheatAdapter.EnableCheats && _ultimateCheatAdapter.Cheats.hasCheatStartLevel)
+                return _ultimateCheatAdapter.Cheats.cheatStartLevel.Level;
+            return _userSaveProfileStorage.Current.LevelProgressFacade.SavedLevel;
         }
     }
 }

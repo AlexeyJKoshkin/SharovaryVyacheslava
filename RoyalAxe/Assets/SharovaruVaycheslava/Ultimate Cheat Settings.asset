@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcef557e5d6677647bdde6e1f9a72947, type: 3}
   m_Name: Ultimate Cheat Settings
   m_EditorClassIdentifier: 
-  EnableCheats: 0
+  EnableCheats: 1
   EnableRender: 1
-  StartCustomLevel: 1
-  LevelParams:
-    Biome: 1
-    LevelNumber: 1

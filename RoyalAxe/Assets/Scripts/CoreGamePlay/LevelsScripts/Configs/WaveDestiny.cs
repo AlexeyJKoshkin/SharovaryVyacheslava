@@ -13,5 +13,10 @@ namespace RoyalAxe.CoreLevel
         public string IdDestiny;
         [ColumnName("Level_destiny")]
         public int Level;
+
+        public override string ToString()
+        {
+            return HasDestiny ? $"[{IdDestiny} {Level}]" : "NONE";
+        }
     }
 }
