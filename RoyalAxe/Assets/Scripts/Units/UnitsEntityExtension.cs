@@ -6,6 +6,8 @@ namespace RoyalAxe.GameEntitas
 {
     public static class UnitsEntityExtension
     {
+        public static string HERO_POSTFIX = "_Hero";
+        
         public static void AddMoreDamage(this UnitsEntity unit, IWeaponItem applier)
         {
             if(unit == null || applier == null) return;
@@ -74,4 +76,5 @@ namespace RoyalAxe.GameEntitas
         }
   
     }
+    
 }

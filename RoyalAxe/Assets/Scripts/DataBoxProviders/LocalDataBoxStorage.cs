@@ -77,7 +77,20 @@ namespace Core.Data.Provider
         {
             return GetMember<T>().Collection.Count;
         }
-        
+
+        public bool TryGetValue<T>(string id, out T result) where T : class, IDataObject
+        {
+            int indId  = id.GetHashCode();
+            result = ById<T>(indId);
+            return result != null;
+        }
+
+        public bool Contains<T>(string id) where T : class, IDataObject
+        {
+            int indId = id.GetHashCode();
+            return ById<T>(indId) != null;
+        }
+
         public T ById<T>(int indId) where T : class, IDataObject
         {
             var member = GetMember<T>();
@@ -87,7 +100,6 @@ namespace Core.Data.Provider
 
         public T ById<T>(string id) where T : class, IDataObject
         {
-            
             int indId = id.GetHashCode();
             var result = ById<T>(indId);
             #if UNITY_EDITOR

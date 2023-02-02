@@ -8,8 +8,12 @@ namespace Core
     {
         protected IContainerBuilder Container { get; private set; }
 
+        [SerializeField]
+        private bool _used = true;
+
         public virtual void Install(IContainerBuilder builder)
         {
+            if(!_used) return;
             Container = builder;
             InstallBindings();
         }

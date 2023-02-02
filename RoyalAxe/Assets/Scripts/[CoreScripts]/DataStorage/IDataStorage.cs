@@ -12,6 +12,11 @@ namespace Core.Data.Provider
         T First<T>() where T : class, IDataObject;
 
         T ById<T>(string id) where T : class, IDataObject;
+        
+        bool TryGetValue<T>(string id, out T result) where T : class, IDataObject;
+        
+        bool Contains<T>(string id)  where T : class, IDataObject;
+        
         T ById<T>(int id) where T : class, IDataObject;
 
         T[] PackById<T>(params string[] ids) where T : class, IDataObject;

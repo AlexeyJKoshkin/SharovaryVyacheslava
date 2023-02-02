@@ -1,29 +1,21 @@
-using System;
+using Core.UserProfile;
 using RoyalAxe.CoreLevel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RoyalAxe 
+namespace RoyalAxe
 {
-    [Serializable]
     public class DevelopSelectLevelView : MonoBehaviour
     {
         public event UnityAction<int> OnChangeLevelEvent;
 
-        public int InputIntValue
-        {
-            get { return string.IsNullOrEmpty(_input.text) ? -1 : int.Parse(_input.text); }
-            set { _input.text = value.ToString(); }
-        }
-        [SerializeField]
-        TMP_InputField _input;
-        
-        [SerializeField]
-        TextMeshProUGUI _levelInfo;
 
-        private int _previous;
-        
+        [SerializeField] TMP_InputField _input;
+
+        [SerializeField] TextMeshProUGUI _levelInfo;
+
+
         private void OnEnable()
         {
             _input.characterValidation = TMP_InputField.CharacterValidation.Integer;
@@ -39,21 +31,20 @@ namespace RoyalAxe
         {
             if (levelSettingsData == null)
             {
-                _levelInfo.text = "From Save";
-                _previous        = -1;
+                _levelInfo.text = "Уровень из сохранения";
+             //   _input.text     = "Enter level";
             }
             else
             {
                 _levelInfo.text = $"Biome {levelSettingsData.Type} MaxMobAmount {levelSettingsData.MaxMobAmount} SpawnCooldown {levelSettingsData.SpawnCooldown}\nDestiny {levelSettingsData.Destiny}";
-                _previous        = levelSettingsData.LevelNumber;
+                _input.text     = levelSettingsData.LevelNumber.ToString();
             }
         }
 
         private void OnChangeInputValue(string text)
         {
-            var selected = InputIntValue;
-            if(selected!= _previous)
-                OnChangeLevelEvent?.Invoke(selected);
+            var inputIntValue = string.IsNullOrEmpty(text) ? -1 : int.Parse(text);
+            OnChangeLevelEvent?.Invoke(inputIntValue);
         }
     }
 }

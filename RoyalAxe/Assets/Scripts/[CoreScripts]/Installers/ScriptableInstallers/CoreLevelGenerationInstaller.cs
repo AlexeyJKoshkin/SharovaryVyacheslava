@@ -14,12 +14,9 @@ namespace Core
         [SerializeField]
         private TileCoreMapSettings _coreMapSettings;
 
-        [SerializeField] private CoreGamePlayPrefabStorage _prefabStorage;
-        
-        protected override void InstallBindings()
+       protected override void InstallBindings()
         {
-            Container.RegisterInstance(_prefabStorage);
-
+       
             Container.Register<CoreGameSceneLoaderProvider>(Lifetime.Singleton).AsImplementedInterfaces();
 
             InstallMap();
