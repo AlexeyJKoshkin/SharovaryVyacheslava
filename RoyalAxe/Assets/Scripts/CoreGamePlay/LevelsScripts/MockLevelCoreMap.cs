@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using Core;
 using Entitas;
-using GameKit;
+
 using RoyalAxe.GameEntitas;
-using RoyalAxe.Map;
-using RoyalAxe.Units;
-using UnityEngine;
+using VContainer.Unity;
+
 
 namespace RoyalAxe.CoreLevel
 {
@@ -17,6 +15,8 @@ namespace RoyalAxe.CoreLevel
         private readonly IGroup<UnitsEntity> _allMobs;
         private readonly IUnitsBuilderFacade _unitsBuilder;
         private readonly CoreGamePlayContext _coreGamePlay;
+
+
 
         public MockLevelCoreMap(UnitsContext unitsContext,
                                 IUnitsBuilderFacade unitsBuilder,
@@ -40,7 +40,7 @@ namespace RoyalAxe.CoreLevel
 
         void IEnemyWaveGenerator.GenerateEnemy(MobBlueprint mobBlueprint)
         {
-            var mobGems = _coreGamePlay.levelWaveEntity.levelWaveQueue.Current.GemsPerLevel;
+         //   var mobGems = _coreGamePlay.levelWaveEntity.levelWaveQueue.Current.GemsPerLevel;
             var pos = _generator.GetPosForNewMob(mobBlueprint.Id);
             mobBlueprint.Position = pos.startPoint;
             var entity = _unitsBuilder.CreateEnemyMobUnit(mobBlueprint);
@@ -50,8 +50,11 @@ namespace RoyalAxe.CoreLevel
                 if(entity.hasNavMeshAgent)
                     entity.navMeshAgent.SetDestinationPoint(pos.endPoint);
             }
-            HLogger.TempLog("Надо добавить награду за за мобью смерть");
-            entity.AddMobDeathReward(0, 0, mobGems);
+
+            var reward = mobBlueprint.DeathReward;
+            entity.AddMobDeathReward(reward.Expa, reward.Gold, 0);
         }
+
+      
     }
 }

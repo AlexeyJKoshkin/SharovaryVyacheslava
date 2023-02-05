@@ -18,15 +18,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     internal abstract class ModelsToJsonFile<T> : IConfigUpdater where T : class,IDataObject,  new()
     {
         private List<T> _allExistItems;
-        /*protected readonly CompositeGenericParser DataParser;
-
-        public ModelsToJsonFile()
-        {
-            DataParser = new CompositeGenericParser();
-        }*/
-        
-        
-
+     
         public void UpdateConfigs(List<GoogleSheetGameData> allPages,
                                   IJsonConfigModelsOperation operation,  IGameDataParser parser)
         {

@@ -10,11 +10,6 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     {
         readonly MobSpawnConfigData _mobSpawnParserHelper = new MobSpawnConfigData();
 
-        public LevelConfigSettingDefToFile()
-        {
-         
-        }
-
         protected override void RemoveUpdateConfigs(List<LevelSettingsData> allExistItems, List<GoogleSheetGameData> allPages)
         {
             allExistItems.Clear();

@@ -1,15 +1,14 @@
 using System;
 using Core.Parser;
+using Newtonsoft.Json;
 
 namespace RoyalAxe.CoreLevel {
     [Serializable]
     public class MobDeathReward
     {
-        [ColumnName("Gold")]
+        [ColumnName("Gold"),JsonProperty("g") ]
         public int Gold;
-        [ColumnName("EXP_level")]
+        [ColumnName("EXP_level"),JsonProperty("e")]
         public int Expa;
-        [ColumnName("Gems")]
-        public int Gems;
     }
 }

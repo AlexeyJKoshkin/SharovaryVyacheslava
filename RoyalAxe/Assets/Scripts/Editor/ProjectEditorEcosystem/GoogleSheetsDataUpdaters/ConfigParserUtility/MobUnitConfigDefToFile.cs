@@ -3,6 +3,7 @@ using System.Linq;
 using Core.EditorCore.Parser;
 using Core.Parser;
 using RoyalAxe.Configs;
+using RoyalAxe.CoreLevel;
 using RoyalAxe.Units.Stats;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
@@ -20,7 +21,8 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             {
                 UniqueID = page.PageName,
                 StatCollection = new List<StatsConfig>(),
-                MobWeaponData = new MobWeaponSkillConfigDef()
+                MobWeaponData = new MobWeaponSkillConfigDef(),
+                MobDeathReward = new List<MobDeathReward>()
             };
             
             for (int i = 0; i < page.Cells.Count; i++)
@@ -29,6 +31,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                 AddToListData(result.StatCollection,parser, lvlCells);
                 AddToListData(result.MobWeaponData.RangeConfig,parser, lvlCells);
                 AddToListData(result.MobWeaponData.SkillDamage,parser, lvlCells);
+                AddToListData(result.MobDeathReward,parser, lvlCells);
             }
             return result;
         }

@@ -44,6 +44,7 @@ namespace RoyalAxe.CoreLevel
             var nextWaveSettings = _waveQueue.Dequeue();
 
             SetNewWave(nextWaveSettings);
+            _waveEntity.ReplaceLevelWaveQueue(_waveQueue);
             _waveEntity.ReplaceLevelNumber(nextWave);
             return false;
         }
@@ -60,6 +61,7 @@ namespace RoyalAxe.CoreLevel
 
         private void SetNewWave(LevelSettingsData nextWaveSettingsData)
         {
+            var totalMobs = nextWaveSettingsData.MobsData.Sum(o => o.TotalAmount);
             var pack = _mobBlueprintsSpawnStorage.CreateWavePack(nextWaveSettingsData.MobsData);
             _waveEntity.levelMobBluePrints.Collection.AddRange(pack); // подготовили следующую пачку мобов
             _waveEntity.isWaveFinished = false;

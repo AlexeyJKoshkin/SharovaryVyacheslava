@@ -18,8 +18,8 @@ namespace Core
         protected override void InstallBindings()
         {
             Container.Register<JsonModelsDataBox<UnitWeaponSkillConfigDef>>(Lifetime.Singleton).AsImplementedInterfaces();
-          //  Container.Register<JsonModelsDataBox<StatCollection>>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<JsonModelsDataBox<MobUnitJsonData>>(Lifetime.Singleton).AsImplementedInterfaces();
+            Container.Register<JsonModelsDataBox<HeroUnitJsonData>>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<JsonModelsDataBox<WizardLevelCollection>>(Lifetime.Singleton).AsImplementedInterfaces();
             Container.Register<JsonModelsDataBox<LevelSettingsData>>(Lifetime.Singleton).AsImplementedInterfaces();
 

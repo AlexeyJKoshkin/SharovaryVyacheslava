@@ -20,15 +20,16 @@ namespace RoyalAxe.CoreLevel
             _itemsBlueprintsFactory = itemsBlueprints;
         }
 
-        public MobBlueprint CreateMobBluePrint(MobWeaponSkillConfigDef weaponData, MobUnitJsonData mobStatCollection, int level, string id)
+        public MobBlueprint CreateMobBluePrint(MobWeaponSkillConfigDef weaponData, MobUnitJsonData mobData, int level, string id)
         {
             return new MobBlueprint(id, level)
             {
-                Stats = mobStatCollection.GetStatByLevel(level),
-                MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData, level)
+                Stats = mobData.GetStatByLevel(level),
+                MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData, level),
+                DeathReward = mobData.GetDeathRewardByLevel(level)
             };
         }
-        
+
         public IDictionary<int, MobBlueprint> CreateMobBluePrints(string mobId, IEnumerable<MobAtLevelData> mobs)
         {
             var mobJson = _dataStorage.ById<MobUnitJsonData>(mobId);
