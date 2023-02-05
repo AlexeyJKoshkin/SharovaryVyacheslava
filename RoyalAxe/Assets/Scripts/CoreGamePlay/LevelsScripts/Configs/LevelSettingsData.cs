@@ -17,7 +17,10 @@ namespace RoyalAxe.CoreLevel
         public BiomeType Type;
         [ColumnName("Level")]
         public int LevelNumber;
-        public MobDeathReward MobDeathReward = new MobDeathReward();
+        [ColumnName("Gems")]
+        public int GemsPerLevel;
+        
+        //public MobDeathReward MobDeathReward = new MobDeathReward();
         public List<MobAtLevelData> MobsData = new List<MobAtLevelData>();
         public WaveDestiny Destiny = new WaveDestiny();
         [JsonIgnore]

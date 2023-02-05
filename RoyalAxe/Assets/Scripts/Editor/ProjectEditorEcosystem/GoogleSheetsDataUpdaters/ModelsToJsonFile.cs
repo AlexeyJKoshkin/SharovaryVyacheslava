@@ -1,36 +1,34 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Configs;
 using Core.Data.Provider;
 using Core.EditorCore.Parser;
 using Core.Parser;
-using Sirenix.Utilities;
+
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
-   
-    internal abstract class ModelsToJsonFile<T> where T : class,  new()
+    public interface IConfigUpdater
+    {
+        void UpdateConfigs(List<GoogleSheetGameData> allPages,
+                           IJsonConfigModelsOperation operation,
+                           IGameDataParser parser);
+    }
+
+    internal abstract class ModelsToJsonFile<T> : IConfigUpdater where T : class,IDataObject,  new()
     {
         private List<T> _allExistItems;
-        private readonly CompositeGenericParser _dataParser;
+        /*protected readonly CompositeGenericParser DataParser;
 
         public ModelsToJsonFile()
         {
-            _dataParser = new CompositeGenericParser();
-        }
+            DataParser = new CompositeGenericParser();
+        }*/
         
-        public CompositeGenericParser Bind<TType>()
-        {
-            return _dataParser.Bind<TType>();
-        }
-        public CompositeGenericParser Bind(Type type)
-        {
-            _dataParser.Bind(type);
-            return _dataParser;
-        }
+        
 
-        public void UpdateConfigs(List<GoogleSheetGameData> allPages, IJsonConfigModelsOperation operation)
+        public void UpdateConfigs(List<GoogleSheetGameData> allPages,
+                                  IJsonConfigModelsOperation operation,  IGameDataParser parser)
         {
             _allExistItems = operation.Load<T>().ToList();
             RemoveUpdateConfigs(_allExistItems, allPages);
@@ -38,14 +36,17 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 
             allPages.ForEach(p => //распарсили каждую страничку и добавили их в общий список
                              {
-                                 var newItemsFromPage = Parse(p, _dataParser);
+                                 var newItemsFromPage = Parse(p, parser);
                                  _allExistItems.AddRange(newItemsFromPage);
                              });
             
             operation.Save(_allExistItems);
         }
 
-        protected abstract void RemoveUpdateConfigs(List<T> allExistItems, List<GoogleSheetGameData> allPages);
+        protected virtual void RemoveUpdateConfigs(List<T> allExistItems, List<GoogleSheetGameData> allPages)
+        {
+            allExistItems.RemoveAll(o => allPages.Any(p => p.PageName == o.UniqueID)); //удаляем все модели которые будем обновлять
+        }
 
         protected abstract IEnumerable<T> Parse(GoogleSheetGameData googleSheetGameData, IGameDataParser dataParser);
 

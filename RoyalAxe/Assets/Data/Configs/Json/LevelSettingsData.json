@@ -4,11 +4,7 @@
     "SpawnCooldown": 7.0,
     "Type": 1,
     "LevelNumber": 1,
-    "MobDeathReward": {
-      "Gold": 0,
-      "Expa": 0,
-      "Gems": 0
-    },
+    "GemsPerLevel": 0,
     "MobsData": [
       {
         "MobId": "Swordsman_1",
@@ -27,11 +23,7 @@
     "SpawnCooldown": 6.0,
     "Type": 1,
     "LevelNumber": 2,
-    "MobDeathReward": {
-      "Gold": 0,
-      "Expa": 0,
-      "Gems": 50
-    },
+    "GemsPerLevel": 50,
     "MobsData": [
       {
         "MobId": "Swordsman_1",
@@ -55,11 +47,7 @@
     "SpawnCooldown": 5.0,
     "Type": 1,
     "LevelNumber": 3,
-    "MobDeathReward": {
-      "Gold": 0,
-      "Expa": 0,
-      "Gems": 0
-    },
+    "GemsPerLevel": 0,
     "MobsData": [
       {
         "MobId": "Swordsman_1",
@@ -93,11 +81,7 @@
     "SpawnCooldown": 5.0,
     "Type": 1,
     "LevelNumber": 4,
-    "MobDeathReward": {
-      "Gold": 0,
-      "Expa": 0,
-      "Gems": 0
-    },
+    "GemsPerLevel": 0,
     "MobsData": [
       {
         "MobId": "Swordsman_1",

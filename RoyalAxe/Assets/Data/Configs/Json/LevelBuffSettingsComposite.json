@@ -1,11 +1,17 @@
 {
   "FiringBlade": {
     "Damage": {
-      "pd": 12.0,
       "md": 0.0,
+      "tm": 0,
+      "pd": 12.0,
       "mc": 0.0,
       "CRA": 0.0,
-      "tm": 0
+      "CriticalChance": 0.0,
+      "CriticalDamage": 0.0,
+      "SingleDamageInfo": {
+        "md": 0.0,
+        "tm": 0
+      }
     },
     "Shot_distance": 3.0,
     "Type": 10
@@ -26,7 +32,7 @@
     "Type": 30
   },
   "HealPlayerLife": {
-    "HealPercent": 0.3,
+    "HealPercent": 30.0,
     "Type": 40
   },
   "IncreaseCriticalChance": {
@@ -34,15 +40,15 @@
     "Type": 50
   },
   "IncreaseDamage": {
-    "Value": 0.2,
+    "Value": 20.0,
     "Type": 60
   },
   "IncreasePlayerMaxLife": {
-    "IncreaseValue": 0,
+    "IncreaseValue": 30,
     "Type": 70
   },
   "IncreasePlayerSkillSpeed": {
-    "Value": 0.15,
+    "Value": 30.0,
     "Type": 80
   },
   "InfectedBlood": {
@@ -57,34 +63,52 @@
   },
   "FireAdditionalDamage": {
     "Damage": {
-      "pd": 10.0,
-      "md": 10.0,
+      "md": 30.0,
+      "tm": 1,
+      "pd": 0.0,
       "mc": 0.5,
-      "CRA": 0.0,
-      "tm": 1
+      "CRA": -1.0,
+      "CriticalChance": 0.0,
+      "CriticalDamage": 0.0,
+      "SingleDamageInfo": {
+        "md": 30.0,
+        "tm": 1
+      }
     },
     "Type": 110,
     "DamageTypeType": 1
   },
   "ColdAdditionalDamage": {
-    "DecelerationPercent": 0.2,
+    "DecelerationPercent": 20.0,
     "Damage": {
-      "pd": 10.0,
-      "md": 0.0,
+      "md": 10.0,
+      "tm": 3,
+      "pd": 0.0,
       "mc": 0.0,
       "CRA": 0.0,
-      "tm": 3
+      "CriticalChance": 0.0,
+      "CriticalDamage": 0.0,
+      "SingleDamageInfo": {
+        "md": 10.0,
+        "tm": 3
+      }
     },
     "Type": 120,
     "DamageTypeType": 3
   },
   "PoisonAdditional": {
     "Damage": {
-      "pd": 0.0,
       "md": 15.0,
+      "tm": 2,
+      "pd": 0.0,
       "mc": 0.6,
-      "CRA": 0.0,
-      "tm": 2
+      "CRA": -1.0,
+      "CriticalChance": 0.0,
+      "CriticalDamage": 0.0,
+      "SingleDamageInfo": {
+        "md": 15.0,
+        "tm": 2
+      }
     },
     "Type": 130,
     "DamageTypeType": 2

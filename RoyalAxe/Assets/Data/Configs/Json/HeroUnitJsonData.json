@@ -1,0 +1,15 @@
+[
+  {
+    "StatCollection": [
+      {
+        "he": 100.0,
+        "ms": 1.0
+      },
+      {
+        "he": 200.0,
+        "ms": 1.0
+      }
+    ],
+    "UniqueID": "Default_Hero"
+  }
+]

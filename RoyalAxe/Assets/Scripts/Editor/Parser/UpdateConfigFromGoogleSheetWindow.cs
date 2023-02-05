@@ -133,7 +133,8 @@ namespace Core.EditorCore.Parser
 
                 DoButton(pageItem.PageName, () => pageItem.FolderState = pageItem.FolderState.ToggleFlag(FolderState.Update), EditorStyles.boldLabel);
                 GUI.enabled = pageItem.FolderState.HasFlag(FolderState.Update) && !pageItem.FolderState.HasFlag(FolderState.Missed);
-                if (GUILayout.Button("Update"))
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("  Update  "))
                 {
                     UpdatePage(pageItem.PageName);
                 }

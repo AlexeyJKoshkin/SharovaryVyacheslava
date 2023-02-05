@@ -6,9 +6,9 @@ using GameKit;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.LevelSkill;
 
-namespace RoyalAxe.GameEntitas 
+namespace RoyalAxe.GameEntitas
 {
-    [CoreGamePlay,Event(EventTarget.Self)]
+    [CoreGamePlay, Event(EventTarget.Self)]
     public class CurrentLevelInfoComponent : IComponent
     {
         public LastLevel Level;
@@ -17,9 +17,7 @@ namespace RoyalAxe.GameEntitas
 
     [CoreGamePlay]
     [Unique]
-    public class LevelWaveComponent : IComponent
-    {
-    }
+    public class LevelWaveComponent : IComponent { }
 
     [CoreGamePlay]
     public class LevelWaveQueueComponent : IComponent
@@ -27,23 +25,22 @@ namespace RoyalAxe.GameEntitas
         public Queue<LevelSettingsData> Queue;
         public LevelSettingsData Current => Queue.Peek();
     }
-    
 
-    [CoreGamePlay,Event(EventTarget.Self)]
+
+    [CoreGamePlay, Event(EventTarget.Self)]
     public class LevelMobBluePrints : ListCollectionComponent<GenerateMobBlueprintCounter>
     {
         public MobBlueprint GenerateMobData()
         {
-             var item = this.Collection.GetRandom(false);
-                       item.TotalAmount--;
-                       if (item.TotalAmount == 0) this.Remove(item);
-                       return item.MobBlueprint;
+            var item = this.Collection.GetRandom(false);
+            item.TotalAmount--;
+            if (item.TotalAmount == 0) this.Remove(item);
+            return item.MobBlueprint;
         }
     }
-    
-    
 
-    [CoreGamePlay,Event(EventTarget.Self)]
+
+    [CoreGamePlay, Event(EventTarget.Self)]
     public class LevelNumberComponent : IComponent
     {
         public int Number;
@@ -53,11 +50,9 @@ namespace RoyalAxe.GameEntitas
     /// Указатель, что волна закончилась
     /// </summary>
     [CoreGamePlay]
-    public class WaveFinishedComponent : IComponent
-    {
-    }
+    public class WaveFinishedComponent : IComponent { }
 
-    
+
     [CoreGamePlay]
     public class WizardShopReadyComponent : IComponent
     {

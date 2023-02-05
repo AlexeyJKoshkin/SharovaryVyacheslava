@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5fb7cd09a3949168f2d5c1540598eb6, type: 3}
   m_Name: Build In Json Data Provider
   m_EditorClassIdentifier: 
-  _weaponSkill: {fileID: 4900000, guid: 3bf6ea2e283c3614a8e44eaa37c2c9d4, type: 3}
+  _heroWeaponSkill: {fileID: 4900000, guid: 1a3cd2a4e9c55d649900c71ff898ace0, type: 3}
+  _heroCharacters: {fileID: 4900000, guid: 76277960067c8f444af8f78e5defc132, type: 3}
   _wizardShop: {fileID: 4900000, guid: 06a679502d049fb46aa9f01be26c93ce, type: 3}
-  _unitStatCollection: {fileID: 4900000, guid: 347545ff86077fd47a41452b59f812bb, type: 3}
   _levelsData: {fileID: 4900000, guid: d731c0379f4af08449272135878725f0, type: 3}
   _levelBuffData: {fileID: 4900000, guid: 5e39710528208c74686be8d666ccd947, type: 3}
+  _mobUnitData: {fileID: 4900000, guid: e831d16180f632047b9e2a69abbf8b79, type: 3}

@@ -1,0 +1,2814 @@
+[
+  {
+    "MobWeaponData": {
+      "SkillDamage": [
+        {
+          "md": 20.0,
+          "tm": 1,
+          "pd": 10.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 20.0,
+            "tm": 1
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 12.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        }
+      ],
+      "RangeConfig": [
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        }
+      ],
+      "UniqueID": null,
+      "TotalLevels": 30
+    },
+    "StatCollection": [
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      }
+    ],
+    "UniqueID": "Swordsman_1"
+  },
+  {
+    "MobWeaponData": {
+      "SkillDamage": [
+        {
+          "md": 5.0,
+          "tm": 1,
+          "pd": 10.0,
+          "mc": 1.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 5.0,
+            "tm": 1
+          }
+        },
+        {
+          "md": 7.0,
+          "tm": 1,
+          "pd": 15.0,
+          "mc": 1.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 7.0,
+            "tm": 1
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        }
+      ],
+      "RangeConfig": [
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        }
+      ],
+      "UniqueID": null,
+      "TotalLevels": 30
+    },
+    "StatCollection": [
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      }
+    ],
+    "UniqueID": "Swordsman_2"
+  },
+  {
+    "MobWeaponData": {
+      "SkillDamage": [
+        {
+          "md": 5.0,
+          "tm": 2,
+          "pd": 10.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 5.0,
+            "tm": 2
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        }
+      ],
+      "RangeConfig": [
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        }
+      ],
+      "UniqueID": null,
+      "TotalLevels": 30
+    },
+    "StatCollection": [
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      }
+    ],
+    "UniqueID": "Swordsman_3"
+  },
+  {
+    "MobWeaponData": {
+      "SkillDamage": [
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 5.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 7.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        },
+        {
+          "md": 0.0,
+          "tm": 0,
+          "pd": 0.0,
+          "mc": 0.0,
+          "CRA": 0.0,
+          "CriticalChance": 0.0,
+          "CriticalDamage": 0.0,
+          "SingleDamageInfo": {
+            "md": 0.0,
+            "tm": 0
+          }
+        }
+      ],
+      "RangeConfig": [
+        {
+          "C": 2.0,
+          "sf": 1.5,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 1.5,
+          "sf": 1.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        },
+        {
+          "C": 0.0,
+          "sf": 0.0,
+          "su": 1,
+          "pu": 1
+        }
+      ],
+      "UniqueID": null,
+      "TotalLevels": 30
+    },
+    "StatCollection": [
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      },
+      {
+        "he": 10.0,
+        "ms": 1.0
+      }
+    ],
+    "UniqueID": "Gunslinger_1"
+  }
+]

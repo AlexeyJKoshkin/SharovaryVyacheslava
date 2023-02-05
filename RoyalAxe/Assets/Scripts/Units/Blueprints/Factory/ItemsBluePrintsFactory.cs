@@ -16,12 +16,11 @@ namespace RoyalAxe.CoreLevel
 
         public WeaponBluePrint CreateMainWeapon(string id, int level)
         {
-            var weapon = _dataStorage.ById<WeaponsSkillConfigDef>(id);
+            var weapon = _dataStorage.ById<UnitWeaponSkillConfigDef>(id);
             return CreateMainWeapon(weapon, level);
-
         }
 
-        public WeaponBluePrint CreateMainWeapon(WeaponsSkillConfigDef weapon, int level)
+        public WeaponBluePrint CreateMainWeapon(SkillConfigDef weapon, int level)
         {
             WeaponBluePrint result = new WeaponBluePrint()
             {

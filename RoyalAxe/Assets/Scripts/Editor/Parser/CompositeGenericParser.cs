@@ -7,8 +7,8 @@ namespace Core.Parser
 {
     public class CompositeGenericParser : IGameDataParser
     {
-        private static Dictionary<Type, IGameDataParser> _typesParsers = new Dictionary<Type, IGameDataParser>();
-        private static HashSet<Type> _availableTypes = new HashSet<Type>();
+        private static readonly Dictionary<Type, IGameDataParser> _typesParsers = new Dictionary<Type, IGameDataParser>();
+        private static readonly HashSet<Type> _availableTypes = new HashSet<Type>();
 
         public CompositeGenericParser Bind<T>()
         {
@@ -26,8 +26,7 @@ namespace Core.Parser
         {
             if(!CheckType(fieldInfoFieldType)) return;
             if(_availableTypes.Contains(fieldInfoFieldType)) return;
-         
-            
+
             AddType(fieldInfoFieldType);
             var fields = Fields(fieldInfoFieldType);
             for (int i = 0; i < fields.Length; i++)

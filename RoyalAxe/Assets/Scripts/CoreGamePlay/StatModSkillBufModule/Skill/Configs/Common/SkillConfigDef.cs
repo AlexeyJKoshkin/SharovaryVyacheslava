@@ -17,7 +17,7 @@ namespace RoyalAxe.Units.Stats
     }
     
     [Serializable]
-    public abstract class SkillConfigDef : IDataObject
+    public abstract class SkillConfigDef
     {
         public string UniqueID { get; set; }
 
@@ -34,6 +34,7 @@ namespace RoyalAxe.Units.Stats
 
         [SerializeField] public List<RangeParams> RangeConfig = new List<RangeParams>();
 
+        [JsonIgnore]
         public int TotalLevels => SkillDamage.Count;
         
         public (Damage damage, RangeParams rangeParams) GetByLevel(int lvl)

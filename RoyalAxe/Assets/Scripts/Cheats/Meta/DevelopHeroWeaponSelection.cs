@@ -25,7 +25,7 @@ namespace RoyalAxe
         public void PrepareViews()
         {
             var weapons = new List<string>() {"Select Weapon"};
-            _storage.All<WeaponsSkillConfigDef>()
+            _storage.All<UnitWeaponSkillConfigDef>()
                     .Select(o => o.UniqueID)
                     .Where(o => o.Split('_').Length == 4) // тип вещи рарность подтип вещи и айдишник вещи 
                     .ForEach(weapons.Add);
@@ -50,7 +50,7 @@ namespace RoyalAxe
 
         private void OnChangeItemParamsSelectionHandler(string heroId, int heroLvl)
         {
-            if (_storage.Contains<WeaponsSkillConfigDef>(heroId))
+            if (_storage.Contains<UnitWeaponSkillConfigDef>(heroId))
             {
                 _cheatAdapter.Cheats.ReplaceHeroStartWeapon(heroId, heroLvl);
             }

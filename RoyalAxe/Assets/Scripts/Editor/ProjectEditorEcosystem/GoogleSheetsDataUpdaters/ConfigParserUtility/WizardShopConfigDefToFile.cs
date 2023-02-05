@@ -7,27 +7,25 @@ using GameKit.Editor;
 using RoyalAxe.CoreLevel;
 using RoyalAxe.LevelSkill;
 
-namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
+namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
+{
     internal class WizardShopConfigDefToFile : ModelsToJsonFile<WizardLevelCollection>
     {
         private readonly Dictionary<string, LevelSkillType> _settingsToType = new Dictionary<string, LevelSkillType>();
+
         public WizardShopConfigDefToFile()
         {
             LevelBuffSettingsComposite mock = new LevelBuffSettingsComposite();
-            mock.AllSettings().ForEach(e=> _settingsToType.Add(e.GetType().Name,e.Type));
+            mock.AllSettings().ForEach(e => _settingsToType.Add(e.GetType().Name, e.Type));
         }
-        
-        protected override void RemoveUpdateConfigs(List<WizardLevelCollection> allExistItems, List<GoogleSheetGameData> allPages)
-        {
-            allExistItems.RemoveAll(o => allPages.Any(p => p.PageName == o.UniqueID)); //удаляем все модели которые будем обновлять
-        }
+
 
         protected override IEnumerable<WizardLevelCollection> Parse(GoogleSheetGameData googleSheetGameData, IGameDataParser dataParser)
         {
-            yield return SingleCollection(googleSheetGameData, dataParser);
+            yield return SingleCollection(googleSheetGameData);
         }
-        
-        protected WizardLevelCollection SingleCollection(GoogleSheetGameData page, IGameDataParser parser)
+
+        protected WizardLevelCollection SingleCollection(GoogleSheetGameData page)
         {
             WizardLevelCollection result = new WizardLevelCollection {UniqueID = page.PageName};
 
@@ -35,7 +33,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
             {
                 var lvlCells = page.Cells[i];
 
-                var item =new WizardShopSettings()
+                var item = new WizardShopSettings()
                 {
                     PossibleBuffs = GetBuffsType(lvlCells).ToArray()
                 };
@@ -47,14 +45,14 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
 
         private IEnumerable<LevelSkillType> GetBuffsType(List<ICellValue> lvlCells)
         {
-             foreach (var cell in lvlCells)
-                     {
-                         if (_settingsToType.TryGetValue(cell.ColumnName, out var type))
-                         {
-                             if (CommonTypeParser.ParseBool(cell.Value))
-                                 yield return type;
-                         }
-                     }
+            foreach (var cell in lvlCells)
+            {
+                if (_settingsToType.TryGetValue(cell.ColumnName, out var type))
+                {
+                    if (CommonTypeParser.ParseBool(cell.Value))
+                        yield return type;
+                }
+            }
         }
     }
 }

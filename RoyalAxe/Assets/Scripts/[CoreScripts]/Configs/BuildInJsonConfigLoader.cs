@@ -16,11 +16,12 @@ namespace RoyalAxe.Configs
 
         public string LoadText<T>(string path) where T : class
         {
-            if (typeof(T) == typeof(StatCollection)) return _buildInJsonDataProvider.UnitStatText;
             if (typeof(T) == typeof(LevelSettingsData)) return _buildInJsonDataProvider.LevelDataText;
-            if (typeof(T) == typeof(WeaponsSkillConfigDef)) return _buildInJsonDataProvider.WeaponSkillText;
+            if (typeof(T) == typeof(UnitWeaponSkillConfigDef)) return _buildInJsonDataProvider.HeroWeaponSkillText;
             if (typeof(T) == typeof(WizardLevelCollection)) return _buildInJsonDataProvider.WizardLevelText;
             if (typeof(T) == typeof(LevelBuffSettingsComposite)) return _buildInJsonDataProvider.LevelBufSettings;
+            if (typeof(T) == typeof(MobUnitJsonData)) return _buildInJsonDataProvider.MobUnitSettings;
+            if (typeof(T) == typeof(HeroUnitJsonData)) return _buildInJsonDataProvider.HeroUnitSettings;
 
             HLogger.LogError($"Not Found json Asset {typeof(T).Name}");
             return null;

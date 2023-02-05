@@ -3,35 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Configs;
 using Core.EditorCore.Parser;
+using Core.Parser;
 using GameKit.Editor;
 using ProjectEditorEcoSystem;
+using RoyalAxe.CoreLevel;
 using UnityEngine;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
     [Serializable]
-    public class LevelDataToJsonParser : IGoogleSheetDataToGameConfigConverter
+    public class LevelDataToJsonParser : RAGoogleSheetDataToGameConfigConverter
     {
-        public void ParseSheetData(IEnumerable<GoogleSheetGameData> sheet)
+        protected override void BindParserTypes(CompositeGenericParser genericParser)
         {
-            if (sheet == null) return;
-
-            var launcher = EditorUtils.FindAsset<ProjectEditorEcosystemLauncher>();
-
-            if (launcher == null || launcher.Current == null)
-            {
-                Debug.LogError("Eco system Not Found");
-                return;
-            }
-
-            var allPages = sheet.ToList();
-            UpdateJson(allPages, launcher.Current.Utility);
+            genericParser.Bind<LevelSettingsData>();
         }
 
-        private void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser)
         {
             IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
-            new LevelConfigSettingDefToFile().UpdateConfigs(allPages, operation);
+            new LevelConfigSettingDefToFile().UpdateConfigs(allPages, operation, parser);
         }
     }
 }

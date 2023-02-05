@@ -15,23 +15,4 @@ namespace RoyalAxe.Configs
         [ColumnName("Speed_move"), JsonProperty("ms")]
         public float MoveSpeed = 1;
     }
-
-    [Serializable]
-    public class StatCollection : IDataObject
-    {
-        public string UniqueID { get; set; }
-
-        public List<StatsConfig> Stats = new List<StatsConfig>();
-
-        public StatsConfig GetByLevel(int lvl)
-        {
-            lvl--; // уровнь всегда на 1 больше чем индекс
-            if (lvl < Stats.Count)
-            {
-                return Stats[lvl];
-            }
-
-            return new StatsConfig();
-        }
-    }
 }

@@ -40,7 +40,7 @@ namespace RoyalAxe.CoreLevel
 
         void IEnemyWaveGenerator.GenerateEnemy(MobBlueprint mobBlueprint)
         {
-            var mobReward = _coreGamePlay.levelWaveEntity.levelWaveQueue.Current.MobDeathReward;
+            var mobGems = _coreGamePlay.levelWaveEntity.levelWaveQueue.Current.GemsPerLevel;
             var pos = _generator.GetPosForNewMob(mobBlueprint.Id);
             mobBlueprint.Position = pos.startPoint;
             var entity = _unitsBuilder.CreateEnemyMobUnit(mobBlueprint);
@@ -50,7 +50,8 @@ namespace RoyalAxe.CoreLevel
                 if(entity.hasNavMeshAgent)
                     entity.navMeshAgent.SetDestinationPoint(pos.endPoint);
             }
-            entity.AddMobDeathReward(mobReward.Expa, mobReward.Gold, mobReward.Gems);
+            HLogger.TempLog("Надо добавить награду за за мобью смерть");
+            entity.AddMobDeathReward(0, 0, mobGems);
         }
     }
 }

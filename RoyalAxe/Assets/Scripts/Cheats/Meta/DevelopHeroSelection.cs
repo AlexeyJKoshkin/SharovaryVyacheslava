@@ -26,7 +26,7 @@ namespace RoyalAxe
         public void PrepareViews()
         {
             var heroes = new List<string>() {"Select Hero"};
-            _storage.All<StatCollection>()
+            _storage.All<HeroUnitJsonData>()
                                  .Select(o => o.UniqueID)
                                  .Where(o => o.Contains(UnitsEntityExtension.HERO_POSTFIX))
                                  .ForEach(heroes.Add);
@@ -51,7 +51,7 @@ namespace RoyalAxe
 
         private void OnChangeItemParamsSelectionHandler(string heroId, int heroLvl)
         {
-            if (_storage.Contains<StatCollection>(heroId))
+            if (_storage.Contains<HeroUnitJsonData>(heroId))
             {
                 _cheatAdapter.Cheats.ReplaceHeroStartLevel(heroId, heroLvl);
             }

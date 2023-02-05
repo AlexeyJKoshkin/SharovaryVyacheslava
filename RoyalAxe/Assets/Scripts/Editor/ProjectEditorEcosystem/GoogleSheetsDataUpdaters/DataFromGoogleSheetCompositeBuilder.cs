@@ -9,7 +9,6 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
     public class DataFromGoogleSheetCompositeBuilder<T>
     {
-      
         private readonly Dictionary<string, IGameDataParser> _fieldCustomParsers = new Dictionary<string, IGameDataParser>();
         private readonly Dictionary<string, FieldInfo> _fieldNameMap = new Dictionary<string, FieldInfo>();
 

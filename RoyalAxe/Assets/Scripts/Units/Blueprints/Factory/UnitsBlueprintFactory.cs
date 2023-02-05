@@ -20,25 +20,24 @@ namespace RoyalAxe.CoreLevel
             _itemsBlueprintsFactory = itemsBlueprints;
         }
 
-        public MobBlueprint CreateMobBluePrint(WeaponsSkillConfigDef weaponData, StatCollection mobStatCollection, int level, string id)
+        public MobBlueprint CreateMobBluePrint(MobWeaponSkillConfigDef weaponData, MobUnitJsonData mobStatCollection, int level, string id)
         {
             return new MobBlueprint(id, level)
             {
-                Stats = mobStatCollection.GetByLevel(level),
+                Stats = mobStatCollection.GetStatByLevel(level),
                 MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData, level)
             };
         }
         
         public IDictionary<int, MobBlueprint> CreateMobBluePrints(string mobId, IEnumerable<MobAtLevelData> mobs)
         {
-            var mobStatCollection = _dataStorage.ById<StatCollection>(mobId);
-            var weaponData        = _dataStorage.ById<WeaponsSkillConfigDef>(mobId);
+            var mobJson = _dataStorage.ById<MobUnitJsonData>(mobId);
             
             var blueprints = new Dictionary<int, MobBlueprint>();
             foreach (var levelGroup in mobs.GroupBy(o=> o.Level))
             {
                 var level        = levelGroup.Key;
-                var mobBluePrint = CreateMobBluePrint(weaponData, mobStatCollection, level, mobId);
+                var mobBluePrint = CreateMobBluePrint(mobJson.MobWeaponData, mobJson, level, mobId);
                 blueprints.Add(level, mobBluePrint);
             }
 
@@ -49,7 +48,7 @@ namespace RoyalAxe.CoreLevel
         {
             return new UnitBlueprint(heroRecord)
             {
-                Stats = _dataStorage.ById<StatCollection>(heroRecord.Id).GetByLevel(heroRecord.Level),
+               Stats = _dataStorage.ById<HeroUnitJsonData>(heroRecord.Id).GetStatByLevel(heroRecord.Level),
                MainItemBluePrint  = _itemsBlueprintsFactory.CreateMainWeapon(weaponRecord.Id, weaponRecord.Level)
             };
         }

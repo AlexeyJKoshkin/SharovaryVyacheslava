@@ -9,12 +9,10 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     internal class LevelConfigSettingDefToFile : ModelsToJsonFile<LevelSettingsData>
     {
         readonly MobSpawnConfigData _mobSpawnParserHelper = new MobSpawnConfigData();
-        
+
         public LevelConfigSettingDefToFile()
         {
-            Bind<LevelSettingsData>();
-            Bind<MobDeathReward>();
-            Bind<WaveDestiny>();
+         
         }
 
         protected override void RemoveUpdateConfigs(List<LevelSettingsData> allExistItems, List<GoogleSheetGameData> allPages)
@@ -26,17 +24,14 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         {
             for (int i = 0; i < page.Cells.Count; i++)
             {
-                LevelSettingsData result = new LevelSettingsData();
-                var levelCells = page.Cells[i];                       // тут содержится инфа об волнах уровня
-                result = (LevelSettingsData)  parser.UpdateObject(levelCells, result);              // общий класс
-                /*parser.UpdateObject(levelCells, result.MobDeathReward); // мобьи награды
-                parser.UpdateObject(levelCells, result.Destiny);        // судьба/магазин*/
+                var               levelCells = page.Cells[i];                         // тут содержится инфа об волнах уровня
+                LevelSettingsData result = (LevelSettingsData) parser.UpdateObject(levelCells, new LevelSettingsData()); // общий класс
                 FillMobSpawnData(levelCells, result);
                 yield return result;
             }
         }
 
-      
+
         private const int MaxDifferentMobs = 5;
 
         private void FillMobSpawnData(List<ICellValue> levelCells, LevelSettingsData result)
@@ -47,15 +42,15 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             for (int i = 0; i < MaxDifferentMobs; i++)
             {
                 _mobSpawnParserHelper.Set(i + 1);
-                var mobIdCell = FindAndRemove(neededCells,_mobSpawnParserHelper.MobIdCell);
-                if(mobIdCell == null || string.IsNullOrEmpty(mobIdCell.Value)) break; // не указан моб, значит все остальное игнорируем
+                var mobIdCell = FindAndRemove(neededCells, _mobSpawnParserHelper.MobIdCell);
+                if (mobIdCell == null || string.IsNullOrEmpty(mobIdCell.Value)) break; // не указан моб, значит все остальное игнорируем
                 var levelIdCell = FindAndRemove(neededCells, _mobSpawnParserHelper.MobIdLevel);
-                var amountCell = FindAndRemove(neededCells,_mobSpawnParserHelper.MobIdAmount);
+                var amountCell  = FindAndRemove(neededCells, _mobSpawnParserHelper.MobIdAmount);
                 result.MobsData.Add(new MobAtLevelData()
                 {
-                    MobId = mobIdCell.Value,
-                    TotalAmount = (byte)CommonTypeParser.ParseInt(amountCell.Value),
-                    Level = (byte)CommonTypeParser.ParseInt(levelIdCell.Value)
+                    MobId       = mobIdCell.Value,
+                    TotalAmount = (byte) CommonTypeParser.ParseInt(amountCell.Value),
+                    Level       = (byte) CommonTypeParser.ParseInt(levelIdCell.Value)
                 });
             }
         }
@@ -79,8 +74,8 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 
             public void Set(int i)
             {
-                MobIdCell = $"{BlankMobId}_{i}";
-                MobIdLevel = $"{BlankMobLevel}_{i}";
+                MobIdCell   = $"{BlankMobId}_{i}";
+                MobIdLevel  = $"{BlankMobLevel}_{i}";
                 MobIdAmount = $"{BlankMobAmount}_{i}";
             }
         }

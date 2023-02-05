@@ -9,4 +9,6 @@ namespace Core.Parser
         bool UpdateObjectValue(object data, string columnName, string cellValue);
         bool CanRead(string rowName);
     }
+    
+    
 }
