@@ -42,6 +42,30 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
     - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
     - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+  - SceneName: StartScene
+    SceneAsset: {fileID: 102900000, guid: 110a38e16d35e7044a336358b43c5200, type: 3}
+    DisplayName: StartScene
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: MetaScene
+    SceneAsset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+    DisplayName: MetaScene
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: CoreGameScene
+    SceneAsset: {fileID: 102900000, guid: ad15c7c1d0e067b4389618f1427e5514, type: 3}
+    DisplayName: CoreGameScene
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
   tipsList:
   - Create beautiful loading screens for improved your game
   - Easy to use and implement
