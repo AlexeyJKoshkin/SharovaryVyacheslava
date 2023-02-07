@@ -8,11 +8,10 @@ namespace RoyalAxe.CoreLevel
     public class LevelExperienceSystem : RAReactiveSystem<CoreGamePlayEntity>, IInitializeSystem
     {
         private readonly IDataStorage _dataStorage;
-        private IUIScenarioExecutor _showSelectBuffWindowCommand;
+        private readonly IUIScenarioExecutor _showSelectBuffWindowCommand;
 
-        private LevelCounter _levelCounter = new LevelCounter();
+        private readonly LevelCounter _levelCounter = new LevelCounter();
         
-        private ExpaOnLevelData _expaOnLevelData;
         
         public LevelExperienceSystem(IContext<CoreGamePlayEntity> context,
                                      IDataStorage dataStorage,
@@ -34,15 +33,15 @@ namespace RoyalAxe.CoreLevel
 
         protected override void Execute(CoreGamePlayEntity e)
         {
-            if (_levelCounter.Check(e))
+            /*if (_levelCounter.Check(e))
             {
                 _showSelectBuffWindowCommand.ExecuteSelectBufUIScenario();
-            }
+            }*/
         }
 
         public void Initialize()
         {
-            _levelCounter.LoadData(_dataStorage.First<ExpaOnLevelData>());
+           // _levelCounter.LoadData(_dataStorage.First<ExpaOnLevelData>());
         }
         
         class LevelCounter

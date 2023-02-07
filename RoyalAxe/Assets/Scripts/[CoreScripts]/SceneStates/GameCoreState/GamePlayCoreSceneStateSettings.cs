@@ -66,14 +66,16 @@ namespace Core.Launcher
 
         private FeatureBindInfo CleaningSystems()
         {
-            return FeatureBindInfo.Create("Завершающие системы",
-                                          typeof(DropSkillsTimerSystem),          // Сбрасываем таймер на скилах
-                                          typeof(ClearTargetsSystem),             // очистка списка целей  
-                                          typeof(ClearPhysicalInteractionSystem), // очистка взаимодействией
-                                          typeof(HealthEventSystem),              // обновение система слежения здоровья по юнитам
-                                          typeof(HandlePlayerDeadSystem),         // проверяем помер ли игрок
-                                          typeof(CheckMobDeadSystem),             // проверяем померли мобы
-                                          typeof(DestroyUnitSystem));             // уничтожение объектов
+            return FeatureBindInfo.Create("Завершающие системы")
+                                  .Bind<DropSkillsTimerSystem>()          // Сбрасываем таймер на скилах
+                                  .Bind<ClearTargetsSystem>()             // очистка списка целей  
+                                  .Bind<ClearPhysicalInteractionSystem>() // очистка взаимодействией
+                                  .Bind<HealthEventSystem>()              // обновение система слежения здоровья по юнитам
+                                  .Bind<CheckUnitDeadSystem>()            // Выставляем что юнит помер
+                                  .Bind<HandlePlayerDeadSystem>()         // проверяем помер ли игрок
+                                  .Bind<CheckMobDeadSystem>()             // проверяем померли мобы
+                                  .Bind<DestroyUnitSystem>();             // уничтожение объектов
+
         }
 
 
