@@ -1,16 +1,24 @@
+using Core.Data.Provider;
 using Entitas;
 using RoyalAxe.EntitasSystems;
 using RoyalAxe.UI;
 
 namespace RoyalAxe.CoreLevel 
 {
-    public class LevelExperienceSystem : RAReactiveSystem<CoreGamePlayEntity>
+    public class LevelExperienceSystem : RAReactiveSystem<CoreGamePlayEntity>, IInitializeSystem
     {
+        private readonly IDataStorage _dataStorage;
         private IUIScenarioExecutor _showSelectBuffWindowCommand;
-        private int NeedExpa = 100;
+
+        private LevelCounter _levelCounter = new LevelCounter();
         
-        public LevelExperienceSystem(IContext<CoreGamePlayEntity> context, IUIScenarioExecutor showSelectBuffWindow) : base(context)
+        private ExpaOnLevelData _expaOnLevelData;
+        
+        public LevelExperienceSystem(IContext<CoreGamePlayEntity> context,
+                                     IDataStorage dataStorage,
+                                     IUIScenarioExecutor showSelectBuffWindow) : base(context)
         {
+            _dataStorage = dataStorage;
             _showSelectBuffWindowCommand = showSelectBuffWindow;
         }
 
@@ -26,11 +34,41 @@ namespace RoyalAxe.CoreLevel
 
         protected override void Execute(CoreGamePlayEntity e)
         {
-            if (e.earnedExperience.Value >= NeedExpa)
+            if (_levelCounter.Check(e))
             {
-                var delta = e.earnedExperience.Value - NeedExpa;
-                e.ReplaceEarnedExperience(delta);
                 _showSelectBuffWindowCommand.ExecuteSelectBufUIScenario();
+            }
+        }
+
+        public void Initialize()
+        {
+            _levelCounter.LoadData(_dataStorage.First<ExpaOnLevelData>());
+        }
+        
+        class LevelCounter
+        {
+            public int Level { get; private set; }
+            private int[] ExpaArray;
+            private int _needExpa;
+
+            public void LoadData(ExpaOnLevelData first)
+            {
+                ExpaArray = first.NeedUSerExperience;
+                _needExpa = ExpaArray[0];
+            }
+
+            public bool Check(CoreGamePlayEntity e)
+            {
+                if (e.earnedExperience.Value >= _needExpa)
+                {
+                    var delta = e.earnedExperience.Value - _needExpa;
+                    e.ReplaceEarnedExperience(delta);
+                    Level++;
+                    _needExpa = ExpaArray[Level];
+                    return true;
+                }
+
+                return false;
             }
         }
     }

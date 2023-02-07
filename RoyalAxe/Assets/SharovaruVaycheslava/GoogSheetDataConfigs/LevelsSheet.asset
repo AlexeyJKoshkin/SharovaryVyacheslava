@@ -17,9 +17,11 @@ MonoBehaviour:
     id: 0
   _pages:
   - PageName: Level configurator
+    FolderState: 8
+  - PageName: ExpaOnLevels
     FolderState: 10
   - PageName: Help
-    FolderState: 6
+    FolderState: 4
   references:
     version: 1
     00000000:

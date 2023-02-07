@@ -23,13 +23,23 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
         {
             IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
             
-            
-            
-            
-            new LevelConfigSettingDefToFile().UpdateConfigs(allPages, operation, parser);
+            new LevelConfigSettingDefToFile().UpdateConfigs(new List<GoogleSheetGameData>(){allPages[0]}, operation, parser);
+
+            ParseUser(allPages[1]);
         }
-        
-         readonly MobSpawnConfigData _mobSpawnParserHelper = new MobSpawnConfigData();
+
+        private void ParseUser(GoogleSheetGameData page)
+        {
+            ExpaOnLevelData expaOnLevelData = new ExpaOnLevelData() {NeedUSerExperience = new int[page.Cells.Count]};
+            for (int i = 0; i < page.Cells.Count; i++)
+            {
+                var cell = page.Cells[i][1].Value;
+                expaOnLevelData.NeedUSerExperience[i] = CommonTypeParser.ParseInt(cell);
+            }
+            
+        }
+
+        readonly MobSpawnConfigData _mobSpawnParserHelper = new MobSpawnConfigData();
 
         /*protected override void RemoveUpdateConfigs(List<LevelSettingsData> allExistItems, List<GoogleSheetGameData> allPages)
         {

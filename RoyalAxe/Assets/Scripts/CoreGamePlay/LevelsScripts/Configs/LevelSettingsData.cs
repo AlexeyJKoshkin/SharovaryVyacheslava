@@ -19,12 +19,20 @@ namespace RoyalAxe.CoreLevel
         public int LevelNumber;
         [ColumnName("Gems")]
         public int GemsPerLevel;
-        
-        //public MobDeathReward MobDeathReward = new MobDeathReward();
         public List<MobAtLevelData> MobsData = new List<MobAtLevelData>();
         public WaveDestiny Destiny = new WaveDestiny();
         [JsonIgnore]
         public string UniqueID => LevelNumber.ToString();
         public bool IsSafePoint;
     }
+
+    [Serializable]
+    public class ExpaOnLevelData : IDataObject
+    {
+        [JsonIgnore] public string UniqueID { get; } = "ExpaOnLevelData";
+
+        public int[] NeedUSerExperience;
+    }
+    
+    
 }

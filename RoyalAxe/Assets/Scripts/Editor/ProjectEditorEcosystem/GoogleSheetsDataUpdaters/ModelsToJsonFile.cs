@@ -14,6 +14,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                            IJsonConfigModelsOperation operation,
                            IGameDataParser parser);
     }
+    
 
     internal abstract class ModelsToJsonFile<T> : IConfigUpdater where T : class,IDataObject,  new()
     {

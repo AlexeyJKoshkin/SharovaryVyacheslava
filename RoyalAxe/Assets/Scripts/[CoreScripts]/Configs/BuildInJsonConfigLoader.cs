@@ -1,29 +1,25 @@
-﻿using Core;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core.Configs;
-using RoyalAxe.Units.Stats;
-using RoyalAxe.CoreLevel;
-using RoyalAxe.LevelSkill;
+
+using UnityEngine;
 
 namespace RoyalAxe.Configs
 {
     public class BuildInJsonConfigLoader : IJsonConfigFileLoader
     {
-        private readonly BuildInJsonDataProvider _buildInJsonDataProvider;
+        private Dictionary<string, TextAsset> _assetsByTypeName = new Dictionary<string, TextAsset>();
+        
         public BuildInJsonConfigLoader(BuildInJsonDataProvider buildInJsonDataProvider)
         {
-            _buildInJsonDataProvider = buildInJsonDataProvider;
+            _assetsByTypeName = buildInJsonDataProvider.Assets().ToDictionary(e => e.name, e => e);
         }
 
         public string LoadText<T>(string path) where T : class
         {
-            if (typeof(T) == typeof(LevelSettingsData)) return _buildInJsonDataProvider.LevelDataText;
-            if (typeof(T) == typeof(UnitWeaponSkillConfigDef)) return _buildInJsonDataProvider.HeroWeaponSkillText;
-            if (typeof(T) == typeof(WizardLevelCollection)) return _buildInJsonDataProvider.WizardLevelText;
-            if (typeof(T) == typeof(LevelBuffSettingsComposite)) return _buildInJsonDataProvider.LevelBufSettings;
-            if (typeof(T) == typeof(MobUnitJsonData)) return _buildInJsonDataProvider.MobUnitSettings;
-            if (typeof(T) == typeof(HeroUnitJsonData)) return _buildInJsonDataProvider.HeroUnitSettings;
+            var fileName = typeof(T).Name;
 
-            HLogger.LogError($"Not Found json Asset {typeof(T).Name}");
+            if (_assetsByTypeName.TryGetValue(fileName, out var textAsset)) return textAsset.text;
             return null;
         }
     }

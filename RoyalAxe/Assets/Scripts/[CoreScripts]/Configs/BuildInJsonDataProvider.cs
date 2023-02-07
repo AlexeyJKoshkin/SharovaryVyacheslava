@@ -1,29 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace RoyalAxe.Configs
 {
     public class BuildInJsonDataProvider : ScriptableObject
     {
-        public string HeroWeaponSkillText => GetText(_heroWeaponSkill);
-        public string WizardLevelText => GetText(_wizardShop);
-        public string LevelDataText => GetText(_levelsData);
-        public string LevelBufSettings => GetText(_levelBuffData);
-        public string MobUnitSettings => GetText(_mobUnitData);
-        public string HeroUnitSettings => GetText(_heroCharacters);
-
-        [SerializeField] private TextAsset _heroWeaponSkill;
-        [SerializeField] private TextAsset _heroCharacters;
-        [SerializeField] private TextAsset _wizardShop;
-
-        [SerializeField] private TextAsset _levelsData;
-        [SerializeField] private TextAsset _levelBuffData;
+        [SerializeField]
+        private TextAsset[] _allAssets;
         
-        [SerializeField] private TextAsset _mobUnitData;
-        
-        private string GetText(TextAsset asset)
+        public IEnumerable<TextAsset> Assets()
         {
-            if (asset == null) return null;
-            return asset.text;
+            return _allAssets;
         }
+        
+        #if UNITY_EDITOR
+        [SerializeField]
+        private UnityEditor.DefaultAsset _folder;
+
+        [Button, EnableIf("_folder")]
+        void LoadAll()
+        {
+            var path = UnityEditor.AssetDatabase.GetAssetPath(_folder);
+            _allAssets = GameKit.Editor.EditorUtils.LoadAllAssetsAtPath<TextAsset>(path).ToArray();
+        }
+#endif
     }
 }
