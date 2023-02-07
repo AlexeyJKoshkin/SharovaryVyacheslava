@@ -14,18 +14,18 @@ namespace RoyalAxe.CoreLevel
             _skillBlueprints = skillBlueprints;
         }
 
-        public WeaponBluePrint CreateMainWeapon(string id, int level)
+        public WeaponBluePrint CreateHeroMainWeapon(string id, int level)
         {
             var weapon = _dataStorage.ById<UnitWeaponSkillConfigDef>(id);
-            return CreateMainWeapon(weapon, level);
+            return CreateMainWeapon(weapon,id, level);
         }
 
-        public WeaponBluePrint CreateMainWeapon(SkillConfigDef weapon, int level)
+        public WeaponBluePrint CreateMainWeapon(SkillConfigDef weapon, string id, int level)
         {
             WeaponBluePrint result = new WeaponBluePrint()
             {
-                Id             = weapon.UniqueID,Level = level,
-                SkillBlueprint = _skillBlueprints.Create(weapon,level)
+                Id             = id,Level = level,
+                SkillBlueprint = _skillBlueprints.Create(weapon,id,level)
             };
             return result;
         }

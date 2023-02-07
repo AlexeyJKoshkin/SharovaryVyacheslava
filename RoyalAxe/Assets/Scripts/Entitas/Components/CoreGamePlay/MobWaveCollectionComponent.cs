@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core.UserProfile;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using GameKit;
@@ -8,13 +7,6 @@ using RoyalAxe.LevelSkill;
 
 namespace RoyalAxe.GameEntitas
 {
-    [CoreGamePlay, Event(EventTarget.Self)]
-    public class CurrentLevelInfoComponent : IComponent
-    {
-        public LastLevel Level;
-    }
-
-
     [CoreGamePlay]
     [Unique]
     public class LevelWaveComponent : IComponent { }

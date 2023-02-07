@@ -1,7 +1,8 @@
 using RoyalAxe.EntitasSystems.TimerUtility;
 using VContainer.Unity;
 
-namespace RoyalAxe.CoreLevel {
+namespace RoyalAxe.CoreLevel 
+{
     public class MobSpawnFacade : IMobSpawnFacade,IDoneTimerListener, IGamePauseListener, IInitializable
     {
         private readonly CoreGamePlayContext _waveProvider;
@@ -49,7 +50,7 @@ namespace RoyalAxe.CoreLevel {
             _mobSpawnOperation.SpawnMobs();                                                               // первую волну спавним на старте
         }
 
-        public void OnGamePause(GameRootLoopEntity entity, bool isPause)
+         void IGamePauseListener.OnGamePause(GameRootLoopEntity entity, bool isPause)
         {
             if (isPause)
             {

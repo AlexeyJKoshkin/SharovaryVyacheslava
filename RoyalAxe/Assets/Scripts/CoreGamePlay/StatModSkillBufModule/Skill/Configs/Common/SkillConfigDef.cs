@@ -19,13 +19,10 @@ namespace RoyalAxe.Units.Stats
     [Serializable]
     public abstract class SkillConfigDef
     {
-        public string UniqueID { get; set; }
-
         public SkillConfigDef() { }
 
-        public SkillConfigDef(string id, int lvl)
+        public SkillConfigDef( int lvl)
         {
-            UniqueID    = id;
             SkillDamage = new List<Damage>(lvl);
             RangeConfig = new List<RangeParams>(lvl);
         }

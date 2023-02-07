@@ -15,7 +15,10 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
 
         protected UnitWeaponSkillConfigDef SingleCollection(GoogleSheetGameData page, IGameDataParser parser)
         {
-            UnitWeaponSkillConfigDef result = new UnitWeaponSkillConfigDef(page.PageName, page.Cells.Count);
+            UnitWeaponSkillConfigDef result = new UnitWeaponSkillConfigDef(page.Cells.Count)
+            {
+                UniqueID = page.PageName
+            };
 
             for (int i = 0; i < page.Cells.Count; i++)
             {

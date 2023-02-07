@@ -1,3 +1,4 @@
+using Core;
 using Entitas;
 using UnityEngine;
 
@@ -28,7 +29,6 @@ namespace RoyalAxe.EntitasSystems
             {
                 e.unitActiveSkill.SkillEntity.Destroy();
             }
-
             //по хорошему вьюшку надо вернуть в пул, но пока просто уничтожаем
             var view = e.unitsView.View;
             Object.Destroy(view.gameObject);

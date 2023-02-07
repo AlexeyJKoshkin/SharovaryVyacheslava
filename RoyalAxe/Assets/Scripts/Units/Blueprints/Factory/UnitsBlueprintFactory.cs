@@ -20,12 +20,12 @@ namespace RoyalAxe.CoreLevel
             _itemsBlueprintsFactory = itemsBlueprints;
         }
 
-        public MobBlueprint CreateMobBluePrint(MobWeaponSkillConfigDef weaponData, MobUnitJsonData mobData, int level, string id)
+         MobBlueprint CreateMobBluePrint(MobWeaponSkillConfigDef weaponData, MobUnitJsonData mobData, int level, string id)
         {
             return new MobBlueprint(id, level)
             {
                 Stats = mobData.GetStatByLevel(level),
-                MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData, level),
+                MainItemBluePrint = _itemsBlueprintsFactory.CreateMainWeapon(weaponData,mobData.UniqueID, level),
                 DeathReward = mobData.GetDeathRewardByLevel(level)
             };
         }
@@ -50,7 +50,7 @@ namespace RoyalAxe.CoreLevel
             return new UnitBlueprint(heroRecord)
             {
                Stats = _dataStorage.ById<HeroUnitJsonData>(heroRecord.Id).GetStatByLevel(heroRecord.Level),
-               MainItemBluePrint  = _itemsBlueprintsFactory.CreateMainWeapon(weaponRecord.Id, weaponRecord.Level)
+               MainItemBluePrint  = _itemsBlueprintsFactory.CreateHeroMainWeapon(weaponRecord.Id, weaponRecord.Level)
             };
         }
     }

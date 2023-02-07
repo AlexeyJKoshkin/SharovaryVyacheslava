@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Core;
+using Entitas;
 using UnityEngine;
 
 namespace RoyalAxe.EntitasSystems
@@ -31,6 +32,32 @@ namespace RoyalAxe.EntitasSystems
         public void Initialize()
         {
             _movingMobs = _unitsContext.GetGroup(UnitsMatcherLibrary.MovingUnits().Matcher());
+        }
+    }
+
+    public class SetPauseNavMeshSystem : IGamePauseListener, IInitializeSystem
+    {
+        private readonly UnitsContext _unitsContext;
+        private readonly GameRootLoopContext _gameRootContext;
+        private IGroup<UnitsEntity> _movingMobs;
+        public SetPauseNavMeshSystem(UnitsContext unitsContext, GameRootLoopContext gameRootContext)
+        {
+            _unitsContext = unitsContext;
+            _gameRootContext = gameRootContext;
+        } 
+        public void OnGamePause(GameRootLoopEntity entity, bool isPause)
+        {
+            HLogger.TempLog(isPause);
+            foreach (var unit in _movingMobs.AsEnumerable())
+            {
+                unit.navMeshAgent.NavMeshAgent.enabled = !isPause;
+            }
+        }
+
+        public void Initialize()
+        {
+            _movingMobs = _unitsContext.GetGroup(UnitsMatcherLibrary.MovingNavMeshUnits().Matcher());
+            _gameRootContext.gamePauseEntity.AddGamePauseListener(this);
         }
     }
 }

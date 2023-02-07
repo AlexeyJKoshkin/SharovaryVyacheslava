@@ -5,11 +5,13 @@ namespace RoyalAxe.Units.Stats {
     [Serializable]
     public class UnitWeaponSkillConfigDef : SkillConfigDef,IDataObject 
     {
+        public string UniqueID { get; set; }
+        
         public UnitWeaponSkillConfigDef()
         {
         }
         
-        public UnitWeaponSkillConfigDef(string pagePageName, int cellsCount) :base(pagePageName, cellsCount)
+        public UnitWeaponSkillConfigDef(int cellsCount) :base(cellsCount)
         {
         }
     }

@@ -39,6 +39,20 @@ namespace RoyalAxe.EntitasSystems
                 },
             };
         }
+        
+        public static IMatcherBuilder MovingNavMeshUnits(params IMatcher<UnitsEntity>[] triggerDefineMather)
+        {
+            triggerDefineMather ??= new IMatcher<UnitsEntity>[0];
+            return new UnitsMatcherLibrary()
+            {
+                _defineMathchers = new List<IMatcher<UnitsEntity>>(triggerDefineMather)
+                {
+                    UnitsMatcher.MoveSpeed,     // есть скорость
+                    UnitsMatcher.NavMeshAgent, // есть куда двигаться
+                    UnitsMatcher.UnitsView      // и вьюшкой
+                },
+            };
+        }
 
        
     }
