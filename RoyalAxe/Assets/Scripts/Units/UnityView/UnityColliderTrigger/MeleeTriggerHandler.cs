@@ -60,6 +60,7 @@ namespace RoyalAxe.Units
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            if(!this.PhysicTriggerCollider.enabled) return;
             if (collision.CompareTag("GameController"))
             {
                 _owner.isDestroyUnit = true;

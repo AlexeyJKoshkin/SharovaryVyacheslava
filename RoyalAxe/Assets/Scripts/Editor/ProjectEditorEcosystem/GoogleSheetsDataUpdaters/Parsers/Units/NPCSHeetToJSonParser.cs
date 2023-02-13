@@ -10,15 +10,11 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     [Serializable]
     public class NPCSHeetToJSonParser : RAGoogleSheetDataToGameConfigConverter
     {
-        protected override void BindParserTypes(CompositeGenericParser genericParser)
-        {
-            
-        }
 
-        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser)
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
             IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
-            new WizardShopConfigDefToFile().UpdateConfigs(allPages, operation,parser);
+            new WizardShopConfigDefToFile().UpdateConfigs(allPages, operation,null);
         }
     }
 }

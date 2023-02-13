@@ -17,6 +17,7 @@ namespace RoyalAxe.Units
             {
                 _navMeshAgent.updateRotation = false;
                 _navMeshAgent.updateUpAxis = false;
+                _navMeshAgent.updatePosition = true;
                 unitsEntity.AddNavMeshAgent(_navMeshAgent,unitsEntity.moveSpeed.CurrentValue);
             }
         }

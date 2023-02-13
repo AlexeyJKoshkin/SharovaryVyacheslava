@@ -17,14 +17,16 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     {
         [SerializeField] private ConfigLoadUtility _unitsDataLoader = new ConfigLoadUtility();
 
-        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility,IGameDataParser parser)
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
             IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
+            CompositeGenericParser parser = new CompositeGenericParser();
+            BindParserTypes(parser);
             new TConfigUpdater().UpdateConfigs(allPages, operation,parser);
             UpdateScriptable(allPages);
         }
 
-        protected override void BindParserTypes(CompositeGenericParser genericParser)
+        protected virtual void BindParserTypes(CompositeGenericParser genericParser)
         {
             genericParser.Bind<StatsConfig>();
         }

@@ -14,13 +14,9 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     public class LevelBuffToJsonParser : RAGoogleSheetDataToGameConfigConverter
     {
         private DataFromGoogleSheetCompositeBuilder<LevelBuffSettingsComposite> _dataParser;
-        
-        protected override void BindParserTypes(CompositeGenericParser genericParser)
-        {
-            
-        }
 
-        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser)
+     
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
             _dataParser = new DataFromGoogleSheetCompositeBuilder<LevelBuffSettingsComposite>();
             var                        operation = currentUtility.ConfigOperation;

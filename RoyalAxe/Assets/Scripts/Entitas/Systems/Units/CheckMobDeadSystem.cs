@@ -1,3 +1,4 @@
+using Core;
 using Entitas;
 
 namespace RoyalAxe.EntitasSystems
@@ -32,6 +33,26 @@ namespace RoyalAxe.EntitasSystems
         }
     }
 
+    public class SetMobSpeedZeroWhenDead : RAReactiveSystem<UnitsEntity> {
+        public SetMobSpeedZeroWhenDead(IContext<UnitsEntity> context) : base(context) { }
+        protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
+        {
+            var matcher = Matcher<UnitsEntity>.AllOf(UnitsMatcher.DeadUnit).AnyOf(UnitsMatcher.MoveSpeed);
+            var replaceTrigger       = new TriggerOnEvent<UnitsEntity>(matcher, GroupEvent.Added);
+            return context.CreateCollector(replaceTrigger);
+        }
+
+        protected override bool Filter(UnitsEntity entity)
+        {
+            return true;
+        }
+
+        protected override void Execute(UnitsEntity e)
+        {
+            e.moveSpeed.ChangeValue(-e.moveSpeed.CurrentValue);
+        }
+    }
+
     public class CheckMobDeadSystem : RAReactiveSystem<UnitsEntity>, IGamePlaySceneSystem
     {
         private CoreGamePlayEntity CorePlayer => _coreGamePlayContext.playerEntity;
@@ -45,15 +66,14 @@ namespace RoyalAxe.EntitasSystems
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            var deadMobRewardTrigger = Matcher<UnitsEntity>.AllOf(UnitsMatcher.DeadUnit,
-                                                              UnitsMatcher.MobDeathReward);
+            var deadMobRewardTrigger = Matcher<UnitsEntity>.AllOf(UnitsMatcher.DeadUnit).AnyOf(UnitsMatcher.MobDeathReward);
             var replaceTrigger = new TriggerOnEvent<UnitsEntity>(deadMobRewardTrigger, GroupEvent.Added);
             return context.CreateCollector(replaceTrigger);
         }
 
         protected override bool Filter(UnitsEntity entity)
         {
-            return true;
+            return entity.isEnabled;
         }
 
         protected override void Execute(UnitsEntity e)

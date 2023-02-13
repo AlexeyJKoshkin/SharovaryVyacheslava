@@ -73,7 +73,6 @@ namespace Core.Launcher
                                   .Bind<HealthEventSystem>()              // обновение система слежения здоровья по юнитам
                                   .Bind<CheckUnitDeadSystem>()            // Выставляем что юнит помер
                                   .Bind<HandlePlayerDeadSystem>()         // проверяем помер ли игрок
-                                  .Bind<CheckMobDeadSystem>()             // проверяем померли мобы
                                   .Bind<DestroyUnitSystem>();             // уничтожение объектов
 
         }

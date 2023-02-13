@@ -14,16 +14,37 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     [Serializable]
     public class CharacterWeaponSheetToJsonParser : RAGoogleSheetDataToGameConfigConverter
     {
-        protected override void BindParserTypes(CompositeGenericParser genericParser)
-        {
-            genericParser.Bind<UnitWeaponSkillConfigDef>();
-            genericParser.BindWeaponSkills();
-        }
 
-        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser)
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
-            IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
-            new HeroWeaponsSkillConfigDefToFile().UpdateConfigs(allPages, operation, parser);
+            throw new NotImplementedException("need fix");
+            /*IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
+            var genericParser = new CompositeGenericParser().BindWeaponSkills().Bind<UnitWeaponSkillConfigDef>();
+            var modelsToJsonHelper = new ModelsToJsonHelper<UnitWeaponSkillConfigDef>(operation);
+            var items = new List<UnitWeaponSkillConfigDef>();
+            allPages.ForEach(p => //распарсили каждую страничку и добавили их в общий список
+            {
+                var newItemsFromPage = SingleCollection(p, genericParser);
+                items.Add(newItemsFromPage);
+            });
+            
+            modelsToJsonHelper.UpdateModels(items);*/
+        }
+        
+        protected UnitWeaponSkillConfigDef SingleCollection(GoogleSheetGameData page, IGameDataParser parser)
+        {
+            UnitWeaponSkillConfigDef result = new UnitWeaponSkillConfigDef(page.Cells.Count)
+            {
+                UniqueID = page.PageName
+            };
+            throw new NotImplementedException("need fix");
+            /*for (int i = 0; i < page.Cells.Count; i++)
+            {
+                var lvlCells = page.Cells[i];                        // тут содержится инфа об уровне оружия
+                result.SkillDamage.AddParsedData(parser, lvlCells); 
+                result.RangeConfig.AddParsedData(parser, lvlCells);
+            }*/
+            return result;
         }
     }
 }

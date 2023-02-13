@@ -26,7 +26,12 @@ namespace RoyalAxe.EntitasSystems
 
         public static void PlayDie(RAAnimationEntity entity, Animator animator)
         {
-            animator.SetLayerWeight(AnimData.RunningLayer, 0);
+            if (animator.GetLayerName(AnimData.RunningLayer)!= null)
+            {
+                animator.SetLayerWeight(AnimData.RunningLayer, 0);    
+            }
+
+            
             animator.SetTrigger(AnimData.DieTrigger);
 
             entity.isDieTrigger = false;

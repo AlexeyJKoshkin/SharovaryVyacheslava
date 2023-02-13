@@ -14,16 +14,15 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     [Serializable]
     public class LevelDataToJsonParser : RAGoogleSheetDataToGameConfigConverter
     {
-        protected override void BindParserTypes(CompositeGenericParser genericParser)
-        {
-            genericParser.Bind<LevelSettingsData>();
-        }
 
-        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser)
+        protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
             IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
+
+            CompositeGenericParser genericParser = new CompositeGenericParser().Bind<LevelSettingsData>();
             
-            new LevelConfigSettingDefToFile().UpdateConfigs(new List<GoogleSheetGameData>(){allPages[0]}, operation, parser);
+            
+            new LevelConfigSettingDefToFile().UpdateConfigs(new List<GoogleSheetGameData>(){allPages[0]}, operation, genericParser);
 
             ParseUser(allPages[1]);
         }

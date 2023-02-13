@@ -7,11 +7,11 @@ using GameKit.Editor;
 using ProjectEditorEcoSystem;
 using UnityEngine;
 
-namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
+namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters 
+{
     [Serializable]
     public abstract class RAGoogleSheetDataToGameConfigConverter : IGoogleSheetDataToGameConfigConverter
     {
-
         public void ParseSheetData(IEnumerable<GoogleSheetGameData> sheet)
         {
             if (sheet == null) return;
@@ -23,15 +23,10 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters {
                 Debug.LogError("Eco system Not Found");
                 return;
             }
-
             var allPages = sheet.ToList();
-            CompositeGenericParser genericParser = new CompositeGenericParser();
-            BindParserTypes(genericParser);
-            UpdateJson(allPages, launcher.Current.Utility, genericParser);
+            UpdateJson(allPages, launcher.Current.Utility);
         }
 
-        protected abstract void BindParserTypes(CompositeGenericParser genericParser);
-
-        protected abstract void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility, IGameDataParser parser);
+        protected abstract void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility);
     }
 }

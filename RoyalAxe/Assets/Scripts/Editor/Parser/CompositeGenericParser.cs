@@ -16,13 +16,14 @@ namespace Core.Parser
             return this;
         }
 
+       
         public void Bind(Type type)
         {
            if(type == null) return;
            BindRecursive(type);
         }
         
-        private void BindRecursive(Type fieldInfoFieldType)
+        private static void BindRecursive(Type fieldInfoFieldType)
         {
             if(!CheckType(fieldInfoFieldType)) return;
             if(_availableTypes.Contains(fieldInfoFieldType)) return;
@@ -36,7 +37,7 @@ namespace Core.Parser
             }
         }
 
-        bool CheckType(Type type)
+        static bool  CheckType(Type type)
         {
             if(type.IsPrimitive) return false;
             if(!type.IsSerializable) return false;
@@ -50,7 +51,7 @@ namespace Core.Parser
             return true;
         }
 
-        private void AddType(Type type)
+        private static void AddType(Type type)
         {
             _availableTypes.Add(type);
             
@@ -97,7 +98,7 @@ namespace Core.Parser
         }
 
 
-        FieldInfo[] Fields(Type type)
+        static  FieldInfo[] Fields(Type type)
         {
             return type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
         }

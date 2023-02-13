@@ -14,9 +14,9 @@ namespace Core.Launcher
         private void BindSystems()
         {
             //инициализация
-                 Bind<SetPlayerUnitToChunkRootSystem>()     // Установка игрока в родительский чанк
-                .Bind<SetUnitsToChunkRootSystem>()     // Установка юнитов в родительский чанк
-                .Bind<SetAdditionalBosonColorSystem>() // покраска дополнотельных бозонов
+            Bind<SetPlayerUnitToChunkRootSystem>()          // Установка игрока в родительский чанк
+                .Bind<SetUnitsToChunkRootSystem>()          // Установка юнитов в родительский чанк
+                .Bind<SetAdditionalBosonColorSystem>()      // покраска дополнотельных бозонов
                 .Bind<UpdateMoveSpeedNavMeshAgentsSystem>() // обновляем скорость у мобов с навмешем при измении стата скорость
                 //игровой цикл
 
@@ -27,12 +27,12 @@ namespace Core.Launcher
                 .Bind<UnitColliderDataBaseSystem>()                    // Словарь моб - коллайдер
                 .Bind<InitPhysicalInteractionHandlerCompositeSystem>() // логика обработки физического взаимодейтсвия
                 .Bind<UpdateUnitBehaviourSystem>()                     // обновляем поведение мобов
-                .Bind<MeleeAttackCalculationSystem>()                          // обработка атаки милишников todo: возможно стоит перенсти в поведние
+                .Bind<MeleeAttackCalculationSystem>()                  // обработка атаки милишников todo: возможно стоит перенсти в поведние
                 .Bind<UnitBuffTickSystem>()                            // тик переодического урона
                 .Bind<DestroyItemsAfterInteraction>()                  // отдаем команду на уничтожение юнитов на поле
 
                 //движение 
-                .Bind<UnitsMovingSystem>()                          // двигаем юнитов
+                .Bind<UnitsMovingSystem>() // двигаем юнитов
                 .Bind<SetPauseNavMeshSystem>()
                 // Если юнит выходит за пределы экрана его объект и сущность уничтожается.
                 // мобы всегда идут за экран, где они умирают. поэтому не обрабатываем финиш мобов.
@@ -42,7 +42,13 @@ namespace Core.Launcher
 
                 //блок анимаций
                 .Bind<DefaultMobAnimationSystem>()
-                .Bind<RangeMobAnimationSystem>();
+                .Bind<MeleeKnightAnimationSystem>()
+                .Bind<RangeMobAnimationSystem>()
+
+                // посмертие
+
+                .Bind<SetMobSpeedZeroWhenDead>() // сбрасываем скорость
+                .Bind<CheckMobDeadSystem>();     // выдача награды при смерти
 
         }
     }

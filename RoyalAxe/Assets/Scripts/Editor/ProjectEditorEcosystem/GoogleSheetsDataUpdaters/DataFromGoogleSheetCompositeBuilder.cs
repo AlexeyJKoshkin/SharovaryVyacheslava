@@ -9,34 +9,28 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
     public class DataFromGoogleSheetCompositeBuilder<T>
     {
-        private readonly Dictionary<string, IGameDataParser> _fieldCustomParsers = new Dictionary<string, IGameDataParser>();
         private readonly Dictionary<string, FieldInfo> _fieldNameMap = new Dictionary<string, FieldInfo>();
+        private CompositeGenericParser _parser = new CompositeGenericParser();
 
         public DataFromGoogleSheetCompositeBuilder()
         {
-            LoadTypeFields();
+            LoadField(typeof(T));
         }
 
-        public object Load(object data, IEnumerable<GoogleSheetGameData> pages)
+        public T Load(T data, IEnumerable<GoogleSheetGameData> pages)
         {
             foreach (var page in pages)
             {
-                if (_fieldCustomParsers.TryGetValue(page.PageName, out var parser) && _fieldNameMap.TryGetValue(page.PageName, out var fieldInfo))
+                if (_fieldNameMap.TryGetValue(page.PageName, out var fieldInfo))
                 {
                     var cells      = page.Cells[0];
                     var fieldValue = fieldInfo.GetValue(data);
-                    parser.UpdateObject(cells, fieldValue);
+                    _parser.UpdateObject(cells, fieldValue);
                     fieldInfo.SetValue(data, fieldValue);
                 }
             }
 
             return data;
-        }
-
-        private void LoadTypeFields()
-        {
-            _fieldCustomParsers.Clear();
-            LoadField(typeof(T));
         }
 
         private void LoadField(Type type)
@@ -59,17 +53,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             if (attribute == null) return;
             string pageName = GetPageName(attribute, fieldInfo);
 
-            if (_fieldCustomParsers.ContainsKey(pageName))
-            {
-                Debug.LogError($"{typeof(T).Name} duplicate page at {fieldInfo.Name}");
-                return;
-            }
-
-            var parser = Activator.CreateInstance(typeof(CompositeGenericParser)) as CompositeGenericParser;
-            parser.Bind(fieldInfo.FieldType);
-            
-            
-            _fieldCustomParsers.Add(pageName,parser);
+            _parser.Bind(fieldInfo.FieldType);
             _fieldNameMap.Add(pageName, fieldInfo);
         }
 

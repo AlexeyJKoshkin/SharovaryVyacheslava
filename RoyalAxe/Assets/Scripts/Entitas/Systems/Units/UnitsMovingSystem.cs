@@ -47,11 +47,11 @@ namespace RoyalAxe.EntitasSystems
         } 
         public void OnGamePause(GameRootLoopEntity entity, bool isPause)
         {
-            HLogger.TempLog(isPause);
+            /*HLogger.TempLog(isPause);
             foreach (var unit in _movingMobs.AsEnumerable())
             {
                 unit.navMeshAgent.NavMeshAgent.enabled = !isPause;
-            }
+            }*/
         }
 
         public void Initialize()

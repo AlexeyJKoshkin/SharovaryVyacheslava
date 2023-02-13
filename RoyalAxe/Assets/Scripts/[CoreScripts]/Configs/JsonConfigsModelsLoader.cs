@@ -43,7 +43,7 @@ namespace Core.Configs
             SaveTo<T>(json);
         }
 
-        public void Save<T>(T data)
+        public void Save<T>(T data) where T : class
         {
             var json = data == null ? "{}" : _jsonConverter.SerializeObject(data);
             SaveTo<T>(json);

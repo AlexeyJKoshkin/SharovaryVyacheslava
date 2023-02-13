@@ -16,7 +16,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
     {
         protected override void BindParserTypes(CompositeGenericParser genericParser)
         {
-        base.BindParserTypes(genericParser);
+            base.BindParserTypes(genericParser);
             genericParser.BindWeaponSkills();
         }
     }

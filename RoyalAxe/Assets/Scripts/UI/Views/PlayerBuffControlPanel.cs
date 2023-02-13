@@ -69,10 +69,7 @@ namespace RoyalAxe
         public TextMeshProUGUI _singleDamageInfo;
 
 
-        void Update()
-        {
-            UnitsEntity unitsEntity;
-        }
+
 
     }
 }

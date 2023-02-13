@@ -835,11 +835,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4418121349550313816, guid: 9439e3f95be4bed4b817a972e8decf61, type: 3}
       propertyPath: m_Size.x
-      value: 32
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4418121349550313816, guid: 9439e3f95be4bed4b817a972e8decf61, type: 3}
       propertyPath: m_Size.y
-      value: 43
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4418121349550313817, guid: 9439e3f95be4bed4b817a972e8decf61, type: 3}
       propertyPath: m_RootOrder
@@ -1015,6 +1015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2381a66a706542f4a8e3f49d6036ba4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _used: 1
   _levelInfrastructureView: {fileID: 575618482}
   _coreGameSceneUiView: {fileID: 1193775143}
   _buffSelectWindowView: {fileID: 719880018}
