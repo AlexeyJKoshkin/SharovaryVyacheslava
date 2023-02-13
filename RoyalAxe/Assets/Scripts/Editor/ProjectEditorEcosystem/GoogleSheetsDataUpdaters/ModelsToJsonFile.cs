@@ -8,13 +8,46 @@ using Core.Parser;
 
 namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 {
+    public static class ParserExtensions
+    {
+        public static void AddParsedData<T>(this List<T> list, IGameDataParser parser, List<ICellValue> cells) where T : new()
+        {
+            var result = new T();
+            parser.UpdateObject(cells, result);
+            list.Add(result);
+        }
+    }
+
     public interface IConfigUpdater
     {
         void UpdateConfigs(List<GoogleSheetGameData> allPages,
                            IJsonConfigModelsOperation operation,
                            IGameDataParser parser);
     }
-    
+
+
+    public class ModelsToJsonHelper<T> where T : class, IDataObject
+    {
+        private readonly IJsonConfigModelsOperation _operation;
+
+        private readonly Dictionary<string, T> _allExistItems;
+        
+        public ModelsToJsonHelper(IJsonConfigModelsOperation operation)
+        {
+            _operation = operation;
+            _allExistItems = operation.Load<T>().ToDictionary(o => o.UniqueID, o => o);
+        }
+
+        public void UpdateModels(IEnumerable<T> newItems)
+        {
+            foreach (var item in newItems)
+            {
+                _allExistItems[item.UniqueID] = item;
+            }
+            _operation.Save(_allExistItems.Values.ToList());
+        }
+    }
+
 
     internal abstract class ModelsToJsonFile<T> : IConfigUpdater where T : class,IDataObject,  new()
     {

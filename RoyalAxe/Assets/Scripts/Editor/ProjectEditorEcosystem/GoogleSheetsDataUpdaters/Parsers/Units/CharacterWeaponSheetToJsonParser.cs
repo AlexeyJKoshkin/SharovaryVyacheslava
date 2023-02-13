@@ -17,8 +17,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
 
         protected override void UpdateJson(List<GoogleSheetGameData> allPages, IProjectEditorUtility currentUtility)
         {
-            throw new NotImplementedException("need fix");
-            /*IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
+            IJsonConfigModelsOperation operation = currentUtility.ConfigOperation;
             var genericParser = new CompositeGenericParser().BindWeaponSkills().Bind<UnitWeaponSkillConfigDef>();
             var modelsToJsonHelper = new ModelsToJsonHelper<UnitWeaponSkillConfigDef>(operation);
             var items = new List<UnitWeaponSkillConfigDef>();
@@ -28,7 +27,7 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
                 items.Add(newItemsFromPage);
             });
             
-            modelsToJsonHelper.UpdateModels(items);*/
+            modelsToJsonHelper.UpdateModels(items);
         }
         
         protected UnitWeaponSkillConfigDef SingleCollection(GoogleSheetGameData page, IGameDataParser parser)
@@ -37,13 +36,12 @@ namespace ProjectEditorEcosystem.GoogleSheetsDataUpdaters
             {
                 UniqueID = page.PageName
             };
-            throw new NotImplementedException("need fix");
-            /*for (int i = 0; i < page.Cells.Count; i++)
+            for (int i = 0; i < page.Cells.Count; i++)
             {
                 var lvlCells = page.Cells[i];                        // тут содержится инфа об уровне оружия
                 result.SkillDamage.AddParsedData(parser, lvlCells); 
                 result.RangeConfig.AddParsedData(parser, lvlCells);
-            }*/
+            }
             return result;
         }
     }
