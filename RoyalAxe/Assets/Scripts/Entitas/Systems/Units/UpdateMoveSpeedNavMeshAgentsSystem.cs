@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Core;
+using Entitas;
 using RoyalAxe.Map;
 
 namespace RoyalAxe.EntitasSystems
@@ -22,7 +23,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override void Execute(UnitsEntity e)
         {
-            e.navMeshAgent.Speed = e.moveSpeed.CurrentValue + _settings.ChunkSpeed;
+            e.navMeshAgent.Speed = e.moveSpeed.CurrentValue;
         }
     }
 }

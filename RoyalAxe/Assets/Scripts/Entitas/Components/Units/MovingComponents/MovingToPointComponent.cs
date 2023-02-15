@@ -1,3 +1,4 @@
+using Core;
 using Entitas;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +30,7 @@ namespace RoyalAxe.GameEntitas
 
         public void SetDestinationPoint(Vector3 endPoint)
         {
+           // HLogger.TempLog($"{NavMeshAgent.isOnNavMesh} {NavMeshAgent.navMeshOwner.name} {endPoint}");
             NavMeshAgent.SetDestination(endPoint);
         }
     }

@@ -26,7 +26,7 @@ namespace RoyalAxe.EntitasSystems
             };
         }
 
-        public static IMatcherBuilder MovingUnits(params IMatcher<UnitsEntity>[] triggerDefineMather)
+        public static IMatcherBuilder MovingSimpleUnits(params IMatcher<UnitsEntity>[] triggerDefineMather)
         {
             triggerDefineMather ??= new IMatcher<UnitsEntity>[0];
             return new UnitsMatcherLibrary()

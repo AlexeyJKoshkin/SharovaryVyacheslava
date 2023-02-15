@@ -1,5 +1,6 @@
 ﻿using Core;
 using Entitas;
+using GameKit;
 using UnityEngine;
 
 namespace RoyalAxe.EntitasSystems
@@ -16,22 +17,22 @@ namespace RoyalAxe.EntitasSystems
 
         public void Execute()
         {
-            var entities = _movingMobs.GetEntities();
-
-            for (int i = 0; i < entities.Length; i++) UpdateMobPosition(entities[i]);
+            _movingMobs.AsEnumerable().ForEach(UpdateMobPosition);
+            
+            
+            void UpdateMobPosition(UnitsEntity entity)
+            {
+                var     transform  = entity.unitsView.View.RootTransform;
+                Vector2 currentPos = transform.position;
+                transform.position = Vector2.MoveTowards(currentPos, entity.movingToPoint.TargetPosition, entity.moveSpeed.CurrentValue * Time.deltaTime);
+                entity.ReplaceMovingToPoint(entity.movingToPoint.PointAdapter);
+            }
         }
 
-        private void UpdateMobPosition(UnitsEntity entity)
-        {
-            var transform = entity.unitsView.View.RootTransform;
-            Vector2 currentPos = transform.position;
-            transform.position = Vector2.MoveTowards(currentPos, entity.movingToPoint.TargetPosition, entity.moveSpeed.CurrentValue * Time.deltaTime);
-            entity.ReplaceMovingToPoint(entity.movingToPoint.PointAdapter);
-        }
 
         public void Initialize()
         {
-            _movingMobs = _unitsContext.GetGroup(UnitsMatcherLibrary.MovingUnits().Matcher());
+            _movingMobs = _unitsContext.GetGroup(UnitsMatcherLibrary.MovingSimpleUnits().Matcher());
         }
     }
 
@@ -47,11 +48,10 @@ namespace RoyalAxe.EntitasSystems
         } 
         public void OnGamePause(GameRootLoopEntity entity, bool isPause)
         {
-            /*HLogger.TempLog(isPause);
             foreach (var unit in _movingMobs.AsEnumerable())
             {
-                unit.navMeshAgent.NavMeshAgent.enabled = !isPause;
-            }*/
+                unit.navMeshAgent.NavMeshAgent.isStopped = !isPause;
+            }
         }
 
         public void Initialize()

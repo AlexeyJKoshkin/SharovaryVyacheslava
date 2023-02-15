@@ -38,7 +38,9 @@ namespace RoyalAxe.CoreLevel {
              1. мобы всегда генерируются ЗА экраном
              2. Мобов всегда генерируем пачкой. за 1 кадр . для этого мобов надо предсоздать в пуле. 
             */
-            var needMob =Wave.levelWaveQueue.Current.MaxMobAmount - mobGeneratorHelper.CurrentMobAmount;
+
+            var maxMobAmount = Wave.levelWaveQueue.Current.MaxMobAmount;
+            var needMob = maxMobAmount- mobGeneratorHelper.CurrentMobAmount;
 
             var blueprints = Wave.levelMobBluePrints;
             

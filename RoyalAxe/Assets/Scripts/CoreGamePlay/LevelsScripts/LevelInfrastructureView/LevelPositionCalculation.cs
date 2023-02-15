@@ -5,25 +5,19 @@ namespace RoyalAxe.CoreLevel {
     public class LevelPositionCalculation : ILevelPositionCalculation
     {
         private readonly LevelInfrastructureView _levelChunkView;
-        public int SpeedFactor { get; } = -1;
+        public int SpeedFactor { get; } = 1;
 
-        private readonly float _mobZeroYSpawn; // начальная координата для спавна мобов по y
-        
-        public bool IsFinishMoving(CoreGamePlayEntity chunk)
-        {
-            var chunkTransform = chunk.chunkView.RootTransform;
-            return chunkTransform.position.y <= chunk.movingChunk.YEndPoint;
-        }
-
+        private float _mobZeroYSpawn =>_levelChunkView.Bounds.max.y; // начальная координата для спавна мобов по y
+                                                                     //- 1.5f; // когда мобы идут снизу надо отнимать больше. т.к. не учитывается высоты моба
+   
         public LevelPositionCalculation(LevelInfrastructureView levelChunkView)
         {
             _levelChunkView = levelChunkView;
-            _mobZeroYSpawn = levelChunkView.Bounds.max.y; //- 1.5f; // когда мобы идут снизу надо отнимать больше. т.к. не учитывается высоты моба
         }
 
         public float GetMobYPos(int mobAmount)
         {
-            return _mobZeroYSpawn +mobAmount * 2;
+            return _mobZeroYSpawn + mobAmount * 2; //почему 2 ? типа два моба ?
         }
 
         public Vector2 CalcWizardPosition(IBound bound)
@@ -37,7 +31,7 @@ namespace RoyalAxe.CoreLevel {
             var viewBounds   = _levelChunkView.Bounds;
             var downPosition = viewBounds.min.y;
             var halfSize     = chunkBounds.Bounds.extents.y;
-            return downPosition + halfSize;;
+            return   downPosition + halfSize;;
         }
 
         public float CalcNextChunkPos(IBound bearingChunkBounds, IBound nextChunk)

@@ -14,11 +14,14 @@ namespace RoyalAxe.GameEntitas
         private readonly IUnitsEquipmentBuilder _skillBuilder;
         private readonly UnitStatsBuilder _unitStatsBuilder;
 
-        public UnitsEntityFactory(UnitsContext units, RAAnimationContext animationContext, IUnitsEquipmentBuilder skillBuilder) : base(units)
+        public UnitsEntityFactory(UnitsContext units, 
+                                  RAAnimationContext animationContext,
+                                  IDataStorage storage,
+                                  IUnitsEquipmentBuilder skillBuilder) : base(units)
         {
             _animationContext = animationContext;
             _skillBuilder     = skillBuilder;
-            _unitStatsBuilder = new UnitStatsBuilder();
+            _unitStatsBuilder = new UnitStatsBuilder(storage);
         }
 
 

@@ -8,17 +8,11 @@ namespace RoyalAxe.CoreLevel
     public class ChunkBuilderHelper
     {
         private readonly CoreGamePlayContext _gamePlayContext;
-        readonly ILevelAdapter _levelView;
-        private readonly Bounds _levelViewBounds;
         private readonly Queue<LevelChunkView> _queue = new Queue<LevelChunkView>();
-        private readonly ILevelPositionCalculation _levelPositionCalculation;
 
-        public ChunkBuilderHelper(CoreGamePlayContext gamePlayContext, ILevelAdapter levelView, ILevelPositionCalculation levelPositionCalculation)
+        public ChunkBuilderHelper(CoreGamePlayContext gamePlayContext)
         {
             _gamePlayContext = gamePlayContext;
-            _levelView       = levelView;
-            _levelPositionCalculation = levelPositionCalculation;
-            _levelViewBounds = levelView.Bounds;
        }
 
         public CoreGamePlayEntity CreateChunk()
@@ -28,8 +22,6 @@ namespace RoyalAxe.CoreLevel
             var chunkBounds = view.CalcChunkBounds();
             chunkEntity.AddChunkView(view);
             chunkEntity.ReplaceChunkBounds(chunkBounds);
-            var endPoint = _levelPositionCalculation.GetEndPoint(_levelViewBounds, chunkBounds);
-            chunkEntity.AddMovingChunk(endPoint);
             return chunkEntity;
         }
 
@@ -42,7 +34,7 @@ namespace RoyalAxe.CoreLevel
 
         public void Initialize(BiomeScriptableDef scriptableDef)
         {
-            var instanTiatedhunks = scriptableDef.Chunks.Select(e => Object.Instantiate(e, _levelView.ChunkRoot));
+            var instanTiatedhunks = scriptableDef.Chunks.Select(Object.Instantiate);
             _queue.Clear();
             instanTiatedhunks.ForEach(e =>
                                       {
@@ -61,7 +53,7 @@ namespace RoyalAxe.CoreLevel
 
         void Return(LevelChunkView chunk)
         {
-            //подумать над уничтожением всех элементов на чанке
+           //todo: подумать над уничтожением всех элементов на чанке
             chunk.SetActive(false);
             _queue.Enqueue(chunk);
         }

@@ -11,16 +11,22 @@ namespace RoyalAxe.CoreLevel
     {
         [field: SerializeField]
         public Transform ChunkRoot { get; private set; }
+        [field: SerializeField]
+        public Transform PlayerStartPoint { get; private set; }
+        [field: SerializeField]
+        public Transform PlayerEndPoint { get; private set; }
+        [field: SerializeField]
+        public Transform MoveRoot { get; private set; }
 
         public IReadOnlyList<EndPointMeleeMobPoint> MeleeMobEndPoints => _meleeMobEndPoints;
         
         [SerializeField]
         private List<EndPointMeleeMobPoint> _meleeMobEndPoints;
         
-        [field: SerializeField]
-        public Transform PlayerStartPoint { get; private set; }
+
 
         public Bounds Bounds => _borderCollider.bounds;
+       
         public TileCoreMapSettings TimeMapCoreSettings;
         //public BiomeScriptableDef BiomeDef;
 

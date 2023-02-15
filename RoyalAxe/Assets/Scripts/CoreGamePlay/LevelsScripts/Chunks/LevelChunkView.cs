@@ -1,3 +1,4 @@
+using Core;
 using Core.Data.Provider;
 using GameKit;
 using Sirenix.OdinInspector;
@@ -21,6 +22,7 @@ namespace RoyalAxe.CoreLevel
         void CompressBounds()
         {
             TileMap.CompressBounds();
+            HLogger.LogInfo($"Size {TileMap.localBounds.size} cellSize {TileMap.cellBounds.size}");
         }
         public void SetActive(bool isActive)
         {

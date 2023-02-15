@@ -15,7 +15,7 @@ namespace RoyalAxe.EntitasSystems
 
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            var trigger = UnitsMatcherLibrary.MovingUnits(UnitsMatcher.Boson).Added();
+            var trigger = UnitsMatcherLibrary.MovingSimpleUnits(UnitsMatcher.Boson).Added();
            
             return context.CreateCollector(trigger);
         }

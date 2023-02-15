@@ -1,8 +1,4 @@
-﻿using Core.UserProfile;
-using RoyalAxe.Units;
-using UnityEngine;
-
-namespace RoyalAxe.GameEntitas
+﻿namespace RoyalAxe.GameEntitas
 {
     public class UnitsBuilderFacade : IUnitsBuilderFacade
     {

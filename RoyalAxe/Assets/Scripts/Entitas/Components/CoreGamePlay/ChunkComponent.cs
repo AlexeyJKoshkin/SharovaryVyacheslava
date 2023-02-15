@@ -13,12 +13,6 @@ namespace RoyalAxe.GameEntitas
     }
 
     [CoreGamePlay]
-    public class MovingChunkComponent : IComponent
-    {
-        public float YEndPoint;
-    }
-
-    [CoreGamePlay]
     [Unique]
     public class BearingSpawnChunk : IComponent { }
 

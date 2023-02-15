@@ -37,8 +37,8 @@ namespace RoyalAxe.UI
             player.enterPhysicInteraction.Clear();
         //    player.exitPhysicInteraction.Clear();
 
-            var maxHealthValue = player.health.MaxValue;   
-            player.health.ChangeValue(maxHealthValue - player.health.CurrentValue);
+            var maxHealthValue = player.health.MaxValue;
+            player.health.ChangeValue(maxHealthValue - player.health.CurrentValue).ApplyPermanentMod();
             player.ReplaceComponent(UnitsComponentsLookup.Health, player.health);
 
             var buffs = player.activeUnitBuff.Collection;

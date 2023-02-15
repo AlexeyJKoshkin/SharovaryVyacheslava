@@ -6,6 +6,14 @@ namespace RoyalAxe.GameEntitas
 {
     internal class UnitStatsBuilder
     {
+        private IDataStorage _dataStorage;
+        public UnitStatsBuilder(IDataStorage dataStorage)
+        {
+            _dataStorage = dataStorage;
+            
+            //_dataStorage.ById<CharacterStatTypeParameters>()
+        }
+
 
         #region STATS
 
@@ -13,9 +21,10 @@ namespace RoyalAxe.GameEntitas
         //установили все статы на персонажа
         public void SetStats(UnitsEntity unit, StatsConfig config)
         {
+            //_dataStorage.ById<CharacterStatTypeParameters>() // отсюда брать параметры каждого стата
             AddStat(unit, UnitsComponentsLookup.Health, CharacterStatValue.CreateState(config.Health, config.Health));
             AddStat(unit, UnitsComponentsLookup.AttackSpeed, CharacterStatValue.CreateState());
-            AddStat(unit, UnitsComponentsLookup.MoveSpeed, CharacterStatValue.CreateState(config.MoveSpeed));
+            AddStat(unit, UnitsComponentsLookup.MoveSpeed, CharacterStatValue.CreateState(config.MoveSpeed,100,0));
             AddStat(unit, UnitsComponentsLookup.PhysicalDamageStat, CharacterStatValue.CreateState());
             AddStat(unit, UnitsComponentsLookup.FireDamageStat, CharacterStatValue.CreateState());
             AddStat(unit, UnitsComponentsLookup.ColdDamageStat, CharacterStatValue.CreateState());

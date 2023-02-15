@@ -5,8 +5,7 @@ namespace RoyalAxe.EntitasSystems
 {
     public class CheckUnitDeadSystem : RAReactiveSystem<UnitsEntity>, IGamePlaySceneSystem
     {
-
-        public CheckUnitDeadSystem(UnitsContext context, CoreGamePlayContext coreGamePlayContext) : base(context)
+        public CheckUnitDeadSystem(UnitsContext context) : base(context)
         {
         }
 
@@ -33,23 +32,25 @@ namespace RoyalAxe.EntitasSystems
         }
     }
 
-    public class SetMobSpeedZeroWhenDead : RAReactiveSystem<UnitsEntity> {
+    public class SetMobSpeedZeroWhenDead : RAReactiveSystem<UnitsEntity>
+    {
         public SetMobSpeedZeroWhenDead(IContext<UnitsEntity> context) : base(context) { }
         protected override ICollector<UnitsEntity> GetTrigger(IContext<UnitsEntity> context)
         {
-            var matcher = Matcher<UnitsEntity>.AllOf(UnitsMatcher.DeadUnit).AnyOf(UnitsMatcher.MoveSpeed);
+            var matcher = Matcher<UnitsEntity>.AllOf(UnitsMatcher.DeadUnit);
             var replaceTrigger       = new TriggerOnEvent<UnitsEntity>(matcher, GroupEvent.Added);
             return context.CreateCollector(replaceTrigger);
         }
 
         protected override bool Filter(UnitsEntity entity)
         {
-            return true;
+            return entity.hasMoveSpeed;
         }
 
         protected override void Execute(UnitsEntity e)
         {
-            e.moveSpeed.ChangeValue(-e.moveSpeed.CurrentValue);
+            e.moveSpeed.ChangeValue(-e.moveSpeed.CurrentValue).ApplyPermanentMod();
+            e.ReplaceComponent(UnitsComponentsLookup.MoveSpeed, e.moveSpeed);
         }
     }
 

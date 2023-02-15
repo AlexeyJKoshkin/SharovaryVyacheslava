@@ -1,69 +1,51 @@
-using System.Collections.Generic;
+using Core;
 using Entitas;
-using RoyalAxe.EntitasSystems;
 using RoyalAxe.Map;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace RoyalAxe.CoreLevel
 {
     public class ChunkMovingSystem : IExecuteSystem
     {
-        private readonly IGroup<CoreGamePlayEntity> _movingChunks;
+        //todo: возможно вьюшку нельзя передавать напрямую. возможно лучше использовать адаптер или что-то такое.
+        private readonly LevelInfrastructureView _levelInfrastructure;
 
         private readonly ILevelAdapter _axeCoreMap;
         private readonly ILevelPositionCalculation _levelPositionCalculation;
         private readonly TileCoreMapSettings _settings;
-        private IGroup<UnitsEntity> _movingMobs;
+        private readonly IGroup<UnitsEntity> _playerGroup;
 
-        public ChunkMovingSystem(CoreGamePlayContext coreGamePlayContext,
-                                 ILevelAdapter axeCoreMap,
+        private bool _hasend;
+        private Vector3 _endPosition;
+
+        public ChunkMovingSystem(ILevelAdapter axeCoreMap,
                                  TileCoreMapSettings settings,
                                  UnitsContext unitsContext,
-                                 ILevelPositionCalculation levelPositionCalculation)
+                                 ILevelPositionCalculation levelPositionCalculation,
+                                 LevelInfrastructureView levelInfrastructure)
         {
             _axeCoreMap = axeCoreMap;
             _settings = settings;
             _levelPositionCalculation = levelPositionCalculation;
-
-            _movingChunks =
-                coreGamePlayContext.GetGroup(Matcher<CoreGamePlayEntity>.AllOf(CoreGamePlayComponentsLookup.MovingChunk,
-                                                                               CoreGamePlayComponentsLookup.ChunkView));
-            _movingMobs = unitsContext.GetGroup(UnitsMatcherLibrary.MovingNavMeshUnits().Matcher());
+            _levelInfrastructure = levelInfrastructure;
+            _endPosition = _levelInfrastructure.PlayerEndPoint.position;
+            _playerGroup = unitsContext.GetGroup(Matcher<UnitsEntity>.AllOf(UnitsMatcher.UnitsView, UnitsMatcher.Player));
         }
 
         public void Execute()
         {
-            _movingMobs.AsEnumerable().ForEach(e => e.navMeshAgent.NavMeshAgent.updatePosition = false);
-            var movingTransform = _axeCoreMap.ChunkRoot;
+            var movingTransform = _axeCoreMap.MoveRoot;
             movingTransform.Translate(new Vector3(0, Time.deltaTime * _settings.ChunkSpeed * _levelPositionCalculation.SpeedFactor, 0));
-            var chunks = _movingChunks.GetEntities();
-            _movingMobs.AsEnumerable().ForEach(e => e.navMeshAgent.NavMeshAgent.updatePosition = true);
-            for (int i = 0; i < chunks.Length; i++)
+
+            if(_playerGroup.count == 0) return;
+            var player = _playerGroup.GetSingleEntity();
+            if(player== null) return;
+            if (player.unitsView.RootTransform.position.y >= _endPosition.y)
             {
-                MoveChunk(chunks[i]);
-            }
-
-            if (_levelPositionCalculation.CheckNeedRelocateToStartPoint(movingTransform.position.y))
-            {
-                List<Transform> childs = new List<Transform>(movingTransform.childCount);
-
-                for (int i = 0; i < movingTransform.childCount; i++)
-                {
-                    childs.Add(movingTransform.GetChild(i));
-                }
-
-                movingTransform.DetachChildren();
-                movingTransform.localPosition = new Vector3(0, 100, 0);
-                childs.ForEach(e => e.SetParent(movingTransform, true));
+                _axeCoreMap.HandleNextChunk(null);
+                _endPosition = _levelInfrastructure.PlayerEndPoint.position;
             }
         }
 
-        private void MoveChunk(CoreGamePlayEntity chunk)
-        {
-            chunk.ReplaceChunkBounds(chunk.chunkView.View.CalcChunkBounds());
-
-            if (_levelPositionCalculation.IsFinishMoving(chunk)) _axeCoreMap.HandleNextChunk(chunk);
-        }
     }
 }

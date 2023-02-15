@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core.Data.Provider;
 
 namespace Core.Configs
 {

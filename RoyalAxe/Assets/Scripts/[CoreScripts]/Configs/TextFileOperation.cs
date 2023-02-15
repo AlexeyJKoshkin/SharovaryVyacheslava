@@ -28,8 +28,8 @@ namespace Core.Configs
             {
                 File.Create(path).Close();
             }
-
-            File.WriteAllText(path, json);
+            Thread thread = new Thread(() => { File.WriteAllText(path, json); });
+            thread.Start();
         }
     }
 }

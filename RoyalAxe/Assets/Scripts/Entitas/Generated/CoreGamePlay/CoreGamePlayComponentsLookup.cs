@@ -25,12 +25,11 @@ public static class CoreGamePlayComponentsLookup {
     public const int LevelNumber = 14;
     public const int LevelWave = 15;
     public const int LevelWaveQueue = 16;
-    public const int MovingChunk = 17;
-    public const int Player = 18;
-    public const int WaveFinished = 19;
-    public const int WizardShopReady = 20;
+    public const int Player = 17;
+    public const int WaveFinished = 18;
+    public const int WizardShopReady = 19;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 20;
 
     public static readonly string[] componentNames = {
         "CurrentLevelInfoListener",
@@ -50,7 +49,6 @@ public static class CoreGamePlayComponentsLookup {
         "LevelNumber",
         "LevelWave",
         "LevelWaveQueue",
-        "MovingChunk",
         "Player",
         "WaveFinished",
         "WizardShopReady"
@@ -74,7 +72,6 @@ public static class CoreGamePlayComponentsLookup {
         typeof(RoyalAxe.GameEntitas.LevelNumberComponent),
         typeof(RoyalAxe.GameEntitas.LevelWaveComponent),
         typeof(RoyalAxe.GameEntitas.LevelWaveQueueComponent),
-        typeof(RoyalAxe.GameEntitas.MovingChunkComponent),
         typeof(RoyalAxe.GameEntitas.PlayerComponent),
         typeof(RoyalAxe.GameEntitas.WaveFinishedComponent),
         typeof(RoyalAxe.GameEntitas.WizardShopReadyComponent)

@@ -4,7 +4,8 @@ using RoyalAxe.CoreLevel;
 using RoyalAxe.EntitasSystems;
 using UnityEngine;
 
-namespace RoyalAxe.GameEntitas {
+namespace RoyalAxe.GameEntitas 
+{
     public class SetPlayerUnitToChunkRootSystem : RAReactiveSystem<UnitsEntity>
     {
         //todo: возможно вьюшку нельзя передавать напрямую. возможно лучше использовать адаптер или что-то такое.

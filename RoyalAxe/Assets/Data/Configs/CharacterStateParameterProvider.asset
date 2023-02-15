@@ -26,8 +26,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c0fb7b95324ab08d0d58b3efab20c0, type: 3}
   m_Name: Health
   m_EditorClassIdentifier: 
-  <Stat>k__BackingField: 1
+  <Stat>k__BackingField: 12
   DefaultValue:
     MinValue: 0
-    _value: 0
-    MaxValue: 100
+    _value: 4.95
+    MaxValue: 10
